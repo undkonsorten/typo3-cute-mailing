@@ -1,0 +1,26 @@
+<phpunit
+        backupGlobals="true"
+        bootstrap="./Bootstrap/FunctionalTestsBootstrap.php"
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertWarningsToExceptions="true"
+        forceCoversAnnotation="false"
+        stopOnError="false"
+        stopOnFailure="false"
+        stopOnIncomplete="false"
+        stopOnSkipped="false"
+        verbose="false"
+        processIsolation="true"
+        beStrictAboutTestsThatDoNotTestAnything="false"
+>
+    <testsuites>
+        <testsuite name="Functional tests">
+            <directory>./Functional/</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">../Classes/</directory>
+        </whitelist>
+    </filter>
+</phpunit>

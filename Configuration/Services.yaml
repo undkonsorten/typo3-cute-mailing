@@ -1,0 +1,15 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Undkonsorten\CuteMailing\:
+    resource: '../Classes/*'
+
+  Undkonsorten\CuteMailing\Command\SendMailCommand:
+    tags:
+      - name: 'console.command'
+        command: 'cute-mailing:send-mail'
+        description: 'Sends testing mail'
+

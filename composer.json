@@ -1,0 +1,54 @@
+{
+	"name": "undkonsorten/typo3-cute-mailing",
+	"type": "typo3-cms-extension",
+	"description": "A typo3 extension that makes mailing and newsletter sending cute.",
+	"homepage": "https://www.undkonsorten.com",
+	"authors": [
+		{
+			"name": "Eike Starkmann",
+			"email": "starkmann@undkonsorten.com",
+			"homepage": "http://undkonsorten.com",
+			"role": "Developer"
+		}
+	],
+	"license": [
+		"GPL-2.0+"
+	],
+	"keywords": [
+		"email",
+		"newsletter",
+		"TYPO3"
+	],
+	"support": {
+		"issues": ""
+	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": ""
+		}
+	],
+	"require": {
+		"ext-json": "*",
+		"php": "^7.4",
+		"typo3/cms-backend": "^11.5",
+		"typo3/cms-core": "^11.5",
+		"typo3/cms-extbase": "^11.5",
+		"undkonsorten/taskqueue": "^8.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Undkonsorten\\CuteMailing\\": "Classes/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Undkonsorten\\CuteMailing\\Tests\\": "Tests/"
+		}
+	},
+	"extra": {
+		"typo3/cms":{
+			"extension-key": "cute_mailing"
+		}
+	}
+}

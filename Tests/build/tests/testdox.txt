@@ -1,0 +1,299 @@
+Convenience Container (Undkonsorten\FssMotion\Tests\Unit\Domain\ConvenienceContainer)
+ [x] Empty object return empty array
+ [x] Set property by path with data set "first level"
+ [x] Set property by path with data set "first level falsy"
+ [x] Set property by path with data set "first level null"
+ [x] Set property by path with data set "nested"
+ [x] Set property by path with data set "nested falsy"
+ [x] Set property by path with data set "nested null"
+ [x] Set property truthy by path with data set "first level"
+ [x] Set property truthy by path with data set "first level falsy"
+ [x] Set property truthy by path with data set "first level null"
+ [x] Set property truthy by path with data set "nested"
+ [x] Set property truthy by path with data set "nested falsy"
+ [x] Set property truthy by path with data set "nested null"
+ [x] Set property not null by path with data set "first level"
+ [x] Set property not null by path with data set "first level falsy"
+ [x] Set property not null by path with data set "first level null"
+ [x] Set property not null by path with data set "nested"
+ [x] Set property not null by path with data set "nested falsy"
+ [x] Set property not null by path with data set "nested null"
+ [x] Invalid path raises exception with data set "leading dot"
+ [x] Invalid path raises exception with data set "trailing dot"
+ [x] Invalid path raises exception with data set "double dot"
+ [x] Invalid path raises exception with data set "character salat"
+ [x] Second value overrides first value with data set "first level"
+ [x] Second value overrides first value with data set "nested"
+
+Check45 Motion (Undkonsorten\FssMotion\Tests\Unit\Domain\Model\Motion\Check45Motion)
+ [x] All fields required by modab are marked required
+
+Child Care Subvention Motion (Undkonsorten\FssMotion\Tests\Unit\Domain\Model\Motion\ChildCareSubventionMotion)
+ [x] All fields required by modab are marked required
+
+Competition Motion (Undkonsorten\FssMotion\Tests\Unit\Domain\Model\Motion\CompetitionMotion)
+ [x] All fields required by modab are marked required
+
+Copay Health Week Motion (Undkonsorten\FssMotion\Tests\Unit\Domain\Model\Motion\CopayHealthWeekMotion)
+ [x] All fields required by modab are marked required
+
+Education Motion (Undkonsorten\FssMotion\Tests\Unit\Domain\Model\Motion\EducationMotion)
+ [x] All fields required by modab are marked required
+
+Eva Seminar Motion (Undkonsorten\FssMotion\Tests\Unit\Domain\Model\Motion\EvaSeminarMotion)
+ [x] All fields required by modab are marked required
+
+Flood Relief Motion (Undkonsorten\FssMotion\Tests\Unit\Domain\Model\Motion\FloodReliefMotion)
+ [x] All fields required by modab are marked required
+
+Glasses Subvention Motion (Undkonsorten\FssMotion\Tests\Unit\Domain\Model\Motion\GlassesSubventionMotion)
+ [x] All fields required by modab are marked required
+
+Health Week Motion (Undkonsorten\FssMotion\Tests\Unit\Domain\Model\Motion\HealthWeekMotion)
+ [x] All fields required by modab are marked required
+
+Hearing Aid Subvention Motion (Undkonsorten\FssMotion\Tests\Unit\Domain\Model\Motion\HearingAidSubventionMotion)
+ [x] All fields required by modab are marked required
+
+Masks Motion (Undkonsorten\FssMotion\Tests\Unit\Domain\Model\Motion\MasksMotion)
+ [x] All fields required by modab are marked required
+
+Physio Motion (Undkonsorten\FssMotion\Tests\Unit\Domain\Model\Motion\PhysioMotion)
+ [x] All fields required by modab are marked required
+
+Promotion Code Motion (Undkonsorten\FssMotion\Tests\Unit\Domain\Model\Motion\PromotionCodeMotion)
+ [x] All fields required by modab are marked required
+
+Self Assertion Motion (Undkonsorten\FssMotion\Tests\Unit\Domain\Model\Motion\SelfAssertionMotion)
+ [x] All fields required by modab are marked required
+
+Welcome Coupon (Undkonsorten\FssMotion\Tests\Unit\Domain\Model\Motion\WelcomeCoupon)
+ [x] All fields required by modab are marked required
+
+Motion Task (Undkonsorten\FssMotion\Tests\Unit\Domain\Model\Task\MotionTask)
+ [x] Noop
+
+Activity Repository (Undkonsorten\FssMotion\Tests\Unit\Domain\Repository\MasterData\ActivityRepository)
+ [x] Finds all
+ [x] Finds starting before date time
+ [x] Finds one by uuid
+ [x] Finds by title
+
+Bank Account Trait (Undkonsorten\FssMotion\Tests\Unit\Domain\Traits\BankAccountTrait)
+ [x] Get iban should not return whitespaces
+ [x] Get iban should remove i b a n from beginning
+ [x] Get iban should remove special chars
+
+Check45 Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\Check45ExportConverter)
+ [x] Activity type is set correctly
+
+Child Care Subvention Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\ChildCareSubventionExportConverter)
+ [x] Activity type is set correctly
+
+Code2021 Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\Code2021ExportConverter)
+ [x] Activity type is set correctly
+
+Competition Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\CompetitionExportConverter)
+ [x] Activity type is set correctly
+
+Copay Health Week Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\CopayHealthWeekExportConverter)
+ [x] Activity type is set correctly
+
+Education Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\EducationExportConverter)
+ [x] All fields are converted correctly
+
+Eva Seminar Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\EvaSeminarExportConverter)
+ [x] All fields are converted correctly
+
+Fitness Subvention Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\FitnessSubventionExportConverter)
+ [x] Fitness subvention is exported correctly
+ [x] Online fitness subvention is exported correctly
+
+Flood Relief Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\FloodReliefExportConverter)
+ [x] Activity type is set correctly
+
+Glasses Subvention Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\GlassesSubventionExportConverter)
+ [x] Activity type is set correctly
+
+Health Week Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\HealthWeekExportConverter)
+ [x] Activity type is set correctly
+
+Hearing Aid Subvention Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\HearingAidSubventionExportConverter)
+ [x] Activity type is set correctly
+
+Internet Subvention Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\InternetSubventionExportConverter)
+ [x] Activity type is set correctly
+
+Job Ticket Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\JobTicketExportConverter)
+ [x] Activity type is set correctly
+
+Masks Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\MasksExportConverter)
+ [x] Activity type is set correctly
+
+Other Aids And Remedies Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\OtherAidsAndRemediesExportConverter)
+ [x] Activity type is set correctly
+ [x] Prescription is set correctly
+
+Outpatient Health Workshop Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\OutpatientHealthWorkshopExportConverter)
+ [x] Activity type is set correctly
+
+Physio Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\PhysioExportConverter)
+ [x] Activity type is set correctly
+
+Promotion Code Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\PromotionCodeExportConverter)
+ [x] Activity type is set correctly
+
+Self Assertion Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\SelfAssertionExportConverter)
+ [x] Activity type is set correctly
+
+Welcome Coupon Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ActivityExportConverter\WelcomeCouponExportConverter)
+ [x] Activity type is set correctly
+
+Complete Incident Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\CompleteIncidentConverter)
+ [x] Valid item result leads to correct object
+
+Contact Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ContactExportConverter)
+ [x] Bare export is default value
+ [x] Required fields
+ [x] Membership number is filled in
+ [x] Empty membership number is not in result
+
+Contact With Bank Account Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ContactWithBankAccountExportConverter)
+ [x] Bare export is default value
+ [x] Required fields
+
+Currencty Float Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\CurrenctyFloatConverter)
+ [x] Converts correctly with data set "integer"
+ [x] Converts correctly with data set "dot"
+ [x] Converts correctly with data set "comma"
+ [x] Converts correctly with data set "whitespace before"
+ [x] Converts correctly with data set "whitespace after"
+ [x] Converts correctly with data set "whitespace around"
+ [x] Converts correctly with data set "hyphen after dot"
+ [x] Converts correctly with data set "hyphen after comma"
+ [x] Converts correctly with data set "negative value"
+ [x] Converts correctly with data set "leading zero"
+ [x] Cannot convert with data set "with currency"
+ [x] Cannot convert with data set "wrong text"
+ [x] Cannot convert with data set "currency sign before"
+ [x] Cannot convert with data set "empty string"
+ [x] Cannot convert with data set "more than two digits after dot"
+ [x] Cannot convert with data set "more than two digits after comma"
+
+Incident Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\IncidentConverter)
+ [x] Valid list result leads to correct objects
+ [x] Invalid list result leads to validation error
+
+Newsletter Subscription Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\NewsletterSubscriptionConverter)
+ [x] Only email
+ [x] All fields
+
+Proposal Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\ProposalConverter)
+ [x] Valid list result leads to correct objects
+ [x] Invalid list result leads to validation error
+
+Womofonds Contact With Bank Account Export Converter (Undkonsorten\FssMotion\Tests\Unit\Property\TypeConverter\WomofondsContactWithBankAccountExportConverter)
+ [x] Bare export is default value
+ [x] Required fields
+
+Check45 TCA (Undkonsorten\FssMotion\Tests\Unit\TCA\Check45TCA)
+ [x] All properties have t c a definitions
+
+Child Care Subvention TCA (Undkonsorten\FssMotion\Tests\Unit\TCA\ChildCareSubventionTCA)
+ [x] All properties have t c a definitions
+
+Code2021 TCA (Undkonsorten\FssMotion\Tests\Unit\TCA\Code2021TCA)
+ [x] All properties have t c a definitions
+
+Competition TCA (Undkonsorten\FssMotion\Tests\Unit\TCA\CompetitionTCA)
+ [x] All properties have t c a definitions
+
+Education TCA (Undkonsorten\FssMotion\Tests\Unit\TCA\EducationTCA)
+ [x] All properties have t c a definitions
+
+Eva Seminar TCA (Undkonsorten\FssMotion\Tests\Unit\TCA\EvaSeminarTCA)
+ [x] All properties have t c a definitions
+
+Flood Relief TCA (Undkonsorten\FssMotion\Tests\Unit\TCA\FloodReliefTCA)
+ [x] All properties have t c a definitions
+
+Glasses Subvention TCA (Undkonsorten\FssMotion\Tests\Unit\TCA\GlassesSubventionTCA)
+ [x] All properties have t c a definitions
+
+Health Week TCA (Undkonsorten\FssMotion\Tests\Unit\TCA\HealthWeekTCA)
+ [x] All properties have t c a definitions
+
+Hearing Aid Subvention TCA (Undkonsorten\FssMotion\Tests\Unit\TCA\HearingAidSubventionTCA)
+ [x] All properties have t c a definitions
+
+Masks TCA (Undkonsorten\FssMotion\Tests\Unit\TCA\MasksTCA)
+ [x] All properties have t c a definitions
+
+Physio TCA (Undkonsorten\FssMotion\Tests\Unit\TCA\PhysioTCA)
+ [x] All properties have t c a definitions
+
+Promotion Code TCA (Undkonsorten\FssMotion\Tests\Unit\TCA\PromotionCodeTCA)
+ [x] All properties have t c a definitions
+
+Self Assertion TCA (Undkonsorten\FssMotion\Tests\Unit\TCA\SelfAssertionTCA)
+ [x] All properties have t c a definitions
+
+Welcome Coupon TCA (Undkonsorten\FssMotion\Tests\Unit\TCA\WelcomeCouponTCA)
+ [x] All properties have t c a definitions
+
+Scramble Utility (Undkonsorten\FssMotion\Tests\Unit\Utility\ScrambleUtility)
+ [x] Unscrambling of timestamp with data set "shipped example"
+ [x] Unscrambling of timestamp with data set "all digits"
+ [x] Unscrambling of timestamp with data set "numbers only"
+ [x] Unscrambling of timestamp with data set "letters only"
+ [x] Scrambling of timestamp with data set "shipped example"
+ [x] Scrambling of timestamp with data set "all digits"
+ [x] Scrambling of timestamp with data set "numbers only"
+ [x] Scrambling of timestamp with data set "letters only"
+
+Age Validator (Undkonsorten\FssMotion\Tests\Unit\Validation\Validator\AgeValidator)
+ [x] Validator fails age above maximum age
+ [x] Validator fails age below minimum age
+ [x] Validator passes for check 45
+ [x] Validator passes for age in range
+ [x] Validator fails for object not implementing date time interface
+ [x] Validator passes for date time immutable
+ [x] Validation does not change subject
+
+Code Validator (Undkonsorten\FssMotion\Tests\Unit\Validation\Validator\CodeValidator)
+ [x] Valid values with data set #0
+ [x] Valid values with data set #1
+ [x] Valid values with data set #2
+ [x] Valid values with data set #3
+ [x] Valid values with data set #4
+ [x] Valid values with data set #5
+ [x] Valid values with data set #6
+ [x] Valid values with data set #7
+ [x] Valid values with data set #8
+ [x] Invalid values with data set #0
+ [x] Invalid values with data set #1
+ [x] Invalid values with data set #2
+ [x] Invalid values with data set #3
+ [x] Invalid values with data set #4
+ [x] Invalid values with data set #5
+ [x] Invalid values with data set #6
+ [x] Invalid values with data set #7
+ [x] Invalid values with data set #8
+
+Non Empty File Upload Validator (Undkonsorten\FssMotion\Tests\Unit\Validation\Validator\NonEmptyFileUploadValidator)
+ [x] Validator has error for empty file with deletion
+ [x] Validator has error for empty file without deletion
+ [x] Validator has no errors for non empty file
+
+Scrambled Timestamp Validator (Undkonsorten\FssMotion\Tests\Unit\Validation\Validator\ScrambledTimestampValidator)
+ [x] Succeeds for current timestamp
+ [x] Fails for too old timestamp
+
+Facebook View Helper (Undkonsorten\FssMotion\Tests\Unit\ViewHelpers\Share\FacebookViewHelper)
+ [ ] Expected output with target
+ [ ] Expected output with target and class
+
+Twitter View Helper (Undkonsorten\FssMotion\Tests\Unit\ViewHelpers\Share\TwitterViewHelper)
+ [ ] Expected output with target
+ [ ] Expected output with target and class
+
