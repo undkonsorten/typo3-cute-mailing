@@ -16,14 +16,14 @@ class SendMailTest extends FunctionalTestCase
     ];
     public function mailIsCreatedCorrectly(): void
     {
-        /**@var $address \Undkonsorten\CuteMailing\Domain\Model\Recipient*/
-        $address1 = GeneralUtility::makeInstance(\Undkonsorten\CuteMailing\Domain\Model\Recipient::class);
+        /**@var $address \Undkonsorten\CuteMailing\Domain\Model\RecipientInterface*/
+        $address1 = GeneralUtility::makeInstance(\Undkonsorten\CuteMailing\Domain\Model\RecipientInterface::class);
         $address1->setEmail('peter@test.de');
         $address1->setFirstName('Peter');
         $address1->setLastName('Müller');
 
-        /**@var $address \Undkonsorten\CuteMailing\Domain\Model\Recipient*/
-        $address2 = GeneralUtility::makeInstance(\Undkonsorten\CuteMailing\Domain\Model\Recipient::class);
+        /**@var $address \Undkonsorten\CuteMailing\Domain\Model\RecipientInterface*/
+        $address2 = GeneralUtility::makeInstance(\Undkonsorten\CuteMailing\Domain\Model\RecipientInterface::class);
         $address2->setEmail('gerd@test.de');
         $address2->setFirstName('Gerd');
         $address2->setLastName('Hermann');

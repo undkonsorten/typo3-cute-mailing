@@ -4,6 +4,7 @@ namespace Undkonsorten\CuteMailing\Domain\Model;
 
 use Symfony\Component\Mailer\Mailer;
 use TYPO3\CMS\Core\Mail\FluidEmail;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Undkonsorten\Taskqueue\Domain\Model\Task;
 
@@ -19,13 +20,13 @@ class MailTask extends Task
 
     public function run(): void
     {
-        $email = GeneralUtility::makeInstance(FluidEmail::class);
+        /** @var MailMessage $email */
+        $email = GeneralUtility::makeInstance(MailMessage::class);
         $email
             ->to($this->getProperty('email'))
             ->from(new Address('jeremy@acme.com', 'Jeremy'))
             ->subject('TYPO3 loves you - here is why')
             ->format('both') // send HTML and plaintext mail
-           # ->setTemplate('TipsAndTricks')
             ->assign('mySecretIngredient', 'Tomato and TypoScript');
         GeneralUtility::makeInstance(Mailer::class)->send($email);
     }

@@ -27,15 +27,6 @@ class NewsletterTask extends \Undkonsorten\Taskqueue\Domain\Model\Task
      */
     protected $persistenceManager;
 
-    /**
-     * @var RecipientService
-     */
-    protected $recipientService;
-
-    public function injectRecipientService(RecipientService $recipientService): void
-    {
-        $this->recipientService = $recipientService;
-    }
 
     public function injectNewsletterRepository(NewsletterRepository $newsletterRepository)
     {
@@ -66,13 +57,15 @@ class NewsletterTask extends \Undkonsorten\Taskqueue\Domain\Model\Task
             throw new \Exception("Newsletter does not have any recipients.",1643822115);
         }
 
-        $recipients = $this->recipientService->createRecipients($newsletter->getRecipientList());
+        $recipientList = $newsletter->getRecipientList();
+        $recipients = $recipientList->getRecipients();
         foreach ($recipients as $recipient){
-            /**@var $recipient Recipient**/
+            /**@var $recipient RecipientInterface**/
             /**@var $mailTask MailTask**/
             $mailTask = GeneralUtility::makeInstance(MailTask::class);
             $mailTask->setNewsletterPage($newsletter->getNewsletterPage());
-            $mailTask->setEmail($recipient->getEmail()->toString());
+            $mailTask->setEmail($recipient->getEmail());
+            $mailTask->setProperty(get_class($recipient), $recipient->getUid());
             $mailTask->setConfiguration($newsletter->getConfiguration());
             $this->taskRepository->add($mailTask);
         }

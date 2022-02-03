@@ -3,7 +3,6 @@
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use Undkonsorten\CuteMailing\Domain\Repository\RecipientListRepository;
 
 class Newsletter extends AbstractEntity
 {
@@ -13,7 +12,7 @@ class Newsletter extends AbstractEntity
     protected $newsletterPage = 0;
 
     /**
-     * @var RecipientList
+     * @var AbstractRecipientList
      */
     protected $recipientList;
 
@@ -39,17 +38,17 @@ class Newsletter extends AbstractEntity
     }
 
     /**
-     * @return RecipientList
+     * @return AbstractRecipientList
      */
-    public function getRecipientList(): RecipientList
+    public function getRecipientList(): AbstractRecipientList
     {
         return $this->recipientList;
     }
 
     /**
-     * @param RecipientList $recipientList
+     * @param AbstractRecipientList $recipientList
      */
-    public function setRecipientList(RecipientList $recipientList): void
+    public function setRecipientList(AbstractRecipientList $recipientList): void
     {
         $this->recipientList = $recipientList;
     }

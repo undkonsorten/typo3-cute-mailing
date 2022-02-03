@@ -12,4 +12,3 @@ services:
       - name: 'console.command'
         command: 'cute-mailing:send-mail'
         description: 'Sends testing mail'
-

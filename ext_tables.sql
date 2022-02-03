@@ -49,7 +49,7 @@ CREATE TABLE tx_cutemailing_domain_model_recipientlist (
 	pid int(11) DEFAULT '0' NOT NULL,
 
 	recipient_list_page int(11) DEFAULT '0' NOT NULL,
-	recipient_list_type varchar(255) DEFAULT '' NOT NULL,
+	record_type  varchar(255)     DEFAULT ''  NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

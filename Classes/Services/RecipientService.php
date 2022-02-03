@@ -8,12 +8,12 @@ use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
-use Undkonsorten\CuteMailing\Domain\Model\Recipient;
-use Undkonsorten\CuteMailing\Domain\Model\RecipientList;
+use Undkonsorten\CuteMailing\Domain\Model\RecipientInterface;
+use Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipientList;
 
 class RecipientService implements SingletonInterface
 {
-    public function createRecipients(RecipientList $recipientList): ?array
+    public function createRecipients(TtAddressRecipientList $recipientList): ?array
     {
         $result = [];
         if(!is_null($recipientList->getRecipientListPage()) && $recipientList->getRecipientListType() == 'tt_address'){
@@ -28,8 +28,8 @@ class RecipientService implements SingletonInterface
                 $addresses = $addressRepository->findAll();
                 foreach ($addresses as $address){
                     /** @var \FriendsOfTYPO3\TtAddress\Domain\Model\Address $address */
-                    /** @var Recipient $recipient */
-                    $recipient = GeneralUtility::makeInstance(Recipient::class);
+                    /** @var RecipientInterface $recipient */
+                    $recipient = GeneralUtility::makeInstance(RecipientInterface::class);
                     $recipient->setEmail(new Address($address->getEmail()));
                     $recipient->setFirstName($address->getFirstName());
                     $recipient->setLastName($address->getLastName());

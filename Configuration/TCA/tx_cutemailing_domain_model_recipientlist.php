@@ -13,6 +13,7 @@ return [
         'cruser_id' => 'cruser_id',
         'versioningWS' => true,
         'delete' => 'deleted',
+        'type' => 'record_type',
         'enablecolumns' => [
             'disabled' => 'hidden',
             'starttime' => 'starttime',
@@ -22,7 +23,11 @@ return [
         'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_recipient_list.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,--palette--;;1,recipient_list_page,recipient_list_type,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,starttime,endtime'],
+        '0' => ['showitem' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,--palette--;;1,record_type,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,starttime,endtime'],
+        \Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipientList::class=> [
+                'showitem' =>
+                    'sys_language_uid,l10n_parent,l10n_diffsource,hidden,--palette--;;1,record_type,recipient_list_page,recipient_list_type,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,starttime,endtime'
+            ],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
@@ -86,13 +91,17 @@ return [
                 'minitems' => '0',
             ]
         ],
-        'recipient_list_type' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_recipient_list.recipients',
+        'record_type' => [
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_recipient_list.type',
             'config' => [
-                'type' => 'text',
-                'cols' => 40,
-                'rows' => 6
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    [
+                        'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_recipient_list.type.ttaddress',
+                        \Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipientList::class,
+                    ],
+                ],
             ],
         ],
     ],

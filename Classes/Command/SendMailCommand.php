@@ -32,23 +32,17 @@ class SendMailCommand extends Command
      */
     protected $newsletterRepository;
 
-    /**
-     * @var RecipientListRepository
-     */
-    protected $recipientListRepository;
 
     public function __construct(
         TaskRepository          $taskRepository,
         PersistenceManager      $persistenceManager,
         NewsletterRepository    $newsletterRepository,
-        RecipientListRepository $recipientsListRepository,
         string                  $name = null
     )
     {
         $this->taskRepository = $taskRepository;
         $this->persitenceManager = $persistenceManager;
         $this->newsletterRepository = $newsletterRepository;
-        $this->recipientListRepository = $recipientsListRepository;
         parent::__construct($name);
     }
 
@@ -62,14 +56,7 @@ class SendMailCommand extends Command
     public  function execute(InputInterface $input, OutputInterface $output)
     {
 
-        $recipients = $this->recipientListRepository->findByUid(1);
-
-        /**@var $newsletter Newsletter**/
-        $newsletter = GeneralUtility::makeInstance(Newsletter::class);
-        $newsletter->setNewsletterPage(12);
-        $newsletter->setRecipientList($recipients);
-        $this->newsletterRepository->add($newsletter);
-        $this->persitenceManager->persistAll();
+        $newsletter = $this->newsletterRepository->findByUid(13);
 
         /**@var $newsletterTask \Undkonsorten\CuteMailing\Domain\Model\NewsletterTask**/
         $newsletterTask = GeneralUtility::makeInstance(NewsletterTask::class);
