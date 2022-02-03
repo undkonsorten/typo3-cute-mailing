@@ -23,12 +23,12 @@ class MailTask extends Task
         /** @var MailMessage $email */
         $email = GeneralUtility::makeInstance(MailMessage::class);
         $email
-            ->to($this->getProperty('email'))
-            ->from(new Address('jeremy@acme.com', 'Jeremy'))
+            ->to($this->getEmail())
+            ->from('jeremy@acme.com')
             ->subject('TYPO3 loves you - here is why')
-            ->format('both') // send HTML and plaintext mail
-            ->assign('mySecretIngredient', 'Tomato and TypoScript');
-        GeneralUtility::makeInstance(Mailer::class)->send($email);
+            ->text('Ich bin der body')
+            ->send();
+
     }
 
 

@@ -65,7 +65,8 @@ class NewsletterTask extends \Undkonsorten\Taskqueue\Domain\Model\Task
             $mailTask = GeneralUtility::makeInstance(MailTask::class);
             $mailTask->setNewsletterPage($newsletter->getNewsletterPage());
             $mailTask->setEmail($recipient->getEmail());
-            $mailTask->setProperty(get_class($recipient), $recipient->getUid());
+            $mailTask->setProperty('class', get_class($recipient));
+            $mailTask->setProperty('uid', $recipient->getUid());
             $mailTask->setConfiguration($newsletter->getConfiguration());
             $this->taskRepository->add($mailTask);
         }
