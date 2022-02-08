@@ -65,15 +65,11 @@
                 <label for="recipientLists" class="lb-lg">
                     <f:translate key="module.newsletter.new.field.configuration">Sender</f:translate>*
                 </label>
-                <f:form.select
-                        id="recipientLists"
+                <f:form.textfield
+                        id="sender"
                         class="form-control form-select input-lg"
-                        options="{recipientLists}"
-                        prependOptionValue=""
-                        prependOptionLabel="{f:translate(key:'pleasechoose')}"
-                        optionLabelField="title"
-                        optionValueField="uid"
-                        property="recipientList"
+                        value="{sender}"
+                        property="sender"
                         data="{luxletter-mandatory:'1',luxletter-testmail:'configuration'}"
                         required="required" />
                 <span class="help-block">
@@ -89,11 +85,11 @@
                 <f:form.select
                         id="receiver"
                         class="form-control form-select input-lg"
-                        options="{luxletter:usergroup.getReceiverGroups()}"
+                        options="{recipientList}"
                         prependOptionValue=""
                         prependOptionLabel="{f:translate(key:'pleasechoose')}"
                         data="{luxletter-mandatory:'1',luxletter-wizardpreviewevent:'users'}"
-                        property="receiver"
+                        property="recipientList"
                         required="required" />
                 <span class="help-block">
                     <f:translate key="module.newsletter.new.field.receiver.description">Receiver group description</f:translate>

@@ -20,7 +20,7 @@ return [
         'tableName' => 'tx_cutemailing_domain_model_recipientlist',
         'recordType' => \Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipientList::class
     ],
-    \Undkonsorten\CuteMailing\Domain\Model\AbstractRecipientList::class => [
+    \Undkonsorten\CuteMailing\Domain\Model\RecipientList::class => [
         'tableName' => 'tx_cutemailing_domain_model_recipientlist',
         'subclasses' => [
             \Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipientList::class => \Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipientList::class,

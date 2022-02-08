@@ -12,9 +12,17 @@ use In2code\Luxletter\Utility\LocalizationUtility;
 use PharIo\Manifest\InvalidUrlException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Backend\Configuration\TypoScript\ConditionMatching\ConditionMatcher;
+use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
+use TYPO3\CMS\Core\Cache\Frontend\NullFrontend;
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
+use TYPO3\CMS\Core\Configuration\Loader\PageTsConfigLoader;
+use TYPO3\CMS\Core\Configuration\Parser\PageTsConfigParser;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
+use TYPO3\CMS\Core\TypoScript\Parser\TypoScriptParser;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentNameException;
@@ -27,9 +35,10 @@ use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException;
 use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor;
 use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
-use Undkonsorten\CuteMailing\Domain\Repository\RecipientListRepositoryRepository;
+use Undkonsorten\CuteMailing\Domain\Repository\RecipientListRepositoryInterface;
 
 /**
  * Class NewsletterController
@@ -48,7 +57,7 @@ class NewsletterController extends ActionController
     protected $newsletterRepository = null;
 
     /**
-     * @var RecipientListRepositoryRepository|null
+     * @var RecipientListRepositoryInterface|null
      */
     protected $recipientListRepository = null;
 
@@ -56,11 +65,13 @@ class NewsletterController extends ActionController
 
     /**
      * @param NewsletterRepository $newsletterRepository
-     * @param RecipientListRepositoryRepository $recipientListRepository
+     * @param RecipientListRepositoryInterface $recipientListRepository
      */
     public function __construct(
         NewsletterRepository    $newsletterRepository,
-        RecipientListRepositoryRepository $recipientListRepository
+        RecipientListRepositoryInterface $recipientListRepository
+
+
     ) {
         $this->newsletterRepository = $newsletterRepository;
         $this->recipientListRepository = $recipientListRepository;
@@ -72,8 +83,7 @@ class NewsletterController extends ActionController
     public function listAction(): void
     {
         $this->view->assignMultiple([
-            'newsletters' => $this->newsletterRepository->findAll(),
-            'recipientLists' => $this->recipientListRepository->findAll()
+            'newsletters' => $this->newsletterRepository->findAll()
         ]);
     }
 
@@ -84,9 +94,13 @@ class NewsletterController extends ActionController
      */
     public function newAction(): void
     {
+        $pageTs = $this->getPageTsFromPage(97);
         $this->view->assignMultiple([
-            'configurations' => $this->recipientListRepository->findAll(),
-            'layouts' => $this->layoutService->getLayouts()
+            'sender' => $pageTs['sender'],
+            'senderName' => $pageTs['sender_name'],
+            'replyTo' => $pageTs['reply_to'],
+            'replyToName' => $pageTs['reply_to_name'],
+            'recipientList' => $this->recipientListRepository->findAll(),
         ]);
     }
 
@@ -186,4 +200,29 @@ class NewsletterController extends ActionController
         $newsletter['datetime'] = $datetime;
         $this->request->setArgument('newsletter', $newsletter);
     }
+
+    /**
+     * @return array
+     */
+    protected function getPageTsFromPage(int $pid): array
+    {
+        /** @var RootlineUtility $rootline */
+        $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $pid)->get();
+        /** @var PageTsConfigLoader $loader */
+        $loader = GeneralUtility::makeInstance(PageTsConfigLoader::class);
+
+        $tsConfigString = $loader->load($rootline);
+        /** @var ConditionMatcher $conditionMatcher */
+        $conditionMatcher = GeneralUtility::makeInstance(ConditionMatcher::class);
+        $typoScriptParser = GeneralUtility::makeInstance(TypoScriptParser::class);
+        $nullFrontend = GeneralUtility::makeInstance(NullFrontend::class, 'not_needed');
+
+        $parser = GeneralUtility::makeInstance(
+            PageTsConfigParser::class,
+            $typoScriptParser,
+            $nullFrontend
+        );
+        return $parser->parse($tsConfigString, $conditionMatcher)['mod.']['web_modules.']['cute_mailing.'];
+    }
+
 }

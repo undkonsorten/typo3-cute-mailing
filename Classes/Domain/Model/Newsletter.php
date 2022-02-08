@@ -2,19 +2,56 @@
 
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
+use DateTime;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class Newsletter extends AbstractEntity
 {
+    /**
+     * @var string
+     */
+    protected $title = '';
+
+    /**
+     * @var DateTime
+     */
+    protected $sendingTime = null;
+
+    /**
+     * @var string
+     */
+    protected $description = '';
     /**
      * @var int
      */
     protected $newsletterPage = 0;
 
     /**
-     * @var AbstractRecipientList
+     * @var RecipientList
      */
     protected $recipientList;
+
+    /**
+     * @var string
+     */
+    protected $sender = '';
+
+    /**
+     * @var string
+     */
+    protected $senderName = '';
+
+    /**
+     * @var string
+     */
+    protected $replyTo = '';
+
+    /**
+     * @var string
+     */
+    protected $replyToName = '';
+
+
 
     /**
      * @var string
@@ -38,17 +75,17 @@ class Newsletter extends AbstractEntity
     }
 
     /**
-     * @return AbstractRecipientList
+     * @return RecipientList
      */
-    public function getRecipientList(): AbstractRecipientList
+    public function getRecipientList(): RecipientList
     {
         return $this->recipientList;
     }
 
     /**
-     * @param AbstractRecipientList $recipientList
+     * @param RecipientList $recipientList
      */
-    public function setRecipientList(AbstractRecipientList $recipientList): void
+    public function setRecipientList(RecipientList $recipientList): void
     {
         $this->recipientList = $recipientList;
     }

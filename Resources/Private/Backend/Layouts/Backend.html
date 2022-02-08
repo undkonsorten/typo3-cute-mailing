@@ -1,5 +1,6 @@
 <f:Be.Container
-        includeCssFiles="{0:'{f:uri.resource(path:\'Css/Modules.min.css\')}'}"
+        includeCssFiles="{0:'{f:uri.resource(path:\'Css/Modules.min.css\',extensionName:\'cute_mailing\')}'}"
+				includeRequireJsModules="{0:'TYPO3/CMS/CuteMailing/Module.min'}"
         pageTitle="Cute mailing">
 
     <div class="module">
@@ -12,13 +13,15 @@
                             <f:link.action action="list" controller="Newsletter" class="btn{luxletter:backend.getClassNameOnAction(actionName:'list')}">
                                 <f:translate key="layout.backend.link.actionnewsletter">Newsletter</f:translate>
                             </f:link.action>
+													<f:link.action action="receiver" controller="Newsletter" class="btn{luxletter:backend.getClassNameOnAction(actionName:'receiver')}">
+														<f:translate key="layout.backend.link.actionreceiver">Receiver</f:translate>
+													</f:link.action>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="module-docheader-bar module-docheader-bar-buttons">
                 <div class="module-docheader-bar-column-left">
-                    &nbsp;
                 </div>
                 <div class="module-docheader-bar-column-right">
                     <f:be.buttons.shortcut />

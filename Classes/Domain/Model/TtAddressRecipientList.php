@@ -9,7 +9,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 
-class TtAddressRecipientList  extends AbstractRecipientList
+class TtAddressRecipientList  extends RecipientList
 {
     /**
      * @var int

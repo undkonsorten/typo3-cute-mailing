@@ -2,14 +2,7 @@
 
 
 <f:section name="content">
-	<f:if condition="{configurations}">
-		<f:then>
 			<f:render section="Newsletters" arguments="{_all}"/>
-		</f:then>
-		<f:else>
-			<f:render section="NoConfigurations" arguments="{_all}"/>
-		</f:else>
-	</f:if>
 </f:section>
 
 
@@ -29,12 +22,10 @@
 			<h1>
 				<f:translate key="module.newsletter.list.title">Newsletters</f:translate>
 			</h1>
-
 			<f:render partial="Miscellaneous/FlashMessages" arguments="{_all}"/>
-
-
 			<f:if condition="{newsletters}">
 				<f:then>
+					yyy
 					<table class="table table-striped table-condensed">
 						<thead>
 						<tr>
@@ -107,13 +98,5 @@
 			</f:if>
 
 		</div>
-	</div>
-</f:section>
-
-
-<f:section name="NoConfigurations">
-	<div class="alert alert-danger" role="alert">
-		<h4 class="alert-heading"><f:translate key="module.newsletter.list.createnew.noconfiguration">No configuration found</f:translate></h4>
-		<p class="mb-0"><f:translate key="module.newsletter.list.createnew.noconfigurationdetails">Please add a record</f:translate></p>
 	</div>
 </f:section>
