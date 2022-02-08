@@ -11,7 +11,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
 use Undkonsorten\CuteMailing\Domain\Model\NewsletterTask;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
-use Undkonsorten\CuteMailing\Domain\Repository\RecipientListRepository;
+use Undkonsorten\CuteMailing\Domain\Repository\RecipientListRepositoryRepository;
 use Undkonsorten\Taskqueue\Domain\Repository\TaskRepository;
 
 class SendMailCommand extends Command
