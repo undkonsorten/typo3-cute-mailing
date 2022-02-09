@@ -11,11 +11,16 @@ class RecipientListRepository extends Repository implements RecipientListReposit
     /**
      * @return array|object[]|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function findAll()
+    public function findByRootline(array $rootline)
     {
+        $storagePageIds = [];
+        foreach ($rootline as $key => $value){
+            $storagePageIds[] = $value['pid'];
+        }
         $query = $this->createQuery();
         $defaultSettings = $query->getQuerySettings();
-        $defaultSettings->setRespectStoragePage(false);
+        $defaultSettings->setRespectStoragePage(true);
+        $defaultSettings->setStoragePageIds($storagePageIds);
         $query->setQuerySettings($defaultSettings);
         return $query->execute();
     }

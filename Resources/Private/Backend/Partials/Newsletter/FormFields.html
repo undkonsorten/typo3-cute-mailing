@@ -8,6 +8,7 @@
                 <f:form.textfield
                     class="form-control input-lg"
                       property="title"
+											value="{title}"
                       id="title"
                       placeholder="Newsletter Product A 2020/01"
                       data="{luxletter-mandatory:'1'}"
@@ -33,7 +34,24 @@
                 </span>
             </div>
         </div>
-
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="newsletterPage" class="lb-lg">
+						<f:translate key="module.newsletter.new.field.origin">Origin</f:translate>*
+					</label>
+					<f:form.textfield
+						class="form-control input-lg"
+						property="newsletterPage"
+						id="newsletterPage"
+						value="{newsletterPage}"
+						placeholder="https://www.yourdomain/newsletter/2020-01/"
+						data="{luxletter-mandatory:'1',luxletter-wizardpreviewevent:'newsletterPage'}"
+						required="required"/>
+					<span class="help-block">
+                    <f:translate key="module.newsletter.new.field.origin.description">PID or absolute URL</f:translate>
+                </span>
+				</div>
+			</div>
 
         <div class="col-md-12">
             <div class="form-group">
@@ -62,7 +80,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="recipientLists" class="lb-lg">
+                <label for="sender" class="lb-lg">
                     <f:translate key="module.newsletter.new.field.configuration">Sender</f:translate>*
                 </label>
                 <f:form.textfield
@@ -70,10 +88,48 @@
                         class="form-control form-select input-lg"
                         value="{sender}"
                         property="sender"
-                        data="{luxletter-mandatory:'1',luxletter-testmail:'configuration'}"
+                        data="{luxletter-mandatory:'1',luxletter-testmail:'sender'}"
                         required="required" />
                 <span class="help-block">
                     <f:translate key="module.newsletter.new.field.configuration.description">Sender description</f:translate>
+                </span>
+							<label for="senderName" class="lb-lg">
+								<f:translate key="module.newsletter.new.field.configuration">Sender name</f:translate>*
+							</label>
+							<f:form.textfield
+								id="senderName"
+								class="form-control form-select input-lg"
+								value="{senderName}"
+								property="senderName"
+								required="required" />
+							<span class="help-block">
+                    <f:translate key="module.newsletter.new.field.configuration.description">Sender name</f:translate>
+                </span>
+							<label for="replyTo" class="lb-lg">
+								<f:translate key="module.newsletter.new.field.configuration">Reply to</f:translate>*
+							</label>
+							<f:form.textfield
+								id="replyTo"
+								class="form-control form-select input-lg"
+								value="{replyTo}"
+								property="replyTo"
+								data="{luxletter-mandatory:'1',luxletter-testmail:'replyTo'}"
+								required="required" />
+							<span class="help-block">
+                    <f:translate key="module.newsletter.new.field.configuration.description">Reply to address</f:translate>
+                </span>
+							<label for="replyToName" class="lb-lg">
+								<f:translate key="module.newsletter.new.field.configuration">Reply to name</f:translate>*
+							</label>
+							<f:form.textfield
+								id="replyToName"
+								class="form-control form-select input-lg"
+								value="{replyToName}"
+								property="replyToName"
+								data="{luxletter-mandatory:'1',luxletter-testmail:'replyToName'}"
+								required="required" />
+							<span class="help-block">
+                    <f:translate key="module.newsletter.new.field.configuration.description">Reply to name</f:translate>
                 </span>
             </div>
         </div>
@@ -86,9 +142,11 @@
                         id="receiver"
                         class="form-control form-select input-lg"
                         options="{recipientList}"
+												optionValueField="uid"
+												optionLabelField="name"
                         prependOptionValue=""
                         prependOptionLabel="{f:translate(key:'pleasechoose')}"
-                        data="{luxletter-mandatory:'1',luxletter-wizardpreviewevent:'users'}"
+                        data="{luxletter-mandatory:'1',luxletter-wizardpreviewevent:'recipientList'}"
                         property="recipientList"
                         required="required" />
                 <span class="help-block">
@@ -97,45 +155,6 @@
             </div>
         </div>
     </div>
-
-
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="layout" class="lb-lg">
-                    <f:translate key="module.newsletter.new.field.layout">Layout</f:translate>
-                </label>
-                <f:form.select
-                    id="layout"
-                    class="form-control form-select input-lg"
-                    options="{layouts}"
-                    data="{luxletter-wizardpreviewevent:'layout'}"
-                    property="layout" />
-                <span class="help-block">
-                    <f:translate key="module.newsletter.new.field.layout.description">Choose a template file</f:translate>
-                </span>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="origin" class="lb-lg">
-                    <f:translate key="module.newsletter.new.field.origin">Origin</f:translate>*
-                </label>
-                <f:form.textfield
-                    class="form-control input-lg"
-                    property="origin"
-                    id="origin"
-                    placeholder="https://www.yourdomain/newsletter/2020-01/"
-                    data="{luxletter-mandatory:'1',luxletter-wizardpreviewevent:'newsletter'}"
-                    required="required"/>
-                <span class="help-block">
-                    <f:translate key="module.newsletter.new.field.origin.description">PID or absolute URL</f:translate>
-                </span>
-            </div>
-        </div>
-    </div>
-
 
     <div class="row">
         <div class="col-md-12">

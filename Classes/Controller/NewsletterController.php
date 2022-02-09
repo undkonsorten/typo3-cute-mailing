@@ -13,6 +13,7 @@ use PharIo\Manifest\InvalidUrlException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Configuration\TypoScript\ConditionMatching\ConditionMatcher;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Cache\Frontend\NullFrontend;
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
@@ -94,14 +95,27 @@ class NewsletterController extends ActionController
      */
     public function newAction(): void
     {
-        $pageTs = $this->getPageTsFromPage(97);
-        $this->view->assignMultiple([
-            'sender' => $pageTs['sender'],
-            'senderName' => $pageTs['sender_name'],
-            'replyTo' => $pageTs['reply_to'],
-            'replyToName' => $pageTs['reply_to_name'],
-            'recipientList' => $this->recipientListRepository->findAll(),
-        ]);
+        $currentPid = (int)GeneralUtility::_GP('id');
+        $pageTs = BackendUtility::getPagesTSconfig($currentPid);
+        $page = BackendUtility::getRecord('pages', $currentPid);
+        $assign['newsletterPage'] = $currentPid;
+        $assign['title'] = $page['title'];
+        $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
+        $assign['recipientList'] = $this->recipientListRepository->findByRootline($rootline);
+
+
+        //$pageTs = $this->getPageTsFromPage($currentPid);
+
+        //Are default values set via pageTs?
+        if(isset($pageTs['mod.']['web_modules.']['cute_mailing.'])){
+            $pageTs = $pageTs['mod.']['web_modules.']['cute_mailing.'];
+            $assign['sender'] = $pageTs['sender'];
+            $assign['senderName'] = $pageTs['sender_name'];
+            $assign['replyTo'] = $pageTs['reply_to'];
+            $assign['replyToName'] = $pageTs['reply_to_name'];
+        }
+
+        $this->view->assignMultiple($assign);
     }
 
     /**

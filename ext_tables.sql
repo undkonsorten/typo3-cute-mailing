@@ -8,7 +8,10 @@ CREATE TABLE tx_cutemailing_domain_model_newsletter (
 
 	newsletter_page int(11) DEFAULT '0' NOT NULL,
 	recipient_list int(11) DEFAULT '0' NOT NULL,
-	configuration varchar(255) DEFAULT '' NOT NULL,
+	sender varchar(255) DEFAULT '' NOT NULL,
+	sender_name varchar(255) DEFAULT '' NOT NULL,
+	reply_to varchar(255) DEFAULT '' NOT NULL,
+	reply_to_name varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -48,6 +51,7 @@ CREATE TABLE tx_cutemailing_domain_model_recipientlist (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
+	name varchar(255) DEFAULT '' NOT NULL,
 	recipient_list_page int(11) DEFAULT '0' NOT NULL,
 	record_type  varchar(255)     DEFAULT ''  NOT NULL,
 
