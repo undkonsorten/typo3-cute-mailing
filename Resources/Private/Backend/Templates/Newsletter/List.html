@@ -25,7 +25,6 @@
 			<f:render partial="Miscellaneous/FlashMessages" arguments="{_all}"/>
 			<f:if condition="{newsletters}">
 				<f:then>
-					yyy
 					<table class="table table-striped table-condensed">
 						<thead>
 						<tr>
@@ -33,8 +32,6 @@
 							<th><f:translate key="module.newsletter.list.tableheader.title">title</f:translate></th>
 							<th><f:translate key="module.newsletter.list.tableheader.description">description</f:translate></th>
 							<th><f:translate key="module.newsletter.list.tableheader.datetime">datetime</f:translate></th>
-							<th><f:translate key="module.newsletter.list.tableheader.progress">progress</f:translate></th>
-							<th><f:translate key="module.newsletter.list.tableheader.receiver">receiver</f:translate></th>
 							<th></th>
 						</tr>
 						</thead>
@@ -57,15 +54,6 @@
 								<td><span title="{newsletter.description}"><f:format.crop maxCharacters="200" append=" ...">{newsletter.description}</f:format.crop></span></td>
 								<td>{f:format.date(date:newsletter.datetime,format:'{f:translate(key:\'date\')}')}</td>
 								<td>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" title="{newsletter.dispatchProgress} %" style="width: {newsletter.dispatchProgress}%" aria-valuenow="{newsletter.dispatchProgress}" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-								</td>
-								<td>
-									<span title="UID{newsletter.receiver.uid}">{newsletter.receiver.title}</span>
-									<span class="badge" title="Amount" style="margin-left:15px;"><luxletter:queue.getNumberOfReceiversFromQueue newsletter="{newsletter}" /></span>
-								</td>
-								<td>
 									<f:if condition="{newsletter.enabled}">
 										<f:then>
 											<f:link.action action="disable" class="btn btn-warning" arguments="{newsletter:newsletter}">
@@ -78,10 +66,13 @@
 											</f:link.action>
 										</f:else>
 									</f:if>
-
+									<f:link.action action="edit" class="btn btn-info" arguments="{newsletter:newsletter}">
+										<f:translate key="module.newsletter.list.edit">edit</f:translate>
+									</f:link.action>
 									<f:link.action action="delete" class="btn btn-danger" arguments="{newsletter:newsletter}" additionalAttributes="{data-luxletter-confirm:'{f:translate(key:\'deleteconfirm\')}'}">
 										<f:translate key="module.newsletter.list.delete">delete</f:translate>
 									</f:link.action>
+
 								</td>
 							</tr>
 						</f:for>

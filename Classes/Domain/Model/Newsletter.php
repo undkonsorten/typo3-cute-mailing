@@ -51,12 +51,11 @@ class Newsletter extends AbstractEntity
      */
     protected $replyToName = '';
 
-
-
     /**
      * @var string
      */
-    protected $configuration;
+    protected $subject = '';
+
 
     /**
      * @return int
@@ -105,6 +104,135 @@ class Newsletter extends AbstractEntity
     {
         $this->configuration = $configuration;
     }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getSendingTime(): ?DateTime
+    {
+        return $this->sendingTime;
+    }
+
+    /**
+     * @param DateTime $sendingTime
+     */
+    public function setSendingTime(?DateTime $sendingTime): void
+    {
+        $this->sendingTime = $sendingTime;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSender(): string
+    {
+        return $this->sender;
+    }
+
+    /**
+     * @param string $sender
+     */
+    public function setSender(string $sender): void
+    {
+        $this->sender = $sender;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSenderName(): string
+    {
+        return $this->senderName;
+    }
+
+    /**
+     * @param string $senderName
+     */
+    public function setSenderName(string $senderName): void
+    {
+        $this->senderName = $senderName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReplyTo(): string
+    {
+        return $this->replyTo;
+    }
+
+    /**
+     * @param string $replyTo
+     */
+    public function setReplyTo(string $replyTo): void
+    {
+        $this->replyTo = $replyTo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReplyToName(): string
+    {
+        return $this->replyToName;
+    }
+
+    /**
+     * @param string $replyToName
+     */
+    public function setReplyToName(string $replyToName): void
+    {
+        $this->replyToName = $replyToName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSubject(): string
+    {
+        return $this->subject;
+    }
+
+    /**
+     * @param string $subject
+     */
+    public function setSubject(string $subject): void
+    {
+        $this->subject = $subject;
+    }
+
 
 
 

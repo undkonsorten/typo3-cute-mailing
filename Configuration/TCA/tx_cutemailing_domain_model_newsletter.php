@@ -22,7 +22,7 @@ return [
         'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_newsletter.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,--palette--;;1,newsletter_page,recipient_list,configuration,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,starttime,endtime'],
+        '1' => ['showitem' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,--palette--;;1,title, subject, description, newsletter_page,recipient_list,sender, sender_name, reply_to, reply_to_name,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,starttime,endtime'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
@@ -78,10 +78,13 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.page',
             'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim'
-            ],
+                'type' => 'group',
+                'internal_type' => 'db',
+                'allowed' => 'pages',
+                'size' => '1',
+                'maxitems' => '1',
+                'minitems' => '1',
+            ]
         ],
         'recipient_list' => [
             'exclude' => 1,
@@ -92,16 +95,63 @@ return [
                 'allowed' => 'tx_cutemailing_domain_model_recipientlist',
                 'size' => '1',
                 'maxitems' => '1',
-                'minitems' => '0',
+                'minitems' => '1',
             ]
         ],
-        'configuration' => [
+        'sender' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.configuration',
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.sender',
             'config' => [
                 'type' => 'input',
                 'size' => 4,
-                'eval' => 'int'
+            ]
+        ],
+        'sender_name' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.sender_name',
+            'config' => [
+                'type' => 'input',
+                'size' => 4,
+            ]
+        ],
+        'reply_to' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.reply_to',
+            'config' => [
+                'type' => 'input',
+                'size' => 4,
+            ]
+        ],
+        'reply_to_name' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.reply_to_name',
+            'config' => [
+                'type' => 'input',
+                'size' => 4,
+            ]
+        ],
+        'title' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.title',
+            'config' => [
+                'type' => 'input',
+                'size' => 10,
+            ]
+        ],
+        'subject' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.subject',
+            'config' => [
+                'type' => 'input',
+                'size' => 10,
+            ]
+        ],
+        'description' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.subject',
+            'config' => [
+                'type' => 'text',
+                'size' => 4,
             ]
         ],
     ],

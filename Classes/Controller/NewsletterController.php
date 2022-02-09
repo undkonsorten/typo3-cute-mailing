@@ -83,8 +83,17 @@ class NewsletterController extends ActionController
      */
     public function listAction(): void
     {
+        $currentPid = (int)GeneralUtility::_GP('id');
+        $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
         $this->view->assignMultiple([
-            'newsletters' => $this->newsletterRepository->findAll()
+            'newsletters' => $this->newsletterRepository->findByRootline($rootline)
+        ]);
+    }
+
+    public function editAction(Newsletter $newsletter)
+    {
+        $this->view->assignMultiple([
+            'newsletter' => $newsletter
         ]);
     }
 
