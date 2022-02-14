@@ -7,9 +7,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
 use Undkonsorten\CuteMailing\Services\RecipientService;
+use Undkonsorten\Taskqueue\Domain\Model\Task;
 use Undkonsorten\Taskqueue\Domain\Repository\TaskRepository;
 
-class NewsletterTask extends \Undkonsorten\Taskqueue\Domain\Model\Task
+class NewsletterTask extends Task
 {
 
     /**
@@ -67,7 +68,6 @@ class NewsletterTask extends \Undkonsorten\Taskqueue\Domain\Model\Task
             $mailTask->setEmail($recipient->getEmail());
             $mailTask->setProperty('class', get_class($recipient));
             $mailTask->setProperty('uid', $recipient->getUid());
-            $mailTask->setConfiguration($newsletter->getConfiguration());
             $this->taskRepository->add($mailTask);
         }
         $this->persistenceManager->persistAll();
