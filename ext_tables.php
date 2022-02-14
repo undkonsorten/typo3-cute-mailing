@@ -29,7 +29,7 @@ if (!defined('TYPO3')) {
         ],
         [
             'access' => 'user,group',
-            'icon' => 'EXT:cute_mailing/Resources/Public/Icons/lux_module_newsletter.svg',
+            'icon' => 'EXT:cute_mailing/Resources/Public/Icons/Cutemailing.svg',
             'labels' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_mod_newsletter.xlf',
         ]
 
