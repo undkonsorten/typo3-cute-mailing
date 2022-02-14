@@ -8,7 +8,8 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class Newsletter extends AbstractEntity
 {
     const CREATED = 0;
-    const SEND = 1;
+    const TESTED = 1;
+    const SEND = 2;
 
     /**
      * @var string

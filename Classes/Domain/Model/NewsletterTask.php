@@ -2,6 +2,7 @@
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
 
+use phpDocumentor\Reflection\Types\Boolean;
 use TYPO3\CMS\Core\Exception;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
@@ -27,6 +28,7 @@ class NewsletterTask extends Task
      * @var PersistenceManager
      */
     protected $persistenceManager;
+
 
 
     public function injectNewsletterRepository(NewsletterRepository $newsletterRepository)
@@ -58,8 +60,17 @@ class NewsletterTask extends Task
             throw new \Exception("Newsletter does not have any recipients.",1643822115);
         }
 
-        $recipientList = $newsletter->getRecipientList();
+        if($this->getTest()){
+            $recipientList = $newsletter->getTestRecipientList();
+        }else{
+            $recipientList = $newsletter->getRecipientList();
+        }
         $recipients = $recipientList->getRecipients();
+
+        if(empty($recipients)){
+            throw new Exception("Recipient list is empty",1644851884);
+        }
+
         foreach ($recipients as $recipient){
             /**@var $recipient RecipientInterface**/
             /**@var $mailTask MailTask**/
@@ -80,5 +91,15 @@ class NewsletterTask extends Task
     public function setNewsletter(int $newsletterUid): void
     {
         $this->setProperty("newsletter", $newsletterUid);
+    }
+
+    public function getTest(): bool
+    {
+        return (bool)$this->getProperty("test");
+    }
+
+    public function setTest(bool $test): void
+    {
+        $this->setProperty("test", $test);
     }
 }

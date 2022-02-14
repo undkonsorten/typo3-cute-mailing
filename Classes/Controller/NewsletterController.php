@@ -233,12 +233,19 @@ class NewsletterController extends ActionController
     public function sendTestMailAction(Newsletter $newsletter): void
     {
         if($newsletter->getTestRecipientList()){
+            $newsletter->setStatus($newsletter::TESTED);
+            /**@var $newsletterTask \Undkonsorten\CuteMailing\Domain\Model\NewsletterTask**/
+            $newsletterTask = GeneralUtility::makeInstance(NewsletterTask::class);
+            $newsletterTask->setNewsletter($newsletter->getUid());
+            $newsletterTask->setTest(true);
+
+            $this->taskRepository->add($newsletterTask);
+            $this->newsletterRepository->update($newsletter);
             $this->addFlashMessage('Test mail send to '.$newsletter->getTestRecipientList()->getName(),'Send',AbstractMessage::OK);
-            $this->redirect('list');
         }else{
             $this->addFlashMessage('This newsletter has no test recipient.','Error', AbstractMessage::ERROR);
-            $this->redirect('list');
         }
+        $this->redirect('list');
 
     }
 
