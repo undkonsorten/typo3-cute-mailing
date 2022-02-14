@@ -21,16 +21,16 @@
 
         <div class="col-md-6">
             <div class="form-group">
-                <label for="datetime" class="lb-lg">
-                    <f:translate key="module.newsletter.new.field.datetime">Datetime</f:translate>
+                <label for="sendingTime" class="lb-lg">
+                    <f:translate key="module.newsletter.new.field.sendingTime ">Sending date</f:translate>
                 </label>
                 <f:form.textfield
                     type="datetime-local"
-                    property="datetime"
-                    id="datetime"
+                    property="sendingTime"
+                    id="sendingTime"
                     class="form-control input-lg" />
                 <span class="help-block">
-                    <f:translate key="module.newsletter.new.field.datetime.description">Datetime description</f:translate>
+                    <f:translate key="module.newsletter.new.field.sendingTime.description">Sending date description</f:translate>
                 </span>
             </div>
         </div>
@@ -311,7 +311,6 @@
     <button class="btn btn-primary btn-lg" data-wizardform-gotostep="2">
         <f:translate key="module.newsletter.wizard.back">Back</f:translate>
     </button>
-    <f:form.hidden property="bodytext" value=""/>
     <f:form.submit class="btn btn-primary btn-lg pull-right" value="{f:translate(key:'save')}" disabled="disabled" data="{luxletter-wizardstatus:'pending'}"/>
     <f:form.submit class="btn btn-primary btn-lg pull-right" value="{f:translate(key:'save')}" data="{luxletter-wizardstatus:'ready'}" style="display:none"/>
 		<f:comment>@todo: remove this button when js is running</f:comment>

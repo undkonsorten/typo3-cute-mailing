@@ -207,12 +207,20 @@ class NewsletterController extends ActionController
             /**@var $newsletterTask \Undkonsorten\CuteMailing\Domain\Model\NewsletterTask**/
             $newsletterTask = GeneralUtility::makeInstance(NewsletterTask::class);
             $newsletterTask->setNewsletter($newsletter->getUid());
+            $newsletterTask->setStartDate($newsletter->getSendingTime()->getTimestamp());
 
             $this->taskRepository->add($newsletterTask);
             $this->newsletterRepository->update($newsletter);
             $this->addFlashMessage('Newsletter was queued for sending.','Sending....', AbstractMessage::OK);
         }
 
+        $this->redirect('list');
+    }
+
+    public function updateAction(Newsletter $newsletter): void
+    {
+        $this->newsletterRepository->update($newsletter);
+        $this->addFlashMessage('Newsletter was updated.','Updated', AbstractMessage::OK);
         $this->redirect('list');
     }
 
