@@ -24,7 +24,7 @@ if (!defined('TYPO3')) {
         'cutemailing',    // Submodule key
         '',                        // Position
         [
-            \Undkonsorten\CuteMailing\Controller\NewsletterController::class => 'list, new, edit, create, enable, disable, delete, receiver',
+            \Undkonsorten\CuteMailing\Controller\NewsletterController::class => 'list, new, edit, create, enable, disable, delete, receiver, sendTestMail',
 
         ],
         [

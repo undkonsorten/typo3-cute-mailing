@@ -7,6 +7,9 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class Newsletter extends AbstractEntity
 {
+    const CREATED = 0;
+    const SEND = 1;
+
     /**
      * @var string
      */
@@ -29,7 +32,12 @@ class Newsletter extends AbstractEntity
     /**
      * @var RecipientList
      */
-    protected $recipientList;
+    protected $recipientList = null;
+
+    /**
+     * @var RecipientList
+     */
+    protected $testRecipientList = null;
 
     /**
      * @var string
@@ -55,6 +63,11 @@ class Newsletter extends AbstractEntity
      * @var string
      */
     protected $subject = '';
+
+    /**
+     * @var int
+     */
+    protected $status = self::CREATED;
 
 
     /**
@@ -232,6 +245,45 @@ class Newsletter extends AbstractEntity
     {
         $this->subject = $subject;
     }
+
+    /**
+     * @return RecipientList
+     */
+    public function getTestRecipientList(): ?RecipientList
+    {
+        return $this->testRecipientList;
+    }
+
+    /**
+     * @param RecipientList $testRecipientList
+     */
+    public function setTestRecipientList(?RecipientList $testRecipientList): void
+    {
+        $this->testRecipientList = $testRecipientList;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     */
+    public function setStatus(int $status): void
+    {
+        $this->status = $status;
+    }
+
+    public function enable(): void
+    {
+        $this->setStatus(self::SEND);
+    }
+
+
 
 
 

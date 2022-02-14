@@ -8,6 +8,7 @@ CREATE TABLE tx_cutemailing_domain_model_newsletter (
 
 	newsletter_page int(11) DEFAULT '0' NOT NULL,
 	recipient_list int(11) DEFAULT '0' NOT NULL,
+	test_recipient_list int(11) DEFAULT '0' NOT NULL,
 	sender varchar(255) DEFAULT '' NOT NULL,
 	sender_name varchar(255) DEFAULT '' NOT NULL,
 	reply_to varchar(255) DEFAULT '' NOT NULL,
@@ -15,6 +16,7 @@ CREATE TABLE tx_cutemailing_domain_model_newsletter (
 	title varchar(255) DEFAULT '' NOT NULL,
 	subject varchar(255) DEFAULT '' NOT NULL,
 	description varchar(255) DEFAULT '' NOT NULL,
+	status int(11) DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

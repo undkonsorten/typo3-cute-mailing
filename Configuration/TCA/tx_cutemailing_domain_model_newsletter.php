@@ -22,7 +22,7 @@ return [
         'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_newsletter.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,--palette--;;1,title, subject, description, newsletter_page,recipient_list,sender, sender_name, reply_to, reply_to_name,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,starttime,endtime'],
+        '1' => ['showitem' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,--palette--;;1,title, subject, description, newsletter_page,test_recipient_list,recipient_list,sender, sender_name, reply_to, reply_to_name,status,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,starttime,endtime'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
@@ -98,6 +98,18 @@ return [
                 'minitems' => '1',
             ]
         ],
+        'test_recipient_list' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.test_recipients',
+            'config' => [
+                'type' => 'group',
+                'internal_type' => 'db',
+                'allowed' => 'tx_cutemailing_domain_model_recipientlist',
+                'size' => '1',
+                'maxitems' => '1',
+                'minitems' => '1',
+            ]
+        ],
         'sender' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.sender',
@@ -151,6 +163,14 @@ return [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.subject',
             'config' => [
                 'type' => 'text',
+                'size' => 4,
+            ]
+        ],
+        'status' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status',
+            'config' => [
+                'type' => 'input',
                 'size' => 4,
             ]
         ],

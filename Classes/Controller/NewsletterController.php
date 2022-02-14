@@ -21,6 +21,7 @@ use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExis
 use TYPO3\CMS\Core\Configuration\Loader\PageTsConfigLoader;
 use TYPO3\CMS\Core\Configuration\Parser\PageTsConfigParser;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\TypoScript\Parser\TypoScriptParser;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
@@ -38,8 +39,10 @@ use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor;
 use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
+use Undkonsorten\CuteMailing\Domain\Model\NewsletterTask;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
 use Undkonsorten\CuteMailing\Domain\Repository\RecipientListRepositoryInterface;
+use Undkonsorten\Taskqueue\Domain\Repository\TaskRepository;
 
 /**
  * Class NewsletterController
@@ -62,6 +65,11 @@ class NewsletterController extends ActionController
      */
     protected $recipientListRepository = null;
 
+    /**
+     * @var TaskRepository
+     */
+    protected $taskRepository;
+
 
 
     /**
@@ -70,12 +78,14 @@ class NewsletterController extends ActionController
      */
     public function __construct(
         NewsletterRepository    $newsletterRepository,
-        RecipientListRepositoryInterface $recipientListRepository
+        RecipientListRepositoryInterface $recipientListRepository,
+        TaskRepository $taskRepository
 
 
     ) {
         $this->newsletterRepository = $newsletterRepository;
         $this->recipientListRepository = $recipientListRepository;
+        $this->taskRepository = $taskRepository;
     }
 
     /**
@@ -92,9 +102,13 @@ class NewsletterController extends ActionController
 
     public function editAction(Newsletter $newsletter)
     {
-        $this->view->assignMultiple([
-            'newsletter' => $newsletter
-        ]);
+        $currentPid = (int)GeneralUtility::_GP('id');
+        $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
+        $assign['recipientList'] = $this->recipientListRepository->findByRootline($rootline);
+        $assign['testRecipientList'] = $this->recipientListRepository->findByRootline($rootline);
+        $assign['newsletter'] = $newsletter;
+
+        $this->view->assignMultiple($assign);
     }
 
     /**
@@ -111,6 +125,7 @@ class NewsletterController extends ActionController
         $assign['title'] = $page['title'];
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
         $assign['recipientList'] = $this->recipientListRepository->findByRootline($rootline);
+        $assign['testRecipientList'] = $this->recipientListRepository->findByRootline($rootline);
 
 
         //$pageTs = $this->getPageTsFromPage($currentPid);
@@ -185,8 +200,19 @@ class NewsletterController extends ActionController
      */
     public function enableAction(Newsletter $newsletter): void
     {
-        $newsletter->enable();
-        $this->newsletterRepository->update($newsletter);
+        if($newsletter->getStatus() === $newsletter::SEND){
+            $this->addFlashMessage('Newsletter was already send.','Was sended.', AbstractMessage::ERROR);
+        }else{
+            $newsletter->enable();
+            /**@var $newsletterTask \Undkonsorten\CuteMailing\Domain\Model\NewsletterTask**/
+            $newsletterTask = GeneralUtility::makeInstance(NewsletterTask::class);
+            $newsletterTask->setNewsletter($newsletter->getUid());
+
+            $this->taskRepository->add($newsletterTask);
+            $this->newsletterRepository->update($newsletter);
+            $this->addFlashMessage('Newsletter was queued for sending.','Sending....', AbstractMessage::OK);
+        }
+
         $this->redirect('list');
     }
 
@@ -199,9 +225,21 @@ class NewsletterController extends ActionController
      */
     public function deleteAction(Newsletter $newsletter): void
     {
-        $this->newsletterRepository->removeNewsletterAndQueues($newsletter);
+        $this->newsletterRepository->remove($newsletter);
         $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.delete.message'));
         $this->redirect('list');
+    }
+
+    public function sendTestMailAction(Newsletter $newsletter): void
+    {
+        if($newsletter->getTestRecipientList()){
+            $this->addFlashMessage('Test mail send to '.$newsletter->getTestRecipientList()->getName(),'Send',AbstractMessage::OK);
+            $this->redirect('list');
+        }else{
+            $this->addFlashMessage('This newsletter has no test recipient.','Error', AbstractMessage::ERROR);
+            $this->redirect('list');
+        }
+
     }
 
 
