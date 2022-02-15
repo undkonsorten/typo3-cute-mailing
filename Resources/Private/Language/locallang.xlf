@@ -10,6 +10,10 @@
 			<trans-unit id="tx_cutemailing_domain_model_recipient_list">
 				<source>Recipient list</source>
 			</trans-unit>
+			<trans-unit id="cute_mailing_sys_folder">
+				<source>Cute Mailing</source>
+			</trans-unit>
+
 		</body>
 	</file>
 </xliff>

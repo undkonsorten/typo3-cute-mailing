@@ -34,4 +34,14 @@ if (!defined('TYPO3')) {
         ]
 
     );
+    (function ($extKey='cuteMailing') {
+        $archiveDoktype = 116;
+
+        // Add new page type:
+        $GLOBALS['PAGES_TYPES'][$archiveDoktype] = [
+            'type' => 'web',
+            'allowedTables' => '*',
+        ];
+
+    })();
 })();
