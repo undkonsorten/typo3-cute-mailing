@@ -16,7 +16,7 @@ class NewsletterRepository extends Repository
     {
         $storagePageIds = [];
         foreach ($rootline as $key => $value){
-            $storagePageIds[] = $value['pid'];
+            $storagePageIds[] = $value['uid'];
         }
         $query = $this->createQuery();
         $defaultSettings = $query->getQuerySettings();
