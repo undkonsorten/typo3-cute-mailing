@@ -147,7 +147,7 @@ return [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.title',
             'config' => [
                 'type' => 'input',
-                'size' => 10,
+                'size' => 50,
             ]
         ],
         'subject' => [
@@ -155,12 +155,12 @@ return [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.subject',
             'config' => [
                 'type' => 'input',
-                'size' => 10,
+                'size' => 50,
             ]
         ],
         'description' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.subject',
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.description',
             'config' => [
                 'type' => 'text',
                 'size' => 4,

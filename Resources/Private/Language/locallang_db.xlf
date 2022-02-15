@@ -6,11 +6,57 @@
 			<trans-unit id="tx_cutemailing_domain_model_newsletter">
 				<source>Newsletter</source>
 			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.title">
+				<source>Newsletter title (internal)</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.subject">
+				<source>Email subject line (title)</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.sending_time">
+				<source>Scheduled sending time</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.sender">
+				<source>Sender: Email</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.sender_name">
+				<source>Sender: Name</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.reply_to">
+				<source>Reply to: Email address</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.reply_to_name">
+				<source>Reply to: Name</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.test_recipients">
+				<source>Testing recipients list</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.recipients">
+				<source>Newsletter recipients list</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.status">
+				<source>Status</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.page">
+				<source>Newsletter page (to be send)</source>
+			</trans-unit>
+
 			<trans-unit id="tx_cutemailing_domain_model_recipient_list">
 				<source>Recipient list</source>
 			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_recipient_list.name">
+				<source>Name of recipient list</source>
+			</trans-unit>
 			<trans-unit id="tx_cutemailing_domain_model_recipient_list.page">
 				<source>Page with recievers</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_recipient_list.type">
+				<source>Reciever table</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_recipient_list.type.ttaddress">
+				<source>Address (EXT:tt_address)</source>
 			</trans-unit>
 		</body>
 	</file>
