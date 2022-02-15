@@ -9,7 +9,7 @@
         [
             'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang.xlf:cute_mailing_sys_folder',
             $cuteMailingSysFolder,
-            'EXT:' . $extKey . '/Resources/Public/Icons/Archive.svg'
+            'EXT:' . $extKey . '/Resources/Public/Icons/cute_folder_icon.svg'
         ],
         '1',
         'after'
