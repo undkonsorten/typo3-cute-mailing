@@ -26,6 +26,7 @@
                 </label>
                 <f:form.textfield
                     type="datetime-local"
+										value="{newsletter.sendingTime -> f:format.date(format: 'Y-m-d H:i')}"
                     property="sendingTime"
                     id="sendingTime"
                     class="form-control input-lg" />

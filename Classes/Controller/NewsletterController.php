@@ -34,6 +34,7 @@ use TYPO3\CMS\Extbase\Object\Exception as ExceptionExtbaseObject;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
+use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException;
 use TYPO3\CMS\Fluid\View\StandaloneView;
@@ -157,6 +158,23 @@ class NewsletterController extends ActionController
     {
         $this->setDatetimeObjectInNewsletterRequest();
     }
+
+
+
+
+    public function initializeAction(){
+        $dateFormat = 'Y-m-d\TH:i';
+        if (isset($this->arguments['newsletter'])) {
+            $this->arguments['newsletter']
+                ->getPropertyMappingConfiguration()
+                ->forProperty('sendingTime')
+                ->setTypeConverterOption(
+                    DateTimeConverter::class,
+                    DateTimeConverter::CONFIGURATION_DATE_FORMAT,
+                    $dateFormat);
+        }
+    }
+
 
     /**
      * @param Newsletter $newsletter
