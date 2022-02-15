@@ -1,3 +1,9 @@
+:root {
+	/* Palette : https://coolors.co/a5bf3c-869b31-8f857d-5c5552-433633 */
+	--cute-color: #A5BF3C;
+	--cute-color--darken: #869b31;
+}
+
 .timeline {
 	position: relative;
 	background: #fff
@@ -26,7 +32,7 @@
 }
 
 .timeline--vertical .timeline__item:first-child:before {
-	background-color: #4DE7FF
+	background-color: var(--cute-color)
 }
 
 .timeline--vertical .timeline__item:first-child:after {
@@ -103,7 +109,7 @@
 	display: block;
 	width: 1.5rem;
 	height: 1.5rem;
-	background-color: #4DE7FF;
+	background-color: var(--cute-color);
 	border-radius: 1.5rem;
 	position: absolute;
 	z-index: 1;
@@ -228,7 +234,7 @@
 }
 
 .wizard.left-arrow a:last-child:before, .wizard.small.left-arrow a:last-child:before {
-	border-right-color: #4DE7FF
+	border-right-color: var(--cute-color)
 }
 
 .wizard .badge {
@@ -250,20 +256,20 @@
 }
 
 .wizard .current, .wizard a.progress-current {
-	background: #4DE7FF;
+	background: var(--cute-color);
 	color: #fff
 }
 
 .wizard .current .badge, .wizard a.progress-current .badge {
-	color: #4DE7FF
+	color: var(--cute-color)
 }
 
 .wizard a.current:after, .wizard a.progress-current:after {
-	border-left-color: #4DE7FF !important
+	border-left-color: var(--cute-color) !important
 }
 
 .wizard.left-arrow a.current:before, .wizard.left-arrow a.progress-current:before, .wizard.small.left-arrow a.current:before, .wizard.small.left-arrow a.progress-current:before {
-	border-right-color: #4DE7FF
+	border-right-color: var(--cute-color)
 }
 
 .wizard.small {
@@ -341,38 +347,14 @@ label {
 	font-weight: normal
 }
 
-.color-lux {
-	color: #4DE7FF
+.color-cute {
+	color: var(--cute-color)
 }
 
 .color-grey {
 	color: #ddd
 }
 
-.lux-backend {
-	--bs-primary-rgb: 165, 231, 255
-}
-
-.lux-backend .table > :not(caption) > * > * {
-	background: transparent
-}
-
-.lux-backend .img-circle {
-	object-fit: cover;
-	border-radius: 50%;
-	width: 150px;
-	height: 150px
-}
-
-.lux-backend .img-medium {
-	width: 100px;
-	height: 100px
-}
-
-.lux-backend .img-small {
-	width: 50px;
-	height: 50px
-}
 
 @media screen and (min-width: 992px) {
 	.row {
@@ -395,16 +377,13 @@ label {
 	margin-top: .5rem
 }
 
-.luxletter-dashboard .panel, .luxletter-dashboard .panel-body {
-	height: 100%
-}
 
 .panel-body {
 	overflow: hidden
 }
 
 .bg-primary {
-	background-color: #A5E7FF
+	background-color: #A5E7FF;
 }
 
 .bg-primary li {
@@ -412,11 +391,11 @@ label {
 }
 
 .badge-primary {
-	background-color: #4DE7FF
+	background-color: var(--cute-color)
 }
 
 .alert-lux {
-	background-color: #4DE7FF
+	background-color: var(--cute-color)
 }
 
 .input-lg {
@@ -428,7 +407,7 @@ label {
 }
 
 .progress-bar {
-	background-color: #4DE7FF
+	background-color: var(--cute-color)
 }
 
 .btn-lg-extra {
@@ -439,14 +418,14 @@ label {
 }
 
 .btn-primary {
-	background-color: #4DE7FF;
-	border-color: #4DE7FF;
+	background-color: var(--cute-color);
+	border-color: var(--cute-color);
 	color: #fff
 }
 
 .btn-primary:hover {
-	background-color: #08E7FF;
-	border-color: #08E7FF
+	background-color: var(--cute-color--darken);
+	border-color: var(--cute-color--darken);
 }
 
 .btn-primary-extra {
@@ -503,7 +482,7 @@ label {
 }
 
 .table-hover > tbody > tr:hover, .table-hover > tbody > tr.lux-action-detail {
-	background-color: #4DE7FF
+	background-color: var(--cute-color)
 }
 
 .table-hover > tbody > tr:hover > td, .table-hover > tbody > tr.lux-action-detail > td {
@@ -548,12 +527,25 @@ label {
 	font-size: 16px
 }
 
+.vcenter {
+	display: flex;
+	align-items: center;
+	justify-content: center
+}
+
+
+/* REMOVE
+
+.luxletter-dashboard .panel, .luxletter-dashboard .panel-body {
+	height: 100%
+}
+
 .luxletter-panel-body-text {
 	font-size: 2.5vw;
 	display: inline-block;
 	width: 100%;
 	text-align: center;
-	color: #4DE7FF;
+	color: var(--cute-color);
 	line-height: 85%
 }
 
@@ -571,8 +563,4 @@ label {
 	font-size: 1.5vw
 }
 
-.vcenter {
-	display: flex;
-	align-items: center;
-	justify-content: center
-}
+ */
