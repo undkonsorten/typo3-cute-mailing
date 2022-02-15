@@ -43,11 +43,14 @@ class MailService implements SingletonInterface
         $uri = GeneralUtility::makeInstance(Uri::class, $url);
         $uri = $uri->withQuery('type=10');
         $response = $this->requestFactory->request($uri);
-        $email
-            ->to($mailTask->getEmail())
-            ->from('jeremy@acme.com')
-            ->subject('TYPO3 loves you - here is why')
-            ->html($response->getBody()->getContents())
-            ->send();
+        if($mailTask->getFormat() == $mailTask::HTML){
+            $email
+                ->to($mailTask->getEmail())
+                ->from('jeremy@acme.com')
+                ->subject('TYPO3 loves you - here is why')
+                ->html($response->getBody()->getContents())
+                ->send();
+        }
+
     }
 }

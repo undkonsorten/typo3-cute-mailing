@@ -79,6 +79,8 @@ class NewsletterTask extends Task
             $mailTask->setEmail($recipient->getEmail());
             $mailTask->setProperty('class', get_class($recipient));
             $mailTask->setProperty('uid', $recipient->getUid());
+            /**@TODO format needs to be configured somewhere **/
+            $mailTask->setFormat($mailTask::HTML);
             $this->taskRepository->add($mailTask);
         }
         $this->persistenceManager->persistAll();

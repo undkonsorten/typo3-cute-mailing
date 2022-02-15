@@ -9,6 +9,10 @@ use Undkonsorten\Taskqueue\Domain\Model\Task;
 class MailTask extends Task
 {
 
+    const PLAINTEXT = 'plain';
+    const HTML = 'html';
+    const BOTH = 'both';
+
 
     /**
      * @var string
@@ -52,14 +56,14 @@ class MailTask extends Task
        return $this->getProperty("newsletterPage");
    }
 
-    public function setConfiguration(string $configuration): void
+    public function setFormat(string $format): void
     {
-        $this->setProperty("configuration", $configuration);
+        $this->setProperty("format", $format);
     }
 
-    public function getConfiguration(): string
+    public function getFormat(): string
     {
-        return $this->getProperty("configuration");
+        return $this->getProperty("format");
     }
 
 }
