@@ -226,6 +226,12 @@ class NewsletterController extends ActionController
             $newsletterTask = GeneralUtility::makeInstance(NewsletterTask::class);
             $newsletterTask->setNewsletter($newsletter->getUid());
             $newsletterTask->setStartDate($newsletter->getSendingTime()->getTimestamp());
+            $pageTs = BackendUtility::getPagesTSconfig($newsletter->getNewsletterPage());
+            if(isset($pageTs['mod.']['web_modules.']['cute_mailing.'])){
+                $pageTs = $pageTs['mod.']['web_modules.']['cute_mailing.'];
+                $newsletterTask->setPageTypeHtml((int)$pageTs['page_type_html']);
+                $newsletterTask->setPageTypeText((int)$pageTs['page_type_text']);
+            }
 
             $this->taskRepository->add($newsletterTask);
             $this->newsletterRepository->update($newsletter);
@@ -264,6 +270,13 @@ class NewsletterController extends ActionController
             $newsletterTask = GeneralUtility::makeInstance(NewsletterTask::class);
             $newsletterTask->setNewsletter($newsletter->getUid());
             $newsletterTask->setTest(true);
+
+            $pageTs = BackendUtility::getPagesTSconfig($newsletter->getNewsletterPage());
+            if(isset($pageTs['mod.']['web_modules.']['cute_mailing.'])){
+                $pageTs = $pageTs['mod.']['web_modules.']['cute_mailing.'];
+                $newsletterTask->setPageTypeHtml((int)$pageTs['page_type_html']);
+                $newsletterTask->setPageTypeText((int)$pageTs['page_type_text']);
+            }
 
             $this->taskRepository->add($newsletterTask);
             $this->newsletterRepository->update($newsletter);

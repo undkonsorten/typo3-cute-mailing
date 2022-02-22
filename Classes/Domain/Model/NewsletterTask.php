@@ -75,12 +75,12 @@ class NewsletterTask extends Task
             /**@var $recipient RecipientInterface**/
             /**@var $mailTask MailTask**/
             $mailTask = GeneralUtility::makeInstance(MailTask::class);
-            $mailTask->setNewsletterPage($newsletter->getNewsletterPage());
-            $mailTask->setEmail($recipient->getEmail());
-            $mailTask->setProperty('class', get_class($recipient));
-            $mailTask->setProperty('uid', $recipient->getUid());
             /**@TODO format needs to be configured somewhere **/
             $mailTask->setFormat($mailTask::HTML);
+            $mailTask->setNewsletter($newsletter->getUid());
+            $mailTask->setRecipient($recipient->getUid());
+            $mailTask->setPageTypeHtml($this->getPageTypeHtml());
+            $mailTask->setPageTypeText($this->getPageTypeText());
             $this->taskRepository->add($mailTask);
         }
         $this->persistenceManager->persistAll();
@@ -103,5 +103,25 @@ class NewsletterTask extends Task
     public function setTest(bool $test): void
     {
         $this->setProperty("test", $test);
+    }
+
+    public function getPageTypeHtml(): int
+    {
+        return (int)$this->getProperty('pageTypeHtml');
+    }
+
+    public function getPageTypeText(): int
+    {
+        return (int)$this->getProperty('pageTypeText');
+    }
+
+    public function setPageTypeText(int $value): void
+    {
+        $this->setProperty('pageTypeText', $value);
+    }
+
+    public function setPageTypeHtml(int $value): void
+    {
+        $this->setProperty('pageTypeHtml', $value);
     }
 }

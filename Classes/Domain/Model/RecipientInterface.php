@@ -7,6 +7,11 @@ interface RecipientInterface
 {
 
     /**
+     * @return int
+     */
+    public function getUid(): int;
+
+    /**
      * @return string
      */
     public function getEmail(): string;
@@ -39,5 +44,6 @@ interface RecipientInterface
      * @param string $lastName
      */
     public function setLastName(string $lastName): void;
+
 
 }

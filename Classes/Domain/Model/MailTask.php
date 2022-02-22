@@ -15,11 +15,6 @@ class MailTask extends Task
 
 
     /**
-     * @var string
-     */
-    protected $configuration;
-
-    /**
      * @var MailService
      */
     protected $mailService;
@@ -36,26 +31,6 @@ class MailTask extends Task
     }
 
 
-    public function setEmail(string $email): void
-    {
-        $this->setProperty("email", $email);
-    }
-
-    public function getEmail(): string
-    {
-        return $this->getProperty("email");
-    }
-
-   public function setNewsletterPage(int $newsletterPage): void
-   {
-       $this->setProperty("newsletterPage", $newsletterPage);
-   }
-
-   public function getNewsletterPage(): int
-   {
-       return $this->getProperty("newsletterPage");
-   }
-
     public function setFormat(string $format): void
     {
         $this->setProperty("format", $format);
@@ -65,5 +40,46 @@ class MailTask extends Task
     {
         return $this->getProperty("format");
     }
+
+    public function getNewsletter(): int
+    {
+        return (int)$this->getProperty('newsletter');
+    }
+
+    public function setNewsletter(int $newsletter): void
+    {
+        $this->setProperty('newsletter', $newsletter);
+    }
+
+    public function getRecipient(): int
+    {
+        return (int)$this->getProperty('recipient');
+    }
+
+    public function setRecipient(int $recipient): void
+    {
+        $this->setProperty('recipient', $recipient);
+    }
+
+    public function getPageTypeHtml(): int
+    {
+        return (int)$this->getProperty('pageTypeHtml');
+    }
+
+    public function getPageTypeText(): int
+    {
+        return (int)$this->getProperty('pageTypeText');
+    }
+
+    public function setPageTypeText(int $value): void
+    {
+        $this->setProperty('pageTypeText', $value);
+    }
+
+    public function setPageTypeHtml(int $value): void
+    {
+        $this->setProperty('pageTypeHtml', $value);
+    }
+
 
 }

@@ -49,4 +49,20 @@ class TtAddressRecipientList  extends RecipientList
         }
         return $result;
     }
+
+    public function getRecipient(int $recipient): ?\FriendsOfTYPO3\TtAddress\Domain\Model\Address
+    {
+        $result = null;
+        if(ExtensionManagementUtility::isLoaded('tt_address')){
+            /**@var $addressRepository AddressRepository **/
+            $addressRepository = GeneralUtility::makeInstance(AddressRepository::class);
+            /**@var $defaultQuerySettings Typo3QuerySettings**/
+            $defaultQuerySettings = $this->defaultQuerySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+            $defaultQuerySettings->setRespectStoragePage(true);
+            $defaultQuerySettings->setStoragePageIds([$this->getRecipientListPage()]);
+            $addressRepository->setDefaultQuerySettings($defaultQuerySettings);
+            $result = $addressRepository->findByUid($recipient);
+        }
+        return $result;
+    }
 }
