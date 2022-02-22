@@ -49,7 +49,6 @@
 											<i class="fa fa-stop color-grey" title="Newsletter disabled"></i>
 										</f:else>
 									</f:if>
-
 									<span title="UID{newsletter.uid}">{newsletter.title}</span>
 								</td>
 								<td><span title="{newsletter.description}"><f:format.crop maxCharacters="200" append=" ...">{newsletter.description}</f:format.crop></span></td>
@@ -68,17 +67,21 @@
 										</f:then>
 										<f:else>
 											<f:link.action action="enable" class="btn btn-primary" arguments="{newsletter:newsletter}" additionalAttributes="{data-luxletter-confirm:'{f:translate(key:\'module.newsletter.list.enableConfirm\',extensionName:\'CuteMailing\')}'}">
+												<i class="fa fa-send"></i>
 												<f:translate key="module.newsletter.list.enable" extensionName="CuteMailing">enable</f:translate>
 											</f:link.action>
 										</f:else>
 									</f:if>
 									<f:link.action action="sendTestMail" class="btn btn-primary" arguments="{newsletter:newsletter}">
+										<i class="fa fa-flask"></i>
 										<f:translate key="module.newsletter.list.test" extensionName="CuteMailing">Send test mail</f:translate>
 									</f:link.action>
 									<f:link.action action="edit" class="btn btn-primary" arguments="{newsletter:newsletter}">
+										<i class="fa fa-edit"></i>
 										<f:translate key="module.newsletter.list.edit" extensionName="CuteMailing">edit</f:translate>
 									</f:link.action>
 									<f:link.action action="delete" class="btn btn-danger" arguments="{newsletter:newsletter}" additionalAttributes="{data-luxletter-confirm:'{f:translate(key:\'module.newsletter.list.deleteConfirm\',extensionName:\'CuteMailing\')}'}">
+										<i class="fa fa-close"></i>
 										<f:translate key="module.newsletter.list.delete" extensionName="CuteMailing">delete</f:translate>
 									</f:link.action>
 								</td>
