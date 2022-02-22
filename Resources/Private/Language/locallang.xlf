@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-10-09T12:38:21Z"
-		  product-name="cutemailing">
+	<file source-language="en" datatype="plaintext" original="messages" date="2022-10-09T12:38:21Z" product-name="cute_mailing">
 		<header/>
 		<body>
+
 			<trans-unit id="tx_cutemailing_domain_model_newsletter">
 				<source>Task</source>
 			</trans-unit>
@@ -14,6 +14,111 @@
 				<source>Cute Mailing</source>
 			</trans-unit>
 
+			<!-- Wizard -->
+			<trans-unit id="module.newsletter.new.field.title">
+				<source>Newsletter title (internal)</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.title">
+				<source>Newsletter title (internal)</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.title.description">
+				<source>This title is used only for internal description. It it not the email title.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.sendingTime">
+				<source>Scheduled sending time</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.list.tableheader.datetime">
+				<source>Scheduled sending time</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.sendingTime.description">
+				<source>The date and time when you newsletter sending should be scheduled.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.list.tableheader.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.origin">
+				<source>Newsletter page</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.origin.description">
+				<source>UID of the newsletter page that sould be send with this campaign.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.description">
+				<source>Descritpion (internal)</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.description.description">
+				<source>A newsletter description for internal usage only.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.sender">
+				<source>Sender email</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.sender.description">
+				<source>Email address of the sender of the email. Attention your mailserver might need configuration to use this email address.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.sender">
+				<source>Sender email</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.sender.description">
+				<source>Email address of the sender of the email. Attention your mailserver might need configuration to use this email address.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.senderName">
+				<source>Sender name</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.senderName.description">
+				<source>Name of the newsletter sender (will be displayed in the recievers email software).</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.replyTo">
+				<source>ReplyTo email</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.replyTo.description">
+				<source>If an newsletter reciever wants to answer on you newsletter this email address will be used as a reciever.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.replyToName">
+				<source>ReplyTo name</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.replyToName.description">
+				<source>If an newsletter reciever wants to answer on you newsletter this name address will be used as a reciever.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.receiver">
+				<source>Newsletter receivers</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.receiver.description">
+				<source>Choose the list of newsletter recievers.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.testReceiver">
+				<source>Test newsletter receivers</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.testReceiver.description">
+				<source>Choose the list of newsletter recievers which sould recieve the test newsletter.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.subject">
+				<source>Newsletter/Email subject line</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.subject.description">
+				<source>The subject line of your newsletter will be shown in the email software of the reciever. Optimal lenght: 20-60 characters.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.wizard.back">
+				<source>Back</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.wizard.next">
+				<source>Next</source>
+			</trans-unit>
+
+			<!-- LIST -->
+			<trans-unit id="module.newsletter.list.enable">
+				<source>Send</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.list.enabled">
+				<source>Scheduled</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.list.enableConfirm">
+				<source>Please confirm you want to send out this newsletter campaign.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.list.deleteConfirm">
+				<source>Please confirm the deletion of this newsletter.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.list.tableheader.deleteConfirm">
+				<source>Please confirm the deletion of this newsletter.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

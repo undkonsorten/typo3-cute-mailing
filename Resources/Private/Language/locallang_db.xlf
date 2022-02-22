@@ -9,6 +9,9 @@
 			<trans-unit id="tx_cutemailing_domain_model_newsletter.title">
 				<source>Newsletter title (internal)</source>
 			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.title">
+				<source>Newsletter title (internal)</source>
+			</trans-unit>
 			<trans-unit id="tx_cutemailing_domain_model_newsletter.subject">
 				<source>Email subject line (title)</source>
 			</trans-unit>

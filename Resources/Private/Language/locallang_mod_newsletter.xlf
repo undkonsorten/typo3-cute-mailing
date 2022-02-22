@@ -3,6 +3,7 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2019-06-16T12:00:00Z" product-name="luxletter">
 		<header/>
 		<body>
+			<!-- Defines the module on the left side -->
 			<trans-unit id="mlang_tabs_tab">
 				<source>Newsletter</source>
 			</trans-unit>
