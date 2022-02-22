@@ -41,6 +41,7 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor;
 use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
 use Undkonsorten\CuteMailing\Domain\Model\NewsletterTask;
+use Undkonsorten\CuteMailing\Domain\Model\RecipientListInterface;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
 use Undkonsorten\CuteMailing\Domain\Repository\RecipientListRepositoryInterface;
 use Undkonsorten\Taskqueue\Domain\Repository\TaskRepository;
@@ -55,6 +56,11 @@ class NewsletterController extends ActionController
      * @var string
      */
     protected $receiverDetailFile = 'EXT:cute_mailing/Resources/Private/Templates/Newsletter/ReceiverDetail.html';
+
+    /**
+     * @var string
+     */
+    protected $wizardUserPreviewFile = 'EXT:cute_mailing/Resources/Private/Backend/Templates/Newsletter/WizardUserPreview.html';
 
     /**
      * @var NewsletterRepository|null
@@ -288,7 +294,20 @@ class NewsletterController extends ActionController
 
     }
 
-
+    public function wizardUserPreviewAjax(ServerRequestInterface $request): ResponseInterface
+    {
+        $recipientListId = $request->getQueryParams()['recipientList'];
+        /** @var RecipientListInterface $recipientList */
+        $recipientList = $this->recipientListRepository->findByUid($recipientListId);
+        $recipients = $recipientList->getRecipients();
+        $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
+        $standaloneView->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($this->wizardUserPreviewFile));
+        $standaloneView->assignMultiple([
+            'userPreview' => array_slice($recipients, 0, 3),
+            'userAmount' => count($recipients),
+        ]);
+        return $this->jsonResponse(json_encode(['html' => $standaloneView->render()]));
+    }
 
 
     /**

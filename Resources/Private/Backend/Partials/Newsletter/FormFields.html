@@ -1,4 +1,5 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/ViewHelpers"
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+			xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
 			data-namespace-typo3-fluid="true">
 <fieldset>
     <div class="row">
@@ -48,7 +49,7 @@
 						id="newsletterPage"
 						value="{newsletterPage}"
 						placeholder="https://www.yourdomain/newsletter/2020-01/"
-						data="{luxletter-mandatory:'1',luxletter-wizardpreviewevent:'newsletterPage'}"
+						data="{luxletter-mandatory:'1',cutemailing-wizardpreviewevent:'newsletter'}"
 						required="required"/>
 					<span class="help-block">
                     <f:translate key="module.newsletter.new.field.origin.description" extensionName="CuteMailing">PID or absolute URL</f:translate>
@@ -64,7 +65,7 @@
                 <f:form.textarea class="form-control input-lg"
                      property="description"
                      id="description"
-                     style="height: 200px;"></f:form.textarea>
+                     style="height: 200px;" />
                 <span class="help-block">
                     <f:translate key="module.newsletter.new.field.description.description" extensionName="CuteMailing">Example description</f:translate>
                 </span>
@@ -149,7 +150,7 @@
 												optionLabelField="name"
                         prependOptionValue=""
                         prependOptionLabel="{f:translate(key:'pleasechoose')}"
-                        data="{luxletter-mandatory:'1',luxletter-wizardpreviewevent:'recipientList'}"
+                        data="{luxletter-mandatory:'1',cutemailing-wizardpreviewevent:'users'}"
                         property="recipientList"
                         required="required" />
                 <span class="help-block">
@@ -166,7 +167,7 @@
 								optionLabelField="name"
 								prependOptionValue=""
 								prependOptionLabel="{f:translate(key:'pleasechoose')}"
-								data="{luxletter-mandatory:'1',luxletter-wizardpreviewevent:'testRecipientList'}"
+								data="{luxletter-mandatory:'1',cutemailing-wizardpreviewevent:'testRecipientList'}"
 								property="testRecipientList"
 								required="required" />
 							<span class="help-block">
@@ -218,13 +219,13 @@
 
 
 <fieldset>
-    <div class="alert alert-warning" role="alert" data-luxletter-wizardstatus="pending">
+    <div class="alert alert-warning" role="alert" data-cutemailing-wizardstatus="pending">
         <h4 class="alert-heading">
             <f:translate key="module.newsletter.new.message.notready" extensionName="CuteMailing">Newsletter is not yet ready to be sent</f:translate>
         </h4>
         <p><f:translate key="module.newsletter.new.message.notready.mandatory" extensionName="CuteMailing">Please fill all mandatory fields</f:translate></p>
     </div>
-    <div class="alert alert-success" role="alert" data-luxletter-wizardstatus="ready" style="display: none;">
+    <div class="alert alert-success" role="alert" data-cutemailing-wizardstatus="ready" style="display: none;">
         <h4 class="alert-heading">
             <f:translate key="module.newsletter.new.message.ready" extensionName="CuteMailing">Newsletter is ready for dispatch</f:translate>
         </h4>
@@ -235,7 +236,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default" data-luxletter-wizardstatus="ready" style="display: none; height: auto;">
+            <div class="panel panel-default" data-cutemailing-wizardstatus="ready" style="display: none; height: auto;">
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <f:translate key="module.newsletter.new.field.testmail" extensionName="CuteMailing">Testmail</f:translate>
@@ -270,7 +271,7 @@
 
 
 
-            <div data-luxletter-wizardpreview="users">
+            <div data-cutemailing-wizardpreview="users">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
@@ -279,7 +280,7 @@
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <div class="alert alert-warning" role="alert" data-luxletter-wizardstatus="pending">
+                        <div class="alert alert-warning" role="alert" data-cutemailing-wizardstatus="pending">
                             <h4 class="alert-heading">
                                 <f:translate key="module.newsletter.new.message.notready" extensionName="CuteMailing">Newsletter is not yet ready to be sent</f:translate>
                             </h4>
@@ -297,7 +298,7 @@
                         <f:translate key="module.newsletter.new.wizarduserpreview.previewnewsletter" extensionName="CuteMailing">Newsletter preview</f:translate>
                     </h3>
                 </div>
-                <div class="panel-body" data-luxletter-wizardpreview="newsletter">
+                <div class="panel-body" data-cutemailing-wizardpreview="newsletter">
                     <div class="alert alert-warning" role="alert">
                         <h4 class="alert-heading">
                             <f:translate key="module.newsletter.new.message.notready" extensionName="CuteMailing">Newsletter is not yet ready to be sent</f:translate>
@@ -314,8 +315,7 @@
     <button class="btn btn-primary btn-lg" data-wizardform-gotostep="2">
         <f:translate key="module.newsletter.wizard.back" extensionName="CuteMailing">Back</f:translate>
     </button>
-    <f:form.submit class="btn btn-primary btn-lg pull-right" value="{f:translate(key:'save')}" disabled="disabled" data="{luxletter-wizardstatus:'pending'}"/>
-    <f:form.submit class="btn btn-primary btn-lg pull-right" value="{f:translate(key:'save')}" data="{luxletter-wizardstatus:'ready'}" style="display:none"/>
-		<f:comment><!-- @todo: remove this button when js is running --></f:comment>
-    <f:form.submit class="btn btn-primary btn-lg pull-right" value="{f:translate(key:'save')}" />
+    <f:form.submit class="btn btn-primary btn-lg pull-right" value="{f:translate(key:'save')}" disabled="disabled" data="{cutemailing-wizardstatus:'pending'}"/>
+    <f:form.submit class="btn btn-primary btn-lg pull-right" value="{f:translate(key:'save')}" data="{cutemailing-wizardstatus:'ready'}" style="display:none"/>
 </fieldset>
+</html>

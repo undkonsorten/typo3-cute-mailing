@@ -3,9 +3,9 @@
 use Undkonsorten\CuteMailing\Controller\NewsletterController;
 
 return [
-    '/luxletter/wizardUserPreview' => [
-        'path' => '/luxletter/wizardUserPreview',
-        'target' => NewsletterController::class . '::wizardUserPreviewAjax',
+    '/cutemailing/wizardUserPreview' => [
+        'path' => '/cutemailing/wizardUserPreview',
+        'target' => implode('::', [NewsletterController::class , 'wizardUserPreviewAjax']),
     ],
     '/luxletter/testMail' => [
         'path' => '/luxletter/testMail',
