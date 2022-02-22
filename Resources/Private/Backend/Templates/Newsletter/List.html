@@ -52,7 +52,7 @@
 									<span title="UID{newsletter.uid}">{newsletter.title}</span>
 								</td>
 								<td><span title="{newsletter.description}"><f:format.crop maxCharacters="200" append=" ...">{newsletter.description}</f:format.crop></span></td>
-								<td>{f:format.date(date:newsletter.datetime,format:'{f:translate(key:\'date\')}')}</td>
+								<td>{newsletter.sendingTime -> f:format.date(format: 'Y-m-d H:i')}</td>
 								<td>
 									<f:if condition="{newsletter.enabled}">
 										<f:then>
