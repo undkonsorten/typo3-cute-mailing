@@ -43,7 +43,7 @@
 				<source>UID of the newsletter page that sould be send with this campaign.</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.description">
-				<source>Descritpion (internal)</source>
+				<source>Description (internal)</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.description.description">
 				<source>A newsletter description for internal usage only.</source>
