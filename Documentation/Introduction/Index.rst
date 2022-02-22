@@ -6,50 +6,22 @@
 Introduction
 ============
 
-.. tip::
-
-   New to reStructuredText and Sphinx?
-
-   Get an introduction:
-   https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/WritingReST/Index.html
-
-   Use this cheat sheet as reference:
-   https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/WritingReST/CheatSheet.html
-
 .. _what-it-does:
 
 What does it do?
 ================
 
-The aim of this chapter is to provide a general overview of your extension.
+We had been looking for a tool to send newsletters in TYPO3 for a long time.
+Nothing that existed or exists met our requirements. We would have to make
+compromises everywhere.
 
-*  What does it do?
-*  What problems does it solve?
-*  Who is the target audience?
-
-This chapter should provide information that will help inform
-potential users and assist them in deciding if they should
-install and use this extension.
+Therefore we decided to develop our own extension. Basically, it is only about
+sending a TYPO3 page as an e-mail. For everything else in a newsletter
+(subscribe/unsubscribe, html templates) there are ready-made solutions or tools
+that can be used.
+So CuteMailing only does one thing: **Sending mails!**
 
 .. important::
 
-   Do not forget to set extension's version number in :file:`Settings.cfg` file,
-   in the :code:`release` property.
-   It will be automatically picked up on the cover page by the :code:`|release|` substitution.
-
-.. _screenshots:
-
-Screenshots
-===========
-
-This chapter should help people understand how the extension works.
-Remove it if it is not relevant.
-
-.. figure:: /Images/IntroductionPackage.png
-   :class: with-shadow
-   :alt: Introduction Package
-   :width: 300px
-
-   Introduction Package after installation (caption of the image).
-
-How the Frontend of the Introduction Package looks like after installation (legend of the image).
+   CuteMailing does not provide HTML templates or plugins for subscribing or
+   unsubscribing to a newsletter!

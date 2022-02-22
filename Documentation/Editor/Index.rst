@@ -6,41 +6,28 @@
 For Editors
 ===========
 
-How to use the extension from the perspective of an editor.
-
-Think of common tasks that an editor is likely to perform:
-
-*  How do they complete them?
-*  What problems are they likely to encounter?
-*  What access do they require?
-*  What configuration options are available to them?
-
-One example could be adding a frontend plugin to a page and then configuring it.
-
-Language should be non-technical, aim to avoid using acronyms where possible.
-
-Be mindful that editors typically don't have administrative access to the installation.
+Editors can manage recipients and newsletters via a backend module.
+Select the newsletter module in the module column on the left and then select
+the newsletter area in the page tree.
+First, 2 lists of recipients should be created.
 
 .. tip::
 
-   Take a break from time to time.
+   One list for the normal recipients and one list with a few addresses for
+   a test mailing.
 
-Admonitions should be used to warn the users about potential pitfalls.
-Attract their attention to important elements,
-or add some notes for for information (further reading, for example).
+Now you can start the wizard by clicking on the button "Create new newsletter".
 
-Do not overuse admonitions like notes, important, etc.!
-
-Provide screenshots as needed for making things clear.
-When creating screenshots, try using the Official Introduction Package.
-
-.. figure:: /Images/UserManual/BackendView.png
+.. figure:: /Images/Editor/AddNewsletter.png
    :class: with-shadow
-   :alt: Backend view
+   :alt: Add new Newsletter in backend
 
-   Default Backend view (caption of the image)
+   Add new newsletter in backend
 
-Do not use huge full-screen images, unless it is necessary and serves a good purpose.
+The fields have a description and are actually self-explanatory.
+
+Once you have filled in all the necessary information, you can save the
+newsletter. It will not yet be released for dispatch.
 
 .. _editor-faq:
 
