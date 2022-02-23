@@ -315,6 +315,8 @@
     <button class="btn btn-primary btn-lg" data-wizardform-gotostep="2">
         <f:translate key="module.newsletter.wizard.back" extensionName="CuteMailing">Back</f:translate>
     </button>
+		<f:form.hidden property="pageTypeHtml" value="{pageTypeHtml}"/>
+		<f:form.hidden property="pageTypeText" value="{pageTypeText}"/>
     <f:form.submit class="btn btn-primary btn-lg pull-right" value="{f:translate(key:'save')}" disabled="disabled" data="{cutemailing-wizardstatus:'pending'}"/>
     <f:form.submit class="btn btn-primary btn-lg pull-right" value="{f:translate(key:'save')}" data="{cutemailing-wizardstatus:'ready'}" style="display:none"/>
 </fieldset>

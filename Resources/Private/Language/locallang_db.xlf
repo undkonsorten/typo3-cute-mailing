@@ -61,6 +61,12 @@
 			<trans-unit id="tx_cutemailing_domain_model_recipient_list.type.ttaddress">
 				<source>Address (EXT:tt_address)</source>
 			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.page_type_html">
+				<source>Page type for html newsletter</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.page_type_text">
+				<source>Page type for text newsletter</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

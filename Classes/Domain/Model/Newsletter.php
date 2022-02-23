@@ -70,6 +70,17 @@ class Newsletter extends AbstractEntity
      */
     protected $status = self::CREATED;
 
+    /**
+     * @var int
+     */
+    protected $pageTypeHtml = 0;
+
+    /**
+     * @var int
+     */
+    protected $pageTypeText = 0;
+
+
 
     /**
      * @return int
@@ -283,6 +294,39 @@ class Newsletter extends AbstractEntity
     {
         $this->setStatus(self::SEND);
     }
+
+    /**
+     * @return int
+     */
+    public function getPageTypeHtml(): int
+    {
+        return $this->pageTypeHtml;
+    }
+
+    /**
+     * @param int $pageTypeHtml
+     */
+    public function setPageTypeHtml(int $pageTypeHtml): void
+    {
+        $this->pageTypeHtml = $pageTypeHtml;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPageTypeText(): int
+    {
+        return $this->pageTypeText;
+    }
+
+    /**
+     * @param int $pageTypeText
+     */
+    public function setPageTypeText(int $pageTypeText): void
+    {
+        $this->pageTypeText = $pageTypeText;
+    }
+
 
 
 

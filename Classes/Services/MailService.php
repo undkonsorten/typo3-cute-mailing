@@ -66,7 +66,7 @@ class MailService implements SingletonInterface
 
 
         if($mailTask->getFormat() == $mailTask::HTML){
-            $uri = $uri->withQuery('type='.$mailTask->getPageTypeHtml());
+            $uri = $uri->withQuery('type='.$newsletter->getPageTypeHtml());
             $response = $this->requestFactory->request($uri);
             $email
                 ->to($recipient->getEmail())

@@ -61,25 +61,6 @@ class MailTask extends Task
         $this->setProperty('recipient', $recipient);
     }
 
-    public function getPageTypeHtml(): int
-    {
-        return (int)$this->getProperty('pageTypeHtml');
-    }
-
-    public function getPageTypeText(): int
-    {
-        return (int)$this->getProperty('pageTypeText');
-    }
-
-    public function setPageTypeText(int $value): void
-    {
-        $this->setProperty('pageTypeText', $value);
-    }
-
-    public function setPageTypeHtml(int $value): void
-    {
-        $this->setProperty('pageTypeHtml', $value);
-    }
 
 
 }
