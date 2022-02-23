@@ -15,7 +15,7 @@ class RecipientListRepository extends Repository implements RecipientListReposit
     {
         $storagePageIds = [];
         foreach ($rootline as $key => $value){
-            $storagePageIds[] = $value['pid'];
+            $storagePageIds[] = $value['uid'];
         }
         $query = $this->createQuery();
         $defaultSettings = $query->getQuerySettings();
