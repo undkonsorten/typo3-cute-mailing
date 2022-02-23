@@ -34,6 +34,7 @@ use TYPO3\CMS\Extbase\Object\Exception as ExceptionExtbaseObject;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException;
@@ -77,6 +78,11 @@ class NewsletterController extends ActionController
      */
     protected $taskRepository;
 
+    /**
+     * @var PersistenceManager
+     */
+    protected $persistenceManager;
+
 
 
     /**
@@ -86,13 +92,15 @@ class NewsletterController extends ActionController
     public function __construct(
         NewsletterRepository    $newsletterRepository,
         RecipientListRepositoryInterface $recipientListRepository,
-        TaskRepository $taskRepository
+        TaskRepository $taskRepository,
+        PersistenceManager $persistenceManager
 
 
     ) {
         $this->newsletterRepository = $newsletterRepository;
         $this->recipientListRepository = $recipientListRepository;
         $this->taskRepository = $taskRepository;
+        $this->persistenceManager = $persistenceManager;
     }
 
     /**
@@ -196,8 +204,15 @@ class NewsletterController extends ActionController
      */
     public function createAction(Newsletter $newsletter): void
     {
+        $currentPid = (int)GeneralUtility::_GP('id');
+        $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
+        foreach ($rootline as $page) {
+            if($page['doktype'] === 116){
+                $newsletter->setPid($page['uid']);
+            }
+        }
         $this->newsletterRepository->add($newsletter);
-        $this->newsletterRepository->persistAll();
+        $this->persistenceManager->persistAll();
         $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.create.message'));
         $this->redirect('list');
     }
@@ -306,37 +321,13 @@ class NewsletterController extends ActionController
     protected function setDatetimeObjectInNewsletterRequest(): void
     {
         $newsletter = (array)$this->request->getArgument('newsletter');
-        if (!empty($newsletter['datetime'])) {
-            $datetime = new DateTime($newsletter['datetime']);
+        if (!empty($newsletter['sendingTime'])) {
+            $datetime = new DateTime($newsletter['sendingTime']);
         } else {
             $datetime = new DateTime();
         }
-        $newsletter['datetime'] = $datetime;
+        $newsletter['sendingTime'] = $datetime;
         $this->request->setArgument('newsletter', $newsletter);
-    }
-
-    /**
-     * @return array
-     */
-    protected function getPageTsFromPage(int $pid): array
-    {
-        /** @var RootlineUtility $rootline */
-        $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $pid)->get();
-        /** @var PageTsConfigLoader $loader */
-        $loader = GeneralUtility::makeInstance(PageTsConfigLoader::class);
-
-        $tsConfigString = $loader->load($rootline);
-        /** @var ConditionMatcher $conditionMatcher */
-        $conditionMatcher = GeneralUtility::makeInstance(ConditionMatcher::class);
-        $typoScriptParser = GeneralUtility::makeInstance(TypoScriptParser::class);
-        $nullFrontend = GeneralUtility::makeInstance(NullFrontend::class, 'not_needed');
-
-        $parser = GeneralUtility::makeInstance(
-            PageTsConfigParser::class,
-            $typoScriptParser,
-            $nullFrontend
-        );
-        return $parser->parse($tsConfigString, $conditionMatcher)['mod.']['web_modules.']['cute_mailing.'];
     }
 
 }
