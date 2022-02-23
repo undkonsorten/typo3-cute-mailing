@@ -9,6 +9,8 @@ use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
+use TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use Undkonsorten\CuteMailing\Domain\Model\MailTask;
 use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
 use Undkonsorten\CuteMailing\Domain\Model\RecipientInterface;
@@ -63,18 +65,35 @@ class MailService implements SingletonInterface
         $url = (string)$site->getRouter()->generateUri($newsletter->getNewsletterPage());
         $uri = GeneralUtility::makeInstance(Uri::class, $url);
 
-
-
         if($mailTask->getFormat() == $mailTask::HTML){
             $uri = $uri->withQuery('type='.$newsletter->getPageTypeHtml());
             $response = $this->requestFactory->request($uri);
+            $content = $response->getBody()->getContents();
+            $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $content, $recipient);
             $email
                 ->to($recipient->getEmail())
                 ->from($newsletter->getSender())
                 ->replyTo($newsletter->getReplyTo())
                 ->subject($newsletter->getSubject())
-                ->html($response->getBody()->getContents())
+                ->html($content)
                 ->send();
+        }
+
+    }
+
+    protected function replaceMarker(array $allowedMarker, &$content, RecipientInterface $recipient)
+    {
+        foreach ($allowedMarker as $marker){
+            try{
+                $property = ObjectAccess::getProperty($recipient, $marker);
+            }catch(PropertyNotAccessibleException $exception){
+                /**@todo maybe log this ot something */
+            }
+
+            if(!is_null($property)){
+                $content = str_replace('###'.$marker.'###', $property, $content);
+            }
+
         }
 
     }

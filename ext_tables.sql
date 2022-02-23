@@ -20,6 +20,7 @@ CREATE TABLE tx_cutemailing_domain_model_newsletter (
 	sending_time int(11) unsigned DEFAULT '0' NOT NULL,
 	page_type_html int(11) DEFAULT '0' NOT NULL,
 	page_type_text int(11) DEFAULT '0' NOT NULL,
+	allowed_marker varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

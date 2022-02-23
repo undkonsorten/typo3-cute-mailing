@@ -26,4 +26,7 @@ return [
             \Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipientList::class => \Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipientList::class,
         ]
     ],
+    \Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipient::class => [
+        'tableName' => 'tt_address',
+    ],
 ];

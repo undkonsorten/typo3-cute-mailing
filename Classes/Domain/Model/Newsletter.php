@@ -80,6 +80,11 @@ class Newsletter extends AbstractEntity
      */
     protected $pageTypeText = 0;
 
+    /**
+     * @var string
+     */
+    protected $allowedMarker = '';
+
 
 
     /**
@@ -325,6 +330,22 @@ class Newsletter extends AbstractEntity
     public function setPageTypeText(int $pageTypeText): void
     {
         $this->pageTypeText = $pageTypeText;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAllowedMarker(): string
+    {
+        return $this->allowedMarker;
+    }
+
+    /**
+     * @param string $allowedMarker
+     */
+    public function setAllowedMarker(string $allowedMarker): void
+    {
+        $this->allowedMarker = $allowedMarker;
     }
 
 

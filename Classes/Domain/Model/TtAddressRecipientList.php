@@ -8,6 +8,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+use Undkonsorten\CuteMailing\Domain\Repository\TtAddressRecipientRepository;
 
 class TtAddressRecipientList  extends RecipientList
 {
@@ -39,7 +40,7 @@ class TtAddressRecipientList  extends RecipientList
         $result = [];
         if(ExtensionManagementUtility::isLoaded('tt_address')){
             /**@var $addressRepository AddressRepository **/
-            $addressRepository = GeneralUtility::makeInstance(AddressRepository::class);
+            $addressRepository = GeneralUtility::makeInstance(TtAddressRecipientRepository::class);
             /**@var $defaultQuerySettings Typo3QuerySettings**/
             $defaultQuerySettings = $this->defaultQuerySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
             $defaultQuerySettings->setRespectStoragePage(true);
@@ -55,7 +56,7 @@ class TtAddressRecipientList  extends RecipientList
         $result = null;
         if(ExtensionManagementUtility::isLoaded('tt_address')){
             /**@var $addressRepository AddressRepository **/
-            $addressRepository = GeneralUtility::makeInstance(AddressRepository::class);
+            $addressRepository = GeneralUtility::makeInstance(TtAddressRecipientRepository::class);
             /**@var $defaultQuerySettings Typo3QuerySettings**/
             $defaultQuerySettings = $this->defaultQuerySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
             $defaultQuerySettings->setRespectStoragePage(true);

@@ -154,6 +154,7 @@ class NewsletterController extends ActionController
             $assign['replyToName'] = $pageTs['reply_to_name'];
             $assign['pageTypeHtml'] = $pageTs['page_type_html'];
             $assign['pageTypeText'] = $pageTs['page_type_text'];
+            $assign['allowedMarker'] = $pageTs['allowed_marker'];
          }
 
         $this->view->assignMultiple($assign);
