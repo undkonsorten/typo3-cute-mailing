@@ -13,6 +13,9 @@
 			<trans-unit id="cute_mailing_sys_folder">
 				<source>Cute Mailing</source>
 			</trans-unit>
+			<trans-unit id="module.newsletter.new.title">
+				<source>Add newsletter</source>
+			</trans-unit>
 
 			<!-- Wizard -->
 			<trans-unit id="module.newsletter.new.field.title">
