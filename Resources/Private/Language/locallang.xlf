@@ -119,6 +119,9 @@
 			<trans-unit id="module.newsletter.list.tableheader.deleteConfirm">
 				<source>Please confirm the deletion of this newsletter.</source>
 			</trans-unit>
+			<trans-unit id="pleasechoose">
+				<source>Please choose a recipient list</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
