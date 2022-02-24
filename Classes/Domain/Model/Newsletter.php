@@ -71,19 +71,19 @@ class Newsletter extends AbstractEntity
     protected $status = self::CREATED;
 
     /**
-     * @var int
+     * @var int|null
      */
-    protected $pageTypeHtml = 0;
+    protected $pageTypeHtml = null;
 
     /**
-     * @var int
+     * @var int|null
      */
-    protected $pageTypeText = 0;
+    protected $pageTypeText = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $allowedMarker = '';
+    protected $allowedMarker = null;
 
 
 
@@ -301,52 +301,54 @@ class Newsletter extends AbstractEntity
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPageTypeHtml(): int
+    public function getPageTypeHtml(): ?int
     {
         return $this->pageTypeHtml;
     }
 
     /**
-     * @param int $pageTypeHtml
+     * @param int|null $pageTypeHtml
      */
-    public function setPageTypeHtml(int $pageTypeHtml): void
+    public function setPageTypeHtml(?int $pageTypeHtml): void
     {
         $this->pageTypeHtml = $pageTypeHtml;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPageTypeText(): int
+    public function getPageTypeText(): ?int
     {
         return $this->pageTypeText;
     }
 
     /**
-     * @param int $pageTypeText
+     * @param int|null $pageTypeText
      */
-    public function setPageTypeText(int $pageTypeText): void
+    public function setPageTypeText(?int $pageTypeText): void
     {
         $this->pageTypeText = $pageTypeText;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAllowedMarker(): string
+    public function getAllowedMarker(): ?string
     {
         return $this->allowedMarker;
     }
 
     /**
-     * @param string $allowedMarker
+     * @param string|null $allowedMarker
      */
-    public function setAllowedMarker(string $allowedMarker): void
+    public function setAllowedMarker(?string $allowedMarker): void
     {
         $this->allowedMarker = $allowedMarker;
     }
+
+
 
 
 
