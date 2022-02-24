@@ -55,16 +55,13 @@
 								<td><span title="{newsletter.description}"><f:format.crop maxCharacters="200" append=" ...">{newsletter.description}</f:format.crop></span></td>
 								<td>{newsletter.sendingTime -> f:format.date(format: 'Y-m-d H:i')}</td>
 								<td>
-									<f:if condition="{newsletter.enabled}">
+									<f:comment><!-- status const SEND = 2; const CREATED = 0; const TESTED = 1; --></f:comment>
+									<f:if condition="{newsletter.status} == 2">
 										<f:then>
-											<f:comment><!-- @ToDo -- enabled geht hier noch nicht als status --></f:comment>
-											<f:translate key="module.newsletter.list.enabled" extensionName="CuteMailing">enabled</f:translate>
-											<f:comment>
-												<!-- We do not want to disable anymore -->
-												<f:link.action action="disable" class="btn btn-warning" arguments="{newsletter:newsletter}">
-													<f:translate key="module.newsletter.list.disable" extensionName="CuteMailing">disable</f:translate>
-												</f:link.action>
-											</f:comment>
+											<span class="cute__status-scheduled">
+												<f:translate key="module.newsletter.list.enabled" extensionName="CuteMailing">
+													<i class="fa fa-checked"></i>Status: Scheduled</f:translate>
+											</span>
 										</f:then>
 										<f:else>
 											<f:link.action action="enable" class="btn btn-primary" arguments="{newsletter:newsletter}" additionalAttributes="{data-luxletter-confirm:'{f:translate(key:\'module.newsletter.list.enableConfirm\',extensionName:\'CuteMailing\')}'}">

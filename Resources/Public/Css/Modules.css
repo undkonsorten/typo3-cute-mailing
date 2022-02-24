@@ -534,6 +534,10 @@ label {
 	justify-content: center
 }
 
+.cute__status-scheduled {
+	font-weight: bold;
+	margin-right: .2em;
+}
 
 /* REMOVE
 
