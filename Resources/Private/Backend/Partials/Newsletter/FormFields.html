@@ -1,6 +1,5 @@
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
-			xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
-			data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
 <fieldset>
     <div class="row">
         <div class="col-md-6">
@@ -149,7 +148,7 @@
 												optionValueField="uid"
 												optionLabelField="name"
                         prependOptionValue=""
-                        prependOptionLabel="{f:translate(key:'pleasechoose',extensionName='CuteMailing')}"
+                        prependOptionLabel="{f:translate(key:'pleasechoose',extensionName:'CuteMailing')}"
                         data="{luxletter-mandatory:'1',cutemailing-wizardpreviewevent:'users'}"
                         property="recipientList"
                         required="required" />
@@ -166,7 +165,7 @@
 								optionValueField="uid"
 								optionLabelField="name"
 								prependOptionValue=""
-								prependOptionLabel="{f:translate(key:'pleasechoose',extensionName='CuteMailing')}"
+								prependOptionLabel="{f:translate(key:'pleasechoose',extensionName:'CuteMailing')}"
 								data="{luxletter-mandatory:'1',cutemailing-wizardpreviewevent:'testRecipientList'}"
 								property="testRecipientList"
 								required="required" />
@@ -318,7 +317,7 @@
 		<f:form.hidden property="pageTypeHtml" value="{pageTypeHtml}"/>
 		<f:form.hidden property="pageTypeText" value="{pageTypeText}"/>
 		<f:form.hidden property="allowedMarker" value="{allowedMarker}"/>
-    <f:form.submit class="btn btn-primary btn-lg pull-right" value="{f:translate(key:'save',extensionName='CuteMailing')}" disabled="disabled" data="{cutemailing-wizardstatus:'pending'}"/>
-    <f:form.submit class="btn btn-primary btn-lg pull-right" value="{f:translate(key:'save',extensionName='CuteMailing')}" data="{cutemailing-wizardstatus:'ready'}" style="display:none"/>
+    <f:form.submit class="btn btn-primary btn-lg pull-right" value="{f:translate(key:'save',extensionName:'CuteMailing')}" disabled="disabled" data="{cutemailing-wizardstatus:'pending'}"/>
+    <f:form.submit class="btn btn-primary btn-lg pull-right" value="{f:translate(key:'save',extensionName:'CuteMailing')}" data="{cutemailing-wizardstatus:'ready'}" style="display:none"/>
 </fieldset>
 </html>

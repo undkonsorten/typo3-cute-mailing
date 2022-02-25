@@ -14,7 +14,7 @@
 				<source>Cute Mailing</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.title">
-				<source>Add newsletter</source>
+				<source>Create newsletter from current page</source>
 			</trans-unit>
 
 			<!-- Wizard -->
@@ -35,6 +35,9 @@
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.sendingTime.description">
 				<source>The date and time when you newsletter sending should be scheduled.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.list.tableheader.status">
+				<source>Status</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.list.tableheader.description">
 				<source>Description</source>
@@ -107,8 +110,17 @@
 			</trans-unit>
 
 			<!-- LIST -->
+			<trans-unit id="module.newsletter.list.edit">
+				<source>Edit</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.list.delete">
+				<source>Delete</source>
+			</trans-unit>
 			<trans-unit id="module.newsletter.list.enable">
 				<source>Send</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.list.test">
+				<source>Send test</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.list.enabled">
 				<source>Scheduled</source>

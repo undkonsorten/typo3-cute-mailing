@@ -275,7 +275,7 @@ class NewsletterController extends ActionController
     public function deleteAction(Newsletter $newsletter): void
     {
         $this->newsletterRepository->remove($newsletter);
-        $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.delete.message'));
+        $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.delete.message'),'Deleted');
         $this->redirect('list');
     }
 
@@ -290,7 +290,7 @@ class NewsletterController extends ActionController
 
             $this->taskRepository->add($newsletterTask);
             $this->newsletterRepository->update($newsletter);
-            $this->addFlashMessage('Test mail send to '.$newsletter->getTestRecipientList()->getName(),'Send',AbstractMessage::OK);
+            $this->addFlashMessage('Your test mailing is beeing send out for the reciepient group: '.$newsletter->getTestRecipientList()->getName(),'Testmailing invoked',AbstractMessage::OK);
         }else{
             $this->addFlashMessage('This newsletter has no test recipient.','Error', AbstractMessage::ERROR);
         }

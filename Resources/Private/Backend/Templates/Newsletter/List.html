@@ -1,39 +1,31 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/ViewHelpers"
-			data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
 <f:layout name="Backend"/>
 
 <f:section name="content">
 			<f:render section="Newsletters" arguments="{_all}"/>
 </f:section>
 
-
 <f:section name="Newsletters">
-	<f:if condition="{newsletters}">
-		<div class="row">
-			<div class="col-md-12">
-				<f:link.action action="new" class="btn btn-lg btn-primary" style="width: 250px; margin-bottom: 20px;">
-					<i class="fa fa-plus"></i>
-					<f:translate key="module.newsletter.new.title" extensionName="CuteMailing">Add newsletter</f:translate>
-				</f:link.action>
-			</div>
-		</div>
-	</f:if>
 
-	<div class="row">
-		<div class="col-md-12">
 			<h1>
-				<f:translate key="module.newsletter.list.title" extensionName="CuteMailing">Newsletters</f:translate>
+				<f:translate key="module.newsletter.list.title" extensionName="CuteMailing">CuteMailing: Newsletters</f:translate>
 			</h1>
 			<f:render partial="Miscellaneous/FlashMessages" arguments="{_all}"/>
 			<f:if condition="{newsletters}">
 				<f:then>
+					<f:link.action action="new" class="btn btn-lg btn-primary cute__list-add-new mb-3">
+						<i class="fa fa-plus"></i>
+						<f:translate key="module.newsletter.new.title" extensionName="CuteMailing">Add newsletter</f:translate>
+					</f:link.action>
 					<table class="table table-striped table-condensed">
 						<thead>
 						<tr>
 							<th>#</th>
 							<th><f:translate key="module.newsletter.list.tableheader.title" extensionName="CuteMailing">Newsletter title</f:translate></th>
-							<th><f:translate key="module.newsletter.list.tableheader.description" extensionName="CuteMailing">Description</f:translate></th>
+							<th><f:translate key="module.newsletter.list.tableheader.status" extensionName="CuteMailing">Status</f:translate></th>
 							<th><f:translate key="module.newsletter.list.tableheader.sendingTime" extensionName="CuteMailing">Sending time</f:translate></th>
+							<th>Sending</th>
 							<th></th>
 						</tr>
 						</thead>
@@ -42,46 +34,65 @@
 							<tr>
 								<td>{iteration.cycle}.</td>
 								<td>
-									<f:if condition="{newsletter.enabled}">
-										<f:then>
-											<i class="fa fa-play color-cute" title="Newsletter enabled"></i>
-										</f:then>
-										<f:else>
-											<i class="fa fa-stop color-grey" title="Newsletter disabled"></i>
-										</f:else>
-									</f:if>
 									<span title="UID{newsletter.uid}">{newsletter.title}</span>
 								</td>
-								<td><span title="{newsletter.description}"><f:format.crop maxCharacters="200" append=" ...">{newsletter.description}</f:format.crop></span></td>
-								<td>{newsletter.sendingTime -> f:format.date(format: 'Y-m-d H:i')}</td>
 								<td>
+									<f:switch expression="{newsletter.status}">
+										<f:case value="1"><i class="fa fa-flask"></i> Tested</f:case>
+										<f:case value="2"><i class="fa fa-clock-o"></i> Scheduled</f:case>
+										<f:defaultCase>Created</f:defaultCase>
+									</f:switch>
+								</td>
+								<td>{newsletter.sendingTime -> f:format.date(format: 'Y-m-d H:i')}</td>
+								<td class="cute__list-edit-button">
 									<f:comment><!-- status const SEND = 2; const CREATED = 0; const TESTED = 1; --></f:comment>
-									<f:if condition="{newsletter.status} == 2">
-										<f:then>
-											<span class="cute__status-scheduled">
-												<f:translate key="module.newsletter.list.enabled" extensionName="CuteMailing">
-													<i class="fa fa-checked"></i>Status: Scheduled</f:translate>
-											</span>
-										</f:then>
-										<f:else>
-											<f:link.action action="enable" class="btn btn-primary" arguments="{newsletter:newsletter}" additionalAttributes="{data-luxletter-confirm:'{f:translate(key:\'module.newsletter.list.enableConfirm\',extensionName:\'CuteMailing\')}'}">
-												<i class="fa fa-send"></i>
-												<f:translate key="module.newsletter.list.enable" extensionName="CuteMailing">enable</f:translate>
-											</f:link.action>
-										</f:else>
+									<f:if condition="{newsletter.status} != 2">
+										<f:link.action action="enable" class="btn btn-primary" arguments="{newsletter:newsletter}" additionalAttributes="{data-luxletter-confirm:'{f:translate(key:\'module.newsletter.list.enableConfirm\',extensionName:\'CuteMailing\')}'}">
+											<i class="fa fa-send"></i>
+											<f:translate key="module.newsletter.list.enable" extensionName="CuteMailing">enable</f:translate>
+										</f:link.action>
 									</f:if>
 									<f:link.action action="sendTestMail" class="btn btn-primary" arguments="{newsletter:newsletter}">
 										<i class="fa fa-flask"></i>
 										<f:translate key="module.newsletter.list.test" extensionName="CuteMailing">Send test mail</f:translate>
 									</f:link.action>
-									<f:link.action action="edit" class="btn btn-primary" arguments="{newsletter:newsletter}">
-										<i class="fa fa-edit"></i>
-										<f:translate key="module.newsletter.list.edit" extensionName="CuteMailing">edit</f:translate>
-									</f:link.action>
-									<f:link.action action="delete" class="btn btn-danger" arguments="{newsletter:newsletter}" additionalAttributes="{data-luxletter-confirm:'{f:translate(key:\'module.newsletter.list.deleteConfirm\',extensionName:\'CuteMailing\')}'}">
-										<i class="fa fa-close"></i>
-										<f:translate key="module.newsletter.list.delete" extensionName="CuteMailing">delete</f:translate>
-									</f:link.action>
+								</td>
+								<td>
+									<div class="btn-group">
+										<f:link.action action="edit" class="btn btn-default" arguments="{newsletter:newsletter}" title="{f:translate(key: 'module.newsletter.list.edit', extensionName: 'CuteMailing')}">
+											<span class="t3js-icon icon icon-size-small icon-state-default icon-actions-page-open" data-identifier="actions-page-open">
+												<span class="icon-markup">
+													<svg class="icon-color">
+														<use xlink:href="/typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/actions.svg#actions-file-edit"></use>
+													</svg>
+												</span>
+												<span class="sr-only">
+													<f:translate key="module.newsletter.list.edit" extensionName="CuteMailing">
+														edit
+													</f:translate>
+												</span>
+											</span>
+										</f:link.action>
+										<f:link.action
+											action="delete"
+											class="btn btn-default t3js-record-delete"
+											arguments="{newsletter:newsletter}"
+											title="{f:translate(key: 'module.newsletter.list.delete', extensionName: 'CuteMailing')}"
+											additionalAttributes="{data-luxletter-confirm:'{f:translate(key:\'module.newsletter.list.deleteConfirm\',extensionName:\'CuteMailing\')}'}">
+											<span
+												class="t3js-icon icon icon-size-small icon-state-default icon-actions-edit-delete"
+												data-identifier="actions-edit-delete">
+												<span class="icon-markup">
+													<svg class="icon-color">
+														<use xlink:href="/typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/actions.svg#actions-delete"></use>
+													</svg>
+												</span>
+											</span>
+											<span class="sr-only">
+												<f:translate key="module.newsletter.list.delete" extensionName="CuteMailing">delete</f:translate>
+											</span>
+										</f:link.action>
+									</div>
 								</td>
 							</tr>
 						</f:for>
@@ -96,7 +107,4 @@
 					</f:link.action>
 				</f:else>
 			</f:if>
-
-		</div>
-	</div>
 </f:section>

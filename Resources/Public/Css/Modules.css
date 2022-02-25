@@ -274,77 +274,6 @@
 	border-right-color: var(--cute-color)
 }
 
-.wizard.small {
-	margin-bottom: 15px
-}
-
-.wizard.small a {
-	padding: 5px 12px 5px
-}
-
-.wizard.small:not(.left-arrow) a:before {
-	border-top: 15px inset transparent;
-	border-bottom: 15px inset transparent;
-	border-left: 15px solid #fff
-}
-
-.wizard.small:not(.left-arrow) a:after {
-	border-top: 15px inset transparent;
-	border-bottom: 15px inset transparent;
-	border-left: 15px solid #A5E7FF;
-	right: -15px
-}
-
-.wizard.small.left-arrow a:before {
-	border-top: 15px inset transparent;
-	border-bottom: 15px inset transparent;
-	border-right: 15px solid #A5E7FF;
-	left: -15px;
-	z-index: 2
-}
-
-.wizard.small.left-arrow a:after {
-	width: 0;
-	height: 0;
-	border-top: 15px inset transparent;
-	border-bottom: 15px inset transparent;
-	border-right: 15px solid #fff
-}
-
-.wizard.small a:first-child:before, .wizard.small a:last-child:after {
-	border: none
-}
-
-_:-ms-fullscreen, :root .wizard.small.left-arrow a:before {
-	left: -14px
-}
-
-_:-ms-fullscreen, :root .wizard.small:not(.left-arrow) a:after {
-	right: -14px
-}
-
-_:-ms-fullscreen, :root .wizard.left-arrow a:before {
-	left: -29px
-}
-
-_:-ms-fullscreen, :root .wizard:not(.left-arrow) a:after {
-	right: -29px
-}
-
-a {
-	color: #08E7FF;
-	cursor: pointer
-}
-
-hr {
-	border-style: dashed;
-	border-color: #ddd;
-	border-bottom: 0;
-	border-left: 0;
-	border-right: 0;
-	margin: 40px 0
-}
-
 label {
 	font-weight: normal
 }
@@ -396,10 +325,6 @@ label {
 	background-color: var(--cute-color)
 }
 
-.alert-lux {
-	background-color: var(--cute-color)
-}
-
 .input-lg {
 	line-height: 1.3 !important
 }
@@ -412,13 +337,6 @@ label {
 	background-color: var(--cute-color)
 }
 
-.btn-lg-extra {
-	padding: 30px 60px;
-	font-size: 25px;
-	line-height: 2;
-	border-radius: 5px
-}
-
 .btn-primary {
 	background-color: var(--cute-color);
 	border-color: var(--cute-color);
@@ -429,46 +347,18 @@ label {
 	background-color: var(--cute-color--darken);
 	border-color: var(--cute-color--darken);
 }
-
-.btn-primary-extra {
-	appearance: none;
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	left: 50%;
-	top: 50%;
-	margin-top: -100px;
-	margin-left: -200px;
-	position: fixed;
-	line-height: 1.6
-}
-
-.btn-primary-extra > span {
-	display: block;
-	font-size: 16px
-}
-
-.btn-add-lg {
-	display: block;
-	width: 100%;
-	padding: 5px;
-	font-weight: bold;
-	font-size: 20px
-}
-
-.lb-lg {
-	font-size: 1.2em;
+.cute__flash-message-list {
+	list-style: none;
 }
 
 .help-block {
 	margin-top: .5em;
 }
-
 .help-block__code {
 	list-style-type: none;
 	padding: 0;
 	margin: 0
 }
-
 .help-block__code > li {
 	margin: 5px 0
 }
@@ -539,6 +429,9 @@ label {
 	margin-right: .2em;
 }
 
+.cute__list-change-button {
+	background-color: dimgrey;
+}
 /* REMOVE
 
 .luxletter-dashboard .panel, .luxletter-dashboard .panel-body {
