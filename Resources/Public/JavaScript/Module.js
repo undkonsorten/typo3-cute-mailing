@@ -1,4 +1,4 @@
-define(['jquery'], function($) {
+define(['jquery'], function ($) {
 	'use strict';
 
 	/**
@@ -29,7 +29,7 @@ define(['jquery'], function($) {
 		 *
 		 * @returns {void}
 		 */
-		this.initialize = function() {
+		this.initialize = function () {
 			addDatePickers();
 			addWizardForm();
 			addWizardUserPreview();
@@ -43,7 +43,7 @@ define(['jquery'], function($) {
 		/**
 		 * @returns {void}
 		 */
-		var addWizardForm = function() {
+		var addWizardForm = function () {
 			var fieldsets = document.querySelectorAll('.wizardform > fieldset');
 			var buttons = document.querySelectorAll('[data-wizardform-gotostep]');
 			var wizardLinks = document.querySelectorAll('.wizard > a');
@@ -52,17 +52,17 @@ define(['jquery'], function($) {
 				hideElement(fieldsets[i]);
 			}
 			for (var j = 0; j < buttons.length; j++) {
-				buttons[j].addEventListener('click', function(event) {
+				buttons[j].addEventListener('click', function (event) {
 					event.preventDefault();
 					var step = this.getAttribute('data-wizardform-gotostep');
 
 					removeClassFromElements(wizardLinks, 'current');
-					wizardLinks[step-1].classList.add('current');
+					wizardLinks[step - 1].classList.add('current');
 
 					for (var k = 0; k < fieldsets.length; k++) {
 						hideElement(fieldsets[k]);
 					}
-					showElement(fieldsets[step-1]);
+					showElement(fieldsets[step - 1]);
 
 					showIfNewsletterIsReady();
 				});
@@ -74,7 +74,7 @@ define(['jquery'], function($) {
 		 * @param {string} className
 		 * @returns {void}
 		 */
-		var removeClassFromElements = function(elements, className) {
+		var removeClassFromElements = function (elements, className) {
 			for (var i = 0; i < elements.length; i++) {
 				elements[i].classList.remove(className);
 			}
@@ -83,9 +83,9 @@ define(['jquery'], function($) {
 		/**
 		 * @returns {void}
 		 */
-		var addDatePickers = function() {
+		var addDatePickers = function () {
 			if (document.querySelector('.t3js-datetimepicker') !== null) {
-				require(['TYPO3/CMS/Backend/DateTimePicker'], function(DateTimePicker) {
+				require(['TYPO3/CMS/Backend/DateTimePicker'], function (DateTimePicker) {
 					DateTimePicker.initialize();
 				});
 			}
@@ -94,10 +94,10 @@ define(['jquery'], function($) {
 		/**
 		 * @returns {void}
 		 */
-		var addWizardUserPreview = function() {
+		var addWizardUserPreview = function () {
 			var select = document.querySelector('[data-cutemailing-wizardpreviewevent="users"]');
 			if (select !== null) {
-				select.addEventListener('change', function() {
+				select.addEventListener('change', function () {
 					ajaxConnection(TYPO3.settings.ajaxUrls['/cutemailing/wizardUserPreview'], {
 						recipientList: this.value,
 					}, 'addWizardUserPreviewCallback');
@@ -109,10 +109,10 @@ define(['jquery'], function($) {
 		/**
 		 * @returns {void}
 		 */
-		var addWizardNewsletterPreview = function() {
+		var addWizardNewsletterPreview = function () {
 			var input = document.querySelector('[data-cutemailing-wizardpreviewevent="newsletter"]');
 			if (input !== null) {
-				input.addEventListener('blur', function() {
+				input.addEventListener('blur', function () {
 					initializeNewsletterPreviewIframe();
 				});
 				input.dispatchEvent(new Event('blur'));
@@ -122,7 +122,7 @@ define(['jquery'], function($) {
 		/**
 		 * @returns {void}
 		 */
-		var initializeNewsletterPreviewIframe = function() {
+		var initializeNewsletterPreviewIframe = function () {
 			var container = document.querySelector('[data-cutemailing-wizardpreview="newsletter"]');
 			var input = document.querySelector('[data-cutemailing-wizardpreviewevent="newsletter"]');
 			console.log(container, input);
@@ -140,7 +140,7 @@ define(['jquery'], function($) {
 		/**
 		 * @returns {string}
 		 */
-		var getIframeSource = function(origin) {
+		var getIframeSource = function (origin) {
 			var pageId = parseInt(document.querySelector('[data-cutemailing-wizardpreviewevent="newsletter"]').value);
 			// @TODO fetch HTML type configuration from newsletter. Type is still hardcoded!
 			return '//' + window.location.host + '/index.php?id=' + pageId + "&type=10";
@@ -149,10 +149,10 @@ define(['jquery'], function($) {
 		/**
 		 * @returns {void}
 		 */
-		var testMailListener = function() {
+		var testMailListener = function () {
 			var input = document.querySelector('[data-luxletter-testmail="submit"]');
 			if (input !== null) {
-				input.addEventListener('click', function(event) {
+				input.addEventListener('click', function (event) {
 					event.preventDefault();
 					var origin = document.querySelector('[data-cutemailing-wizardpreviewevent="newsletter"]').value;
 					var email = document.querySelector('[data-luxletter-testmail="email"]').value;
@@ -175,10 +175,10 @@ define(['jquery'], function($) {
 		 *
 		 * @returns {void}
 		 */
-		var userDetailMockListener = function() {
+		var userDetailMockListener = function () {
 			var elements = document.querySelectorAll('[data-luxletter-linkmockaction]');
 			for (var i = 0; i < elements.length; i++) {
-				elements[i].addEventListener('click', function() {
+				elements[i].addEventListener('click', function () {
 					var identifier = this.getAttribute('data-luxletter-linkmockaction');
 					document.querySelector('[data-luxletter-linkmock-link="' + identifier + '"]').click();
 				});
@@ -188,10 +188,10 @@ define(['jquery'], function($) {
 		/**
 		 * @returns {void}
 		 */
-		var userDetailListener = function() {
+		var userDetailListener = function () {
 			var elements = document.querySelectorAll('[data-luxletter-action-ajax]');
 			for (var i = 0; i < elements.length; i++) {
-				elements[i].addEventListener('click', function(event) {
+				elements[i].addEventListener('click', function (event) {
 					event.preventDefault();
 					var userIdentifier = this.getAttribute('data-luxletter-action-ajax');
 					ajaxConnection(TYPO3.settings.ajaxUrls['/luxletter/receiverdetail'], {
@@ -204,10 +204,10 @@ define(['jquery'], function($) {
 		/**
 		 * @returns {void}
 		 */
-		var addConfirmListeners = function() {
+		var addConfirmListeners = function () {
 			var elements = document.querySelectorAll('[data-luxletter-confirm]');
 			for (var i = 0; i < elements.length; i++) {
-				elements[i].addEventListener('click', function(event) {
+				elements[i].addEventListener('click', function (event) {
 					var message = event.currentTarget.getAttribute('data-luxletter-confirm');
 					if (confirm(message) === false) {
 						event.preventDefault();
@@ -220,7 +220,7 @@ define(['jquery'], function($) {
 		 * @param response
 		 * @returns {void}
 		 */
-		this.addWizardUserPreviewCallback = function(response) {
+		this.addWizardUserPreviewCallback = function (response) {
 			var container = document.querySelector('[data-cutemailing-wizardpreview="users"]');
 			if (container !== null) {
 				container.innerHTML = response.html;
@@ -233,7 +233,7 @@ define(['jquery'], function($) {
 		 * @param response
 		 * @returns {void}
 		 */
-		this.testMailListenerCallback = function(response) {
+		this.testMailListenerCallback = function (response) {
 			var messageElement = document.querySelector('[data-luxletter-testmail="message"]');
 			if (messageElement !== null) {
 				showElement(messageElement);
@@ -244,7 +244,7 @@ define(['jquery'], function($) {
 		 * @param response
 		 * @returns {void}
 		 */
-		this.userDetailListenerCallback = function(response) {
+		this.userDetailListenerCallback = function (response) {
 			var container = document.getElementById('luxletter-newsletter-receiver-container');
 			if (container !== null) {
 				container.innerHTML = response.html;
@@ -257,10 +257,10 @@ define(['jquery'], function($) {
 		 * @params {string} target callback function name
 		 * @returns {void}
 		 */
-		var ajaxConnection = function(uri, parameters, target) {
+		var ajaxConnection = function (uri, parameters, target) {
 			if (uri !== undefined && uri !== '') {
 				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function() {
+				xhttp.onreadystatechange = function () {
 					if (this.readyState === 4 && this.status === 200) {
 						if (target !== null) {
 							that[target](JSON.parse(this.responseText));
@@ -277,7 +277,7 @@ define(['jquery'], function($) {
 		/**
 		 * @returns {void}
 		 */
-		var showIfNewsletterIsReady = function() {
+		var showIfNewsletterIsReady = function () {
 			if (isNewsletterReady() && areAllMandatoryFieldsFilled()) {
 				var statusElements = document.querySelectorAll('[data-cutemailing-wizardstatus]');
 				for (var i = 0; i < statusElements.length; i++) {
@@ -293,15 +293,15 @@ define(['jquery'], function($) {
 		/**
 		 * @returns {boolean}
 		 */
-		var isNewsletterReady = function() {
-			console.log(newsletterPreview , userPreview);
+		var isNewsletterReady = function () {
+			console.log(newsletterPreview, userPreview);
 			return newsletterPreview && userPreview;
 		};
 
 		/**
 		 * @returns {boolean}
 		 */
-		var areAllMandatoryFieldsFilled = function() {
+		var areAllMandatoryFieldsFilled = function () {
 			console.log(document.querySelectorAll('[data-luxletter-mandatory]'));
 			var fields = document.querySelectorAll('[data-luxletter-mandatory]');
 			for (var i = 0; i < fields.length; i++) {
@@ -327,7 +327,7 @@ define(['jquery'], function($) {
 		 * @params {object} parameters
 		 * @returns {string} e.g. "index.php?id=123&type=123&x=123&y=abc"
 		 */
-		var mergeUriWithParameters = function(uri, parameters) {
+		var mergeUriWithParameters = function (uri, parameters) {
 			for (var key in parameters) {
 				if (parameters.hasOwnProperty(key)) {
 					if (uri.indexOf('?') !== -1) {
@@ -345,7 +345,7 @@ define(['jquery'], function($) {
 		 * @param element
 		 * @returns {void}
 		 */
-		var hideElement = function(element) {
+		var hideElement = function (element) {
 			element.style.display = 'none';
 		};
 
@@ -353,7 +353,7 @@ define(['jquery'], function($) {
 		 * @param element
 		 * @returns {void}
 		 */
-		var showElement = function(element) {
+		var showElement = function (element) {
 			element.style.display = 'block';
 		};
 	}

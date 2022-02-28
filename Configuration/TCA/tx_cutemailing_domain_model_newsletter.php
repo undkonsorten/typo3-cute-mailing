@@ -6,7 +6,7 @@ if (!defined('TYPO3')) {
 
 return [
     'ctrl' => [
-        'title'	=> 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter',
+        'title' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter',
         'label' => 'newsletter_page',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',

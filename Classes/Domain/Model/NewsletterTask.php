@@ -1,13 +1,12 @@
 <?php
+
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
 
-use phpDocumentor\Reflection\Types\Boolean;
 use TYPO3\CMS\Core\Exception;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
-use Undkonsorten\CuteMailing\Services\RecipientService;
 use Undkonsorten\Taskqueue\Domain\Model\Task;
 use Undkonsorten\Taskqueue\Domain\Repository\TaskRepository;
 
@@ -30,7 +29,6 @@ class NewsletterTask extends Task
     protected $persistenceManager;
 
 
-
     public function injectNewsletterRepository(NewsletterRepository $newsletterRepository)
     {
         $this->newsletterRepository = $newsletterRepository;
@@ -51,31 +49,31 @@ class NewsletterTask extends Task
      */
     public function run(): void
     {
-        /**@var $newsletter Newsletter**/
+        /**@var $newsletter Newsletter* */
         $newsletter = $this->newsletterRepository->findByUid($this->getNewsletter());
-        if(is_null($newsletter)){
-            throw new \Exception("Newsletter with uid: ".$this->getNewsletter()." was not found", 1643821994);
+        if (is_null($newsletter)) {
+            throw new \Exception("Newsletter with uid: " . $this->getNewsletter() . " was not found", 1643821994);
         }
-        if(empty($newsletter->getRecipientList())){
-            throw new \Exception("Newsletter does not have any recipients.",1643822115);
+        if (empty($newsletter->getRecipientList())) {
+            throw new \Exception("Newsletter does not have any recipients.", 1643822115);
         }
 
-        if($this->getTest()){
+        if ($this->getTest()) {
             $recipientList = $newsletter->getTestRecipientList();
-        }else{
+        } else {
             $recipientList = $newsletter->getRecipientList();
         }
         $recipients = $recipientList->getRecipients();
 
-        if(empty($recipients)){
-            throw new Exception("Recipient list is empty",1644851884);
+        if (empty($recipients)) {
+            throw new Exception("Recipient list is empty", 1644851884);
         }
 
-        foreach ($recipients as $recipient){
-            /**@var $recipient RecipientInterface**/
-            /**@var $mailTask MailTask**/
+        foreach ($recipients as $recipient) {
+            /**@var $recipient RecipientInterface* */
+            /**@var $mailTask MailTask* */
             $mailTask = GeneralUtility::makeInstance(MailTask::class);
-            /**@TODO format needs to be configured somewhere **/
+            /**@TODO format needs to be configured somewhere * */
             $mailTask->setFormat($mailTask::HTML);
             $mailTask->setNewsletter($newsletter->getUid());
             $mailTask->setRecipient($recipient->getUid());
@@ -88,14 +86,15 @@ class NewsletterTask extends Task
     {
         return $this->getProperty("newsletter");
     }
-    public function setNewsletter(int $newsletterUid): void
-    {
-        $this->setProperty("newsletter", $newsletterUid);
-    }
 
     public function getTest(): bool
     {
         return (bool)$this->getProperty("test");
+    }
+
+    public function setNewsletter(int $newsletterUid): void
+    {
+        $this->setProperty("newsletter", $newsletterUid);
     }
 
     public function setTest(bool $test): void

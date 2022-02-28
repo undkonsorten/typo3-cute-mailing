@@ -2,6 +2,7 @@
 
 use Composer\Factory;
 use Composer\IO\NullIO;
+
 (function () {
     $vendorDir = getenv('VENDOR_DIR') ?: (Factory::create(new NullIO()))->getConfig()->get('vendor-dir');
     /** @noinspection PhpIncludeInspection */

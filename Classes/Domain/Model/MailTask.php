@@ -62,5 +62,4 @@ class MailTask extends Task
     }
 
 
-
 }

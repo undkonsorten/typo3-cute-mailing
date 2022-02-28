@@ -1,323 +1,365 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html data-namespace-typo3-fluid="true" xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
 
 <fieldset>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="title" class="lb-lg">
-                    <f:translate key="module.newsletter.new.field.title" extensionName="CuteMailing">Title</f:translate>*
-                </label>
-                <f:form.textfield
-                    class="form-control input-lg"
-                      property="title"
-											value="{title}"
-                      id="title"
-                      placeholder="Newsletter Product A 2020/01"
-                      data="{luxletter-mandatory:'1'}"
-                      required="required"/>
-                <span class="help-block">
-                    <f:translate key="module.newsletter.new.field.title.description" extensionName="CuteMailing">Useful title</f:translate>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="lb-lg" for="title">
+					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.title">Title</f:translate>
+					*
+				</label>
+				<f:form.textfield
+					class="form-control input-lg"
+					data="{luxletter-mandatory:'1'}"
+					id="title"
+					placeholder="Newsletter Product A 2020/01"
+					property="title"
+					required="required"
+					value="{title}"/>
+				<span class="help-block">
+                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.title.description">Useful title</f:translate>
                 </span>
-            </div>
-        </div>
+			</div>
+		</div>
 
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="sendingTime" class="lb-lg">
-                    <f:translate key="module.newsletter.new.field.sendingTime" extensionName="CuteMailing">Sending date</f:translate>
-                </label>
-                <f:form.textfield
-                    type="datetime-local"
-										value="{newsletter.sendingTime -> f:format.date(format: 'Y-m-d H:i')}"
-                    property="sendingTime"
-                    id="sendingTime"
-                    class="form-control input-lg" />
-                <span class="help-block">
-                    <f:translate key="module.newsletter.new.field.sendingTime.description" extensionName="CuteMailing">Sending date description</f:translate>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="lb-lg" for="sendingTime">
+					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.sendingTime">Sending date
+					</f:translate>
+				</label>
+				<f:form.textfield
+					class="form-control input-lg"
+					id="sendingTime"
+					property="sendingTime"
+					type="datetime-local"
+					value="{newsletter.sendingTime -> f:format.date(format: 'Y-m-d H:i')}"/>
+				<span class="help-block">
+                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.sendingTime.description">Sending date description</f:translate>
                 </span>
-            </div>
-        </div>
-			<div class="col-md-6">
-				<div class="form-group">
-					<label for="newsletterPage" class="lb-lg">
-						<f:translate key="module.newsletter.new.field.origin" extensionName="CuteMailing">Origin PID</f:translate>*
-					</label>
-					<f:form.textfield
-						class="form-control input-lg"
-						property="newsletterPage"
-						id="newsletterPage"
-						value="{newsletterPage}"
-						placeholder="https://www.yourdomain/newsletter/2020-01/"
-						data="{luxletter-mandatory:'1',cutemailing-wizardpreviewevent:'newsletter'}"
-						required="required"/>
-					<span class="help-block">
-                    <f:translate key="module.newsletter.new.field.origin.description" extensionName="CuteMailing">PID or absolute URL</f:translate>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="lb-lg" for="newsletterPage">
+					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.origin">Origin PID</f:translate>
+					*
+				</label>
+				<f:form.textfield
+					class="form-control input-lg"
+					data="{luxletter-mandatory:'1',cutemailing-wizardpreviewevent:'newsletter'}"
+					id="newsletterPage"
+					placeholder="https://www.yourdomain/newsletter/2020-01/"
+					property="newsletterPage"
+					required="required"
+					value="{newsletterPage}"/>
+				<span class="help-block">
+                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.origin.description">PID or absolute URL</f:translate>
                 </span>
+			</div>
+		</div>
+
+		<div class="col-md-12">
+			<div class="form-group">
+				<label class="lb-lg" for="description">
+					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.description">description
+					</f:translate>
+				</label>
+				<f:form.textarea class="form-control input-lg"
+												 id="description"
+												 property="description"
+												 style="height: 200px;"/>
+				<span class="help-block">
+                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.description.description">Example description</f:translate>
+                </span>
+			</div>
+		</div>
+	</div>
+
+
+	<button class="btn btn-primary btn-lg pull-right" data-wizardform-gotostep="2" type="button">
+		<f:translate extensionName="CuteMailing" key="module.newsletter.wizard.next">Next</f:translate>
+	</button>
+</fieldset>
+
+
+<fieldset>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="lb-lg" for="sender">
+					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.sender">Sender</f:translate>
+					*
+				</label>
+				<f:form.textfield
+					class="form-control form-input input-lg"
+					data="{luxletter-mandatory:'1',luxletter-testmail:'sender'}"
+					id="sender"
+					property="sender"
+					required="required"
+					value="{sender}"/>
+				<span class="help-block">
+                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.sender.description">Sender description</f:translate>
+                </span>
+				<label class="lb-lg" for="senderName">
+					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.senderName">Sender name
+					</f:translate>
+					*
+				</label>
+				<f:form.textfield
+					class="form-control form-input input-lg"
+					id="senderName"
+					property="senderName"
+					required="required"
+					value="{senderName}"/>
+				<span class="help-block">
+                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.configuration.senderName">Sender name</f:translate>
+                </span>
+				<label class="lb-lg" for="replyTo">
+					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.replyTo">Reply to</f:translate>
+					*
+				</label>
+				<f:form.textfield
+					class="form-control form-input input-lg"
+					data="{luxletter-mandatory:'1',luxletter-testmail:'replyTo'}"
+					id="replyTo"
+					property="replyTo"
+					required="required"
+					value="{replyTo}"/>
+				<span class="help-block">
+                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.replyTo.description">Reply to address</f:translate>
+                </span>
+				<label class="lb-lg" for="replyToName">
+					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.replyToName">Reply to name
+					</f:translate>
+					*
+				</label>
+				<f:form.textfield
+					class="form-control form-input input-lg"
+					data="{luxletter-mandatory:'1',luxletter-testmail:'replyToName'}"
+					id="replyToName"
+					property="replyToName"
+					required="required"
+					value="{replyToName}"/>
+				<span class="help-block">
+                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.replyToName.description">Reply to name</f:translate>
+                </span>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="lb-lg" for="receiver">
+					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.receiver">Receiver</f:translate>
+					*
+				</label>
+				<f:form.select
+					class="form-control form-select input-lg"
+					data="{luxletter-mandatory:'1',cutemailing-wizardpreviewevent:'users'}"
+					id="receiver"
+					optionLabelField="name"
+					optionValueField="uid"
+					options="{recipientList}"
+					prependOptionLabel="{f:translate(key:'pleasechoose',extensionName:'CuteMailing')}"
+					prependOptionValue=""
+					property="recipientList"
+					required="required"/>
+				<span class="help-block">
+                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.receiver.description">Receiver group description</f:translate>
+                </span>
+				<label class="lb-lg" for="testReceiver">
+					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.testReceiver">Test Receiver
+					</f:translate>
+					*
+				</label>
+				<f:form.select
+					class="form-control form-select input-lg"
+					data="{luxletter-mandatory:'1',cutemailing-wizardpreviewevent:'testRecipientList'}"
+					id="testReceiver"
+					optionLabelField="name"
+					optionValueField="uid"
+					options="{testRecipientList}"
+					prependOptionLabel="{f:translate(key:'pleasechoose',extensionName:'CuteMailing')}"
+					prependOptionValue=""
+					property="testRecipientList"
+					required="required"/>
+				<span class="help-block">
+											<f:translate extensionName="CuteMailing"
+																	 key="module.newsletter.new.field.testReceiver.description">Test receiver group description</f:translate>
+									</span>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+				<label class="lb-lg" for="subject">
+					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.subject">Subject</f:translate>
+					*
+				</label>
+				<f:form.textfield
+					class="form-control input-lg"
+					data="{luxletter-mandatory:'1',luxletter-testmail:'subject'}"
+					id="subject"
+					placeholder="Your new newsletter for product A (2020/01)"
+					property="subject"
+					required="required"
+					value="{subject}"/>
+				<span class="help-block">
+                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.subject.description">Email subject</f:translate>
+                </span>
+			</div>
+		</div>
+	</div>
+
+
+	<div style="margin: 20px 0;">
+		<button class="btn btn-primary btn-lg" data-wizardform-gotostep="1">
+			<f:translate extensionName="CuteMailing" key="module.newsletter.wizard.back">Back</f:translate>
+		</button>
+		<button class="btn btn-primary btn-lg pull-right" data-wizardform-gotostep="3">
+			<f:translate extensionName="CuteMailing" key="module.newsletter.wizard.next">Next</f:translate>
+		</button>
+	</div>
+</fieldset>
+
+
+<fieldset>
+	<div class="alert alert-warning" data-cutemailing-wizardstatus="pending" role="alert">
+		<h4 class="alert-heading">
+			<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.notready">Newsletter is not yet ready
+				to be sent
+			</f:translate>
+		</h4>
+		<p>
+			<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.notready.mandatory">Please fill all
+				mandatory fields
+			</f:translate>
+		</p>
+	</div>
+	<div class="alert alert-success" data-cutemailing-wizardstatus="ready" role="alert" style="display: none;">
+		<h4 class="alert-heading">
+			<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.ready">Newsletter is ready for
+				dispatch
+			</f:translate>
+		</h4>
+		<p>
+			<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.ready.addition">If you click save (see
+				below), the newsletter will be planned for dispatch
+			</f:translate>
+		</p>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default" data-cutemailing-wizardstatus="ready" style="display: none; height: auto;">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.testmail">Testmail</f:translate>
+					</h3>
+				</div>
+				<div class="panel-body">
+					<div data-luxletter-testmail="fields" style="display: flex; flex-direction: row;">
+						<label class="lb-lg" for="test" style="width:15%;">
+							<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.testmail.receiver">Receiver
+							</f:translate>
+						</label>
+						<f:form.textfield
+							class="form-control input-lg"
+							data="{luxletter-testmail:'email'}"
+							id="test"
+							name="testmail"
+							placeholder="your@email.org"
+							style="margin: 0 20px; width:75%;"/>
+						<button class="btn btn-primary" data-luxletter-testmail="submit" style="width:10%;">
+							<f:translate extensionName="CuteMailing" key="send">Send</f:translate>
+						</button>
+					</div>
+
+
+					<div class="alert alert-success" data-luxletter-testmail="message" role="alert"
+							 style="display: none; margin-top: 20px;">
+						<h4 class="alert-heading">
+							<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.testmailsent">Newsletter was
+								sent
+							</f:translate>
+						</h4>
+						<p>
+							<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.testmailsent.addition">Your
+								test newsletter was sent correctly
+							</f:translate>
+						</p>
+					</div>
 				</div>
 			</div>
 
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="description" class="lb-lg">
-                    <f:translate key="module.newsletter.new.field.description" extensionName="CuteMailing">description</f:translate>
-                </label>
-                <f:form.textarea class="form-control input-lg"
-                     property="description"
-                     id="description"
-                     style="height: 200px;" />
-                <span class="help-block">
-                    <f:translate key="module.newsletter.new.field.description.description" extensionName="CuteMailing">Example description</f:translate>
-                </span>
-            </div>
-        </div>
-    </div>
 
-
-    <button class="btn btn-primary btn-lg pull-right" data-wizardform-gotostep="2" type="button">
-        <f:translate key="module.newsletter.wizard.next" extensionName="CuteMailing">Next</f:translate>
-    </button>
-</fieldset>
-
-
-<fieldset>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="sender" class="lb-lg">
-                    <f:translate key="module.newsletter.new.field.sender" extensionName="CuteMailing">Sender</f:translate>*
-                </label>
-                <f:form.textfield
-                        id="sender"
-                        class="form-control form-input input-lg"
-                        value="{sender}"
-                        property="sender"
-                        data="{luxletter-mandatory:'1',luxletter-testmail:'sender'}"
-                        required="required" />
-                <span class="help-block">
-                    <f:translate key="module.newsletter.new.field.sender.description" extensionName="CuteMailing">Sender description</f:translate>
-                </span>
-							<label for="senderName" class="lb-lg">
-								<f:translate key="module.newsletter.new.field.senderName" extensionName="CuteMailing">Sender name</f:translate>*
-							</label>
-							<f:form.textfield
-								id="senderName"
-								class="form-control form-input input-lg"
-								value="{senderName}"
-								property="senderName"
-								required="required" />
-							<span class="help-block">
-                    <f:translate key="module.newsletter.new.field.configuration.senderName" extensionName="CuteMailing">Sender name</f:translate>
-                </span>
-							<label for="replyTo" class="lb-lg">
-								<f:translate key="module.newsletter.new.field.replyTo" extensionName="CuteMailing">Reply to</f:translate>*
-							</label>
-							<f:form.textfield
-								id="replyTo"
-								class="form-control form-input input-lg"
-								value="{replyTo}"
-								property="replyTo"
-								data="{luxletter-mandatory:'1',luxletter-testmail:'replyTo'}"
-								required="required" />
-							<span class="help-block">
-                    <f:translate key="module.newsletter.new.field.replyTo.description" extensionName="CuteMailing">Reply to address</f:translate>
-                </span>
-							<label for="replyToName" class="lb-lg">
-								<f:translate key="module.newsletter.new.field.replyToName" extensionName="CuteMailing">Reply to name</f:translate>*
-							</label>
-							<f:form.textfield
-								id="replyToName"
-								class="form-control form-input input-lg"
-								value="{replyToName}"
-								property="replyToName"
-								data="{luxletter-mandatory:'1',luxletter-testmail:'replyToName'}"
-								required="required" />
-							<span class="help-block">
-                    <f:translate key="module.newsletter.new.field.replyToName.description" extensionName="CuteMailing">Reply to name</f:translate>
-                </span>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="receiver" class="lb-lg">
-                    <f:translate key="module.newsletter.new.field.receiver" extensionName="CuteMailing">Receiver</f:translate>*
-                </label>
-                <f:form.select
-                        id="receiver"
-                        class="form-control form-select input-lg"
-                        options="{recipientList}"
-												optionValueField="uid"
-												optionLabelField="name"
-                        prependOptionValue=""
-                        prependOptionLabel="{f:translate(key:'pleasechoose',extensionName:'CuteMailing')}"
-                        data="{luxletter-mandatory:'1',cutemailing-wizardpreviewevent:'users'}"
-                        property="recipientList"
-                        required="required" />
-                <span class="help-block">
-                    <f:translate key="module.newsletter.new.field.receiver.description" extensionName="CuteMailing">Receiver group description</f:translate>
-                </span>
-							<label for="testReceiver" class="lb-lg">
-								<f:translate key="module.newsletter.new.field.testReceiver" extensionName="CuteMailing">Test Receiver</f:translate>*
-							</label>
-							<f:form.select
-								id="testReceiver"
-								class="form-control form-select input-lg"
-								options="{testRecipientList}"
-								optionValueField="uid"
-								optionLabelField="name"
-								prependOptionValue=""
-								prependOptionLabel="{f:translate(key:'pleasechoose',extensionName:'CuteMailing')}"
-								data="{luxletter-mandatory:'1',cutemailing-wizardpreviewevent:'testRecipientList'}"
-								property="testRecipientList"
-								required="required" />
-							<span class="help-block">
-											<f:translate key="module.newsletter.new.field.testReceiver.description" extensionName="CuteMailing">Test receiver group description</f:translate>
-									</span>
+			<div data-cutemailing-wizardpreview="users">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<f:translate extensionName="CuteMailing" key="module.newsletter.new.wizarduserpreview.previewreceivers">
+								Preview of the receivers
+							</f:translate>
+							<span class="badge" title="{userAmount} receivers">{userAmount}</span>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<div class="alert alert-warning" data-cutemailing-wizardstatus="pending" role="alert">
+							<h4 class="alert-heading">
+								<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.notready">Newsletter is not
+									yet ready to be sent
+								</f:translate>
+							</h4>
+							<p>
+								<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.notready.receiver">Please
+									choose a receiver group
+								</f:translate>
+							</p>
 						</div>
-            </div>
-        </div>
+					</div>
+				</div>
+			</div>
 
 
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<f:translate extensionName="CuteMailing" key="module.newsletter.new.wizarduserpreview.previewnewsletter">
+							Newsletter preview
+						</f:translate>
+					</h3>
+				</div>
+				<div class="panel-body" data-cutemailing-wizardpreview="newsletter">
+					<div class="alert alert-warning" role="alert">
+						<h4 class="alert-heading">
+							<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.notready">Newsletter is not
+								yet ready to be sent
+							</f:translate>
+						</h4>
+						<p>
+							<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.notready.origin">Please select
+								an origin for your newsletter
+							</f:translate>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="subject" class="lb-lg">
-                    <f:translate key="module.newsletter.new.field.subject" extensionName="CuteMailing">Subject</f:translate>*
-                </label>
-                <f:form.textfield
-                    class="form-control input-lg"
-                    property="subject"
-										value="{subject}"
-                    id="subject"
-                    placeholder="Your new newsletter for product A (2020/01)"
-                    data="{luxletter-mandatory:'1',luxletter-testmail:'subject'}"
-                    required="required"/>
-                <span class="help-block">
-                    <f:translate key="module.newsletter.new.field.subject.description" extensionName="CuteMailing">Email subject</f:translate>
-                </span>
-            </div>
-        </div>
-    </div>
-
-
-    <div style="margin: 20px 0;">
-        <button class="btn btn-primary btn-lg" data-wizardform-gotostep="1">
-            <f:translate key="module.newsletter.wizard.back" extensionName="CuteMailing">Back</f:translate>
-        </button>
-        <button class="btn btn-primary btn-lg pull-right" data-wizardform-gotostep="3">
-            <f:translate key="module.newsletter.wizard.next" extensionName="CuteMailing">Next</f:translate>
-        </button>
-    </div>
-</fieldset>
-
-
-
-
-
-
-
-<fieldset>
-    <div class="alert alert-warning" role="alert" data-cutemailing-wizardstatus="pending">
-        <h4 class="alert-heading">
-            <f:translate key="module.newsletter.new.message.notready" extensionName="CuteMailing">Newsletter is not yet ready to be sent</f:translate>
-        </h4>
-        <p><f:translate key="module.newsletter.new.message.notready.mandatory" extensionName="CuteMailing">Please fill all mandatory fields</f:translate></p>
-    </div>
-    <div class="alert alert-success" role="alert" data-cutemailing-wizardstatus="ready" style="display: none;">
-        <h4 class="alert-heading">
-            <f:translate key="module.newsletter.new.message.ready" extensionName="CuteMailing">Newsletter is ready for dispatch</f:translate>
-        </h4>
-        <p><f:translate key="module.newsletter.new.message.ready.addition" extensionName="CuteMailing">If you click save (see below), the newsletter will be planned for dispatch</f:translate></p>
-    </div>
-
-
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default" data-cutemailing-wizardstatus="ready" style="display: none; height: auto;">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <f:translate key="module.newsletter.new.field.testmail" extensionName="CuteMailing">Testmail</f:translate>
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <div data-luxletter-testmail="fields" style="display: flex; flex-direction: row;">
-                        <label for="test" class="lb-lg" style="width:15%;">
-                            <f:translate key="module.newsletter.new.field.testmail.receiver" extensionName="CuteMailing">Receiver</f:translate>
-                        </label>
-                        <f:form.textfield
-                            class="form-control input-lg"
-                            name="testmail"
-                            id="test"
-                            data="{luxletter-testmail:'email'}"
-                            style="margin: 0 20px; width:75%;"
-                            placeholder="your@email.org"/>
-                        <button class="btn btn-primary" data-luxletter-testmail="submit" style="width:10%;">
-                            <f:translate key="send" extensionName="CuteMailing">Send</f:translate>
-                        </button>
-                    </div>
-
-
-                    <div class="alert alert-success" role="alert" data-luxletter-testmail="message" style="display: none; margin-top: 20px;">
-                        <h4 class="alert-heading">
-                            <f:translate key="module.newsletter.new.message.testmailsent" extensionName="CuteMailing">Newsletter was sent</f:translate>
-                        </h4>
-                        <p><f:translate key="module.newsletter.new.message.testmailsent.addition" extensionName="CuteMailing">Your test newsletter was sent correctly</f:translate></p>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div data-cutemailing-wizardpreview="users">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            <f:translate key="module.newsletter.new.wizarduserpreview.previewreceivers" extensionName="CuteMailing">Preview of the receivers</f:translate>
-                            <span class="badge" title="{userAmount} receivers">{userAmount}</span>
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="alert alert-warning" role="alert" data-cutemailing-wizardstatus="pending">
-                            <h4 class="alert-heading">
-                                <f:translate key="module.newsletter.new.message.notready" extensionName="CuteMailing">Newsletter is not yet ready to be sent</f:translate>
-                            </h4>
-                            <p><f:translate key="module.newsletter.new.message.notready.receiver" extensionName="CuteMailing">Please choose a receiver group</f:translate></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <f:translate key="module.newsletter.new.wizarduserpreview.previewnewsletter" extensionName="CuteMailing">Newsletter preview</f:translate>
-                    </h3>
-                </div>
-                <div class="panel-body" data-cutemailing-wizardpreview="newsletter">
-                    <div class="alert alert-warning" role="alert">
-                        <h4 class="alert-heading">
-                            <f:translate key="module.newsletter.new.message.notready" extensionName="CuteMailing">Newsletter is not yet ready to be sent</f:translate>
-                        </h4>
-                        <p><f:translate key="module.newsletter.new.message.notready.origin" extensionName="CuteMailing">Please select an origin for your newsletter</f:translate></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <button class="btn btn-primary btn-lg" data-wizardform-gotostep="2">
-        <f:translate key="module.newsletter.wizard.back" extensionName="CuteMailing">Back</f:translate>
-    </button>
-		<f:form.hidden property="pageTypeHtml" value="{pageTypeHtml}"/>
-		<f:form.hidden property="pageTypeText" value="{pageTypeText}"/>
-		<f:form.hidden property="allowedMarker" value="{allowedMarker}"/>
-    <f:form.submit class="btn btn-primary btn-lg pull-right" value="{f:translate(key:'save',extensionName:'CuteMailing')}" disabled="disabled" data="{cutemailing-wizardstatus:'pending'}"/>
-    <f:form.submit class="btn btn-primary btn-lg pull-right" value="{f:translate(key:'save',extensionName:'CuteMailing')}" data="{cutemailing-wizardstatus:'ready'}" style="display:none"/>
+	<button class="btn btn-primary btn-lg" data-wizardform-gotostep="2">
+		<f:translate extensionName="CuteMailing" key="module.newsletter.wizard.back">Back</f:translate>
+	</button>
+	<f:form.hidden property="pageTypeHtml" value="{pageTypeHtml}"/>
+	<f:form.hidden property="pageTypeText" value="{pageTypeText}"/>
+	<f:form.hidden property="allowedMarker" value="{allowedMarker}"/>
+	<f:form.submit class="btn btn-primary btn-lg pull-right" data="{cutemailing-wizardstatus:'pending'}"
+								 disabled="disabled" value="{f:translate(key:'save',extensionName:'CuteMailing')}"/>
+	<f:form.submit class="btn btn-primary btn-lg pull-right" data="{cutemailing-wizardstatus:'ready'}"
+								 style="display:none" value="{f:translate(key:'save',extensionName:'CuteMailing')}"/>
 </fieldset>
 </html>

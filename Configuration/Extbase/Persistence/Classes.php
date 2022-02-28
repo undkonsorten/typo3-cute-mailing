@@ -1,32 +1,39 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
+
+use Undkonsorten\CuteMailing\Domain\Model\MailTask;
+use Undkonsorten\CuteMailing\Domain\Model\NewsletterTask;
+use Undkonsorten\CuteMailing\Domain\Model\RecipientList;
+use Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipient;
+use Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipientList;
+use Undkonsorten\Taskqueue\Domain\Model\Task;
 
 return [
-    \Undkonsorten\CuteMailing\Domain\Model\MailTask::class => [
+    MailTask::class => [
         'tableName' => 'tx_taskqueue_domain_model_task',
-        'recordType' => \Undkonsorten\CuteMailing\Domain\Model\MailTask::class
+        'recordType' => MailTask::class
     ],
-    \Undkonsorten\CuteMailing\Domain\Model\NewsletterTask::class => [
+    NewsletterTask::class => [
         'tableName' => 'tx_taskqueue_domain_model_task',
-        'recordType' => \Undkonsorten\CuteMailing\Domain\Model\NewsletterTask::class
+        'recordType' => NewsletterTask::class
     ],
-    \Undkonsorten\Taskqueue\Domain\Model\Task::class => [
+    Task::class => [
         'subclasses' => [
-            \Undkonsorten\CuteMailing\Domain\Model\MailTask::class => \Undkonsorten\CuteMailing\Domain\Model\MailTask::class,
-            \Undkonsorten\CuteMailing\Domain\Model\NewsletterTask::class => \Undkonsorten\CuteMailing\Domain\Model\NewsletterTask::class,
+            MailTask::class => MailTask::class,
+            NewsletterTask::class => NewsletterTask::class,
         ]
     ],
-    \Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipientList::class => [
+    TtAddressRecipientList::class => [
         'tableName' => 'tx_cutemailing_domain_model_recipientlist',
-        'recordType' => \Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipientList::class
+        'recordType' => TtAddressRecipientList::class
     ],
-    \Undkonsorten\CuteMailing\Domain\Model\RecipientList::class => [
+    RecipientList::class => [
         'tableName' => 'tx_cutemailing_domain_model_recipientlist',
         'subclasses' => [
-            \Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipientList::class => \Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipientList::class,
+            TtAddressRecipientList::class => TtAddressRecipientList::class,
         ]
     ],
-    \Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipient::class => [
+    TtAddressRecipient::class => [
         'tableName' => 'tt_address',
     ],
 ];

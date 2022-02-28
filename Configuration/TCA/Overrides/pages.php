@@ -1,9 +1,14 @@
 <?php
-(function ($extKey='cute_mailing', $table='pages') {
+
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
+(function ($extKey = 'cute_mailing', $table = 'pages') {
     $cuteMailingSysFolder = 116;
 
     // Add new page type as possible select item:
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
+    ExtensionManagementUtility::addTcaSelectItem(
         $table,
         'doktype',
         [
@@ -15,7 +20,7 @@
         'after'
     );
 
-    \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
+    ArrayUtility::mergeRecursiveWithOverrule(
         $GLOBALS['TCA'][$table],
         [
             // add icon for new page type:
@@ -30,7 +35,7 @@
             // add all page standard fields and tabs to your new page type
             'types' => [
                 $cuteMailingSysFolder => [
-                    'showitem' => $GLOBALS['TCA'][$table]['types'][\TYPO3\CMS\Core\Domain\Repository\PageRepository::DOKTYPE_DEFAULT]['showitem']
+                    'showitem' => $GLOBALS['TCA'][$table]['types'][PageRepository::DOKTYPE_DEFAULT]['showitem']
                 ]
             ]
         ]

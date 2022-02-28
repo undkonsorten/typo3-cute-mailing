@@ -1,9 +1,9 @@
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
-			xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
-			data-namespace-typo3-fluid="true">
+<html data-namespace-typo3-fluid="true" lang="en"
+			xmlns="http://www.w3.org/1999/xhtml"
+			xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
 <f:flashMessages as="flashMessages">
 	<div class="typo3-messages">
-		<f:for each="{flashMessages}" as="flashMessage">
+		<f:for as="flashMessage" each="{flashMessages}">
 			<div class="alert {f:render(section:'alertColor', arguments:'{severity:flashMessage.severity}')}">
 				<div class="media">
 					<div class="media-left">

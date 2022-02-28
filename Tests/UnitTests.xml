@@ -1,23 +1,23 @@
 <phpunit
-	backupGlobals="true"
-	colors="true"
-	bootstrap="./Bootstrap/UnitTestsBootstrap.php"
-	convertErrorsToExceptions="true"
-	convertWarningsToExceptions="true"
-	forceCoversAnnotation="false"
-	processIsolation="false"
-	stopOnError="false"
-	stopOnFailure="false"
-	stopOnIncomplete="false"
-	stopOnSkipped="false"
-	verbose="false"
-	beStrictAboutTestsThatDoNotTestAnything="false"
+        backupGlobals="true"
+        colors="true"
+        bootstrap="./Bootstrap/UnitTestsBootstrap.php"
+        convertErrorsToExceptions="true"
+        convertWarningsToExceptions="true"
+        forceCoversAnnotation="false"
+        processIsolation="false"
+        stopOnError="false"
+        stopOnFailure="false"
+        stopOnIncomplete="false"
+        stopOnSkipped="false"
+        verbose="false"
+        beStrictAboutTestsThatDoNotTestAnything="false"
 >
-	<testsuites>
-		<testsuite name="Fss motion unit tests">
-			<directory>./Unit/</directory>
-		</testsuite>
-	</testsuites>
+    <testsuites>
+        <testsuite name="Fss motion unit tests">
+            <directory>./Unit/</directory>
+        </testsuite>
+    </testsuites>
     <filter>
         <whitelist>
             <directory suffix=".php">../Classes/</directory>

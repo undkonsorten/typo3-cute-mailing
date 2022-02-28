@@ -1,28 +1,18 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
+
 namespace Undkonsorten\CuteMailing\Controller;
 
 use DateTime;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Exception as ExceptionDbalDriver;
-use Doctrine\DBAL\Exception as ExceptionDbal;
 use Exception;
-use In2code\Luxletter\Utility\BackendUserUtility;
 use In2code\Luxletter\Utility\LocalizationUtility;
 use PharIo\Manifest\InvalidUrlException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Backend\Configuration\TypoScript\ConditionMatching\ConditionMatcher;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
-use TYPO3\CMS\Core\Cache\Frontend\NullFrontend;
-use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
-use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
-use TYPO3\CMS\Core\Configuration\Loader\PageTsConfigLoader;
-use TYPO3\CMS\Core\Configuration\Parser\PageTsConfigParser;
-use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
-use TYPO3\CMS\Core\TypoScript\Parser\TypoScriptParser;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
@@ -32,14 +22,12 @@ use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Object\Exception as ExceptionExtbaseObject;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
-use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException;
 use TYPO3\CMS\Fluid\View\StandaloneView;
-use TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor;
 use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
 use Undkonsorten\CuteMailing\Domain\Model\NewsletterTask;
 use Undkonsorten\CuteMailing\Domain\Model\RecipientListInterface;
@@ -84,19 +72,19 @@ class NewsletterController extends ActionController
     protected $persistenceManager;
 
 
-
     /**
      * @param NewsletterRepository $newsletterRepository
      * @param RecipientListRepositoryInterface $recipientListRepository
      */
     public function __construct(
-        NewsletterRepository    $newsletterRepository,
+        NewsletterRepository             $newsletterRepository,
         RecipientListRepositoryInterface $recipientListRepository,
-        TaskRepository $taskRepository,
-        PersistenceManager $persistenceManager
+        TaskRepository                   $taskRepository,
+        PersistenceManager               $persistenceManager
 
 
-    ) {
+    )
+    {
         $this->newsletterRepository = $newsletterRepository;
         $this->recipientListRepository = $recipientListRepository;
         $this->taskRepository = $taskRepository;
@@ -146,7 +134,7 @@ class NewsletterController extends ActionController
         //$pageTs = $this->getPageTsFromPage($currentPid);
 
         //Are default values set via pageTs?
-        if(isset($pageTs['mod.']['web_modules.']['cute_mailing.'])){
+        if (isset($pageTs['mod.']['web_modules.']['cute_mailing.'])) {
             $pageTs = $pageTs['mod.']['web_modules.']['cute_mailing.'];
             $assign['sender'] = $pageTs['sender'];
             $assign['senderName'] = $pageTs['sender_name'];
@@ -155,7 +143,7 @@ class NewsletterController extends ActionController
             $assign['pageTypeHtml'] = $pageTs['page_type_html'];
             $assign['pageTypeText'] = $pageTs['page_type_text'];
             $assign['allowedMarker'] = $pageTs['allowed_marker'];
-         }
+        }
 
         $this->view->assignMultiple($assign);
     }
@@ -176,10 +164,25 @@ class NewsletterController extends ActionController
         $this->setDatetimeObjectInNewsletterRequest();
     }
 
+    /**
+     * @return void
+     * @throws NoSuchArgumentException
+     * @throws Exception
+     */
+    protected function setDatetimeObjectInNewsletterRequest(): void
+    {
+        $newsletter = (array)$this->request->getArgument('newsletter');
+        if (!empty($newsletter['sendingTime'])) {
+            $datetime = new DateTime($newsletter['sendingTime']);
+        } else {
+            $datetime = new DateTime();
+        }
+        $newsletter['sendingTime'] = $datetime;
+        $this->request->setArgument('newsletter', $newsletter);
+    }
 
-
-
-    public function initializeAction(){
+    public function initializeAction()
+    {
         $dateFormat = 'Y-m-d\TH:i';
         if (isset($this->arguments['newsletter'])) {
             $this->arguments['newsletter']
@@ -191,7 +194,6 @@ class NewsletterController extends ActionController
                     $dateFormat);
         }
     }
-
 
     /**
      * @param Newsletter $newsletter
@@ -208,7 +210,7 @@ class NewsletterController extends ActionController
         $currentPid = (int)GeneralUtility::_GP('id');
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
         foreach ($rootline as $page) {
-            if($page['doktype'] === 116){
+            if ($page['doktype'] === 116) {
                 $newsletter->setPid($page['uid']);
             }
         }
@@ -224,35 +226,21 @@ class NewsletterController extends ActionController
      * @throws IllegalObjectTypeException
      * @throws StopActionException
      * @throws UnknownObjectException
-     */
-    public function disableAction(Newsletter $newsletter): void
-    {
-        $newsletter->disable();
-        $this->newsletterRepository->update($newsletter);
-        $this->redirect('list');
-    }
-
-    /**
-     * @param Newsletter $newsletter
-     * @return void
-     * @throws IllegalObjectTypeException
-     * @throws StopActionException
-     * @throws UnknownObjectException
      * @noinspection PhpUnused
      */
     public function enableAction(Newsletter $newsletter): void
     {
-        if($newsletter->getStatus() === $newsletter::SEND){
-            $this->addFlashMessage('Newsletter was already send.','Was sended.', AbstractMessage::ERROR);
-        }else{
+        if ($newsletter->getStatus() === $newsletter::SEND) {
+            $this->addFlashMessage('Newsletter was already send.', 'Was sended.', AbstractMessage::ERROR);
+        } else {
             $newsletter->enable();
-            /**@var $newsletterTask \Undkonsorten\CuteMailing\Domain\Model\NewsletterTask**/
+            /**@var $newsletterTask NewsletterTask* */
             $newsletterTask = GeneralUtility::makeInstance(NewsletterTask::class);
             $newsletterTask->setNewsletter($newsletter->getUid());
             $newsletterTask->setStartDate($newsletter->getSendingTime()->getTimestamp());
             $this->taskRepository->add($newsletterTask);
             $this->newsletterRepository->update($newsletter);
-            $this->addFlashMessage('Newsletter was queued for sending.','Sending....', AbstractMessage::OK);
+            $this->addFlashMessage('Newsletter was queued for sending.', 'Sending....', AbstractMessage::OK);
         }
 
         $this->redirect('list');
@@ -261,7 +249,7 @@ class NewsletterController extends ActionController
     public function updateAction(Newsletter $newsletter): void
     {
         $this->newsletterRepository->update($newsletter);
-        $this->addFlashMessage('Newsletter was updated.','Updated', AbstractMessage::OK);
+        $this->addFlashMessage('Newsletter was updated.', 'Updated', AbstractMessage::OK);
         $this->redirect('list');
     }
 
@@ -275,24 +263,24 @@ class NewsletterController extends ActionController
     public function deleteAction(Newsletter $newsletter): void
     {
         $this->newsletterRepository->remove($newsletter);
-        $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.delete.message'),'Deleted');
+        $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.delete.message'), 'Deleted');
         $this->redirect('list');
     }
 
     public function sendTestMailAction(Newsletter $newsletter): void
     {
-        if($newsletter->getTestRecipientList()){
+        if ($newsletter->getTestRecipientList()) {
             $newsletter->setStatus($newsletter::TESTED);
-            /**@var $newsletterTask \Undkonsorten\CuteMailing\Domain\Model\NewsletterTask**/
+            /**@var $newsletterTask NewsletterTask* */
             $newsletterTask = GeneralUtility::makeInstance(NewsletterTask::class);
             $newsletterTask->setNewsletter($newsletter->getUid());
             $newsletterTask->setTest(true);
 
             $this->taskRepository->add($newsletterTask);
             $this->newsletterRepository->update($newsletter);
-            $this->addFlashMessage('Your test mailing is beeing send out for the reciepient group: '.$newsletter->getTestRecipientList()->getName(),'Testmailing invoked',AbstractMessage::OK);
-        }else{
-            $this->addFlashMessage('This newsletter has no test recipient.','Error', AbstractMessage::ERROR);
+            $this->addFlashMessage('Your test mailing is beeing send out for the reciepient group: ' . $newsletter->getTestRecipientList()->getName(), 'Testmailing invoked', AbstractMessage::OK);
+        } else {
+            $this->addFlashMessage('This newsletter has no test recipient.', 'Error', AbstractMessage::ERROR);
         }
         $this->redirect('list');
 
@@ -311,24 +299,6 @@ class NewsletterController extends ActionController
             'userAmount' => count($recipients),
         ]);
         return $this->jsonResponse(json_encode(['html' => $standaloneView->render()]));
-    }
-
-
-    /**
-     * @return void
-     * @throws NoSuchArgumentException
-     * @throws Exception
-     */
-    protected function setDatetimeObjectInNewsletterRequest(): void
-    {
-        $newsletter = (array)$this->request->getArgument('newsletter');
-        if (!empty($newsletter['sendingTime'])) {
-            $datetime = new DateTime($newsletter['sendingTime']);
-        } else {
-            $datetime = new DateTime();
-        }
-        $newsletter['sendingTime'] = $datetime;
-        $this->request->setArgument('newsletter', $newsletter);
     }
 
 }

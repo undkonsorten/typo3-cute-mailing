@@ -86,7 +86,6 @@ class Newsletter extends AbstractEntity
     protected $allowedMarker = null;
 
 
-
     /**
      * @return int
      */
@@ -347,14 +346,6 @@ class Newsletter extends AbstractEntity
     {
         $this->allowedMarker = $allowedMarker;
     }
-
-
-
-
-
-
-
-
 
 
 }

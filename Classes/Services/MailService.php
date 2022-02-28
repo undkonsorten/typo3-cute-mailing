@@ -1,9 +1,9 @@
 <?php
+
 namespace Undkonsorten\CuteMailing\Services;
 
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Http\Uri;
-use TYPO3\CMS\Core\Http\UriFactory;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Site\SiteFinder;
@@ -15,7 +15,6 @@ use Undkonsorten\CuteMailing\Domain\Model\MailTask;
 use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
 use Undkonsorten\CuteMailing\Domain\Model\RecipientInterface;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
-use Undkonsorten\CuteMailing\Domain\Repository\RecipientRepositoryInterface;
 
 class MailService implements SingletonInterface
 {
@@ -65,8 +64,8 @@ class MailService implements SingletonInterface
         $url = (string)$site->getRouter()->generateUri($newsletter->getNewsletterPage());
         $uri = GeneralUtility::makeInstance(Uri::class, $url);
 
-        if($mailTask->getFormat() == $mailTask::HTML){
-            $uri = $uri->withQuery('type='.$newsletter->getPageTypeHtml());
+        if ($mailTask->getFormat() == $mailTask::HTML) {
+            $uri = $uri->withQuery('type=' . $newsletter->getPageTypeHtml());
             $response = $this->requestFactory->request($uri);
             $content = $response->getBody()->getContents();
             $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $content, $recipient);
@@ -83,15 +82,15 @@ class MailService implements SingletonInterface
 
     protected function replaceMarker(array $allowedMarker, &$content, RecipientInterface $recipient)
     {
-        foreach ($allowedMarker as $marker){
-            try{
+        foreach ($allowedMarker as $marker) {
+            try {
                 $property = ObjectAccess::getProperty($recipient, $marker);
-            }catch(PropertyNotAccessibleException $exception){
+            } catch (PropertyNotAccessibleException $exception) {
                 /**@todo maybe log this ot something */
             }
 
-            if(!is_null($property)){
-                $content = str_replace('###'.$marker.'###', $property, $content);
+            if (!is_null($property)) {
+                $content = str_replace('###' . $marker . '###', $property, $content);
             }
 
         }

@@ -347,6 +347,7 @@ label {
 	background-color: var(--cute-color--darken);
 	border-color: var(--cute-color--darken);
 }
+
 .cute__flash-message-list {
 	list-style: none;
 }
@@ -354,11 +355,13 @@ label {
 .help-block {
 	margin-top: .5em;
 }
+
 .help-block__code {
 	list-style-type: none;
 	padding: 0;
 	margin: 0
 }
+
 .help-block__code > li {
 	margin: 5px 0
 }
@@ -432,6 +435,7 @@ label {
 .cute__list-change-button {
 	background-color: dimgrey;
 }
+
 /* REMOVE
 
 .luxletter-dashboard .panel, .luxletter-dashboard .panel-body {

@@ -1,22 +1,27 @@
 <?php
+
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use Undkonsorten\CuteMailing\Controller\NewsletterController;
+
 if (!defined('TYPO3')) {
     die('Access denied.');
 }
 (function () {
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_cutemailing_domain_model_newsletter');
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_cutemailing_domain_model_recipient_list');
+    ExtensionManagementUtility::allowTableOnStandardPages('tx_cutemailing_domain_model_newsletter');
+    ExtensionManagementUtility::allowTableOnStandardPages('tx_cutemailing_domain_model_recipient_list');
 
     /**
      * Registers a Backend Module
      */
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+    ExtensionUtility::registerModule(
         'Cutemailing',
         'web',     // Make module a submodule of 'tools'
         'cutemailing',    // Submodule key
         '',                        // Position
         [
-            \Undkonsorten\CuteMailing\Controller\NewsletterController::class => 'list, new, edit, create, enable, disable, delete, receiver, sendTestMail, update',
+            NewsletterController::class => 'list, new, edit, create, enable, delete, receiver, sendTestMail, update',
 
         ],
         [
@@ -26,7 +31,7 @@ if (!defined('TYPO3')) {
         ]
 
     );
-    (function ($extKey='cuteMailing') {
+    (function ($extKey = 'cuteMailing') {
         $cuteMailingDoktype = 116;
 
         // Add new page type:

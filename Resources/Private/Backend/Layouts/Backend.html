@@ -1,39 +1,42 @@
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
-			xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
-			data-namespace-typo3-fluid="true">
+<html data-namespace-typo3-fluid="true" lang="en"
+			xmlns="http://www.w3.org/1999/xhtml"
+			xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
 <f:Be.Container
-        includeCssFiles="{0:'{f:uri.resource(path:\'Css/Modules.css\',extensionName:\'cute_mailing\')}'}"
-				includeRequireJsModules="{0:'TYPO3/CMS/CuteMailing/Module'}"
-        pageTitle="Cute mailing">
+	includeCssFiles="{0:'{f:uri.resource(path:\'Css/Modules.css\',extensionName:\'cute_mailing\')}'}"
+	includeRequireJsModules="{0:'TYPO3/CMS/CuteMailing/Module'}"
+	pageTitle="Cute mailing">
 
-    <div class="module">
-        <div class="module-docheader">
-            <div class="typo3-docheader-functions">
-                <div class="module-docheader-bar module-docheader-bar-navigation">
-                    <div class="module-docheader-bar-column-left">
-                        <div class="btn-group" role="group">
-                            <img alt="" src="{f:uri.resource(path:'Icons/Cutemailing.svg',extensionName:'cute_mailing')}" height="30" style="float:left;" />
-                            <f:link.action action="list" controller="Newsletter" class="btn{luxletter:backend.getClassNameOnAction(actionName:'list')}">
-                                <f:translate key="layout.backend.link.actionnewsletter">Newsletter</f:translate>
-                            </f:link.action>
-													<f:link.action action="receiver" controller="Newsletter" class="btn{luxletter:backend.getClassNameOnAction(actionName:'receiver')}">
-														<f:translate key="layout.backend.link.actionreceiver">Receiver</f:translate>
-													</f:link.action>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="module-docheader-bar module-docheader-bar-buttons">
-                <div class="module-docheader-bar-column-left">
-                </div>
-                <div class="module-docheader-bar-column-right">
-                    <f:be.buttons.shortcut />
-                </div>
-            </div>
-        </div>
-        <div class="backend module-body">
-            <f:render section="content" />
-        </div>
-    </div>
+	<div class="module">
+		<div class="module-docheader">
+			<div class="typo3-docheader-functions">
+				<div class="module-docheader-bar module-docheader-bar-navigation">
+					<div class="module-docheader-bar-column-left">
+						<div class="btn-group" role="group">
+							<img alt="" height="30" src="{f:uri.resource(path:'Icons/Cutemailing.svg',extensionName:'cute_mailing')}"
+									 style="float:left;"/>
+							<f:link.action action="list" class="btn{luxletter:backend.getClassNameOnAction(actionName:'list')}"
+														 controller="Newsletter">
+								<f:translate key="layout.backend.link.actionnewsletter">Newsletter</f:translate>
+							</f:link.action>
+							<f:link.action action="receiver" class="btn{luxletter:backend.getClassNameOnAction(actionName:'receiver')}"
+														 controller="Newsletter">
+								<f:translate key="layout.backend.link.actionreceiver">Receiver</f:translate>
+							</f:link.action>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="module-docheader-bar module-docheader-bar-buttons">
+				<div class="module-docheader-bar-column-left">
+				</div>
+				<div class="module-docheader-bar-column-right">
+					<f:be.buttons.shortcut/>
+				</div>
+			</div>
+		</div>
+		<div class="backend module-body">
+			<f:render section="content"/>
+		</div>
+	</div>
 </f:Be.Container>
 </html>
