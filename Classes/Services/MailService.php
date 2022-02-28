@@ -2,6 +2,8 @@
 
 namespace Undkonsorten\CuteMailing\Services;
 
+use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
+use TYPO3\CMS\Core\Exception;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -85,7 +87,7 @@ class MailService implements SingletonInterface
         foreach ($allowedMarker as $marker) {
             try {
                 $property = ObjectAccess::getProperty($recipient, $marker);
-            } catch (PropertyNotAccessibleException $exception) {
+            } catch (\Exception $exception) {
                 /**@todo maybe log this ot something */
             }
 
