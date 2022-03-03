@@ -1,4 +1,4 @@
-<html data-namespace-typo3-fluid="true" xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
+<html data-namespace-typo3-fluid="true" xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" lang="en">
 
 <fieldset>
 	<div class="row">
@@ -305,8 +305,8 @@
 	<button class="btn btn-primary btn-lg" data-wizardform-gotostep="2">
 		<f:translate extensionName="CuteMailing" key="module.newsletter.wizard.back">Back</f:translate>
 	</button>
-	<f:form.hidden property="pageTypeHtml" value="{pageTypeHtml}"/>
-	<f:form.hidden property="pageTypeText" value="{pageTypeText}"/>
+	<f:form.hidden property="pageTypeHtml" data="{cutemailing-pagetype-html:true}" value="{pageTypeHtml}"/>
+	<f:form.hidden property="pageTypeText" data="{cutemailing-pagetype-text:true}" value="{pageTypeText}"/>
 	<f:form.hidden property="allowedMarker" value="{allowedMarker}"/>
 	<f:form.submit class="btn btn-primary btn-lg pull-right" data="{cutemailing-wizardstatus:'pending'}"
 								 disabled="disabled" value="{f:translate(key:'save',extensionName:'CuteMailing')}"/>

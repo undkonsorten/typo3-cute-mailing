@@ -124,7 +124,6 @@ define(['jquery'], function ($) {
 		var initializeNewsletterPreviewIframe = function () {
 			var container = document.querySelector('[data-cutemailing-wizardpreview="newsletter"]');
 			var input = document.querySelector('[data-cutemailing-wizardpreviewevent="newsletter"]');
-			console.log(container, input);
 			if (container !== null && input.value !== '') {
 				container.innerHTML = '';
 				var iframe = document.createElement('iframe');
@@ -141,8 +140,12 @@ define(['jquery'], function ($) {
 		 */
 		var getIframeSource = function (origin) {
 			var pageId = parseInt(document.querySelector('[data-cutemailing-wizardpreviewevent="newsletter"]').value);
-			// @TODO fetch HTML type configuration from newsletter. Type is still hardcoded!
-			return '//' + window.location.host + '/index.php?id=' + pageId + "&type=10";
+			var pageTypeHTML = 0;
+			var pageTypeHTMLElement = document.querySelector("[data-cutemailing-pagetype-html]");
+			if (pageTypeHTMLElement) {
+				pageTypeHTML = pageTypeHTMLElement.value;
+			}
+			return '//' + window.location.host + '/index.php?id=' + pageId + "&type=" + pageTypeHTML;
 		};
 
 		/**
@@ -234,7 +237,7 @@ define(['jquery'], function ($) {
 				xhttp.open('POST', mergeUriWithParameters(uri, parameters), true);
 				xhttp.send();
 			} else {
-				console.log('No ajax URI given!');
+				console.error('No ajax URI given!');
 			}
 		};
 
@@ -258,7 +261,6 @@ define(['jquery'], function ($) {
 		 * @returns {boolean}
 		 */
 		var isNewsletterReady = function () {
-			console.log(newsletterPreview, userPreview);
 			return newsletterPreview && userPreview;
 		};
 
@@ -266,7 +268,6 @@ define(['jquery'], function ($) {
 		 * @returns {boolean}
 		 */
 		var areAllMandatoryFieldsFilled = function () {
-			console.log(document.querySelectorAll('[data-luxletter-mandatory]'));
 			var fields = document.querySelectorAll('[data-luxletter-mandatory]');
 			for (var i = 0; i < fields.length; i++) {
 				if (fields[i].value === 0 || fields[i].value === '') {
