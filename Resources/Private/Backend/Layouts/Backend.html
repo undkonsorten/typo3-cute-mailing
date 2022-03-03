@@ -12,13 +12,11 @@
 				<div class="module-docheader-bar module-docheader-bar-navigation">
 					<div class="module-docheader-bar-column-left">
 						<div class="btn-group" role="group">
-							<img alt="" height="30" src="{f:uri.resource(path:'Icons/Cutemailing.svg',extensionName:'cute_mailing')}"
-									 style="float:left;"/>
-							<f:link.action action="list" class="btn{luxletter:backend.getClassNameOnAction(actionName:'list')}"
+							<f:link.action action="list" class="btn btn-default"
 														 controller="Newsletter">
 								<f:translate key="layout.backend.link.actionnewsletter">Newsletter</f:translate>
 							</f:link.action>
-							<f:link.action action="receiver" class="btn{luxletter:backend.getClassNameOnAction(actionName:'receiver')}"
+							<f:link.action action="receiver" class="btn btn-default"
 														 controller="Newsletter">
 								<f:translate key="layout.backend.link.actionreceiver">Receiver</f:translate>
 							</f:link.action>
