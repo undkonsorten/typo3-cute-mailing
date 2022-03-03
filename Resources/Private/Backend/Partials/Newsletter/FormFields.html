@@ -252,76 +252,27 @@
 	</div>
 
 
-	<div class="row">
-		<div class="col-md-12">
-			<div class="panel panel-default" data-cutemailing-wizardstatus="ready" style="display: none; height: auto;">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.testmail">Testmail</f:translate>
-					</h3>
-				</div>
-				<div class="panel-body">
-					<div data-luxletter-testmail="fields" style="display: flex; flex-direction: row;">
-						<label class="lb-lg" for="test" style="width:15%;">
-							<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.testmail.receiver">Receiver
-							</f:translate>
-						</label>
-						<f:form.textfield
-							class="form-control input-lg"
-							data="{luxletter-testmail:'email'}"
-							id="test"
-							name="testmail"
-							placeholder="your@email.org"
-							style="margin: 0 20px; width:75%;"/>
-						<button class="btn btn-primary" data-luxletter-testmail="submit" style="width:10%;">
-							<f:translate extensionName="CuteMailing" key="send">Send</f:translate>
-						</button>
-					</div>
 
-
-					<div class="alert alert-success" data-luxletter-testmail="message" role="alert"
-							 style="display: none; margin-top: 20px;">
-						<h4 class="alert-heading">
-							<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.testmailsent">Newsletter was
-								sent
-							</f:translate>
-						</h4>
-						<p>
-							<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.testmailsent.addition">Your
-								test newsletter was sent correctly
-							</f:translate>
-						</p>
-					</div>
-				</div>
-			</div>
-
-
-			<div data-cutemailing-wizardpreview="users">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">
-							<f:translate extensionName="CuteMailing" key="module.newsletter.new.wizarduserpreview.previewreceivers">
-								Preview of the receivers
-							</f:translate>
-							<span class="badge" title="{userAmount} receivers">{userAmount}</span>
-						</h3>
-					</div>
-					<div class="panel-body">
-						<div class="alert alert-warning" data-cutemailing-wizardstatus="pending" role="alert">
-							<h4 class="alert-heading">
-								<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.notready">Newsletter is not
-									yet ready to be sent
-								</f:translate>
-							</h4>
-							<p>
-								<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.notready.receiver">Please
-									choose a receiver group
-								</f:translate>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
+    <div class="row">
+        <div class="col-md-12">
+            <div data-cutemailing-wizardpreview="users">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <f:translate key="module.newsletter.new.wizarduserpreview.previewreceivers" extensionName="CuteMailing">Preview of the receivers</f:translate>
+                            <span class="badge" title="{userAmount} receivers">{userAmount}</span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="alert alert-warning" role="alert" data-cutemailing-wizardstatus="pending">
+                            <h4 class="alert-heading">
+                                <f:translate key="module.newsletter.new.message.notready" extensionName="CuteMailing">Newsletter is not yet ready to be sent</f:translate>
+                            </h4>
+                            <p><f:translate key="module.newsletter.new.message.notready.receiver" extensionName="CuteMailing">Please choose a receiver group</f:translate></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 			<div class="panel panel-default">
