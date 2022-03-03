@@ -25,7 +25,7 @@
 				<source>Newsletter title (internal)</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.title.description">
-				<source>This title is used only for internal description. It it not the email title.</source>
+				<source>This title is used only for internal description. It's not the email title.</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.sendingTime">
 				<source>Scheduled sending time</source>
@@ -34,7 +34,7 @@
 				<source>Scheduled sending time</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.sendingTime.description">
-				<source>The date and time when you newsletter sending should be scheduled.</source>
+				<source>The date and time when your newsletter sending should be scheduled.</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.list.tableheader.status">
 				<source>Status</source>
