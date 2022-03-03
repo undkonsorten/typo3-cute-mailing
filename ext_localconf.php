@@ -17,18 +17,10 @@ call_user_func(
         $iconRegistry = GeneralUtility::makeInstance(IconRegistry::class);
         $iconRegistry
             ->registerIcon(
-                'apps-pagetree-archive',
+                'apps-pagetree-cute-mailing',
                 TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
                 [
-                    'source' => 'EXT:' . $extKey . '/Resources/Public/Icons/Extension.svg',
-                ]
-            );
-        $iconRegistry
-            ->registerIcon(
-                'apps-pagetree-archive-contentFromPid',
-                TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-                [
-                    'source' => 'EXT:' . $extKey . '/Resources/Public/Icons/Extension.svg',
+                    'source' => 'EXT:' . $extKey . '/Resources/Public/Icons/cute_folder_icon.svg',
                 ]
             );
         // ... register other icons in the same way, see below.

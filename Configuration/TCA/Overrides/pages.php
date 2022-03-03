@@ -26,10 +26,10 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
             // add icon for new page type:
             'ctrl' => [
                 'typeicon_classes' => [
-                    $cuteMailingSysFolder => 'apps-pagetree-archive',
-                    $cuteMailingSysFolder . '-contentFromPid' => "apps-pagetree-archive-contentFromPid",
-                    $cuteMailingSysFolder . '-root' => "apps-pagetree-archive-root",
-                    $cuteMailingSysFolder . '-hideinmenu' => "apps-pagetree-archive-hideinmenu",
+                    $cuteMailingSysFolder => 'apps-pagetree-cute-mailing',
+                    $cuteMailingSysFolder . '-contentFromPid' => "apps-pagetree-cute-mailing",
+                    $cuteMailingSysFolder . '-root' => "aapps-pagetree-cute-mailing",
+                    $cuteMailingSysFolder . '-hideinmenu' => "apps-pagetree-cute-mailing",
                 ],
             ],
             // add all page standard fields and tabs to your new page type
