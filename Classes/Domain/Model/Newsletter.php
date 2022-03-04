@@ -155,7 +155,7 @@ class Newsletter extends AbstractEntity
      */
     public function getSendingTime(): ?DateTime
     {
-        return $this->sendingTime;
+        return $this->sendingTime ?: new DateTime();
     }
 
     /**
