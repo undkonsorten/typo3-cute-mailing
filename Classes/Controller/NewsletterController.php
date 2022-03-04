@@ -278,7 +278,7 @@ class NewsletterController extends ActionController
 
             $this->taskRepository->add($newsletterTask);
             $this->newsletterRepository->update($newsletter);
-            $this->addFlashMessage('Your test mailing is beeing send out for the reciepient group: ' . $newsletter->getTestRecipientList()->getName(), 'Testmailing invoked', AbstractMessage::OK);
+            $this->addFlashMessage('Your test mailing is being send out for the recipient group: ' . $newsletter->getTestRecipientList()->getName(), 'Testmailing invoked', AbstractMessage::OK);
         } else {
             $this->addFlashMessage('This newsletter has no test recipient.', 'Error', AbstractMessage::ERROR);
         }
