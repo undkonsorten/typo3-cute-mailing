@@ -1,4 +1,4 @@
-<html data-namespace-typo3-fluid="true" xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
+<html data-namespace-typo3-fluid="true" xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" lang="en">
 
 <f:layout name="Backend"/>
 
@@ -9,29 +9,29 @@
 <f:section name="Newsletters">
 
 	<h1>
-		<f:translate extensionName="CuteMailing" key="module.newsletter.list.title">CuteMailing: Newsletters</f:translate>
+		<f:translate key="module.newsletter.list.title">CuteMailing: Newsletters</f:translate>
 	</h1>
 	<f:render arguments="{_all}" partial="Miscellaneous/FlashMessages"/>
 	<f:if condition="{newsletters}">
 		<f:then>
 			<f:link.action action="new" class="btn btn-lg btn-primary cute__list-add-new mb-3">
 				<i class="fa fa-plus"></i>
-				<f:translate extensionName="CuteMailing" key="module.newsletter.new.title">Add newsletter</f:translate>
+				<f:translate key="module.newsletter.new.title">Add newsletter</f:translate>
 			</f:link.action>
 			<table class="table table-striped table-condensed">
 				<thead>
 				<tr>
 					<th>#</th>
 					<th>
-						<f:translate extensionName="CuteMailing" key="module.newsletter.list.tableheader.title">Newsletter title
+						<f:translate key="module.newsletter.list.tableheader.title">Newsletter title
 						</f:translate>
 					</th>
 					<th>
-						<f:translate extensionName="CuteMailing" key="module.newsletter.list.tableheader.status">Status
+						<f:translate key="module.newsletter.list.tableheader.status">Status
 						</f:translate>
 					</th>
 					<th>
-						<f:translate extensionName="CuteMailing" key="module.newsletter.list.tableheader.sendingTime">Sending time
+						<f:translate key="module.newsletter.list.tableheader.sendingTime">Sending time
 						</f:translate>
 					</th>
 					<th>Sending</th>
@@ -59,12 +59,12 @@
 								<f:link.action action="enable" additionalAttributes="{data-luxletter-confirm:'{f:translate(key:\'module.newsletter.list.enableConfirm\',extensionName:\'CuteMailing\')}'}" arguments="{newsletter:newsletter}"
 															 class="btn btn-primary">
 									<i class="fa fa-send"></i>
-									<f:translate extensionName="CuteMailing" key="module.newsletter.list.enable">enable</f:translate>
+									<f:translate key="module.newsletter.list.enable">enable</f:translate>
 								</f:link.action>
 							</f:if>
 							<f:link.action action="sendTestMail" arguments="{newsletter:newsletter}" class="btn btn-primary">
 								<i class="fa fa-flask"></i>
-								<f:translate extensionName="CuteMailing" key="module.newsletter.list.test">Send test mail</f:translate>
+								<f:translate key="module.newsletter.list.test">Send test mail</f:translate>
 							</f:link.action>
 						</td>
 						<td>
@@ -80,7 +80,7 @@
 													</svg>
 												</span>
 												<span class="sr-only">
-													<f:translate extensionName="CuteMailing" key="module.newsletter.list.edit">
+													<f:translate key="module.newsletter.list.edit">
 														edit
 													</f:translate>
 												</span>
@@ -103,7 +103,7 @@
 												</span>
 											</span>
 									<span class="sr-only">
-												<f:translate extensionName="CuteMailing"
+												<f:translate
 																		 key="module.newsletter.list.delete">delete</f:translate>
 											</span>
 								</f:link.action>
@@ -117,9 +117,9 @@
 		<f:else>
 			<div class="lux-workflow-new"></div>
 			<f:link.action action="new" class="btn btn-lg-extra btn-primary btn-primary-extra">
-				<span><f:translate extensionName="CuteMailing"
+				<span><f:translate
 													 key="module.newsletter.list.createnew.1">No newsletters yet</f:translate></span>
-				<f:translate extensionName="CuteMailing" key="module.newsletter.list.createnew.2">Add a new one</f:translate>
+				<f:translate key="module.newsletter.list.createnew.2">Add a new one</f:translate>
 			</f:link.action>
 		</f:else>
 	</f:if>

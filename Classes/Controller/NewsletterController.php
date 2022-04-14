@@ -16,6 +16,7 @@ use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentNameException;
 use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
@@ -97,10 +98,18 @@ class NewsletterController extends ActionController
     public function listAction(): void
     {
         $currentPid = (int)GeneralUtility::_GP('id');
+        if ($currentPid === 0) {
+            $this->forward('choosePage');
+        }
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
         $this->view->assignMultiple([
             'newsletters' => $this->newsletterRepository->findByRootline($rootline)
         ]);
+    }
+
+    public function choosePageAction()
+    {
+
     }
 
     public function editAction(Newsletter $newsletter)

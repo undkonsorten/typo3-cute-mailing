@@ -16,7 +16,7 @@ if (!defined('TYPO3')) {
      * Registers a Backend Module
      */
     ExtensionUtility::registerModule(
-        'Cutemailing',
+        'CuteMailing',
         'web',     // Make module a submodule of 'tools'
         'cutemailing',    // Submodule key
         '',                        // Position
@@ -26,7 +26,7 @@ if (!defined('TYPO3')) {
         ],
         [
             'access' => 'user,group',
-            'icon' => 'EXT:cute_mailing/Resources/Public/Icons/Cutemailing.svg',
+            'icon' => 'EXT:cute_mailing/Resources/Public/Icons/CuteMailing.svg',
             'labels' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_mod_newsletter.xlf',
         ]
 

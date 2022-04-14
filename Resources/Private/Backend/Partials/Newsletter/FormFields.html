@@ -5,7 +5,7 @@
 		<div class="col-md-6">
 			<div class="form-group">
 				<label class="lb-lg" for="title">
-					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.title">Title</f:translate>
+					<f:translate key="module.newsletter.new.field.title">Title</f:translate>
 					*
 				</label>
 				<f:form.textfield
@@ -17,7 +17,7 @@
 					required="required"
 					value="{title}"/>
 				<span class="help-block">
-                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.title.description">Useful title</f:translate>
+                    <f:translate key="module.newsletter.new.field.title.description">Useful title</f:translate>
                 </span>
 			</div>
 		</div>
@@ -25,7 +25,7 @@
 		<div class="col-md-6">
 			<div class="form-group">
 				<label class="lb-lg" for="sendingTime">
-					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.sendingTime">Sending date
+					<f:translate key="module.newsletter.new.field.sendingTime">Sending date
 					</f:translate>
 				</label>
 				<f:form.textfield
@@ -35,14 +35,14 @@
 					type="datetime-local"
 					value="{newsletter.sendingTime -> f:format.date(format: 'Y-m-d H:i')}"/>
 				<span class="help-block">
-                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.sendingTime.description">Sending date description</f:translate>
+                    <f:translate key="module.newsletter.new.field.sendingTime.description">Sending date description</f:translate>
                 </span>
 			</div>
 		</div>
 		<div class="col-md-6">
 			<div class="form-group">
 				<label class="lb-lg" for="newsletterPage">
-					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.origin">Origin PID</f:translate>
+					<f:translate key="module.newsletter.new.field.origin">Origin PID</f:translate>
 					*
 				</label>
 				<f:form.textfield
@@ -54,7 +54,7 @@
 					required="required"
 					value="{newsletterPage}"/>
 				<span class="help-block">
-                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.origin.description">PID or absolute URL</f:translate>
+                    <f:translate key="module.newsletter.new.field.origin.description">PID or absolute URL</f:translate>
                 </span>
 			</div>
 		</div>
@@ -62,7 +62,7 @@
 		<div class="col-md-12">
 			<div class="form-group">
 				<label class="lb-lg" for="description">
-					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.description">description
+					<f:translate key="module.newsletter.new.field.description">description
 					</f:translate>
 				</label>
 				<f:form.textarea class="form-control input-lg"
@@ -70,7 +70,7 @@
 												 property="description"
 												 style="height: 200px;"/>
 				<span class="help-block">
-                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.description.description">Example description</f:translate>
+                    <f:translate key="module.newsletter.new.field.description.description">Example description</f:translate>
                 </span>
 			</div>
 		</div>
@@ -78,7 +78,7 @@
 
 
 	<button class="btn btn-primary btn-lg pull-right" data-wizardform-gotostep="2" type="button">
-		<f:translate extensionName="CuteMailing" key="module.newsletter.wizard.next">Next</f:translate>
+		<f:translate key="module.newsletter.wizard.next">Next</f:translate>
 	</button>
 </fieldset>
 
@@ -88,7 +88,7 @@
 		<div class="col-md-6">
 			<div class="form-group">
 				<label class="lb-lg" for="sender">
-					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.sender">Sender</f:translate>
+					<f:translate key="module.newsletter.new.field.sender">Sender</f:translate>
 					*
 				</label>
 				<f:form.textfield
@@ -99,10 +99,10 @@
 					required="required"
 					value="{sender}"/>
 				<span class="help-block">
-                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.sender.description">Sender description</f:translate>
+                    <f:translate key="module.newsletter.new.field.sender.description">Sender description</f:translate>
                 </span>
 				<label class="lb-lg" for="senderName">
-					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.senderName">Sender name
+					<f:translate key="module.newsletter.new.field.senderName">Sender name
 					</f:translate>
 					*
 				</label>
@@ -113,10 +113,10 @@
 					required="required"
 					value="{senderName}"/>
 				<span class="help-block">
-                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.configuration.senderName">Sender name</f:translate>
+                    <f:translate key="module.newsletter.new.field.configuration.senderName">Sender name</f:translate>
                 </span>
 				<label class="lb-lg" for="replyTo">
-					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.replyTo">Reply to</f:translate>
+					<f:translate key="module.newsletter.new.field.replyTo">Reply to</f:translate>
 					*
 				</label>
 				<f:form.textfield
@@ -127,10 +127,10 @@
 					required="required"
 					value="{replyTo}"/>
 				<span class="help-block">
-                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.replyTo.description">Reply to address</f:translate>
+                    <f:translate key="module.newsletter.new.field.replyTo.description">Reply to address</f:translate>
                 </span>
 				<label class="lb-lg" for="replyToName">
-					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.replyToName">Reply to name
+					<f:translate key="module.newsletter.new.field.replyToName">Reply to name
 					</f:translate>
 					*
 				</label>
@@ -142,14 +142,14 @@
 					required="required"
 					value="{replyToName}"/>
 				<span class="help-block">
-                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.replyToName.description">Reply to name</f:translate>
+                    <f:translate key="module.newsletter.new.field.replyToName.description">Reply to name</f:translate>
                 </span>
 			</div>
 		</div>
 		<div class="col-md-6">
 			<div class="form-group">
 				<label class="lb-lg" for="receiver">
-					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.receiver">Receiver</f:translate>
+					<f:translate key="module.newsletter.new.field.receiver">Receiver</f:translate>
 					*
 				</label>
 				<f:form.select
@@ -164,10 +164,10 @@
 					property="recipientList"
 					required="required"/>
 				<span class="help-block">
-                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.receiver.description">Receiver group description</f:translate>
+                    <f:translate key="module.newsletter.new.field.receiver.description">Receiver group description</f:translate>
                 </span>
 				<label class="lb-lg" for="testReceiver">
-					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.testReceiver">Test Receiver
+					<f:translate key="module.newsletter.new.field.testReceiver">Test Receiver
 					</f:translate>
 					*
 				</label>
@@ -183,7 +183,7 @@
 					property="testRecipientList"
 					required="required"/>
 				<span class="help-block">
-											<f:translate extensionName="CuteMailing"
+											<f:translate
 																	 key="module.newsletter.new.field.testReceiver.description">Test receiver group description</f:translate>
 									</span>
 			</div>
@@ -195,7 +195,7 @@
 		<div class="col-md-12">
 			<div class="form-group">
 				<label class="lb-lg" for="subject">
-					<f:translate extensionName="CuteMailing" key="module.newsletter.new.field.subject">Subject</f:translate>
+					<f:translate key="module.newsletter.new.field.subject">Subject</f:translate>
 					*
 				</label>
 				<f:form.textfield
@@ -207,7 +207,7 @@
 					required="required"
 					value="{subject}"/>
 				<span class="help-block">
-                    <f:translate extensionName="CuteMailing" key="module.newsletter.new.field.subject.description">Email subject</f:translate>
+                    <f:translate key="module.newsletter.new.field.subject.description">Email subject</f:translate>
                 </span>
 			</div>
 		</div>
@@ -216,10 +216,10 @@
 
 	<div style="margin: 20px 0;">
 		<button class="btn btn-primary btn-lg" data-wizardform-gotostep="1">
-			<f:translate extensionName="CuteMailing" key="module.newsletter.wizard.back">Back</f:translate>
+			<f:translate key="module.newsletter.wizard.back">Back</f:translate>
 		</button>
 		<button class="btn btn-primary btn-lg pull-right" data-wizardform-gotostep="3">
-			<f:translate extensionName="CuteMailing" key="module.newsletter.wizard.next">Next</f:translate>
+			<f:translate key="module.newsletter.wizard.next">Next</f:translate>
 		</button>
 	</div>
 </fieldset>
@@ -228,24 +228,24 @@
 <fieldset>
 	<div class="alert alert-warning" data-cutemailing-wizardstatus="pending" role="alert">
 		<h4 class="alert-heading">
-			<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.notready">Newsletter is not yet ready
+			<f:translate key="module.newsletter.new.message.notready">Newsletter is not yet ready
 				to be sent
 			</f:translate>
 		</h4>
 		<p>
-			<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.notready.mandatory">Please fill all
+			<f:translate key="module.newsletter.new.message.notready.mandatory">Please fill all
 				mandatory fields
 			</f:translate>
 		</p>
 	</div>
 	<div class="alert alert-success" data-cutemailing-wizardstatus="ready" role="alert" style="display: none;">
 		<h4 class="alert-heading">
-			<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.ready">Newsletter is ready for
+			<f:translate key="module.newsletter.new.message.ready">Newsletter is ready for
 				dispatch
 			</f:translate>
 		</h4>
 		<p>
-			<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.ready.addition">If you click save (see
+			<f:translate key="module.newsletter.new.message.ready.addition">If you click save (see
 				below), the newsletter will be planned for dispatch
 			</f:translate>
 		</p>
@@ -259,16 +259,16 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            <f:translate key="module.newsletter.new.wizarduserpreview.previewreceivers" extensionName="CuteMailing">Preview of the receivers</f:translate>
+                            <f:translate key="module.newsletter.new.wizarduserpreview.previewreceivers">Preview of the receivers</f:translate>
                             <span class="badge" title="{userAmount} receivers">{userAmount}</span>
                         </h3>
                     </div>
                     <div class="panel-body">
                         <div class="alert alert-warning" role="alert" data-cutemailing-wizardstatus="pending">
                             <h4 class="alert-heading">
-                                <f:translate key="module.newsletter.new.message.notready" extensionName="CuteMailing">Newsletter is not yet ready to be sent</f:translate>
+                                <f:translate key="module.newsletter.new.message.notready">Newsletter is not yet ready to be sent</f:translate>
                             </h4>
-                            <p><f:translate key="module.newsletter.new.message.notready.receiver" extensionName="CuteMailing">Please choose a receiver group</f:translate></p>
+                            <p><f:translate key="module.newsletter.new.message.notready.receiver">Please choose a receiver group</f:translate></p>
                         </div>
                     </div>
                 </div>
@@ -278,7 +278,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<f:translate extensionName="CuteMailing" key="module.newsletter.new.wizarduserpreview.previewnewsletter">
+						<f:translate key="module.newsletter.new.wizarduserpreview.previewnewsletter">
 							Newsletter preview
 						</f:translate>
 					</h3>
@@ -286,12 +286,12 @@
 				<div class="panel-body" data-cutemailing-wizardpreview="newsletter">
 					<div class="alert alert-warning" role="alert">
 						<h4 class="alert-heading">
-							<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.notready">Newsletter is not
+							<f:translate key="module.newsletter.new.message.notready">Newsletter is not
 								yet ready to be sent
 							</f:translate>
 						</h4>
 						<p>
-							<f:translate extensionName="CuteMailing" key="module.newsletter.new.message.notready.origin">Please select
+							<f:translate key="module.newsletter.new.message.notready.origin">Please select
 								an origin for your newsletter
 							</f:translate>
 						</p>
@@ -303,7 +303,7 @@
 
 
 	<button class="btn btn-primary btn-lg" data-wizardform-gotostep="2">
-		<f:translate extensionName="CuteMailing" key="module.newsletter.wizard.back">Back</f:translate>
+		<f:translate key="module.newsletter.wizard.back">Back</f:translate>
 	</button>
 	<f:form.hidden property="pageTypeHtml" data="{cutemailing-pagetype-html:true}" value="{pageTypeHtml}"/>
 	<f:form.hidden property="pageTypeText" data="{cutemailing-pagetype-text:true}" value="{pageTypeText}"/>
