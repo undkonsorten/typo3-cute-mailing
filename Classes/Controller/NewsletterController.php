@@ -230,7 +230,7 @@ class NewsletterController extends ActionController
      */
     public function enableAction(Newsletter $newsletter): void
     {
-        if ($newsletter->getStatus() === $newsletter::SEND) {
+        if ($newsletter->getStatus() === $newsletter::SENT) {
             $this->addFlashMessage('Newsletter was already send.', 'Was sended.', AbstractMessage::ERROR);
         } else {
             $newsletter->enable();

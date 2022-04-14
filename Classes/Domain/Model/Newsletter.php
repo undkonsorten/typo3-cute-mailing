@@ -9,7 +9,7 @@ class Newsletter extends AbstractEntity
 {
     const CREATED = 0;
     const TESTED = 1;
-    const SEND = 2;
+    const SENT = 2;
 
     /**
      * @var string
@@ -153,7 +153,7 @@ class Newsletter extends AbstractEntity
     /**
      * @return DateTime
      */
-    public function getSendingTime(): ?DateTime
+    public function getSendingTime(): DateTime
     {
         return $this->sendingTime ?: new DateTime();
     }
@@ -296,7 +296,7 @@ class Newsletter extends AbstractEntity
 
     public function enable(): void
     {
-        $this->setStatus(self::SEND);
+        $this->setStatus(self::SENT);
     }
 
     /**
