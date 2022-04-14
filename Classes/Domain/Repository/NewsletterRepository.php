@@ -2,6 +2,7 @@
 
 namespace Undkonsorten\CuteMailing\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
@@ -22,6 +23,8 @@ class NewsletterRepository extends Repository
         $defaultSettings->setRespectStoragePage(true);
         $defaultSettings->setStoragePageIds($storagePageIds);
         $query->setQuerySettings($defaultSettings);
+        // @TODO make configurable? Find better property than crdate?
+        $query->setOrderings(['crdate' => QueryInterface::ORDER_DESCENDING]);
         return $query->execute();
     }
 }
