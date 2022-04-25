@@ -70,6 +70,9 @@
 			<trans-unit id="tx_cutemailing_domain_model_newsletter.allowed_marker">
 				<source>Allowed marker</source>
 			</trans-unit>
+			<trans-unit id="tx_taskqueue_domain_model_task.newsletter">
+				<source>Newsletter</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

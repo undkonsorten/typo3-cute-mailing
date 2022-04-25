@@ -95,3 +95,7 @@ CREATE TABLE tx_cutemailing_domain_model_recipientlist
 	KEY language (l10n_parent, sys_language_uid)
 
 );
+
+CREATE TABLE tx_taskqueue_domain_model_task(
+  tx_cutemailing_newsletter	int(11) DEFAULT '0' NOT NULL
+);

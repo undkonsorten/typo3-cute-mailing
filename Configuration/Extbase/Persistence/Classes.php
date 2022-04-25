@@ -11,7 +11,12 @@ use Undkonsorten\Taskqueue\Domain\Model\Task;
 return [
     MailTask::class => [
         'tableName' => 'tx_taskqueue_domain_model_task',
-        'recordType' => MailTask::class
+        'recordType' => MailTask::class,
+        'properties' => [
+            'newsletter' => [
+                'fieldName' => 'tx_cutemailing_newsletter',
+            ],
+        ],
     ],
     NewsletterTask::class => [
         'tableName' => 'tx_taskqueue_domain_model_task',

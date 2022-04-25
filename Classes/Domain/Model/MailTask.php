@@ -13,6 +13,10 @@ class MailTask extends Task
     const HTML = 'html';
     const BOTH = 'both';
 
+    /**
+     * @var int
+     */
+    protected $newsletter;
 
     /**
      * @var MailService
@@ -41,14 +45,14 @@ class MailTask extends Task
         return $this->getProperty("format");
     }
 
-    public function getNewsletter(): int
+    public function getNewsletter(): ?int
     {
-        return (int)$this->getProperty('newsletter');
+        return $this->newsletter;
     }
 
-    public function setNewsletter(int $newsletter): void
+    public function setNewsletter(?int $newsletter): void
     {
-        $this->setProperty('newsletter', $newsletter);
+        $this->newsletter = $newsletter;
     }
 
     public function getRecipient(): int
