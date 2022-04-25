@@ -9,7 +9,8 @@ class Newsletter extends AbstractEntity
 {
     const CREATED = 0;
     const TESTED = 1;
-    const SENT = 2;
+    const SCHEDULED = 2;
+    const SENT = 3;
 
     /**
      * @var string
@@ -296,7 +297,13 @@ class Newsletter extends AbstractEntity
 
     public function enable(): void
     {
+        $this->setStatus(self::SCHEDULED);
+    }
+
+    public function markSent(): self
+    {
         $this->setStatus(self::SENT);
+        return $this;
     }
 
     /**

@@ -239,7 +239,7 @@ class NewsletterController extends ActionController
      */
     public function enableAction(Newsletter $newsletter): void
     {
-        if ($newsletter->getStatus() === $newsletter::SENT) {
+        if ($newsletter->getStatus() >= $newsletter::SCHEDULED) {
             $this->addFlashMessage('Newsletter was already send.', 'Was sended.', AbstractMessage::ERROR);
         } else {
             $newsletter->enable();
@@ -307,6 +307,7 @@ class NewsletterController extends ActionController
             'userPreview' => array_slice($recipients, 0, 3),
             'userAmount' => count($recipients),
         ]);
+        /** @noinspection PhpComposerExtensionStubsInspection */
         return $this->jsonResponse(json_encode(['html' => $standaloneView->render()]));
     }
 
