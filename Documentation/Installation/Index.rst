@@ -37,5 +37,5 @@ Requirements
 CuteMailing requires the extension `taskqueue <https://gitbucket.undkonsorten.com>`__
 for sending the emails.
 The extension is automatically installed during installation via Composer.
-installed. If CuteMailing is installed via one of the other ways,
+If CuteMailing is installed via one of the other ways,
 the extension must be installed manually.
