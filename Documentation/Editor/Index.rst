@@ -6,7 +6,9 @@
 For Editors
 ===========
 
+There should be at least on Syfolder with doktype "Cute Mailing" exists.
 Editors can manage Newsletter data with the "Newsletter Module".
+
 For the moment recipient lists can only managed via the default List module.
 Select the "List Module" in the module column on the left and then select
 the newsletter SysFolder in the page tree.
@@ -17,6 +19,7 @@ First create recipient lists.
 
    Create one list for the normal recipients and one list with addresses for
    a test mailing.
+
 
 .. figure:: /Images/Editor/ReceiverList.png
    :class: with-shadow
@@ -39,10 +42,3 @@ The fields have a description and are actually self-explanatory.
 
 Once you have filled in all the necessary information, you can save the
 newsletter. It will not yet be released for dispatch.
-
-.. _editor-faq:
-
-FAQ
-===
-
-Possible subsection: FAQ

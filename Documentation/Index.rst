@@ -50,18 +50,7 @@ This documentation is for the TYPO3 extension cute-mailing.
 .. toctree::
    :maxdepth: 3
 
-   Editor/Index
    Installation/Index
    Configuration/Index
-   Templates/Index
-   Developer/Index
+   Editor/Index
    KnownProblems/Index
-
-
-.. toctree::
-   :maxdepth: 1
-
-   Sitemap
-   genindex
-   About
-   Targets
