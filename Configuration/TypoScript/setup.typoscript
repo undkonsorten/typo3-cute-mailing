@@ -1,8 +1,5 @@
  # Module configuration
 module.tx_cutemailing {
-	persistence {
-		storagePid = {$module.tx_cutemailing.persistence.storagePid}
-	}
 	view {
 		templateRootPaths.0 = {$module.tx_cutemailing.view.templateRootPath}
 		partialRootPaths.0 = {$module.tx_cutemailing.view.partialRootPath}

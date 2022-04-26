@@ -8,8 +8,4 @@ module.tx_cutemailing {
 		# cat=module.tx_cute_mailing/file; type=string; label=Path to template layouts (BE)
 		layoutRootPath = EXT:cute_mailing/Resources/Private/Backend/Layouts/
 	}
-	persistence {
-		# cat=module.tx_cute_mailing//a; type=string; label=Default storage PID
-		storagePid =
-	}
 }
