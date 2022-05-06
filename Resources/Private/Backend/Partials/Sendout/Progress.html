@@ -1,0 +1,12 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/ViewHelpers"
+			data-namespace-typo3-fluid="true"
+			lang="en">
+<f:section name="main">
+	<progress value="{completed -> f:count()}" max="{total}"></progress>
+	<f:format.number decimals="2">{progress * 100}</f:format.number>%
+	<f:if condition="{progress < 1}">
+		<f:then>({completed -> f:count()} of {total})</f:then>
+		<f:else>({total})</f:else>
+	</f:if>
+</f:section>
+</html>

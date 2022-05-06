@@ -4,6 +4,7 @@ namespace Undkonsorten\CuteMailing\Domain\Model;
 
 use DateTime;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Newsletter extends AbstractEntity
 {
@@ -86,6 +87,15 @@ class Newsletter extends AbstractEntity
      */
     protected $allowedMarker = null;
 
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Undkonsorten\CuteMailing\Domain\Model\SendOut>
+     */
+    protected $sendOuts;
+
+    public function __construct()
+    {
+        $this->sendOuts = new ObjectStorage();
+    }
 
     /**
      * @return int
@@ -354,5 +364,47 @@ class Newsletter extends AbstractEntity
         $this->allowedMarker = $allowedMarker;
     }
 
+    public function isScheduled(): bool
+    {
+        return $this->status === self::SCHEDULED;
+    }
+
+    public function isSent(): bool
+    {
+        return $this->status === self::SENT;
+    }
+
+    public function setSendOuts(ObjectStorage $sendOuts): self
+    {
+        $this->sendOuts = $sendOuts;
+        return $this;
+    }
+
+    public function getSendOuts(): ObjectStorage
+    {
+        return $this->sendOuts;
+    }
+
+    public function getLatestSendOut(): ?SendOut
+    {
+        $sendOuts = $this->sendOuts->toArray() ?? [];
+        return array_pop($sendOuts);
+    }
+
+    public function addSendOut(SendOut $sendOut): self
+    {
+        $this->sendOuts->attach($sendOut);
+        return $this;
+    }
+
+    public function getProgress(): float
+    {
+        return (float)$this->getLatestSendOut() ? $this->getLatestSendOut()->getProgress() : 0;
+    }
+
+    public function isComplete(): bool
+    {
+        return $this->getLatestSendOut() && $this->getLatestSendOut()->isComplete();
+    }
 
 }

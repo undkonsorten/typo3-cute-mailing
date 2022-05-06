@@ -31,6 +31,10 @@
 						</f:translate>
 					</th>
 					<th>
+						<f:translate key="module.newsletter.list.tableheader.progress">Progress
+						</f:translate>
+					</th>
+					<th>
 						<f:translate key="module.newsletter.list.tableheader.sendingTime">Sending time
 						</f:translate>
 					</th>
@@ -49,8 +53,19 @@
 							<f:switch expression="{newsletter.status}">
 								<f:case value="1"><i class="fa fa-flask"></i> Tested</f:case>
 								<f:case value="2"><i class="fa fa-clock-o"></i> Scheduled</f:case>
+								<f:case value="3"><i class="fa fa-check-square"></i> Sent</f:case>
 								<f:defaultCase>Created</f:defaultCase>
 							</f:switch>
+						</td>
+						<td>
+							<f:if condition="{newsletter.scheduled}">
+								<f:then>
+									<f:render partial="Sendout/Progress" section="main" arguments="{progress:newsletter.latestSendout.progress,total:newsletter.latestSendout.total,completed:newsletter.latestSendOut.completedMailTasks}" />
+								</f:then>
+								<f:else if="{newsletter.sent}">
+									<f:render partial="Sendout/Progress" section="main" arguments="{progress:newsletter.latestSendout.progress,total:newsletter.latestSendout.total,completed:newsletter.latestSendOut.completedMailTasks}" />
+								</f:else>
+							</f:if>
 						</td>
 						<td>{newsletter.sendingTime -> f:format.date(format: 'Y-m-d H:i')}</td>
 						<td class="cute__list-edit-button">

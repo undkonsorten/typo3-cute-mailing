@@ -7,8 +7,10 @@ use TYPO3\CMS\Core\Exception;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
+use Undkonsorten\CuteMailing\Domain\Repository\SendOutRepository;
 use Undkonsorten\Taskqueue\Domain\Model\Task;
 use Undkonsorten\Taskqueue\Domain\Repository\TaskRepository;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 class NewsletterTask extends Task
 {
@@ -28,6 +30,17 @@ class NewsletterTask extends Task
      */
     protected $persistenceManager;
 
+    /**
+     * @var Newsletter
+     */
+    protected $newsletter;
+
+    protected SendOutRepository $sendOutRepository;
+
+    public function injectSendOutRepository(SendOutRepository $sendOutRepository): void
+    {
+        $this->sendOutRepository = $sendOutRepository;
+    }
 
     public function injectNewsletterRepository(NewsletterRepository $newsletterRepository)
     {
@@ -49,19 +62,17 @@ class NewsletterTask extends Task
      */
     public function run(): void
     {
-        /**@var $newsletter Newsletter* */
-        $newsletter = $this->newsletterRepository->findByUid($this->getNewsletter());
-        if (is_null($newsletter)) {
-            throw new \Exception("Newsletter with uid: " . $this->getNewsletter() . " was not found", 1643821994);
+        if (is_null($this->newsletter)) {
+            throw new \Exception("Newsletter with uid: " . $this->newsletter . " was not found", 1643821994);
         }
-        if (empty($newsletter->getRecipientList())) {
+        if (empty($this->newsletter->getRecipientList())) {
             throw new \Exception("Newsletter does not have any recipients.", 1643822115);
         }
 
         if ($this->getTest()) {
-            $recipientList = $newsletter->getTestRecipientList();
+            $recipientList = $this->newsletter->getTestRecipientList();
         } else {
-            $recipientList = $newsletter->getRecipientList();
+            $recipientList = $this->newsletter->getRecipientList();
         }
         $recipients = $recipientList->getRecipients();
 
@@ -69,22 +80,27 @@ class NewsletterTask extends Task
             throw new Exception("Recipient list is empty", 1644851884);
         }
 
+
+        $sendOut = GeneralUtility::makeInstance(SendOut::class);
+        $sendOut->setNewsletter($this->newsletter);
         foreach ($recipients as $recipient) {
             /**@var $recipient RecipientInterface* */
             /**@var $mailTask MailTask* */
             $mailTask = GeneralUtility::makeInstance(MailTask::class);
-            /**@TODO format needs to be configured somewhere * */
+            /** @TODO format needs to be configured somewhere */
             $mailTask->setFormat($mailTask::HTML);
-            $mailTask->setNewsletter($newsletter->getUid());
+            $mailTask->setNewsletter($this->newsletter);
+            $mailTask->setSendOut($sendOut);
             $mailTask->setRecipient($recipient->getUid());
             $this->taskRepository->add($mailTask);
+            $sendOut->addMailTask($mailTask);
         }
+        $sendOut->setTotal(count($recipients));
+        $sendOut->setPid($this->newsletter->getPid());
+        $this->newsletter->addSendOut($sendOut);
+        $this->newsletterRepository->update($this->newsletter);
+        $this->sendOutRepository->add($sendOut);
         $this->persistenceManager->persistAll();
-    }
-
-    public function getNewsletter(): int
-    {
-        return $this->getProperty("newsletter");
     }
 
     public function getTest(): bool
@@ -92,14 +108,27 @@ class NewsletterTask extends Task
         return (bool)$this->getProperty("test");
     }
 
-    public function setNewsletter(int $newsletterUid): void
+    public function getNewsletter(): ?Newsletter
     {
-        $this->setProperty("newsletter", $newsletterUid);
+        return $this->newsletter;
+    }
+
+    public function setNewsletter(?Newsletter $newsletter): self
+    {
+        $this->newsletter = $newsletter;
+        return $this;
     }
 
     public function setTest(bool $test): void
     {
         $this->setProperty("test", $test);
+    }
+
+    public function getAdditionalData(): array
+    {
+        return [
+            'newsletter' => $this->newsletter,
+        ];
     }
 
 }

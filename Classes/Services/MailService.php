@@ -53,8 +53,10 @@ class MailService implements SingletonInterface
 
     public function sendMail(MailTask $mailTask)
     {
-        /** @var Newsletter $newsletter */
-        $newsletter = $this->newsletterRepository->findByUid($mailTask->getNewsletter());
+        $newsletter = $mailTask->getNewsletter();
+        if (is_null($newsletter)) {
+            throw new \Exception('No newsletter given for sending', 1651441455);
+        }
 
         /** @var RecipientInterface $recipient */
         $recipient = $newsletter->getRecipientList()->getRecipient($mailTask->getRecipient());

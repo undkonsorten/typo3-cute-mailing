@@ -8,6 +8,7 @@ CREATE TABLE tx_cutemailing_domain_model_newsletter
 	pid                 int(11)             DEFAULT '0' NOT NULL,
 
 	newsletter_page     int(11)             DEFAULT '0' NOT NULL,
+	send_outs				    int(11)             DEFAULT '0' NOT NULL,
 	recipient_list      int(11)             DEFAULT '0' NOT NULL,
 	test_recipient_list int(11)             DEFAULT '0' NOT NULL,
 	sender              varchar(255)        DEFAULT ''  NOT NULL,
@@ -53,6 +54,14 @@ CREATE TABLE tx_cutemailing_domain_model_newsletter
 
 );
 
+CREATE TABLE tx_cutemailing_domain_model_sendout
+(
+	newsletter int(11) DEFAULT '0' NOT NULL,
+	mail_tasks int(11) DEFAULT '0' NOT NULL,
+	total 		 int(11)
+);
+
+
 #
 # Table structure for table 'tx_cutemailing_domain_model_recipient_list'
 #
@@ -97,5 +106,6 @@ CREATE TABLE tx_cutemailing_domain_model_recipientlist
 );
 
 CREATE TABLE tx_taskqueue_domain_model_task(
-  tx_cutemailing_newsletter	int(11) DEFAULT '0' NOT NULL
+  tx_cutemailing_newsletter	int(11) DEFAULT '0' NOT NULL,
+  tx_cutemailing_sendout	int(11) DEFAULT '0' NOT NULL
 );

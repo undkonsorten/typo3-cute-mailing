@@ -34,6 +34,7 @@ use Undkonsorten\CuteMailing\Domain\Model\NewsletterTask;
 use Undkonsorten\CuteMailing\Domain\Model\RecipientListInterface;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
 use Undkonsorten\CuteMailing\Domain\Repository\RecipientListRepositoryInterface;
+use Undkonsorten\CuteMailing\Services\NewsletterService;
 use Undkonsorten\Taskqueue\Domain\Repository\TaskRepository;
 
 /**
@@ -72,6 +73,10 @@ class NewsletterController extends ActionController
      */
     protected $persistenceManager;
 
+    /**
+     * @var NewsletterService
+     */
+    protected $newsletterService;
 
     /**
      * @param NewsletterRepository $newsletterRepository
@@ -81,15 +86,15 @@ class NewsletterController extends ActionController
         NewsletterRepository             $newsletterRepository,
         RecipientListRepositoryInterface $recipientListRepository,
         TaskRepository                   $taskRepository,
-        PersistenceManager               $persistenceManager
-
-
+        PersistenceManager               $persistenceManager,
+        NewsletterService $newsletterService
     )
     {
         $this->newsletterRepository = $newsletterRepository;
         $this->recipientListRepository = $recipientListRepository;
         $this->taskRepository = $taskRepository;
         $this->persistenceManager = $persistenceManager;
+        $this->newsletterService = $newsletterService;
     }
 
     /**
@@ -102,8 +107,12 @@ class NewsletterController extends ActionController
             $this->forward('choosePage');
         }
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
+        $newsletters = $this->newsletterRepository->findByRootline($rootline);
+        foreach ($newsletters as $newsletter) {
+            $this->newsletterService->updateNewsletterStatus($newsletter);
+        }
         $this->view->assignMultiple([
-            'newsletters' => $this->newsletterRepository->findByRootline($rootline)
+            'newsletters' => $newsletters,
         ]);
     }
 
@@ -245,7 +254,7 @@ class NewsletterController extends ActionController
             $newsletter->enable();
             /**@var $newsletterTask NewsletterTask* */
             $newsletterTask = GeneralUtility::makeInstance(NewsletterTask::class);
-            $newsletterTask->setNewsletter($newsletter->getUid());
+            $newsletterTask->setNewsletter($newsletter);
             $newsletterTask->setStartDate($newsletter->getSendingTime()->getTimestamp());
             $this->taskRepository->add($newsletterTask);
             $this->newsletterRepository->update($newsletter);
@@ -282,7 +291,7 @@ class NewsletterController extends ActionController
             $newsletter->setStatus($newsletter::TESTED);
             /**@var $newsletterTask NewsletterTask* */
             $newsletterTask = GeneralUtility::makeInstance(NewsletterTask::class);
-            $newsletterTask->setNewsletter($newsletter->getUid());
+            $newsletterTask->setNewsletter($newsletter);
             $newsletterTask->setTest(true);
 
             $this->taskRepository->add($newsletterTask);

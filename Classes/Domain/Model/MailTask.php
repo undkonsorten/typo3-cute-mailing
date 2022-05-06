@@ -5,6 +5,7 @@ namespace Undkonsorten\CuteMailing\Domain\Model;
 
 use Undkonsorten\CuteMailing\Services\MailService;
 use Undkonsorten\Taskqueue\Domain\Model\Task;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 class MailTask extends Task
 {
@@ -14,9 +15,14 @@ class MailTask extends Task
     const BOTH = 'both';
 
     /**
-     * @var int
+     * @var Newsletter
      */
-    protected $newsletter;
+    protected $newsletter = null;
+
+    /**
+     * @var SendOut
+     */
+    protected $sendOut;
 
     /**
      * @var MailService
@@ -45,14 +51,15 @@ class MailTask extends Task
         return $this->getProperty("format");
     }
 
-    public function getNewsletter(): ?int
+    public function getNewsletter(): ?Newsletter
     {
         return $this->newsletter;
     }
 
-    public function setNewsletter(?int $newsletter): void
+    public function setNewsletter(?Newsletter $newsletter): self
     {
         $this->newsletter = $newsletter;
+        return $this;
     }
 
     public function getRecipient(): int
@@ -65,5 +72,23 @@ class MailTask extends Task
         $this->setProperty('recipient', $recipient);
     }
 
+    public function getAdditionalData(): array
+    {
+        return [
+            'newsletter' => $this->getNewsletter(),
+            'sendOut' => $this->getSendOut(),
+        ];
+    }
+
+    public function setSendOut(SendOut $sendOut): self
+    {
+        $this->sendOut = $sendOut;
+        return $this;
+    }
+
+    public function getSendOut(): SendOut
+    {
+        return $this->sendOut;
+    }
 
 }

@@ -42,6 +42,18 @@
 			<trans-unit id="tx_cutemailing_domain_model_newsletter.status">
 				<source>Status</source>
 			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.status.0">
+				<source>Created</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.status.1">
+				<source>Tested</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.status.2">
+				<source>Scheduled</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.status.3">
+				<source>Sent</source>
+			</trans-unit>
 			<trans-unit id="tx_cutemailing_domain_model_newsletter.page">
 				<source>Newsletter page (to be send)</source>
 			</trans-unit>
@@ -70,8 +82,38 @@
 			<trans-unit id="tx_cutemailing_domain_model_newsletter.allowed_marker">
 				<source>Allowed marker</source>
 			</trans-unit>
+			<trans-unit id="palettes.sender">
+				<source>Sender</source>
+			</trans-unit>
+			<trans-unit id="palettes.reply_to">
+				<source>Reply to</source>
+			</trans-unit>
+			<trans-unit id="palettes.page_types">
+				<source>Page types</source>
+			</trans-unit>
+			<trans-unit id="tabs.sender">
+				<source>Sender</source>
+			</trans-unit>
+			<trans-unit id="tabs.recipients">
+				<source>Recipients</source>
+			</trans-unit>
+			<trans-unit id="tabs.technical_details">
+				<source>Technical Details</source>
+			</trans-unit>
 			<trans-unit id="tx_taskqueue_domain_model_task.newsletter">
 				<source>Newsletter</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_sendout">
+				<source>Send-out</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_sendout.newsletter">
+				<source>Newsletter</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_sendout.mail_tasks">
+				<source>Mail tasks</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_sendout.total">
+				<source>Total number of mails</source>
 			</trans-unit>
 		</body>
 	</file>

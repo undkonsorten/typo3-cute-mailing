@@ -16,11 +16,19 @@ return [
             'newsletter' => [
                 'fieldName' => 'tx_cutemailing_newsletter',
             ],
+            'sendOut' => [
+                'fieldName' => 'tx_cutemailing_sendout',
+            ],
         ],
     ],
     NewsletterTask::class => [
         'tableName' => 'tx_taskqueue_domain_model_task',
-        'recordType' => NewsletterTask::class
+        'recordType' => NewsletterTask::class,
+        'properties' => [
+            'newsletter' => [
+                'fieldName' => 'tx_cutemailing_newsletter',
+            ],
+        ],
     ],
     Task::class => [
         'subclasses' => [

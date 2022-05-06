@@ -22,10 +22,27 @@ return [
         'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_newsletter.svg'
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,--palette--;;1,title, subject, description,sending_time, newsletter_page,test_recipient_list,recipient_list,sender, sender_name, reply_to, reply_to_name,status,page_type_html,page_type_text,allowed_marker,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,starttime,endtime'],
+        '1' => ['showitem' => 'sys_language_uid,l10n_parent,l10n_diffsource,--palette--;;title, subject, description,sending_time, ' .
+            ' newsletter_page, ' .
+            '--div--;LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tabs.sender, --palette--;;sender, --palette--;;reply_to,' .
+            '--div--;LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tabs.recipients, test_recipient_list,recipient_list,' .
+            '--div--;LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tabs.technical_details,--palette--;;page_types,allowed_marker,' .
+            '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,hidden,starttime,endtime'],
     ],
     'palettes' => [
-        '1' => ['showitem' => ''],
+        'sender' => [
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:palettes.sender',
+            'showitem' => 'sender,sender_name'
+        ],
+        'reply_to' => [
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:palettes.reply_to',
+            'showitem' => 'reply_to,reply_to_name'
+        ],
+        'page_types' => [
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:palettes.page_types',
+            'showitem' => 'page_type_html,page_type_text'
+        ],
+        'title' => ['showitem' => 'title,status'],
     ],
     'columns' => [
         't3ver_label' => [
@@ -86,6 +103,16 @@ return [
                 'minitems' => '1',
             ]
         ],
+        'send_outs' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.send_out',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_cutemailing_domain_model_sendout',
+                'foreign_field' => 'newsletter',
+            ],
+        ],
         'recipient_list' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.recipients',
@@ -115,7 +142,7 @@ return [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.sender',
             'config' => [
                 'type' => 'input',
-                'size' => 4,
+                'size' => 15,
             ]
         ],
         'sender_name' => [
@@ -123,7 +150,7 @@ return [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.sender_name',
             'config' => [
                 'type' => 'input',
-                'size' => 4,
+                'size' => 30,
             ]
         ],
         'reply_to' => [
@@ -131,7 +158,7 @@ return [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.reply_to',
             'config' => [
                 'type' => 'input',
-                'size' => 4,
+                'size' => 15,
             ]
         ],
         'reply_to_name' => [
@@ -139,7 +166,7 @@ return [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.reply_to_name',
             'config' => [
                 'type' => 'input',
-                'size' => 4,
+                'size' => 30,
             ]
         ],
         'title' => [
@@ -147,7 +174,7 @@ return [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.title',
             'config' => [
                 'type' => 'input',
-                'size' => 50,
+                'size' => 25,
             ]
         ],
         'subject' => [
@@ -155,7 +182,7 @@ return [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.subject',
             'config' => [
                 'type' => 'input',
-                'size' => 50,
+                'size' => 40,
             ]
         ],
         'description' => [
@@ -170,8 +197,14 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status',
             'config' => [
-                'type' => 'input',
-                'size' => 4,
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status.0', 0],
+                    ['LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status.1', 1],
+                    ['LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status.2', 2],
+                    ['LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status.3', 3],
+                ],
             ]
         ],
         'sending_time' => [
@@ -192,6 +225,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 4,
+                'eval' => 'int',
             ]
         ],
         'page_type_text' => [
@@ -200,6 +234,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 4,
+                'eval' => 'int',
             ]
         ],
         'allowed_marker' => [
