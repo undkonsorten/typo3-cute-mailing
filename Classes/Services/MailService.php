@@ -65,6 +65,7 @@ class MailService implements SingletonInterface
         $email = GeneralUtility::makeInstance(MailMessage::class);
         /** @var SiteFinder $site */
         $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
+        /** @noinspection PhpUndefinedMethodInspection */
         $url = (string)$site->getRouter()->generateUri($newsletter->getNewsletterPage());
         $uri = GeneralUtility::makeInstance(Uri::class, $url);
 
@@ -90,11 +91,12 @@ class MailService implements SingletonInterface
             try {
                 $property = ObjectAccess::getProperty($recipient, $marker);
             } catch (\Exception $exception) {
+                $property = null;
                 /**@todo maybe log this ot something */
             }
 
             if (!is_null($property)) {
-                $content = str_replace('###' . $marker . '###', $property, $content);
+                $content = str_replace(['###' . $marker . '###', '%23%23%23' . $marker . '%23%23%23'], [$property, $property], $content);
             }
 
         }
