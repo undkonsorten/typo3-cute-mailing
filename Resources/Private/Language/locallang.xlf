@@ -143,6 +143,12 @@
 			<trans-unit id="message.choosePage">
 				<source>Please choose a newsletter page first!</source>
 			</trans-unit>
+			<trans-unit id="module.newsletter.create.message">
+				<source>Newsletter successfully created</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.delete.message">
+				<source>Newsletter successfully deleted</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

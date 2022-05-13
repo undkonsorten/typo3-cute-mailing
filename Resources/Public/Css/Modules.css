@@ -138,7 +138,7 @@
 
 .wizard {
 	background-color: #fff;
-	padding: 0.2em 0em 0.2em 0.2em;
+	padding: 0.2em 0 0.2em 0.2em;
 	display: flex;
 }
 
@@ -304,11 +304,6 @@ label {
 	}
 }
 
-.row + .row:not(.lux-trigger) {
-	margin-top: .5rem
-}
-
-
 .panel-body {
 	overflow: hidden
 }
@@ -375,28 +370,11 @@ label {
 	font-weight: bold
 }
 
-.table-hover > tbody > tr:hover, .table-hover > tbody > tr.lux-action-detail {
-	background-color: var(--cute-color)
-}
-
-.table-hover > tbody > tr:hover > td, .table-hover > tbody > tr.lux-action-detail > td {
-	color: #fff
-}
-
 .table-pointer > tbody > tr {
 	cursor: pointer
 }
 
-.lux-textarea {
-	width: 100%;
-	padding: 10px
-}
-
-.lux-textarea__default {
-	color: #ddd
-}
-
-.luxletter-mailprefiew--image {
+.cutemailing-mailprefiew--image {
 	width: 32px;
 	height: 32px;
 	border-radius: 16px;
@@ -411,12 +389,12 @@ label {
 	height: 800px
 }
 
-.luxletter-messages {
+.cutemailing-messages {
 	padding: 15px 0;
 	list-style-type: none
 }
 
-.luxletter-messages > li {
+.cutemailing-messages > li {
 	margin: 5px 30px;
 	font-size: 16px
 }
@@ -435,34 +413,3 @@ label {
 .cute__list-change-button {
 	background-color: dimgrey;
 }
-
-/* REMOVE
-
-.luxletter-dashboard .panel, .luxletter-dashboard .panel-body {
-	height: 100%
-}
-
-.luxletter-panel-body-text {
-	font-size: 2.5vw;
-	display: inline-block;
-	width: 100%;
-	text-align: center;
-	color: var(--cute-color);
-	line-height: 85%
-}
-
-.luxletter-panel-body-text--addition {
-	font-size: 1vw;
-	color: #292929;
-	display: block
-}
-
-.luxletter-panel-body-text__larger {
-	font-size: 4vw
-}
-
-.luxletter-panel-body-text__larger .luxletter-panel-body-text--addition {
-	font-size: 1.5vw
-}
-
- */

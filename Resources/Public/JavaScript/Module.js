@@ -2,15 +2,15 @@ define(['jquery'], function ($) {
 	'use strict';
 
 	/**
-	 * LuxBackend functions
+	 * Cutemailing backend functions
 	 *
-	 * @class LuxletterBackend
+	 * @class CuteMailingBackend
 	 */
-	function LuxletterBackend($) {
+	function CuteMailingBackend() {
 		'use strict';
 
 		/**
-		 * @type {LuxletterBackend}
+		 * @type {CuteMailingBackend}
 		 */
 		var that = this;
 
@@ -34,8 +34,6 @@ define(['jquery'], function ($) {
 			addWizardForm();
 			addWizardUserPreview();
 			addWizardNewsletterPreview();
-			userDetailMockListener();
-			userDetailListener();
 			addConfirmListeners();
 		};
 
@@ -138,7 +136,7 @@ define(['jquery'], function ($) {
 		/**
 		 * @returns {string}
 		 */
-		var getIframeSource = function (origin) {
+		var getIframeSource = function () {
 			var pageId = parseInt(document.querySelector('[data-cutemailing-wizardpreviewevent="newsletter"]').value);
 			var pageTypeHTML = 0;
 			var pageTypeHTMLElement = document.querySelector("[data-cutemailing-pagetype-html]");
@@ -149,44 +147,13 @@ define(['jquery'], function ($) {
 		};
 
 		/**
-		 * Clicking on a table line simulates a click on the (hidden) detail button
-		 *
-		 * @returns {void}
-		 */
-		var userDetailMockListener = function () {
-			var elements = document.querySelectorAll('[data-luxletter-linkmockaction]');
-			for (var i = 0; i < elements.length; i++) {
-				elements[i].addEventListener('click', function () {
-					var identifier = this.getAttribute('data-luxletter-linkmockaction');
-					document.querySelector('[data-luxletter-linkmock-link="' + identifier + '"]').click();
-				});
-			}
-		};
-
-		/**
-		 * @returns {void}
-		 */
-		var userDetailListener = function () {
-			var elements = document.querySelectorAll('[data-luxletter-action-ajax]');
-			for (var i = 0; i < elements.length; i++) {
-				elements[i].addEventListener('click', function (event) {
-					event.preventDefault();
-					var userIdentifier = this.getAttribute('data-luxletter-action-ajax');
-					ajaxConnection(TYPO3.settings.ajaxUrls['/luxletter/receiverdetail'], {
-						user: userIdentifier,
-					}, 'userDetailListenerCallback');
-				});
-			}
-		};
-
-		/**
 		 * @returns {void}
 		 */
 		var addConfirmListeners = function () {
-			var elements = document.querySelectorAll('[data-luxletter-confirm]');
+			var elements = document.querySelectorAll('[data-cutemailing-confirm]');
 			for (var i = 0; i < elements.length; i++) {
 				elements[i].addEventListener('click', function (event) {
-					var message = event.currentTarget.getAttribute('data-luxletter-confirm');
+					var message = event.currentTarget.getAttribute('data-cutemailing-confirm');
 					if (confirm(message) === false) {
 						event.preventDefault();
 					}
@@ -204,17 +171,6 @@ define(['jquery'], function ($) {
 				container.innerHTML = response.html;
 				userPreview = true;
 				showIfNewsletterIsReady();
-			}
-		};
-
-		/**
-		 * @param response
-		 * @returns {void}
-		 */
-		this.userDetailListenerCallback = function (response) {
-			var container = document.getElementById('luxletter-newsletter-receiver-container');
-			if (container !== null) {
-				container.innerHTML = response.html;
 			}
 		};
 
@@ -268,7 +224,7 @@ define(['jquery'], function ($) {
 		 * @returns {boolean}
 		 */
 		var areAllMandatoryFieldsFilled = function () {
-			var fields = document.querySelectorAll('[data-luxletter-mandatory]');
+			var fields = document.querySelectorAll('[data-cutemailing-mandatory]');
 			for (var i = 0; i < fields.length; i++) {
 				if (fields[i].value === 0 || fields[i].value === '') {
 					return false;
@@ -328,7 +284,7 @@ define(['jquery'], function ($) {
 	 * Init
 	 */
 	$(document).ready(function () {
-		var LuxletterBackendObject = new LuxletterBackend($);
-		LuxletterBackendObject.initialize();
+		var CuteMailingBackendObject = new CuteMailingBackend($);
+		CuteMailingBackendObject.initialize();
 	})
 });

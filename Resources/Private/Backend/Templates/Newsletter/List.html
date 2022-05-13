@@ -71,7 +71,7 @@
 						<td class="cute__list-edit-button">
 							<f:comment><!-- status const SEND = 2; const CREATED = 0; const TESTED = 1; --></f:comment>
 							<f:if condition="{newsletter.status} != 2">
-								<f:link.action action="enable" additionalAttributes="{data-luxletter-confirm:'{f:translate(key:\'module.newsletter.list.enableConfirm\',extensionName:\'CuteMailing\')}'}" arguments="{newsletter:newsletter}"
+								<f:link.action action="enable" additionalAttributes="{data-cutemailing-confirm:'{f:translate(key:\'module.newsletter.list.enableConfirm\',extensionName:\'CuteMailing\')}'}" arguments="{newsletter:newsletter}"
 															 class="btn btn-primary">
 									<i class="fa fa-send"></i>
 									<f:translate key="module.newsletter.list.enable">enable</f:translate>
@@ -103,7 +103,7 @@
 								</f:link.action>
 								<f:link.action
 									action="delete"
-									additionalAttributes="{data-luxletter-confirm:'{f:translate(key:\'module.newsletter.list.deleteConfirm\',extensionName:\'CuteMailing\')}'}"
+									additionalAttributes="{data-cutemailing-confirm:'{f:translate(key:\'module.newsletter.list.deleteConfirm\',extensionName:\'CuteMailing\')}'}"
 									arguments="{newsletter:newsletter}"
 									class="btn btn-default t3js-record-delete"
 									title="{f:translate(key: 'module.newsletter.list.delete', extensionName: 'CuteMailing')}">
@@ -130,7 +130,7 @@
 			</table>
 		</f:then>
 		<f:else>
-			<div class="lux-workflow-new"></div>
+			<div class="cutemailing-workflow-new"></div>
 			<f:link.action action="new" class="btn btn-lg-extra btn-primary btn-primary-extra">
 				<span><f:translate
 													 key="module.newsletter.list.createnew.1">No newsletters yet</f:translate></span>

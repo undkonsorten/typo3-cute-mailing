@@ -7,7 +7,6 @@ use DateTime;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Exception as ExceptionDbalDriver;
 use Exception;
-use In2code\Luxletter\Utility\LocalizationUtility;
 use PharIo\Manifest\InvalidUrlException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -28,6 +27,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
 use Undkonsorten\CuteMailing\Domain\Model\NewsletterTask;
@@ -234,7 +234,7 @@ class NewsletterController extends ActionController
         }
         $this->newsletterRepository->add($newsletter);
         $this->persistenceManager->persistAll();
-        $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.create.message'));
+        $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.create.message', 'cute_mailing'));
         $this->redirect('list');
     }
 
@@ -281,7 +281,7 @@ class NewsletterController extends ActionController
     public function deleteAction(Newsletter $newsletter): void
     {
         $this->newsletterRepository->remove($newsletter);
-        $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.delete.message'), 'Deleted');
+        $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.delete.message', 'cute_mailing'), 'Deleted');
         $this->redirect('list');
     }
 
