@@ -6,6 +6,7 @@ use Undkonsorten\CuteMailing\Domain\Model\NewsletterTask;
 use Undkonsorten\CuteMailing\Domain\Model\RecipientList;
 use Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipient;
 use Undkonsorten\CuteMailing\Domain\Model\TtAddressRecipientList;
+use Undkonsorten\CuteMailing\Domain\Model\RegisterAddressRecipient;
 use Undkonsorten\Taskqueue\Domain\Model\Task;
 
 return [
@@ -47,6 +48,9 @@ return [
         ]
     ],
     TtAddressRecipient::class => [
+        'tableName' => 'tt_address',
+    ],
+    RegisterAddressRecipient::class => [
         'tableName' => 'tt_address',
     ],
 ];
