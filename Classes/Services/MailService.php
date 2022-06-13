@@ -69,19 +69,41 @@ class MailService implements SingletonInterface
         $url = (string)$site->getRouter()->generateUri($newsletter->getNewsletterPage());
         $uri = GeneralUtility::makeInstance(Uri::class, $url);
 
+        $email
+            ->to($recipient->getEmail())
+            ->from($newsletter->getSender())
+            ->replyTo($newsletter->getReplyTo())
+            ->subject($newsletter->getSubject());
+
         if ($mailTask->getFormat() == $mailTask::HTML) {
             $uri = $uri->withQuery('type=' . $newsletter->getPageTypeHtml());
             $response = $this->requestFactory->request($uri);
             $content = $response->getBody()->getContents();
             $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $content, $recipient);
-            $email
-                ->to($recipient->getEmail())
-                ->from($newsletter->getSender())
-                ->replyTo($newsletter->getReplyTo())
-                ->subject($newsletter->getSubject())
-                ->html($content)
-                ->send();
+            $email->html($content);
         }
+        if ($mailTask->getFormat() == $mailTask::PLAINTEXT) {
+            $uri = $uri->withQuery('type=' . $newsletter->getPageTypeText());
+            $response = $this->requestFactory->request($uri);
+            $content = $response->getBody()->getContents();
+            $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $content, $recipient);
+            $email->text($content);
+
+        }
+        if ($mailTask->getFormat() == $mailTask::BOTH) {
+            $htmlUri = $uri->withQuery('type=' . $newsletter->getPageTypeHtml());
+            $textUri = $uri->withQuery('type=' . $newsletter->getPageTypeText());
+            $htmlResponse = $this->requestFactory->request($htmlUri);
+            $textResponse = $this->requestFactory->request($textUri);
+            $htmlContent = $htmlResponse->getBody()->getContents();
+            $textContent = $textResponse->getBody()->getContents();
+            $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $htmlContent, $recipient);
+            $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $textContent, $recipient);
+            $email
+                ->html($htmlContent)
+                ->text($textContent);
+        }
+        $email->send();
 
     }
 

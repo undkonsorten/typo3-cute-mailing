@@ -89,7 +89,7 @@ class NewsletterTask extends Task
             /**@var $mailTask MailTask* */
             $mailTask = GeneralUtility::makeInstance(MailTask::class);
             /** @TODO format needs to be configured somewhere */
-            $mailTask->setFormat($mailTask::HTML);
+            $mailTask->setFormat($mailTask::BOTH);
             $mailTask->setNewsletter($this->newsletter);
             $mailTask->setSendOut($sendOut);
             $mailTask->setRecipient($recipient->getUid());
