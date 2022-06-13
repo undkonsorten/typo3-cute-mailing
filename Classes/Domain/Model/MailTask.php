@@ -38,6 +38,7 @@ class MailTask extends Task
     public function run(): void
     {
         $this->mailService->sendMail($this);
+        $this->sendOut->incrementCompleted();
     }
 
 
