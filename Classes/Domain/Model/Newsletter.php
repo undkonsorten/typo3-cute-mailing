@@ -89,6 +89,7 @@ class Newsletter extends AbstractEntity
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Undkonsorten\CuteMailing\Domain\Model\SendOut>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $sendOuts;
 
