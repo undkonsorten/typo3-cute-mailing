@@ -115,6 +115,7 @@ return [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_sendout.test',
             'config' => [
                 'type' => 'check',
+                'readOnly' => true,
             ],
         ],
     ],
