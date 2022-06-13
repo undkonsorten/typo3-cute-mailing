@@ -20,7 +20,7 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'newsletter',
-        'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_newsletter.svg'
+        'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_sendout.svg'
     ],
     'types' => [
         '1' => ['showitem' => 'hidden, newsletter, mail_tasks, total, test'],
@@ -87,8 +87,7 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_sendout.mail_tasks',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
+                'type' => 'inline',
                 'foreign_table' => 'tx_taskqueue_domain_model_task',
                 'foreign_field' => 'tx_cutemailing_sendout',
             ],
