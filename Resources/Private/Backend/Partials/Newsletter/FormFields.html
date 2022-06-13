@@ -28,12 +28,25 @@
 					<f:translate key="module.newsletter.new.field.sendingTime">Sending date
 					</f:translate>
 				</label>
-				<f:form.textfield
-					class="form-control input-lg"
-					id="sendingTime"
-					property="sendingTime"
-					type="datetime-local"
-					value="{newsletter.sendingTime -> f:format.date(format: 'Y-m-d H:i')}"/>
+				<f:if condition="{newsletter.sendingTime}">
+					<f:then>
+						<f:form.textfield
+							class="form-control input-lg"
+							id="sendingTime"
+							property="sendingTime"
+							type="datetime-local"
+							value="{newsletter.sendingTime -> f:format.date(format: 'Y-m-d H:i')}"/>
+					</f:then>
+					<f:else>
+						<f:form.textfield
+							class="form-control input-lg"
+							id="sendingTime"
+							property="sendingTime"
+							type="datetime-local"
+							value="{defaultSendingTime -> f:format.date(format: 'Y-m-d H:i')}"/>
+					</f:else>
+				</f:if>
+
 				<span class="help-block">
                     <f:translate key="module.newsletter.new.field.sendingTime.description">Sending date description</f:translate>
                 </span>

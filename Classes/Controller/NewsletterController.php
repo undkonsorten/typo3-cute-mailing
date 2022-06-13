@@ -147,6 +147,7 @@ class NewsletterController extends ActionController
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
         $assign['recipientList'] = $this->recipientListRepository->findByRootline($rootline);
         $assign['testRecipientList'] = $this->recipientListRepository->findByRootline($rootline);
+        $assign['defaultSendingTime'] = new DateTime('now');
 
 
         //$pageTs = $this->getPageTsFromPage($currentPid);
