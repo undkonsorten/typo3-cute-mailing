@@ -93,6 +93,7 @@ class NewsletterTask extends Task
             $mailTask->setNewsletter($this->newsletter);
             $mailTask->setSendOut($sendOut);
             $mailTask->setRecipient($recipient->getUid());
+            $mailTask->setPid($this->newsletter->getPid());
             $this->taskRepository->add($mailTask);
             $sendOut->addMailTask($mailTask);
         }
