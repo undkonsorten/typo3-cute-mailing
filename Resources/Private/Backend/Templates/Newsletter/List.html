@@ -70,37 +70,40 @@
 						<td>{newsletter.sendingTime -> f:format.date(format: 'Y-m-d H:i')}</td>
 						<td class="cute__list-edit-button">
 							<f:comment><!-- status const SEND = 2; const CREATED = 0; const TESTED = 1; --></f:comment>
-							<f:if condition="{newsletter.status} != 2">
+							<f:if condition="{newsletter.status} != 2 && {newsletter.status} != 3">
 								<f:link.action action="enable" additionalAttributes="{data-cutemailing-confirm:'{f:translate(key:\'module.newsletter.list.enableConfirm\',extensionName:\'CuteMailing\')}'}" arguments="{newsletter:newsletter}"
 															 class="btn btn-primary">
 									<i class="fa fa-send"></i>
 									<f:translate key="module.newsletter.list.enable">enable</f:translate>
 								</f:link.action>
+								<f:link.action action="sendTestMail" arguments="{newsletter:newsletter}" class="btn btn-primary">
+									<i class="fa fa-flask"></i>
+									<f:translate key="module.newsletter.list.test">Send test mail</f:translate>
+								</f:link.action>
 							</f:if>
-							<f:link.action action="sendTestMail" arguments="{newsletter:newsletter}" class="btn btn-primary">
-								<i class="fa fa-flask"></i>
-								<f:translate key="module.newsletter.list.test">Send test mail</f:translate>
-							</f:link.action>
+
 						</td>
 						<td>
 							<div class="btn-group">
-								<f:link.action action="edit" arguments="{newsletter:newsletter}" class="btn btn-default"
-															 title="{f:translate(key: 'module.newsletter.list.edit', extensionName: 'CuteMailing')}">
-											<span class="t3js-icon icon icon-size-small icon-state-default icon-actions-page-open"
-														data-identifier="actions-page-open">
-												<span class="icon-markup">
-													<svg class="icon-color">
-														<use
-															xlink:href="/typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/actions.svg#actions-file-edit"></use>
-													</svg>
+								<f:if condition="{newsletter.status} != 2 && {newsletter.status} != 3">
+									<f:link.action action="edit" arguments="{newsletter:newsletter}" class="btn btn-default"
+																 title="{f:translate(key: 'module.newsletter.list.edit', extensionName: 'CuteMailing')}">
+												<span class="t3js-icon icon icon-size-small icon-state-default icon-actions-page-open"
+															data-identifier="actions-page-open">
+													<span class="icon-markup">
+														<svg class="icon-color">
+															<use
+																xlink:href="/typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/actions.svg#actions-file-edit"></use>
+														</svg>
+													</span>
+													<span class="sr-only">
+														<f:translate key="module.newsletter.list.edit">
+															edit
+														</f:translate>
+													</span>
 												</span>
-												<span class="sr-only">
-													<f:translate key="module.newsletter.list.edit">
-														edit
-													</f:translate>
-												</span>
-											</span>
-								</f:link.action>
+									</f:link.action>
+								</f:if>
 								<f:link.action
 									action="delete"
 									additionalAttributes="{data-cutemailing-confirm:'{f:translate(key:\'module.newsletter.list.deleteConfirm\',extensionName:\'CuteMailing\')}'}"
