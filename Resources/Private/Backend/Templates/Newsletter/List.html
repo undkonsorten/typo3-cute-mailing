@@ -110,20 +110,19 @@
 									arguments="{newsletter:newsletter}"
 									class="btn btn-default t3js-record-delete"
 									title="{f:translate(key: 'module.newsletter.list.delete', extensionName: 'CuteMailing')}">
-											<span
-												class="t3js-icon icon icon-size-small icon-state-default icon-actions-edit-delete"
-												data-identifier="actions-edit-delete">
-												<span class="icon-markup">
-													<svg class="icon-color">
-														<use
-															xlink:href="/typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/actions.svg#actions-delete"></use>
-													</svg>
-												</span>
-											</span>
+									<span
+										class="t3js-icon icon icon-size-small icon-state-default icon-actions-edit-delete"
+										data-identifier="actions-edit-delete">
+										<span class="icon-markup">
+											<svg class="icon-color">
+												<use
+													xlink:href="/typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/actions.svg#actions-delete"></use>
+											</svg>
+										</span>
+									</span>
 									<span class="sr-only">
-												<f:translate
-																		 key="module.newsletter.list.delete">delete</f:translate>
-											</span>
+										<f:translate key="module.newsletter.list.delete">delete</f:translate>
+									</span>
 								</f:link.action>
 							</div>
 						</td>
@@ -135,8 +134,7 @@
 		<f:else>
 			<div class="cutemailing-workflow-new"></div>
 			<f:link.action action="new" class="btn btn-lg-extra btn-primary btn-primary-extra">
-				<span><f:translate
-													 key="module.newsletter.list.createnew.1">No newsletters yet</f:translate></span>
+				<span><f:translate key="module.newsletter.list.createnew.1">No newsletters yet</f:translate></span>
 				<f:translate key="module.newsletter.list.createnew.2">Add a new one</f:translate>
 			</f:link.action>
 		</f:else>

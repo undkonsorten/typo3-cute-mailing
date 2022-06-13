@@ -12,10 +12,10 @@
 					class="form-control input-lg"
 					data="{cutemailing-mandatory:'1'}"
 					id="title"
-					placeholder="Newsletter Product A 2020/01"
+					placeholder="{f:translate(key:'module.newsletter.new.field.title.placeholder')}"
 					property="title"
 					required="required"
-					value="{title}"/>
+					value="{title}" />
 				<span class="help-block">
                     <f:translate key="module.newsletter.new.field.title.description">Useful title</f:translate>
                 </span>
@@ -194,11 +194,10 @@
 					prependOptionLabel="{f:translate(key:'pleasechoose',extensionName:'CuteMailing')}"
 					prependOptionValue=""
 					property="testRecipientList"
-					required="required"/>
+					required="required" />
 				<span class="help-block">
-											<f:translate
-																	 key="module.newsletter.new.field.testReceiver.description">Test receiver group description</f:translate>
-									</span>
+					<f:translate key="module.newsletter.new.field.testReceiver.description">Test receiver group description</f:translate>
+				</span>
 			</div>
 		</div>
 	</div>
@@ -215,7 +214,7 @@
 					class="form-control input-lg"
 					data="{cutemailing-mandatory:'1',cutemailing-testmail:'subject'}"
 					id="subject"
-					placeholder="Your new newsletter for product A (2020/01)"
+					placeholder="{f:translate(key:'module.newsletter.new.field.subject.placeholder')}"
 					property="subject"
 					required="required"
 					value="{subject}"/>

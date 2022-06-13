@@ -21,11 +21,11 @@
 			<trans-unit id="module.newsletter.new.field.title">
 				<source>Newsletter title (internal)</source>
 			</trans-unit>
-			<trans-unit id="module.newsletter.new.field.title">
-				<source>Newsletter title (internal)</source>
-			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.title.description">
 				<source>This title is used only for internal description. It's not the email title.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.title.placeholder">
+				<source>Newsletter Product A 2020/01</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.sendingTime">
 				<source>Scheduled sending time</source>
@@ -60,47 +60,44 @@
 			<trans-unit id="module.newsletter.new.field.sender.description">
 				<source>Email address of the sender of the email. Attention your mailserver might need configuration to use this email address.</source>
 			</trans-unit>
-			<trans-unit id="module.newsletter.new.field.sender">
-				<source>Sender email</source>
-			</trans-unit>
-			<trans-unit id="module.newsletter.new.field.sender.description">
-				<source>Email address of the sender of the email. Attention your mailserver might need configuration to use this email address.</source>
-			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.senderName">
 				<source>Sender name</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.senderName.description">
-				<source>Name of the newsletter sender (will be displayed in the recievers email software).</source>
+				<source>Name of the newsletter sender (will be displayed in the receivers email software).</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.replyTo">
 				<source>ReplyTo email</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.replyTo.description">
-				<source>If an newsletter reciever wants to answer on you newsletter this email address will be used as a reciever.</source>
+				<source>If an newsletter receiver wants to answer on you newsletter this email address will be used as a receiver.</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.replyToName">
 				<source>ReplyTo name</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.replyToName.description">
-				<source>If an newsletter reciever wants to answer on you newsletter this name address will be used as a reciever.</source>
+				<source>If an newsletter receiver wants to answer on you newsletter this name address will be used as a receiver.</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.receiver">
 				<source>Newsletter receivers</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.receiver.description">
-				<source>Choose the list of newsletter recievers.</source>
+				<source>Choose the list of newsletter receivers.</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.testReceiver">
 				<source>Test newsletter receivers</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.testReceiver.description">
-				<source>Choose the list of newsletter recievers which sould recieve the test newsletter.</source>
+				<source>Choose the list of newsletter receivers which sould recieve the test newsletter.</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.subject">
 				<source>Newsletter/Email subject line</source>
 			</trans-unit>
+			<trans-unit id="module.newsletter.new.field.subject.placeholder">
+				<source>Your very good newsletter</source>
+			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.subject.description">
-				<source>The subject line of your newsletter will be shown in the email software of the reciever. Optimal lenght: 20-60 characters.</source>
+				<source>The subject line of your newsletter will be shown in the email software of the receiver. Optimal lenght: 20-60 characters.</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.wizard.back">
 				<source>Back</source>
@@ -139,6 +136,9 @@
 			</trans-unit>
 			<trans-unit id="save">
 				<source>Save</source>
+			</trans-unit>
+			<trans-unit id="sendoutOf">
+				<source>of</source>
 			</trans-unit>
 			<trans-unit id="message.choosePage">
 				<source>Please choose a newsletter page first!</source>
