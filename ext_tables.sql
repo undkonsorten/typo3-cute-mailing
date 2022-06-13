@@ -56,11 +56,13 @@ CREATE TABLE tx_cutemailing_domain_model_newsletter
 
 CREATE TABLE tx_cutemailing_domain_model_sendout
 (
-    test        tinyint(4) DEFAULT '0' NOT NULL,
-	newsletter int(11) DEFAULT '0' NOT NULL,
-	mail_tasks int(11) DEFAULT '0' NOT NULL,
-	total 		 int(11)
+    test       tinyint(4) DEFAULT '0' NOT NULL,
+    newsletter int(11)    DEFAULT '0' NOT NULL,
+    mail_tasks int(11)    DEFAULT '0' NOT NULL,
+    total      int(11)    DEFAULT '0',
+    completed  int(11)    DEFAULT '0'
 );
+
 
 
 #

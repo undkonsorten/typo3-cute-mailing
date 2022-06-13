@@ -102,6 +102,15 @@ return [
                 'eval' => 'int',
             ],
         ],
+        'completed' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_sendout.completed',
+            'config' => [
+                'type' => 'input',
+                'size' => 4,
+                'eval' => 'int',
+            ],
+        ],
         'test' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_sendout.test',

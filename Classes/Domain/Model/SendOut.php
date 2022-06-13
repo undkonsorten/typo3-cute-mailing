@@ -28,6 +28,8 @@ class SendOut extends AbstractEntity
 
     protected int $total = 0;
 
+    protected int $completed = 0;
+
     public function __construct()
     {
         $this->mailTasks = new ObjectStorage();
@@ -74,17 +76,12 @@ class SendOut extends AbstractEntity
         });
     }
 
-    public function getCompleted(): int
-    {
-        return count($this->getCompletedMailTasks());
-    }
-
     public function getProgress(): float
     {
         if ($this->total === 0) {
             return 0.0;
         }
-        return (float)count($this->getCompletedMailTasks()) / $this->total;
+        return (float)$this->completed / $this->total;
     }
 
     public function getTotal(): int
@@ -111,6 +108,33 @@ class SendOut extends AbstractEntity
     {
         $this->test = $test;
         return $this;
+    }
+
+    public function getCompleted(): int
+    {
+        return $this->completed;
+    }
+
+    public function setCompleted(int $completed): self
+    {
+        $this->completed = $completed;
+        return $this;
+    }
+
+    public function incrementCompleted(): self
+    {
+        $this->completed++;
+        return $this;
+    }
+
+    public function isScheduled(): bool
+    {
+        return $this->getProgress() === 0.0;
+    }
+
+    public function isRunning(): bool
+    {
+        return $this->hasStarted() && !$this->isComplete();
     }
 
 }

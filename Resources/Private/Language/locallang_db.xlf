@@ -115,6 +115,9 @@
 			<trans-unit id="tx_cutemailing_domain_model_sendout.total">
 				<source>Total number of mails</source>
 			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_sendout.completed">
+				<source>Completed mails count</source>
+			</trans-unit>
 			<trans-unit id="tx_cutemailing_domain_model_sendout.test">
 				<source>Is test sendout</source>
 			</trans-unit>
