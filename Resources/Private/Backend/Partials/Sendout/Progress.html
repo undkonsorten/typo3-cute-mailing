@@ -2,11 +2,13 @@
 			data-namespace-typo3-fluid="true"
 			lang="en">
 <f:section name="main">
-	<progress value="{sendout.completed}" max="{sendout.total}"></progress>
-	<f:format.number decimals="2">{sendout.progress * 100}</f:format.number>%
-	<f:if condition="{sendout.progress < 1}">
-		<f:then>({sendout.completed} of {sendout.total})</f:then>
-		<f:else>({sendout.total})</f:else>
+	<f:if condition="{sendout}">
+		<progress value="{sendout.completed}" max="{sendout.total}"></progress>
+		<f:format.number decimals="2">{sendout.progress * 100}</f:format.number>%
+		<f:if condition="{sendout.progress < 1}">
+			<f:then>({sendout.completed} of {sendout.total})</f:then>
+			<f:else>({sendout.total})</f:else>
+		</f:if>
 	</f:if>
 </f:section>
 </html>
