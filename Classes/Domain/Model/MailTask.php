@@ -34,11 +34,11 @@ class MailTask extends Task
         $this->mailService = $mailService;
     }
 
-
     public function run(): void
     {
         $this->mailService->sendMail($this);
         $this->sendOut->incrementCompleted();
+        $this->getNewsletter() && $this->getNewsletter()->updateStatus();
     }
 
 

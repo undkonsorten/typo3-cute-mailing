@@ -34,7 +34,6 @@ use Undkonsorten\CuteMailing\Domain\Model\NewsletterTask;
 use Undkonsorten\CuteMailing\Domain\Model\RecipientListInterface;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
 use Undkonsorten\CuteMailing\Domain\Repository\RecipientListRepositoryInterface;
-use Undkonsorten\CuteMailing\Services\NewsletterService;
 use Undkonsorten\Taskqueue\Domain\Repository\TaskRepository;
 
 /**
@@ -74,11 +73,6 @@ class NewsletterController extends ActionController
     protected $persistenceManager;
 
     /**
-     * @var NewsletterService
-     */
-    protected $newsletterService;
-
-    /**
      * @param NewsletterRepository $newsletterRepository
      * @param RecipientListRepositoryInterface $recipientListRepository
      */
@@ -86,15 +80,13 @@ class NewsletterController extends ActionController
         NewsletterRepository             $newsletterRepository,
         RecipientListRepositoryInterface $recipientListRepository,
         TaskRepository                   $taskRepository,
-        PersistenceManager               $persistenceManager,
-        NewsletterService $newsletterService
+        PersistenceManager               $persistenceManager
     )
     {
         $this->newsletterRepository = $newsletterRepository;
         $this->recipientListRepository = $recipientListRepository;
         $this->taskRepository = $taskRepository;
         $this->persistenceManager = $persistenceManager;
-        $this->newsletterService = $newsletterService;
     }
 
     /**
@@ -108,9 +100,6 @@ class NewsletterController extends ActionController
         }
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
         $newsletters = $this->newsletterRepository->findByRootline($rootline);
-        foreach ($newsletters as $newsletter) {
-            $this->newsletterService->updateNewsletterStatus($newsletter);
-        }
         $this->view->assignMultiple([
             'newsletters' => $newsletters,
         ]);

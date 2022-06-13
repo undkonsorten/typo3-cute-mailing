@@ -416,4 +416,12 @@ class Newsletter extends AbstractEntity
         return $this->getLatestNonTestSendout() && $this->getLatestNonTestSendout()->isComplete();
     }
 
+    public function updateStatus(): self
+    {
+        if ($this->getStatus() === Newsletter::SCHEDULED && $this->isComplete()) {
+            $this->setStatus(Newsletter::SENT);
+        }
+        return $this;
+    }
+
 }
