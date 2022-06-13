@@ -23,7 +23,7 @@ return [
         'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_newsletter.svg'
     ],
     'types' => [
-        '1' => ['showitem' => 'hidden, newsletter, mail_tasks, total'],
+        '1' => ['showitem' => 'hidden, newsletter, mail_tasks, total, test'],
     ],
     'columns' => [
         'crdate' => [
@@ -100,6 +100,13 @@ return [
                 'type' => 'input',
                 'size' => 4,
                 'eval' => 'int',
+            ],
+        ],
+        'test' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_sendout.test',
+            'config' => [
+                'type' => 'check',
             ],
         ],
     ],

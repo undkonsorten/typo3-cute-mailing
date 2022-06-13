@@ -83,6 +83,7 @@ class NewsletterTask extends Task
 
         $sendOut = GeneralUtility::makeInstance(SendOut::class);
         $sendOut->setNewsletter($this->newsletter);
+        $sendOut->setTest($this->getTest());
         foreach ($recipients as $recipient) {
             /**@var $recipient RecipientInterface* */
             /**@var $mailTask MailTask* */

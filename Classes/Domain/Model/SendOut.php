@@ -17,6 +17,11 @@ class SendOut extends AbstractEntity
     protected $newsletter;
 
     /**
+     * @var bool
+     */
+    protected $test;
+
+    /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Undkonsorten\CuteMailing\Domain\Model\MailTask>
      */
     protected $mailTasks;
@@ -69,6 +74,11 @@ class SendOut extends AbstractEntity
         });
     }
 
+    public function getCompleted(): int
+    {
+        return count($this->getCompletedMailTasks());
+    }
+
     public function getProgress(): float
     {
         if ($this->total === 0) {
@@ -90,6 +100,17 @@ class SendOut extends AbstractEntity
     public function hasStarted(): bool
     {
         return $this->getProgress() > 0;
+    }
+
+    public function isTest(): bool
+    {
+        return $this->test;
+    }
+
+    public function setTest(bool $test): self
+    {
+        $this->test = $test;
+        return $this;
     }
 
 }

@@ -60,10 +60,10 @@
 						<td>
 							<f:if condition="{newsletter.scheduled}">
 								<f:then>
-									<f:render partial="Sendout/Progress" section="main" arguments="{progress:newsletter.latestSendout.progress,total:newsletter.latestSendout.total,completed:newsletter.latestSendOut.completedMailTasks}" />
+									<f:render partial="Sendout/Progress" section="main" arguments="{sendout:newsletter.latestNonTestSendout}" />
 								</f:then>
 								<f:else if="{newsletter.sent}">
-									<f:render partial="Sendout/Progress" section="main" arguments="{progress:newsletter.latestSendout.progress,total:newsletter.latestSendout.total,completed:newsletter.latestSendOut.completedMailTasks}" />
+									<f:render partial="Sendout/Progress" section="main" arguments="{sendout:newsletter.latestNonTestSendout}" />
 								</f:else>
 							</f:if>
 						</td>

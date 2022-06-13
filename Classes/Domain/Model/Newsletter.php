@@ -391,6 +391,15 @@ class Newsletter extends AbstractEntity
         return array_pop($sendOuts);
     }
 
+    public function getLatestNonTestSendout(): ?SendOut
+    {
+        $sendOuts = $this->sendOuts->toArray() ?? [];
+        $sendOuts = array_filter($sendOuts, static function(SendOut $sendout): bool {
+            return !$sendout->isTest();
+        });
+        return array_pop($sendOuts);
+    }
+
     public function addSendOut(SendOut $sendOut): self
     {
         $this->sendOuts->attach($sendOut);
@@ -399,12 +408,12 @@ class Newsletter extends AbstractEntity
 
     public function getProgress(): float
     {
-        return (float)$this->getLatestSendOut() ? $this->getLatestSendOut()->getProgress() : 0;
+        return (float)($this->getLatestNonTestSendout() ? $this->getLatestNonTestSendout()->getProgress() : 0);
     }
 
     public function isComplete(): bool
     {
-        return $this->getLatestSendOut() && $this->getLatestSendOut()->isComplete();
+        return $this->getLatestNonTestSendout() && $this->getLatestNonTestSendout()->isComplete();
     }
 
 }
