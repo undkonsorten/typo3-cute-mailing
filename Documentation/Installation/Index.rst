@@ -10,7 +10,8 @@ The extension needs to be installed as any other extension of TYPO3 CMS:
 
 Get the extension by one of the following methods:
 
-Use composer:
+Install the extension with Composer
+-----------------------------------
 
 .. code-block:: bash
 
@@ -37,5 +38,5 @@ Requirements
 CuteMailing requires the extension `taskqueue <https://gitbucket.undkonsorten.com>`__
 for sending the emails.
 The extension is automatically installed during installation via Composer.
-If CuteMailing is installed via one of the other ways,
-the extension must be installed manually.
+If CuteMailing is installed via one of the other ways, the extension must be
+installed manually before.
