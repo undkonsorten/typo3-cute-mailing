@@ -12,7 +12,7 @@ defined('TYPO3') or die();
             ],
         ],
         'tx_cutemailing_sendout' => [
-            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_taskqueue_domain_model_task.newsletterTask',
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_sendout',
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_cutemailing_domain_model_sendout',
