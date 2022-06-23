@@ -1,4 +1,4 @@
-### Cute mailing
+### Cute Mailing
 
 Pronounced [kø] "queued" mailing :grin:
 

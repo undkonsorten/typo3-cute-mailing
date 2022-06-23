@@ -2,7 +2,7 @@
 
 /** @noinspection PhpUndefinedVariableInspection */
 $EM_CONF[$_EXTKEY] = [
-    'title' => 'Cute mailing',
+    'title' => 'Cute Mailing',
     'description' => '',
     'category' => 'plugin',
     'author' => 'undkonsorten',
