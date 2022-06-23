@@ -11,26 +11,19 @@ Introduction
 What does it do?
 ================
 
-We had been looking for a tool to send newsletters in TYPO3 for a long time.
-Nothing that existed or exists met our requirements. We would have to make
-compromises everywhere.
+Cute Mailing is a newsletter tool that spools and sends TYPO3 pages as emails to
+many recipients. Cute Mailing can handle different types of recipient lists.
+For the time being this is restricted to recipients in `tt_address` table but can
+be extended to use e.g. `fe_user` data.
 
-Therefore we decided to develop our own extension.
+Cute Mailing is heavily inspired by luxletter but omits the rendering part to
+focus on it‘s main purpose:
 
-We used the TYPO3 extension "Luxletter" as the basis for our Cute Mailing.
-There were already many ready-made functions concerning the dispatch. At this
-point, we would like to say thank you to the developers at In2Code for their
-good work.
+Cute Mailing only does one thing: **Sending mails!**
 
-Luxletter is a good newsletter tool but we want a tool only for sending a TYPO3
-page as an e-mail.
-And we wanted to be free in the choice of address types and not limited to
-fe_users.
-
-So now Cute Mailing only does one thing: **Sending mails!**
+We say thank you to the developers at In2Code for their good work.
 
 .. important::
 
-   Cute Mailing does not provide HTML templates or plugins for subscribing or
-   unsubscribing to a newsletter! There are ready-made solutions or tools
-   that can be used.
+   CuteMailing does not provide HTML templates or plugins for newsletter
+   subscription! There are ready-made solutions or tools that can be used.

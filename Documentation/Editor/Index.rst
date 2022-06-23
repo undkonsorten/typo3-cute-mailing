@@ -9,14 +9,14 @@ For Editors
 Prepare newsletter sending
 --------------------------
 
-There should be at least on Sysfolder with doktype "Cute Mailing" exists.
-Editors can manage Newsletter data with the "Newsletter Module".
+There needs to be at least one Sysfolder with Doktype "Cute Mailing".
+Editors can manage newsletter data via the "Newsletter" Module.
 
-For the moment recipient lists can only managed via the default List module.
-Select the "List Module" in the module column on the left and then select
-the newsletter SysFolder in the page tree.
+For the time being, recipient lists can only be managed via the default list
+module. Select the "List" Module in the module column and then pick the
+newsletter SysFolder in the page tree.
 
-First create recipient lists.
+Create recipient lists first.
 
 .. tip::
 
@@ -30,13 +30,13 @@ First create recipient lists.
 
    Create at least two recipients lists
 
-After creating that recipient lists you can create your first newsletter.
+After creating those recipient lists you can continue with your first newsletter.
 
 Create Newsletter
 -----------------
 
-Select the "Newsletter Module" on the left and choose a page for the newsletter
-in the Page Tree. Then click the + button.
+Select the "Newsletter" Module on the left and choose a page for the newsletter
+in the page tree. Then click the [+] button.
 
 .. figure:: /Images/Editor/CreateNewsletter.png
    :class: with-shadow
@@ -44,25 +44,21 @@ in the Page Tree. Then click the + button.
 
    Create new newsletter
 
-The fields in Wizard are prefilled with some default data. You can change target page and the other data for the newsletter in the wizard.
-The fields have a description and are actually self-explanatory.
+The fields in the wizard are prefilled with the default data you entered in
+Page TSconfig. You can change the target page and other data for the newsletter
+in the wizard. The fields have a description and should be self-explanatory.
 
-Once you have filled in all the necessary information, you can save the
+Once you have filled in all the necessary information you can save the
 newsletter. It will not yet be released for dispatch.
 
 Newsletter sending
 ------------------
 
-After clicking the "send" Button, a new newsletter task will be created. If they will be executed, new mail tasks for sending will be created. You find them in the Backend Modul "Task Queue". For automatic execution of such tasks you
-should create a "Scheduler Task". Of course you can execute the tasks manually for testing.
+Click the "send" button in the Newsletter module to trigger sending.
+After clicking the "send" Button, a new newsletter task will be created.
+When this newsletter task is executed it will unfold in many mail tasks, depending
+on the number of recipients. You can find them in the backend module "Task Queue".
+For automatic execution of such tasks, see :ref:`configuration_scheduler_task`.
+Alternatively you can execute the tasks manually for testing purposes, of course.
 
-Create a new Scheduler Task
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Choose "Execute Console Commands" in the field "Class" in Scheduler Task.
-Type schould be "recurring" and set the frequency you need.
-After saving the new task you can select the "taskqueue:run-tasks" as the "Schedulable Command". Set the limit for "how many task should be executed in one run" and save the task.
-
-Now you are ready for sending Newsletters. Scheduler will start executing the
-prepared Tasks in the "Task Queue".
-
+.. @TODO add screenshot of task queue with spooled mail tasks
