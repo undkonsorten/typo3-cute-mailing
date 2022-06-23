@@ -35,6 +35,8 @@ You can get the latest version from git by using the git command:
 Requirements
 ------------
 
+.. @TODO fix taskqueue uri
+
 CuteMailing requires the extension `taskqueue <https://gitbucket.undkonsorten.com>`__
 for sending the emails.
 The extension is automatically installed during installation via Composer.
