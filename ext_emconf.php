@@ -16,6 +16,7 @@ $EM_CONF[$_EXTKEY] = [
     'constraints' => [
         'depends' => [
             'typo3' => '11.5.0-11.5.99',
+            'taskqueue' => '8.0.0-8.99.99',
         ],
     ],
 ];
