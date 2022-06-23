@@ -53,4 +53,3 @@ This documentation is for the TYPO3 extension cute-mailing.
    Installation/Index
    Configuration/Index
    Editor/Index
-   KnownProblems/Index
