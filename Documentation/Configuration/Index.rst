@@ -11,7 +11,7 @@ to override template paths.
 
 You need at least one Newsletter Sysfolder with Doktype "Cute Mailing".
 
-.. figure:: /Images/Doktype.png
+.. figure:: /Images/Build/CuteMailingSysfolder.png
    :class: with-shadow
    :alt: Created Sysfolder with doktype "Cute Mailing"
 

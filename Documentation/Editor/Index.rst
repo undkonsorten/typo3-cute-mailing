@@ -24,7 +24,7 @@ Create recipient lists first.
    a test mailing.
 
 
-.. figure:: /Images/Editor/ReceiverList.png
+.. figure:: /Images/Build/Recipientslist.png
    :class: with-shadow
    :alt: Add new Newsletter in backend
 
@@ -38,7 +38,7 @@ Create Newsletter
 Select the "Newsletter" Module on the left and choose a page for the newsletter
 in the page tree. Then click the [+] button.
 
-.. figure:: /Images/Editor/CreateNewsletter.png
+.. figure:: /Images/Editor/NewsletterModule.png
    :class: with-shadow
    :alt: Create new Newsletter from the current page
 
@@ -61,4 +61,8 @@ on the number of recipients. You can find them in the backend module "Task Queue
 For automatic execution of such tasks, see :ref:`configuration_scheduler_task`.
 Alternatively you can execute the tasks manually for testing purposes, of course.
 
-.. @TODO add screenshot of task queue with spooled mail tasks
+.. figure:: /Images/Build/ModuleTaskQueue.png
+   :class: with-shadow
+   :alt: Module Task Queue with newsletter and mail tasks
+
+   Module Task Queue
