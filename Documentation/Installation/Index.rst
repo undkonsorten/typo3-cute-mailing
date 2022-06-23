@@ -29,6 +29,8 @@ Latest version from git
 -----------------------
 You can get the latest version from git by using the git command:
 
+.. @TODO check and/or fix github uri
+
 .. code-block:: bash
 
    git clone https://github.com/undkonsorten/cute_mailing.git
