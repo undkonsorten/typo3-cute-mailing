@@ -22,7 +22,8 @@ Get it from the Extension Manager
 
 Switch to the module Admin Tools > Extensions.
 Switch to Get Extensions and search for the extension key cute_mailing and
-import the extension from the repository.
+import the extension from the repository. *Please note that this installation
+method is not tested. Please feedback your experiences!*
 
 Latest version from git
 -----------------------
