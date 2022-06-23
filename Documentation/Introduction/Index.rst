@@ -27,10 +27,10 @@ page as an e-mail.
 And we wanted to be free in the choice of address types and not limited to
 fe_users.
 
-So now CuteMailing only does one thing: **Sending mails!**
+So now Cute Mailing only does one thing: **Sending mails!**
 
 .. important::
 
-   CuteMailing does not provide HTML templates or plugins for subscribing or
+   Cute Mailing does not provide HTML templates or plugins for subscribing or
    unsubscribing to a newsletter! There are ready-made solutions or tools
    that can be used.

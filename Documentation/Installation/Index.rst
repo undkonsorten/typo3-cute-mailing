@@ -40,8 +40,8 @@ Requirements
 
 .. @TODO fix taskqueue uri
 
-CuteMailing requires the extension `taskqueue <https://gitbucket.undkonsorten.com>`__
+Cute Mailing requires the extension `taskqueue <https://gitbucket.undkonsorten.com>`__
 for sending the emails.
 The extension is automatically installed during installation via Composer.
-If CuteMailing is installed via one of the other ways, the extension must be
+If Cute Mailing is installed via one of the other ways, the extension must be
 installed manually before.
