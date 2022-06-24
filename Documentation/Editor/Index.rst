@@ -38,7 +38,7 @@ Create Newsletter
 Select the "Newsletter" Module on the left and choose a page for the newsletter
 in the page tree. Then click the [+] button.
 
-.. figure:: /Images/Editor/NewsletterModule.png
+.. figure:: /Images/Build/NewsletterModule.png
    :class: with-shadow
    :alt: Create new Newsletter from the current page
 
@@ -65,4 +65,4 @@ Alternatively you can execute the tasks manually for testing purposes, of course
    :class: with-shadow
    :alt: Module Task Queue with newsletter and mail tasks
 
-   Module Task Queue
+   Module Task Queue with created tasks
