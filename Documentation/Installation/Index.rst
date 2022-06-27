@@ -29,18 +29,16 @@ Latest version from git
 -----------------------
 You can get the latest version from git by using the git command:
 
-.. @TODO check and/or fix github uri
 
 .. code-block:: bash
 
-   git clone https://github.com/undkonsorten/cute_mailing.git
+   git clone https://github.com/undkonsorten/typo3-cute-mailing
 
 Requirements
 ------------
 
-.. @TODO fix taskqueue uri
 
-Cute Mailing requires the extension `taskqueue <https://gitbucket.undkonsorten.com>`__
+Cute Mailing requires the extension `taskqueue <https://github.com/undkonsorten/taskqueue>`__
 for sending the emails.
 The extension is automatically installed during installation via Composer.
 If Cute Mailing is installed via one of the other ways, the extension must be
