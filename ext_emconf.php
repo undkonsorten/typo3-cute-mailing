@@ -3,7 +3,7 @@
 /** @noinspection PhpUndefinedVariableInspection */
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Cute Mailing',
-    'description' => '',
+    'description' => 'Send TYPO3 pages as emails (newsletter) to nmany recipients.',
     'category' => 'plugin',
     'author' => 'undkonsorten',
     'author_email' => 'kontakt@undkonsorten.com',
