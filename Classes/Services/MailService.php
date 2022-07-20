@@ -66,8 +66,10 @@ class MailService implements SingletonInterface
         /** @var SiteFinder $site */
         $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
         /** @noinspection PhpUndefinedMethodInspection */
-        $url = (string)$site->getRouter()->generateUri($newsletter->getNewsletterPage());
-        $uri = GeneralUtility::makeInstance(Uri::class, $url);
+        $htmlUrl = (string)$site->getRouter()->generateUri($newsletter->getNewsletterPage(), ['type' => $newsletter->getPageTypeHtml()]);
+        $textUrl = (string)$site->getRouter()->generateUri($newsletter->getNewsletterPage(), ['type' => $newsletter->getPageTypeText()]);
+        $htmlUrl = GeneralUtility::makeInstance(Uri::class, $htmlUrl);
+        $textUrl = GeneralUtility::makeInstance(Uri::class, $textUrl);
 
         $email
             ->to($recipient->getEmail())
@@ -76,25 +78,21 @@ class MailService implements SingletonInterface
             ->subject($newsletter->getSubject());
 
         if ($mailTask->getFormat() == $mailTask::HTML) {
-            $uri = $uri->withQuery('type=' . $newsletter->getPageTypeHtml());
-            $response = $this->requestFactory->request($uri);
+            $response = $this->requestFactory->request($htmlUrl);
             $content = $response->getBody()->getContents();
             $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $content, $recipient);
             $email->html($content);
         }
         if ($mailTask->getFormat() == $mailTask::PLAINTEXT) {
-            $uri = $uri->withQuery('type=' . $newsletter->getPageTypeText());
-            $response = $this->requestFactory->request($uri);
+            $response = $this->requestFactory->request($textUrl);
             $content = $response->getBody()->getContents();
             $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $content, $recipient);
             $email->text($content);
 
         }
         if ($mailTask->getFormat() == $mailTask::BOTH) {
-            $htmlUri = $uri->withQuery('type=' . $newsletter->getPageTypeHtml());
-            $textUri = $uri->withQuery('type=' . $newsletter->getPageTypeText());
-            $htmlResponse = $this->requestFactory->request($htmlUri);
-            $textResponse = $this->requestFactory->request($textUri);
+            $htmlResponse = $this->requestFactory->request($htmlUrl);
+            $textResponse = $this->requestFactory->request($textUrl);
             $htmlContent = $htmlResponse->getBody()->getContents();
             $textContent = $textResponse->getBody()->getContents();
             $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $htmlContent, $recipient);
