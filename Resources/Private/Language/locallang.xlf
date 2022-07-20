@@ -97,7 +97,7 @@
 				<source>Your very good newsletter</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.new.field.subject.description">
-				<source>The subject line of your newsletter will be shown in the email software of the receiver. Optimal lenght: 20-60 characters.</source>
+				<source>The subject line of your newsletter will be shown in the email software of the receiver. Optimal length: 20-60 characters.</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.wizard.back">
 				<source>Back</source>
