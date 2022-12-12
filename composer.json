@@ -34,11 +34,11 @@
 		"typo3/cms-backend": "^11.5",
 		"typo3/cms-core": "^11.5",
 		"typo3/cms-extbase": "^11.5",
-		"undkonsorten/taskqueue": "^8.0",
-		"friendsoftypo3/tt-address": "^7.0"
+		"undkonsorten/taskqueue": "^8.0"
 	},
 	"suggest": {
-		"afm/registeraddress": "For register/unregister subscriber"
+		"undkonsorten/typo3-cute-mailing-registeradddess": "For register/unregister subscriber with registeraddess",
+		"undkonsorten/typo3-cute-mailing-ttaddress": "For tt_address as recipient connector"
 	},
 	"autoload": {
 		"psr-4": {
