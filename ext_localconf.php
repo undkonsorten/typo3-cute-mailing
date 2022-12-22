@@ -30,6 +30,9 @@ call_user_func(
             'options.pageTree.doktypesToShowInNewPageDragArea := addToList(' . $cuteMailingSysFolder . ')'
         );
 
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['cuteMailing_folderUpdateWizard']
+            = \Undkonsorten\CuteMailing\Updates\FolderUpdateWizard::class;
     }
+
 );
 
