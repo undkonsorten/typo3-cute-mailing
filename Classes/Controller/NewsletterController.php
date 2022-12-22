@@ -218,7 +218,7 @@ class NewsletterController extends ActionController
         $currentPid = (int)GeneralUtility::_GP('id');
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
         foreach ($rootline as $page) {
-            if ($page['doktype'] === 116) {
+            if ($page['module'] === 'cute_mailing') {
                 $newsletter->setPid($page['uid']);
             }
         }
