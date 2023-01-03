@@ -8,6 +8,7 @@ use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
@@ -63,9 +64,8 @@ class MailService implements SingletonInterface
 
         /** @var MailMessage $email */
         $email = GeneralUtility::makeInstance(MailMessage::class);
-        /** @var SiteFinder $site */
+        /** @var Site $site */
         $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
-        /** @noinspection PhpUndefinedMethodInspection */
         $htmlUrl = (string)$site->getRouter()->generateUri($newsletter->getNewsletterPage(), ['type' => $newsletter->getPageTypeHtml()]);
         $textUrl = (string)$site->getRouter()->generateUri($newsletter->getNewsletterPage(), ['type' => $newsletter->getPageTypeText()]);
         $htmlUrl = GeneralUtility::makeInstance(Uri::class, $htmlUrl);
@@ -76,6 +76,10 @@ class MailService implements SingletonInterface
             ->from($newsletter->getSender())
             ->replyTo($newsletter->getReplyTo())
             ->subject($newsletter->getSubject());
+
+        if ($newsletter->getReturnPath() !== null) {
+            $email->returnPath($newsletter->getReturnPath());
+        }
 
         if ($mailTask->getFormat() == $mailTask::HTML) {
             $response = $this->requestFactory->request($htmlUrl);
