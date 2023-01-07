@@ -2,8 +2,7 @@
 
 namespace Undkonsorten\CuteMailing\Services;
 
-use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
-use TYPO3\CMS\Core\Exception;
+use Symfony\Component\Mime\Part\DataPart;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -12,15 +11,19 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
-use TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use Undkonsorten\CuteMailing\Domain\Model\MailTask;
-use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
 use Undkonsorten\CuteMailing\Domain\Model\RecipientInterface;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
 
 class MailService implements SingletonInterface
 {
+
+    /**
+     * @var MailMessage|null
+     */
+    protected $email;
+
     /**
      * @var RequestFactory
      */
@@ -78,7 +81,7 @@ class MailService implements SingletonInterface
         $htmlUrl = GeneralUtility::makeInstance(Uri::class, $htmlUrl);
         $textUrl = GeneralUtility::makeInstance(Uri::class, $textUrl);
 
-        $email
+        $this->email
             ->to($recipient->getEmail())
             ->from($newsletter->getSender())
             ->replyTo($newsletter->getReplyTo())
@@ -91,28 +94,34 @@ class MailService implements SingletonInterface
         if ($mailTask->getFormat() == $mailTask::HTML) {
             $response = $this->requestFactory->request($htmlUrl);
             $content = $response->getBody()->getContents();
+            if ($mailTask->isAttachImages()) {
+                $content = $this->attachImages($content);
+            }
             $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $content, $recipient);
-            $email->html($content);
+            $this->email->html($content);
         }
         if ($mailTask->getFormat() == $mailTask::PLAINTEXT) {
             $response = $this->requestFactory->request($textUrl);
             $content = $response->getBody()->getContents();
             $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $content, $recipient);
-            $email->text($content);
+            $this->email->text($content);
 
         }
         if ($mailTask->getFormat() == $mailTask::BOTH) {
             $htmlResponse = $this->requestFactory->request($htmlUrl);
             $textResponse = $this->requestFactory->request($textUrl);
             $htmlContent = $htmlResponse->getBody()->getContents();
+            if ($mailTask->isAttachImages()) {
+                $htmlContent = $this->attachImages($htmlContent);
+            }
             $textContent = $textResponse->getBody()->getContents();
             $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $htmlContent, $recipient);
             $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $textContent, $recipient);
-            $email
+            $this->email
                 ->html($htmlContent)
                 ->text($textContent);
         }
-        $email->send();
+        $this->email->send();
 
     }
 
@@ -131,6 +140,47 @@ class MailService implements SingletonInterface
             }
 
         }
-
     }
+
+    /**
+     * This method looks for image tags and replaces their src attributes
+     * with corresponding cid uris after downloading and attaching the
+     * images.
+     * For now, there‘s no possibility to control which images are attached.
+     *
+     * @param string $html
+     * @return string
+     */
+    protected function attachImages(string $html): string
+    {
+        return preg_replace_callback(
+            '/<img[^>]*>/i',
+            function ($match) {
+                return $this->replaceImageSource($match[0]);
+            },
+            $html
+        );
+    }
+
+    protected function replaceImageSource(string $imageTag): string
+    {
+        return preg_replace_callback(
+            '/src="([^"]*)"/',
+            function ($match) {
+                $part = $this->createImageMailPartFromUri($match[1]);
+                $cid = $part->getContentId();
+                $this->email->attachPart($part);
+                return sprintf('src="cid:%s"', $cid);
+            },
+            $imageTag
+        );
+    }
+
+    protected function createImageMailPartFromUri(string $uri): DataPart
+    {
+        $image = $this->requestFactory->request($uri);
+        $imageContent = $image->getBody()->getContents();
+        return new DataPart($imageContent, basename($uri), $image->getHeaderLine('Content-Type'));
+    }
+
 }
