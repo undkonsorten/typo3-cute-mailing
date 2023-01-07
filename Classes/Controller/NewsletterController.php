@@ -275,7 +275,7 @@ class NewsletterController extends ActionController
         $this->redirect('list');
     }
 
-    public function sendTestMailAction(Newsletter $newsletter): void
+    public function sendTestMailAction(Newsletter $newsletter, bool $attachImages = false): void
     {
         if ($newsletter->getTestRecipientList()) {
             $newsletter->setStatus($newsletter::TESTED);
@@ -283,6 +283,7 @@ class NewsletterController extends ActionController
             $newsletterTask = GeneralUtility::makeInstance(NewsletterTask::class);
             $newsletterTask->setNewsletter($newsletter);
             $newsletterTask->setTest(true);
+            $newsletterTask->setAttachImages($attachImages);
 
             $this->taskRepository->add($newsletterTask);
             $this->newsletterRepository->update($newsletter);

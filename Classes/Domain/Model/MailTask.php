@@ -92,4 +92,15 @@ class MailTask extends Task
         return $this->sendOut;
     }
 
+    public function isAttachImages(): ?bool
+    {
+        return $this->getProperty('attachImages');
+    }
+
+    public function setAttachImages(bool $attachImages): self
+    {
+        $this->setProperty('attachImages', $attachImages);
+        return $this;
+    }
+
 }
