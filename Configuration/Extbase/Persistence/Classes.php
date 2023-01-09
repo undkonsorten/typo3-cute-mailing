@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Undkonsorten\CuteMailing\Domain\Model\LineSeparatedRecipientList;
 use Undkonsorten\CuteMailing\Domain\Model\MailTask;
 use Undkonsorten\CuteMailing\Domain\Model\NewsletterTask;
 use Undkonsorten\CuteMailing\Domain\Model\RecipientList;
@@ -34,7 +35,14 @@ return [
             NewsletterTask::class => NewsletterTask::class,
         ]
     ],
+    LineSeparatedRecipientList::class => [
+        'tableName' => 'tx_cutemailing_domain_model_recipientlist',
+        'recordType' => LineSeparatedRecipientList::class
+    ],
     RecipientList::class => [
         'tableName' => 'tx_cutemailing_domain_model_recipientlist',
+        'subclasses' => [
+            LineSeparatedRecipientList::class => LineSeparatedRecipientList::class
+        ],
     ],
 ];

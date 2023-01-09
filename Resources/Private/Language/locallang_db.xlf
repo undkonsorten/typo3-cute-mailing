@@ -73,6 +73,15 @@
 			<trans-unit id="tx_cutemailing_domain_model_recipient_list.type.ttaddress">
 				<source>Address (EXT:tt_address)</source>
 			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_recipient_list.type.line_separated_list">
+				<source>Line separated recipient list</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_recipient_list.line_separated_list">
+				<source>Email addresses</source>
+			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_recipient_list.line_separated_list.description">
+				<source>Please enter recipients‘ email addresses, one per line. Intended for test usage.</source>
+			</trans-unit>
 			<trans-unit id="tx_cutemailing_domain_model_newsletter.page_type_html">
 				<source>Page type for html newsletter</source>
 			</trans-unit>
