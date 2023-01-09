@@ -88,6 +88,11 @@ class Newsletter extends AbstractEntity
     protected $allowedMarker = null;
 
     /**
+     * @var string|null
+     */
+    protected $returnPath = null;
+
+    /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Undkonsorten\CuteMailing\Domain\Model\SendOut>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
@@ -423,6 +428,17 @@ class Newsletter extends AbstractEntity
             $this->setStatus(Newsletter::SENT);
         }
         return $this;
+    }
+
+    public function setReturnPath(?string $returnPath): self
+    {
+        $this->returnPath = $returnPath;
+        return $this;
+    }
+
+    public function getReturnPath(): ?string
+    {
+        return $this->returnPath;
     }
 
 }

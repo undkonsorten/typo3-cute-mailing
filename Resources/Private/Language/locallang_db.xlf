@@ -91,6 +91,9 @@
 			<trans-unit id="tx_cutemailing_domain_model_newsletter.allowed_marker">
 				<source>Allowed marker</source>
 			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.return_path">
+				<source>Return path / envelope from</source>
+			</trans-unit>
 			<trans-unit id="palettes.sender">
 				<source>Sender</source>
 			</trans-unit>

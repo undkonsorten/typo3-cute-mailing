@@ -15,6 +15,7 @@ CREATE TABLE tx_cutemailing_domain_model_newsletter
 	sender_name         varchar(255)        DEFAULT ''  NOT NULL,
 	reply_to            varchar(255)        DEFAULT ''  NOT NULL,
 	reply_to_name       varchar(255)        DEFAULT ''  NOT NULL,
+	return_path         varchar(255)        DEFAULT ''  NOT NULL,
 	title               varchar(255)        DEFAULT ''  NOT NULL,
 	subject             varchar(255)        DEFAULT ''  NOT NULL,
 	description         varchar(255)        DEFAULT ''  NOT NULL,

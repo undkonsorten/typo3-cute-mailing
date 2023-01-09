@@ -1,2 +1,4 @@
 # ignore generated documentation
 *GENERATED*
+Tests/.phpunit.result.cache
+Tests/build
