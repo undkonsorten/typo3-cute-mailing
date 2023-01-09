@@ -94,6 +94,7 @@ class NewsletterTask extends Task
             $mailTask->setSendOut($sendOut);
             $mailTask->setRecipient($recipient->getUid());
             $mailTask->setPid($this->newsletter->getPid());
+            $mailTask->setAttachImages($this->isAttachImages() ?? false);
             $this->taskRepository->add($mailTask);
             $sendOut->addMailTask($mailTask);
         }
@@ -131,6 +132,16 @@ class NewsletterTask extends Task
         return [
             'newsletter' => $this->newsletter,
         ];
+    }
+
+    public function setAttachImages(bool $attachImages)
+    {
+        $this->setProperty('attachImages', $attachImages);
+    }
+
+    public function isAttachImages(): ?bool
+    {
+        return $this->getProperty('attachImages');
     }
 
 }

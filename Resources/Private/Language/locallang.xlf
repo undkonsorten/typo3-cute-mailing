@@ -119,6 +119,9 @@
 			<trans-unit id="module.newsletter.list.test">
 				<source>Send test</source>
 			</trans-unit>
+			<trans-unit id="module.newsletter.list.test.attachImages">
+				<source>Test (attach Images)</source>
+			</trans-unit>
 			<trans-unit id="module.newsletter.list.enabled">
 				<source>Scheduled</source>
 			</trans-unit>
