@@ -87,7 +87,7 @@ class MailService implements SingletonInterface
             ->replyTo($newsletter->getReplyTo())
             ->subject($newsletter->getSubject());
 
-        if ($newsletter->getReturnPath() !== null) {
+        if (trim($newsletter->getReturnPath())) {
             $email->returnPath($newsletter->getReturnPath());
         }
 
