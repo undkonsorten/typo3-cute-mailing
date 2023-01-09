@@ -151,6 +151,8 @@ class NewsletterController extends ActionController
             $assign['pageTypeHtml'] = $pageTs['page_type_html'];
             $assign['pageTypeText'] = $pageTs['page_type_text'];
             $assign['allowedMarker'] = $pageTs['allowed_marker'];
+            // @Todo make this configurable in the newsletter wizard, assign available languages here
+            $assign['language'] = $pageTs['language'] ?? 0;
             $assign['returnPath'] = $pageTs['return_path'];
         }
 

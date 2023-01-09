@@ -93,6 +93,11 @@ class Newsletter extends AbstractEntity
     protected $returnPath = null;
 
     /**
+     * @var int
+     */
+    protected $language = 0;
+
+    /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Undkonsorten\CuteMailing\Domain\Model\SendOut>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
@@ -439,6 +444,17 @@ class Newsletter extends AbstractEntity
     public function getReturnPath(): ?string
     {
         return $this->returnPath;
+    }
+
+    public function setLanguage(int $language): self
+    {
+        $this->language = $language;
+        return $this;
+    }
+
+    public function getLanguage(): int
+    {
+        return $this->language;
     }
 
 }

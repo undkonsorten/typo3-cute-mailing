@@ -26,7 +26,7 @@ return [
             ' newsletter_page, ' .
             '--div--;LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tabs.sender, --palette--;;sender, --palette--;;reply_to,' .
             '--div--;LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tabs.recipients, test_recipient_list,recipient_list,' .
-            '--div--;LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tabs.technical_details,--palette--;;page_types,allowed_marker,return_path,' .
+            '--div--;LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tabs.technical_details,--palette--;;page_types,allowed_marker,return_path,language,' .
             '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,hidden,starttime,endtime'],
     ],
     'palettes' => [
@@ -249,6 +249,14 @@ return [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.return_path',
             'config' => [
                 'type' => 'input',
+            ]
+        ],
+        'language' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.language',
+            'config' => [
+                'type' => 'input',
+                'eval' => 'int'
             ]
         ],
     ],
