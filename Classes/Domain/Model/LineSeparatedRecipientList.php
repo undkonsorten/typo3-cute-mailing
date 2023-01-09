@@ -18,6 +18,8 @@ class LineSeparatedRecipientList extends RecipientList
      */
     public function getRecipients(): array
     {
+        // @todo validate email addresses?
+        // @todo allow format "FirstName LastName <firstname.lastname@example.org>"?
         $addresses = GeneralUtility::trimExplode("\n", $this->lineSeparatedList, true);
         return array_map(function (string $address, int $position): SimpleRecipient {
             $recipient = new SimpleRecipient();
