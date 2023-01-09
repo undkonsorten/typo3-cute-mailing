@@ -58,8 +58,15 @@ class MailService implements SingletonInterface
             throw new \Exception('No newsletter given for sending', 1651441455);
         }
 
-        /** @var RecipientInterface $recipient */
-        $recipient = $newsletter->getRecipientList()->getRecipient($mailTask->getRecipient());
+        // They are issue with recipient list type if different types for recipient list and test-recipient list are used!
+        // Therefore check here is necessary. Maybe change in future if another solution is needed.
+        if ($mailTask->getSendOut()->isTest()) {
+            /** @var RecipientInterface $recipient */
+            $recipient = $newsletter->getTestRecipientList()->getRecipient($mailTask->getRecipient());
+        } else {
+            /** @var RecipientInterface $recipient */
+            $recipient = $newsletter->getRecipientList()->getRecipient($mailTask->getRecipient());
+        }
 
         /** @var MailMessage $email */
         $email = GeneralUtility::makeInstance(MailMessage::class);
