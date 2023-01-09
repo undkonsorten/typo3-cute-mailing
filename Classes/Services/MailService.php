@@ -73,7 +73,7 @@ class MailService implements SingletonInterface
         }
 
         /** @var MailMessage $email */
-        $email = GeneralUtility::makeInstance(MailMessage::class);
+        $this->email = GeneralUtility::makeInstance(MailMessage::class);
         /** @var Site $site */
         $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
         $htmlUrl = (string)$site->getRouter()->generateUri($newsletter->getNewsletterPage(), ['type' => $newsletter->getPageTypeHtml()]);
