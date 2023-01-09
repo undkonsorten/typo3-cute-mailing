@@ -32,6 +32,8 @@ call_user_func(
 
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['cuteMailing_folderUpdateWizard']
             = \Undkonsorten\CuteMailing\Updates\FolderUpdateWizard::class;
+
+        $GLOBALS['TYPO3_CONF_VARS']['FE']['addRootLineFields'] = $GLOBALS['TYPO3_CONF_VARS']['FE']['addRootLineFields'].', module';
     }
 
 );
