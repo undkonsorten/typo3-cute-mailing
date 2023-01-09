@@ -143,7 +143,12 @@ define(['jquery'], function ($) {
 			if (pageTypeHTMLElement) {
 				pageTypeHTML = pageTypeHTMLElement.value;
 			}
-			return '//' + window.location.host + '/index.php?id=' + pageId + "&type=" + pageTypeHTML;
+			var languageElement = document.querySelector("[data-cutemailing-language]");
+			var language = 0;
+			if (languageElement) {
+				language = parseInt(languageElement.value);
+			}
+			return '//' + window.location.host + '/index.php?id=' + pageId + "&type=" + pageTypeHTML + "&L=" + language;
 		};
 
 		/**
