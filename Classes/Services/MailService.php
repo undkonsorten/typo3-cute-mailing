@@ -88,7 +88,7 @@ class MailService implements SingletonInterface
             ->subject($newsletter->getSubject());
 
         if (trim($newsletter->getReturnPath())) {
-            $email->returnPath($newsletter->getReturnPath());
+            $this->email->returnPath($newsletter->getReturnPath());
         }
 
         if ($mailTask->getFormat() == $mailTask::HTML) {
