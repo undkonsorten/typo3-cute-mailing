@@ -44,13 +44,55 @@ The extension is automatically installed during installation via Composer.
 If Cute Mailing is installed via one of the other ways, the extension must be
 installed manually before.
 
-Recipient lists
----------------
+.. _installation_suggested:
 
-By default the extension comes with a line seperated recipient list.
-But there are extension that introduce different recipient list for
-`tt_address <https://github.com/FriendsOfTYPO3/tt_address>`__ or
-`registeraddress <https://github.com/lsascha/registeraddress>`__ :
+Suggested Recipientlists
+-------------------------
 
-* `undkonsorten/typo3-cute-mailing-ttaddress <https://github.com/undkonsorten/typo3-cute-mailing-ttaddress>`__
-* `undkonsorten/typo3-cute-mailing-registeraddress <https://github.com/undkonsorten/typo3-cute-mailing-registeraddress>`__
+If you want to use tt_address data for recipients, we suggest one of those
+connector extensions.
+
+.. container:: row m-0 p-0
+
+   .. container:: col-md-12 pl-0 pr-3 py-3 m-0
+
+      .. container:: card px-0 h-100
+
+         .. rst-class:: card-header h3
+
+            .. rubric:: `Connector Extension: cute_mailing_registeraddress <https://extensions.typo3.org/extension/cute_mailing_registeraddress>`__
+
+         .. container:: card-body
+
+            Use this connector if you use registeraddress extension for
+            newsletter subscribing.
+            registeraddress adds some new properties to the
+            tt_address Model. Without those connector extension it is **not** possible
+            to replace such markers in mail content.
+
+         .. container:: card-footer
+
+            .. code-block:: bash
+
+               composer require undkonsorten/typo3-cute-mailing-registeraddress
+
+
+   .. container:: col-md-12 pl-0 pr-3 py-3 m-0
+
+      .. container:: card px-0 h-100
+
+         .. rst-class:: card-header h3
+
+            .. rubric:: `Connector Extension: cute_mailing_ttaddress <https://extensions.typo3.org/extension/cute_mailing_ttaddress>`__
+
+         .. container:: card-body
+
+            Use this connector if you just using tt_adress data for recipient lists.
+            This connector can also be used if you use an extension that simply use
+            the tt_address table for recipient data.
+
+         .. container:: card-footer
+
+            .. code-block:: bash
+
+               composer require undkonsorten/typo3-cute-mailing-ttaddress

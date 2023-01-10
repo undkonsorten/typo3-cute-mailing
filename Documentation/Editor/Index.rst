@@ -9,14 +9,15 @@ For Editors
 Prepare newsletter sending
 --------------------------
 
-There needs to be at least one Sysfolder with Doktype "Cute Mailing".
+There needs to be at least one Sysfolder as :ref:`Cute Mailing Module folder <configuration_setup_sysfolder>`.
 Editors can manage newsletter data via the "Newsletter" Module.
+
+**Create recipient lists first.**
 
 For the time being, recipient lists can only be managed via the default list
 module. Select the "List" Module in the module column and then pick the
-newsletter SysFolder in the page tree.
-
-Create recipient lists first.
+newsletter SysFolder in the page tree. There you should create new data with
+Type CuteMailing -> Recipient List.
 
 .. tip::
 
@@ -72,3 +73,44 @@ Alternatively you can execute the tasks manually for testing purposes, of course
    :alt: Module Task Queue with newsletter and mail tasks
 
    Module Task Queue with created tasks
+
+
+Send a test before Newsletter sending
+-------------------------------------
+
+There are two Buttons to send a Test-Newsletter. They are using the same Test-Recipients-List.
+The Button "Test (attach images)" is just for developers or people they want test
+the layout (html) in Mail Clients. It's **not** purposed for sending many mails with
+embedded images.
+
+.. figure:: /Images/Build/NewsletterModuleButtons.png
+   :class: with-shadow
+   :alt: Cutemailing Buttons
+
+   Cute Mailing Module Buttons in list
+
+
+Multilanguge Newsletter
+-----------------------
+
+Cute Mailing support multilange Newsletter from version 2.1.
+To create multilanguage newsletters configure your languages in your
+:ref:`Site Config <t3coreapi:sitehandling-basics>`.
+
+On creating a new Newsletter, you should see now an additionally step before the wizard.
+Here you can choose the page (uid) which should be send and you can choose
+the language.
+
+.. figure:: /Images/Build/CreateMultilanguageNewsletter.png
+   :class: with-shadow
+   :alt: Module Cute Mailing: Creating multilanguage Newsletter
+
+   Module Cute Mailing: Additionally step on creating multilanguage Newsletter
+
+If you won't creating multilanguage Newsletter (just default language) you can
+disable those additionally step by setting `mod.web_modules.cute_mailing.language` to `1`.
+
+Set `mod.web_modules.cute_mailing.language` with the language uid to use this
+for the default selected language on the first step.
+
+See :ref:`Configuration <configuration_example>` section.
