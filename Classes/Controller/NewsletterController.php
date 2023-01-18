@@ -133,6 +133,7 @@ class NewsletterController extends ActionController
         $page = BackendUtility::getRecord('pages', $currentPid);
         $assign['newsletterPage'] = $currentPid;
         $assign['title'] = $page['title'];
+        $assign['subject'] = $page['title'];
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
         $assign['recipientList'] = $this->recipientListRepository->findByRootline($rootline);
         $assign['testRecipientList'] = $this->recipientListRepository->findByRootline($rootline);
