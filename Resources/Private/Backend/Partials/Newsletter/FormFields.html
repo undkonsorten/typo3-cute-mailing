@@ -98,6 +98,27 @@
 
 <fieldset>
 	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+				<label class="lb-lg" for="subject">
+					<f:translate key="module.newsletter.new.field.subject">Subject</f:translate>
+					*
+				</label>
+				<f:form.textfield
+						class="form-control input-lg"
+						data="{cutemailing-mandatory:'1',cutemailing-testmail:'subject'}"
+						id="subject"
+						placeholder="{f:translate(key:'module.newsletter.new.field.subject.placeholder')}"
+						property="subject"
+						required="required"
+						value="{subject}"/>
+				<span class="help-block">
+                    <f:translate key="module.newsletter.new.field.subject.description">Email subject</f:translate>
+                </span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
 		<div class="col-md-6">
 			<div class="form-group">
 				<label class="lb-lg" for="sender">
@@ -201,30 +222,6 @@
 			</div>
 		</div>
 	</div>
-
-
-	<div class="row">
-		<div class="col-md-12">
-			<div class="form-group">
-				<label class="lb-lg" for="subject">
-					<f:translate key="module.newsletter.new.field.subject">Subject</f:translate>
-					*
-				</label>
-				<f:form.textfield
-					class="form-control input-lg"
-					data="{cutemailing-mandatory:'1',cutemailing-testmail:'subject'}"
-					id="subject"
-					placeholder="{f:translate(key:'module.newsletter.new.field.subject.placeholder')}"
-					property="subject"
-					required="required"
-					value="{subject}"/>
-				<span class="help-block">
-                    <f:translate key="module.newsletter.new.field.subject.description">Email subject</f:translate>
-                </span>
-			</div>
-		</div>
-	</div>
-
 
 	<div style="margin: 20px 0;">
 		<button class="btn btn-primary btn-lg" data-wizardform-gotostep="1">
