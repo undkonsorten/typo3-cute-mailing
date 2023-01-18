@@ -107,12 +107,14 @@ define(['jquery'], function ($) {
 		 * @returns {void}
 		 */
 		var addWizardNewsletterPreview = function () {
-			var input = document.querySelector('[data-cutemailing-wizardpreviewevent="newsletter"]');
-			if (input !== null) {
-				input.addEventListener('blur', function () {
-					initializeNewsletterPreviewIframe();
-				});
-				input.dispatchEvent(new Event('blur'));
+			var inputs = document.querySelectorAll('[data-cutemailing-wizardpreviewevent="newsletter"]');
+			if (inputs.length) {
+				inputs.forEach(function(input) {
+					input.addEventListener('blur', function () {
+						initializeNewsletterPreviewIframe();
+					});
+					input.dispatchEvent(new Event('blur'));
+				})
 			}
 		};
 
@@ -124,6 +126,13 @@ define(['jquery'], function ($) {
 			var input = document.querySelector('[data-cutemailing-wizardpreviewevent="newsletter"]');
 			if (container !== null && input.value !== '') {
 				container.innerHTML = '';
+				var subject = document.querySelector('[data-cutemailing-subject]');
+				if (subject) {
+					var subjectElement = document.createElement("h3");
+					subjectElement.innerHTML = subject.value;
+					subjectElement.classList.add("newsletter-preview-subject-line");
+					container.appendChild(subjectElement);
+				}
 				var iframe = document.createElement('iframe');
 				iframe.setAttribute('src', getIframeSource(input.value));
 				iframe.setAttribute('class', 'cutemailing-iframepreview');

@@ -106,7 +106,12 @@
 				</label>
 				<f:form.textfield
 						class="form-control input-lg"
-						data="{cutemailing-mandatory:'1',cutemailing-testmail:'subject'}"
+						data="{
+							cutemailing-mandatory:'1',
+							cutemailing-testmail:'subject',
+							cutemailing-subject:1,
+							cutemailing-wizardpreviewevent:'newsletter'
+						}"
 						id="subject"
 						placeholder="{f:translate(key:'module.newsletter.new.field.subject.placeholder')}"
 						property="subject"
