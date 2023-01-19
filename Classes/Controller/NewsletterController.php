@@ -173,6 +173,13 @@ class NewsletterController extends ActionController
         }
         if($language > 0){
             $page = $this->pageRepository->getPageOverlay($page, $language);
+            if($page['sys_language_uid'] !== $language){
+                $this->addFlashMessage(
+                    "This page does not exist for chosen language.",
+                    "Translation does not exist.",
+                    AbstractMessage::WARNING
+                );
+            }
         }
         $assign['newsletterPage'] = $newsletterPage ?? $currentPid;
         $assign['language'] = $language ?? 0;
