@@ -4,6 +4,7 @@
 <f:layout name="Backend"/>
 
 <f:section name="content">
+	<f:render arguments="{_all}" partial="Miscellaneous/FlashMessages"/>
 	<f:form action="new">
 		<div class="row">
 			<div class="col-md-6">
@@ -23,7 +24,8 @@
                 </span>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<f:if condition="{displayLanguageSelect}">
+				<div class="col-md-6">
 				<div class="form-group">
 					<label class="lb-lg" for="language">
 						<f:translate key="module.newsletter.prepare.field.language">[Localize] Language
@@ -43,6 +45,7 @@
 				</span>
 				</div>
 			</div>
+			</f:if>
 		</div>
 		<f:form.submit class="btn btn-lg btn-primary mb-3 pull-right" value="[Localize] Starten" />
 	</f:form>

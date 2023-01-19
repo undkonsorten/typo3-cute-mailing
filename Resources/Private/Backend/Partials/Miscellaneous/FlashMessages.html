@@ -48,7 +48,7 @@
 
 <f:comment><!-- change alert box colors by severity --></f:comment>
 <f:section name="alertColor">
-	<f:switch expression="severity">
+	<f:switch expression="{severity}">
 		<f:case value="0">alert-success</f:case>
 		<f:case value="1">alert-warning</f:case>
 		<f:case value="2">alert-danger</f:case>

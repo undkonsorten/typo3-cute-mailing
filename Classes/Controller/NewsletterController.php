@@ -126,6 +126,11 @@ class NewsletterController extends ActionController
         $currentPid = $this->getCurrentPageUid();
         $assign['newsletterPage'] = $currentPid;
         $siteLanguages = $this->getSiteLanguagesForPid($currentPid);
+
+        $assign['displayLanguageSelect'] = false;
+        if(count($siteLanguages) >= 2){
+            $assign['displayLanguageSelect'] = true;
+        }
         $assign['languages'] = $siteLanguages;
         $this->view->assignMultiple($assign);
         return $this->htmlResponse();
@@ -353,6 +358,15 @@ class NewsletterController extends ActionController
 
     protected function shouldForwardToPrepareAction(int $currentPid, ?array $page, array $pageTs, ?int $newsletterPage, ?int $language): bool
     {
+        if($page['doktype'] === PageRepository::DOKTYPE_SYSFOLDER){
+            /**@TODO Translate error messages **/
+            $this->addFlashMessage(
+                "Sysfolder can not be selected, please use another page.",
+                "Wrong page type",
+                AbstractMessage::WARNING
+            );
+            return true;
+        }
         /** @noinspection IfReturnReturnSimplificationInspection */
         if ($newsletterPage !== null && $language !== null) {
             return false;
