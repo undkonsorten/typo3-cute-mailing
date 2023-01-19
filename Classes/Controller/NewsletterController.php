@@ -11,6 +11,7 @@ use PharIo\Manifest\InvalidUrlException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -74,6 +75,11 @@ class NewsletterController extends ActionController
     protected $persistenceManager;
 
     /**
+     * @var PageRepository
+     */
+    protected $pageRepository;
+
+    /**
      * @param NewsletterRepository $newsletterRepository
      * @param RecipientListRepositoryInterface $recipientListRepository
      */
@@ -81,13 +87,15 @@ class NewsletterController extends ActionController
         NewsletterRepository             $newsletterRepository,
         RecipientListRepositoryInterface $recipientListRepository,
         TaskRepository                   $taskRepository,
-        PersistenceManager               $persistenceManager
+        PersistenceManager               $persistenceManager,
+        PageRepository                   $pageRepository
     )
     {
         $this->newsletterRepository = $newsletterRepository;
         $this->recipientListRepository = $recipientListRepository;
         $this->taskRepository = $taskRepository;
         $this->persistenceManager = $persistenceManager;
+        $this->pageRepository = $pageRepository;
     }
 
     /**
@@ -145,8 +153,12 @@ class NewsletterController extends ActionController
         $currentPid = $this->getCurrentPageUid();
         $pageTs = BackendUtility::getPagesTSconfig($currentPid);
         $page = BackendUtility::getRecord('pages', $currentPid);
+
         if ($this->shouldForwardToPrepareAction($currentPid, $page, $pageTs, $newsletterPage, $language)) {
             return new ForwardResponse('prepare');
+        }
+        if($language > 0){
+            $page = $this->pageRepository->getPageOverlay($page, $language);
         }
         $assign['newsletterPage'] = $newsletterPage ?? $currentPid;
         $assign['language'] = $language ?? 0;
