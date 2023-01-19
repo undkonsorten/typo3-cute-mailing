@@ -96,7 +96,6 @@ return [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.page',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'pages',
                 'size' => '1',
                 'maxitems' => '1',
@@ -118,7 +117,6 @@ return [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.recipients',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tx_cutemailing_domain_model_recipientlist',
                 'size' => '1',
                 'maxitems' => '1',
@@ -130,7 +128,6 @@ return [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.test_recipients',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tx_cutemailing_domain_model_recipientlist',
                 'size' => '1',
                 'maxitems' => '1',

@@ -90,27 +90,28 @@ class NewsletterController extends ActionController
     }
 
     /**
-     * @return void
+     *
      */
-    public function listAction(): void
+    public function listAction(): ResponseInterface
     {
         $currentPid = (int)GeneralUtility::_GP('id');
         if ($currentPid === 0) {
-            $this->forward('choosePage');
+            return new ForwardResponse('choosePage');
         }
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
         $newsletters = $this->newsletterRepository->findByRootline($rootline);
         $this->view->assignMultiple([
             'newsletters' => $newsletters,
         ]);
+        return $this->htmlResponse();
     }
 
-    public function choosePageAction()
+    public function choosePageAction(): ResponseInterface
     {
-
+        return $this->htmlResponse();
     }
 
-    public function editAction(Newsletter $newsletter)
+    public function editAction(Newsletter $newsletter): ResponseInterface
     {
         $currentPid = (int)GeneralUtility::_GP('id');
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
@@ -119,6 +120,7 @@ class NewsletterController extends ActionController
         $assign['newsletter'] = $newsletter;
 
         $this->view->assignMultiple($assign);
+        return $this->htmlResponse();
     }
 
     /**
@@ -126,7 +128,7 @@ class NewsletterController extends ActionController
      * @throws InvalidConfigurationTypeException
      * @noinspection PhpUnused
      */
-    public function newAction(): void
+    public function newAction(): ResponseInterface
     {
         $currentPid = (int)GeneralUtility::_GP('id');
         $pageTs = BackendUtility::getPagesTSconfig($currentPid);
@@ -158,6 +160,7 @@ class NewsletterController extends ActionController
         }
 
         $this->view->assignMultiple($assign);
+        return $this->htmlResponse();
     }
 
     /**

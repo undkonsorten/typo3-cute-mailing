@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use Undkonsorten\Taskqueue\Domain\Model\TaskInterface;
@@ -22,8 +23,8 @@ class SendOut extends AbstractEntity
     protected $test;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Undkonsorten\CuteMailing\Domain\Model\MailTask>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     * @var ObjectStorage<MailTask>
+     * @Cascade("remove")
      */
     protected $mailTasks;
 

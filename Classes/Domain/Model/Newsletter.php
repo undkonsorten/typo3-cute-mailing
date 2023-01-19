@@ -2,6 +2,7 @@
 
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 use DateTime;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -98,8 +99,8 @@ class Newsletter extends AbstractEntity
     protected $language = 0;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Undkonsorten\CuteMailing\Domain\Model\SendOut>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     * @var ObjectStorage<SendOut>
+     * @Cascade("remove")
      */
     protected $sendOuts;
 
