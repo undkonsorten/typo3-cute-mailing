@@ -127,18 +127,18 @@ class NewsletterController extends ActionController
         $assign['newsletterPage'] = $currentPid;
         $siteLanguages = $this->getSiteLanguagesForPid($currentPid);
 
-        $currentPid = $this->getCurrentPageUid();
-        $pageTs = BackendUtility::getPagesTSconfig($currentPid);
+        $pageTs = $this->getPageTsConfigForModule($currentPid);
 
         $assign['displayLanguageSelect'] = true;
-        if (isset($pageTs['mod.']['web_modules.']['cute_mailing.']['hideLanguageSelection'])) {
-            $assign['displayLanguageSelect'] = !$pageTs['mod.']['web_modules.']['cute_mailing.']['hideLanguageSelection'];
+        if (isset($pageTs['hideLanguageSelection'])) {
+            $assign['displayLanguageSelect'] = !$pageTs['hideLanguageSelection'];
         }
 
-        if(count($siteLanguages) < 2){
+        if (count($siteLanguages) < 2) {
             $assign['displayLanguageSelect'] = false;
         }
         $assign['languages'] = $siteLanguages;
+        $assign['selectedLanguage'] = $pageTs['language'] ?? 0;
         $this->view->assignMultiple($assign);
         return $this->htmlResponse();
     }
@@ -163,7 +163,7 @@ class NewsletterController extends ActionController
     public function newAction(?int $newsletterPage = null, ?int $language = null): ResponseInterface
     {
         $currentPid = $this->getCurrentPageUid();
-        $pageTs = BackendUtility::getPagesTSconfig($currentPid)['mod.']['web_modules.']['cute_mailing.'] ?? [];
+        $pageTs = $this->getPageTsConfigForModule($currentPid);
 
         $page = BackendUtility::getRecord('pages', $newsletterPage ?? $currentPid );
 
@@ -397,6 +397,11 @@ class NewsletterController extends ActionController
         /** @var Site $site */
         $site = $this->request->getAttribute('site');
         return $site->getLanguages();
+    }
+
+    protected function getPageTsConfigForModule(?int $pid = null): array
+    {
+        return BackendUtility::getPagesTSconfig($pid ?? $this->getCurrentPageUid())['mod.']['web_modules.']['cute_mailing.'] ?? [];
     }
 
 }
