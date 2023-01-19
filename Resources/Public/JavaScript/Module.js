@@ -146,7 +146,7 @@ define(['jquery'], function ($) {
 		 * @returns {string}
 		 */
 		var getIframeSource = function () {
-			var pageId = parseInt(document.querySelector('[data-cutemailing-wizardpreviewevent="newsletter"]').value);
+			var pageId = parseInt(document.querySelector('[data-cutemailing-newsletterpage]').value);
 			var pageTypeHTML = 0;
 			var pageTypeHTMLElement = document.querySelector("[data-cutemailing-pagetype-html]");
 			if (pageTypeHTMLElement) {
@@ -157,6 +157,7 @@ define(['jquery'], function ($) {
 			if (languageElement) {
 				language = parseInt(languageElement.value);
 			}
+			console.log(language, languageElement, pageId);
 			return '//' + window.location.host + '/index.php?id=' + pageId + "&type=" + pageTypeHTML + "&L=" + language;
 		};
 

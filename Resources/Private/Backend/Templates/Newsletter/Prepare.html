@@ -1,0 +1,50 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/ViewHelpers"
+      data-namespace-typo3-fluid="true"
+      lang="en">
+<f:layout name="Backend"/>
+
+<f:section name="content">
+	<f:form action="new">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="lb-lg" for="newsletterPage">
+						<f:translate key="module.newsletter.new.field.origin">Origin PID</f:translate>
+						*
+					</label>
+					<f:form.textfield
+							class="form-control input-lg"
+							id="newsletterPage"
+							name="newsletterPage"
+							required="required"
+							value="{newsletterPage}"/>
+					<span class="help-block">
+                    <f:translate key="module.newsletter.new.field.origin.description">PID or absolute URL</f:translate>
+                </span>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="lb-lg" for="language">
+						<f:translate key="module.newsletter.prepare.field.language">[Localize] Language
+						</f:translate>
+						*
+					</label>
+					<f:form.select
+							class="form-control form-select input-lg"
+							id="language"
+							name="language"
+							options="{languages}"
+							optionValueField="languageId"
+							optionLabelField="title"
+					/>
+					<span class="help-block">
+					<f:translate key="module.newsletter.new.field.testReceiver.description">Test receiver group description</f:translate>
+				</span>
+				</div>
+			</div>
+		</div>
+		<f:form.submit class="btn btn-lg btn-primary mb-3 pull-right" value="[Localize] Starten" />
+	</f:form>
+</f:section>
+</html>

@@ -52,26 +52,8 @@
                 </span>
 			</div>
 		</div>
-		<div class="col-md-6">
-			<div class="form-group">
-				<label class="lb-lg" for="newsletterPage">
-					<f:translate key="module.newsletter.new.field.origin">Origin PID</f:translate>
-					*
-				</label>
-				<f:form.textfield
-					class="form-control input-lg"
-					data="{cutemailing-mandatory:'1',cutemailing-wizardpreviewevent:'newsletter'}"
-					id="newsletterPage"
-					placeholder="https://www.yourdomain/newsletter/2020-01/"
-					property="newsletterPage"
-					required="required"
-					value="{newsletterPage}"/>
-				<span class="help-block">
-                    <f:translate key="module.newsletter.new.field.origin.description">PID or absolute URL</f:translate>
-                </span>
-			</div>
-		</div>
-
+	</div>
+	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
 				<label class="lb-lg" for="description">
@@ -319,6 +301,8 @@
 	<button class="btn btn-primary btn-lg" data-wizardform-gotostep="2">
 		<f:translate key="module.newsletter.wizard.back">Back</f:translate>
 	</button>
+	<f:form.hidden property="newsletterPage" value="{newsletterPage}" data="{cutemailing-newsletterpage:1}" />
+	<f:form.hidden property="language" value="{language}" data="{cutemailing-language:1}" />
 	<f:form.hidden property="pageTypeHtml" data="{cutemailing-pagetype-html:true}" value="{pageTypeHtml}"/>
 	<f:form.hidden property="pageTypeText" data="{cutemailing-pagetype-text:true}" value="{pageTypeText}"/>
 	<f:form.hidden property="allowedMarker" value="{allowedMarker}"/>

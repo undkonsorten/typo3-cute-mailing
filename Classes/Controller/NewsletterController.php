@@ -12,6 +12,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
@@ -111,9 +112,20 @@ class NewsletterController extends ActionController
         return $this->htmlResponse();
     }
 
+    public function prepareAction(): ResponseInterface
+    {
+        $assign = [];
+        $currentPid = $this->getCurrentPageUid();
+        $assign['newsletterPage'] = $currentPid;
+        $siteLanguages = $this->getSiteLanguagesForPid($currentPid);
+        $assign['languages'] = $siteLanguages;
+        $this->view->assignMultiple($assign);
+        return $this->htmlResponse();
+    }
+
     public function editAction(Newsletter $newsletter): ResponseInterface
     {
-        $currentPid = (int)GeneralUtility::_GP('id');
+        $currentPid = $this->getCurrentPageUid();
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
         $assign['recipientList'] = $this->recipientListRepository->findByRootline($rootline);
         $assign['testRecipientList'] = $this->recipientListRepository->findByRootline($rootline);
@@ -128,12 +140,16 @@ class NewsletterController extends ActionController
      * @throws InvalidConfigurationTypeException
      * @noinspection PhpUnused
      */
-    public function newAction(): ResponseInterface
+    public function newAction(?int $newsletterPage = null, ?int $language = null): ResponseInterface
     {
-        $currentPid = (int)GeneralUtility::_GP('id');
+        $currentPid = $this->getCurrentPageUid();
         $pageTs = BackendUtility::getPagesTSconfig($currentPid);
         $page = BackendUtility::getRecord('pages', $currentPid);
-        $assign['newsletterPage'] = $currentPid;
+        if ($this->shouldForwardToPrepareAction($currentPid, $page, $pageTs, $newsletterPage, $language)) {
+            return new ForwardResponse('prepare');
+        }
+        $assign['newsletterPage'] = $newsletterPage ?? $currentPid;
+        $assign['language'] = $language ?? 0;
         $assign['title'] = $page['title'];
         $assign['subject'] = $page['title'];
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
@@ -155,7 +171,7 @@ class NewsletterController extends ActionController
             $assign['pageTypeText'] = $pageTs['page_type_text'];
             $assign['allowedMarker'] = $pageTs['allowed_marker'];
             // @Todo make this configurable in the newsletter wizard, assign available languages here
-            $assign['language'] = $pageTs['language'] ?? 0;
+            $assign['language'] = $language ?? $pageTs['language'] ?? 0;
             $assign['returnPath'] = $pageTs['return_path'];
         }
 
@@ -316,6 +332,27 @@ class NewsletterController extends ActionController
         ]);
         /** @noinspection PhpComposerExtensionStubsInspection */
         return $this->jsonResponse(json_encode(['html' => $standaloneView->render()]));
+    }
+
+    protected function getCurrentPageUid(): int
+    {
+        return (int)GeneralUtility::_GP('id');
+    }
+
+    protected function shouldForwardToPrepareAction(int $currentPid, ?array $page, array $pageTs, ?int $newsletterPage, ?int $language): bool
+    {
+        /** @noinspection IfReturnReturnSimplificationInspection */
+        if ($newsletterPage !== null && $language !== null) {
+            return false;
+        }
+        return true;
+    }
+
+    protected function getSiteLanguagesForPid(int $currentPid): array
+    {
+        /** @var Site $site */
+        $site = $this->request->getAttribute('site');
+        return $site->getLanguages();
     }
 
 }
