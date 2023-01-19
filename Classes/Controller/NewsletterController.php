@@ -182,7 +182,7 @@ class NewsletterController extends ActionController
             }
         }
         $assign['newsletterPage'] = $newsletterPage ?? $currentPid;
-        $assign['language'] = $language ?? 0;
+        $assign['language'] = $language ?? $pageTs['language'] ?? 0;
         $assign['title'] = $page['title'];
         $assign['subject'] = $page['title'];
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
@@ -198,8 +198,6 @@ class NewsletterController extends ActionController
         $assign['pageTypeHtml'] = $pageTs['page_type_html'];
         $assign['pageTypeText'] = $pageTs['page_type_text'];
         $assign['allowedMarker'] = $pageTs['allowed_marker'];
-        // @Todo make this configurable in the newsletter wizard, assign available languages here
-        $assign['language'] = $language ?? $pageTs['language'] ?? 0;
         $assign['returnPath'] = $pageTs['return_path'];
 
         $this->view->assignMultiple($assign);
@@ -368,8 +366,8 @@ class NewsletterController extends ActionController
 
     protected function shouldForwardToPrepareAction(int $currentPid, ?array $page, array $pageTs, ?int $newsletterPage, ?int $language): bool
     {
-        if($page['doktype'] === PageRepository::DOKTYPE_SYSFOLDER){
-            /**@TODO Translate error messages **/
+        if ($page['doktype'] === PageRepository::DOKTYPE_SYSFOLDER) {
+            /** @TODO Translate error messages * */
             $this->addFlashMessage(
                 "Sysfolder can not be selected, please use another page.",
                 "Wrong page type",
@@ -377,18 +375,18 @@ class NewsletterController extends ActionController
             );
             return true;
         }
-        /** @noinspection IfReturnReturnSimplificationInspection */
         if ($newsletterPage !== null && $language !== null) {
             return false;
         }
 
-        $hideLanguageSelection = $pageTs['mod.']['web_modules.']['cute_mailing.']['hideLanguageSelection'] ?? false;
-        if($hideLanguageSelection){
+        $hideLanguageSelection = $pageTs['hideLanguageSelection'] ?? false;
+        if ($hideLanguageSelection) {
             return false;
         }
 
         $languages = $this->getSiteLanguagesForPid($newsletterPage ?? $currentPid);
-        if(count($languages) < 2){
+        /** @noinspection IfReturnReturnSimplificationInspection */
+        if (count($languages) < 2) {
             return false;
         }
         return true;
