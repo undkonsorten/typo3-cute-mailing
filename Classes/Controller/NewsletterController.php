@@ -357,6 +357,10 @@ class NewsletterController extends ActionController
         if ($newsletterPage !== null && $language !== null) {
             return false;
         }
+        $languages = $this->getSiteLanguagesForPid($currentPid);
+        if(count($languages) < 2){
+            return false;
+        }
         return true;
     }
 
