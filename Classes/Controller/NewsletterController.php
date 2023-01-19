@@ -127,9 +127,16 @@ class NewsletterController extends ActionController
         $assign['newsletterPage'] = $currentPid;
         $siteLanguages = $this->getSiteLanguagesForPid($currentPid);
 
-        $assign['displayLanguageSelect'] = false;
-        if(count($siteLanguages) >= 2){
-            $assign['displayLanguageSelect'] = true;
+        $currentPid = $this->getCurrentPageUid();
+        $pageTs = BackendUtility::getPagesTSconfig($currentPid);
+
+        $assign['displayLanguageSelect'] = true;
+        if (isset($pageTs['mod.']['web_modules.']['cute_mailing.']['hideLanguageSelection'])) {
+            $assign['displayLanguageSelect'] = !$pageTs['mod.']['web_modules.']['cute_mailing.']['hideLanguageSelection'];
+        }
+
+        if(count($siteLanguages) < 2){
+            $assign['displayLanguageSelect'] = false;
         }
         $assign['languages'] = $siteLanguages;
         $this->view->assignMultiple($assign);
@@ -156,9 +163,11 @@ class NewsletterController extends ActionController
     public function newAction(?int $newsletterPage = null, ?int $language = null): ResponseInterface
     {
         $currentPid = $this->getCurrentPageUid();
-        $pageTs = BackendUtility::getPagesTSconfig($currentPid);
-        $page = BackendUtility::getRecord('pages', $currentPid);
+        $pageTs = BackendUtility::getPagesTSconfig($currentPid)['mod.']['web_modules.']['cute_mailing.'] ?? [];
 
+        $page = BackendUtility::getRecord('pages', $newsletterPage ?? $currentPid );
+
+        $language = $language ?? (int)$pageTs['language'];
         if ($this->shouldForwardToPrepareAction($currentPid, $page, $pageTs, $newsletterPage, $language)) {
             return new ForwardResponse('prepare');
         }
@@ -175,22 +184,16 @@ class NewsletterController extends ActionController
         $assign['defaultSendingTime'] = new DateTime('now');
 
 
-        //$pageTs = $this->getPageTsFromPage($currentPid);
-
-        //Are default values set via pageTs?
-        if (isset($pageTs['mod.']['web_modules.']['cute_mailing.'])) {
-            $pageTs = $pageTs['mod.']['web_modules.']['cute_mailing.'];
-            $assign['sender'] = $pageTs['sender'];
-            $assign['senderName'] = $pageTs['sender_name'];
-            $assign['replyTo'] = $pageTs['reply_to'];
-            $assign['replyToName'] = $pageTs['reply_to_name'];
-            $assign['pageTypeHtml'] = $pageTs['page_type_html'];
-            $assign['pageTypeText'] = $pageTs['page_type_text'];
-            $assign['allowedMarker'] = $pageTs['allowed_marker'];
-            // @Todo make this configurable in the newsletter wizard, assign available languages here
-            $assign['language'] = $language ?? $pageTs['language'] ?? 0;
-            $assign['returnPath'] = $pageTs['return_path'];
-        }
+        $assign['sender'] = $pageTs['sender'];
+        $assign['senderName'] = $pageTs['sender_name'];
+        $assign['replyTo'] = $pageTs['reply_to'];
+        $assign['replyToName'] = $pageTs['reply_to_name'];
+        $assign['pageTypeHtml'] = $pageTs['page_type_html'];
+        $assign['pageTypeText'] = $pageTs['page_type_text'];
+        $assign['allowedMarker'] = $pageTs['allowed_marker'];
+        // @Todo make this configurable in the newsletter wizard, assign available languages here
+        $assign['language'] = $language ?? $pageTs['language'] ?? 0;
+        $assign['returnPath'] = $pageTs['return_path'];
 
         $this->view->assignMultiple($assign);
         return $this->htmlResponse();
@@ -371,7 +374,13 @@ class NewsletterController extends ActionController
         if ($newsletterPage !== null && $language !== null) {
             return false;
         }
-        $languages = $this->getSiteLanguagesForPid($currentPid);
+
+        $hideLanguageSelection = $pageTs['mod.']['web_modules.']['cute_mailing.']['hideLanguageSelection'] ?? false;
+        if($hideLanguageSelection){
+            return false;
+        }
+
+        $languages = $this->getSiteLanguagesForPid($newsletterPage ?? $currentPid);
         if(count($languages) < 2){
             return false;
         }
