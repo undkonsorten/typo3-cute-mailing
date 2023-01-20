@@ -6,7 +6,18 @@
 <f:section name="content">
 	<f:render arguments="{_all}" partial="Miscellaneous/FlashMessages"/>
 	<f:form action="new">
+
 		<div class="row">
+			<div class="col-md-12">
+				<h1>
+					<f:translate key="module.newsletter.new.title">Add newsletter</f:translate>
+				</h1>
+				<div class="wizard prepare">
+					<span class="wizard__step current dummy">
+						<f:translate key="module.newsletter.wizard.prepare">Page and language</f:translate>
+					</span>
+				</div>
+			</div>
 			<div class="col-md-6">
 				<div class="form-group">
 					<label class="lb-lg" for="newsletterPage">

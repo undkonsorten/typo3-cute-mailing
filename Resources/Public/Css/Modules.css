@@ -140,9 +140,10 @@
 	background-color: #fff;
 	padding: 0.2em 0 0.2em 0.2em;
 	display: flex;
+	border-radius: 4px;
 }
 
-.wizard a {
+.wizard__step {
 	flex-grow: 1;
 	padding: 20px 12px 18px;
 	position: relative;
@@ -150,7 +151,6 @@
 	text-decoration: none;
 	min-width: 33.00%;
 	margin-left: 3px;
-	text-align: center;
 	font-size: 18px;
 	color: #fff;
 	font-weight: bold;
@@ -159,12 +159,15 @@
 	cursor: pointer;
 	margin-bottom: 20px
 }
+.wizard__step:not(.prepare) {
+	text-align: center;
+}
 
-.wizard a:hover {
+a.wizard__step:hover {
 	text-decoration: none
 }
 
-.wizard a:first-child {
+.wizard__step:first-child {
 	margin-left: 0
 }
 
@@ -223,16 +226,14 @@
 	border: none
 }
 
-.wizard a:first-child {
-	-webkit-border-radius: 4px 0 0 4px;
-	-moz-border-radius: 4px 0 0 4px;
-	border-radius: 4px 0 0 4px
+.wizard__step:first-child {
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
 }
 
-.wizard a:last-child {
-	-webkit-border-radius: 0 4px 4px 0;
-	-moz-border-radius: 0 4px 4px 0;
-	border-radius: 0 4px 4px 0
+.wizard__step:last-child {
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
 }
 
 .wizard.left-arrow a:last-child:before, .wizard.small.left-arrow a:last-child:before {
@@ -257,20 +258,20 @@
 	margin-left: 0
 }
 
-.wizard .current, .wizard a.progress-current {
+.wizard .current, .wizard .progress-current {
 	background: var(--cute-color);
 	color: #fff
 }
 
-.wizard .current .badge, .wizard a.progress-current .badge {
+.wizard .current .badge, .wizard .progress-current .badge {
 	color: var(--cute-color)
 }
 
-.wizard a.current:after, .wizard a.progress-current:after {
+.wizard .current:after, .wizard .progress-current:after {
 	border-left-color: var(--cute-color) !important
 }
 
-.wizard.left-arrow a.current:before, .wizard.left-arrow a.progress-current:before, .wizard.small.left-arrow a.current:before, .wizard.small.left-arrow a.progress-current:before {
+.wizard.left-arrow .current:before, .wizard.left-arrow .progress-current:before, .wizard.small.left-arrow .current:before, .wizard.small.left-arrow .progress-current:before {
 	border-right-color: var(--cute-color)
 }
 
@@ -331,14 +332,18 @@ label {
 .progress-bar {
 	background-color: var(--cute-color)
 }
-
+.btn {
+	font-weight: bold;
+	font-size: 1.5em;
+	border-radius: 4px;
+}
 .btn-primary {
 	background-color: var(--cute-color);
 	border-color: var(--cute-color);
 	color: #fff
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-primary:active  {
 	background-color: var(--cute-color--darken);
 	border-color: var(--cute-color--darken);
 }
