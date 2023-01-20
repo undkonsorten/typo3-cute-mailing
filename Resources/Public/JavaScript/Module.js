@@ -128,8 +128,13 @@ define(['jquery'], function ($) {
 				container.innerHTML = '';
 				var subject = document.querySelector('[data-cutemailing-subject]');
 				if (subject) {
+					var subjectPrefix = document.querySelector('[data-cutemailing-subject-prefix]');
 					var subjectElement = document.createElement("h3");
-					subjectElement.innerHTML = subject.value;
+					var subjectHtml = subject.value;
+					if(subjectPrefix) {
+						subjectHtml = '<span class="prefix">' + subjectPrefix.getAttribute('data-cutemailing-subject-prefix') + '</span><span class="subject">' + subjectHtml + '</span>';
+					}
+					subjectElement.innerHTML = subjectHtml;
 					subjectElement.classList.add("newsletter-preview-subject-line");
 					container.appendChild(subjectElement);
 				}

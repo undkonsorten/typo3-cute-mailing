@@ -60,6 +60,9 @@
 			<trans-unit id="module.newsletter.new.wizarduserpreview.nousersfound.addition">
 				<source>Choose a different group</source>
 			</trans-unit>
+			<trans-unit id="module.newsletter.new.wizarduserpreview.subject.prefix">
+				<source>Subject:</source>
+			</trans-unit>
 			<trans-unit id="module.newsletter.list.tableheader.datetime">
 				<source>Scheduled sending time</source>
 			</trans-unit>
