@@ -22,6 +22,18 @@ Page TS-Config
 
 You can configure your newsletter default via Page TSconfig.
 
+If you dont need multi language support you can deactivate it via:
+
+.. code-block:: typoscript
+
+   mod.web_modules.cute_mailing.hideLanguageSelection = 1
+
+The language of created newsletter can also be set via page TSconfig:
+
+.. code-block:: typoscript
+
+   mod.web_modules.cute_mailing.language = 1
+
 Typical example
 ~~~~~~~~~~~~~~~
 
@@ -38,6 +50,7 @@ Typical example
       page_type_text = 111
       # list markers allowed to be replaced in the rendered page
       allowed_marker = firstName,lastName,registeraddresshash
+      return_path = bounce@undkonsorten.com
    }
 
 Taskqueue

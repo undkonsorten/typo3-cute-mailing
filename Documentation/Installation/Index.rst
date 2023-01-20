@@ -43,3 +43,14 @@ for sending the emails.
 The extension is automatically installed during installation via Composer.
 If Cute Mailing is installed via one of the other ways, the extension must be
 installed manually before.
+
+Recipient lists
+---------------
+
+By default the extension comes with a line seperated recipient list.
+But there are extension that introduce different recipient list for
+`tt_address <https://github.com/FriendsOfTYPO3/tt_address>`__ or
+`registeraddress <https://github.com/lsascha/registeraddress>`__ :
+
+* `undkonsorten/typo3-cute-mailing-ttaddress <https://github.com/undkonsorten/typo3-cute-mailing-ttaddress>`__
+* `undkonsorten/typo3-cute-mailing-registeraddress <https://github.com/undkonsorten/typo3-cute-mailing-registeraddress>`__

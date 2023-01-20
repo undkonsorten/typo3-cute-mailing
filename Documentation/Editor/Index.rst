@@ -23,6 +23,10 @@ Create recipient lists first.
    Create one list for the normal recipients and one list with addresses for
    a test mailing.
 
+.. tip::
+
+   Consider using our suggested extensions for different recipient list e.g tt_address
+
 
 .. figure:: /Images/Build/Recipientslist.png
    :class: with-shadow
@@ -47,6 +51,8 @@ in the page tree. Then click the [+] button.
 The fields in the wizard are prefilled with the default data you entered in
 Page TSconfig. You can change the target page and other data for the newsletter
 in the wizard. The fields have a description and should be self-explanatory.
+
+If you have multiple languages you will be asked which language should be used.
 
 Once you have filled in all the necessary information you can save the
 newsletter. It will not yet be released for dispatch.
