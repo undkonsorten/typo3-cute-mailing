@@ -7,11 +7,8 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<f:translate
-							key="LLL:EXT:cute_mailing/Resources/Private/Language/locallang.xlf:module.newsletter.new.wizarduserpreview.previewreceivers">
-							Preview of the receivers
-						</f:translate>
-						<span class="badge" title="{userAmount} receivers">{userAmount}</span>
+						<f:translate key="module.newsletter.new.wizarduserpreview.previewreceivers" extensionName="CuteMailing">Preview of the receivers</f:translate>
+						<span class="badge" title="{userAmount} {f:translate(key:'module.newsletter.new.wizarduserpreview.amountReceivers',extensionName:'CuteMailing')}">{userAmount}</span>
 					</h3>
 				</div>
 				<div class="panel-body">
@@ -27,10 +24,7 @@
 										 src="{f:uri.resource(path: 'Images/DummyUser.svg', extensionName: 'cute_mailing')}"
 										 width="32" />
 								{userAmount - 3}
-								<f:translate
-									key="LLL:EXT:cute_mailing/Resources/Private/Language/locallang.xlf:module.newsletter.new.wizarduserpreview.further">
-									Further
-								</f:translate>
+								<f:translate key="module.newsletter.new.wizarduserpreview.further" extensionName="CuteMailing">Further</f:translate>
 								...
 							</li>
 						</f:if>
@@ -41,16 +35,10 @@
 		<f:else>
 			<div class="alert alert-warning" role="alert">
 				<h4 class="alert-heading">
-					<f:translate
-						key="LLL:EXT:cute_mailing/Resources/Private/Language/locallang.xlf:module.newsletter.new.wizarduserpreview.nousersfound.title">
-						No users
-					</f:translate>
+					<f:translate key="module.newsletter.new.wizarduserpreview.nousersfound.title" extensionName="CuteMailing">No users</f:translate>
 				</h4>
 				<p>
-					<f:translate
-						key="LLL:EXT:cute_mailing/Resources/Private/Language/locallang.xlf:module.newsletter.new.wizarduserpreview.nousersfound.addition">
-						Choose a different group
-					</f:translate>
+					<f:translate key="module.newsletter.new.wizarduserpreview.nousersfound.addition" extensionName="CuteMailing">Choose a different group</f:translate>
 				</p>
 			</div>
 		</f:else>

@@ -30,6 +30,36 @@
 			<trans-unit id="module.newsletter.new.field.sendingTime">
 				<source>Scheduled sending time</source>
 			</trans-unit>
+			<trans-unit id="module.newsletter.new.message.notready">
+				<source>Newsletter is not yet ready to be sent!</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.message.notready.origin">
+				<source>Please select an origin for your newsletter</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.message.notready.receiver">
+				<source>Please choose a receiver group.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.message.notready.mandatory">
+				<source>Please fill all	mandatory fields.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.wizarduserpreview.previewnewsletter">
+				<source>Newsletter Preview</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.wizarduserpreview.previewreceivers">
+				<source>Preview of the receivers</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.wizarduserpreview.amountReceivers">
+				<source>receivers</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.wizarduserpreview.further">
+				<source>further</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.wizarduserpreview.nousersfound.title">
+				<source>No users</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.new.wizarduserpreview.nousersfound.addition">
+				<source>Choose a different group</source>
+			</trans-unit>
 			<trans-unit id="module.newsletter.list.tableheader.datetime">
 				<source>Scheduled sending time</source>
 			</trans-unit>
@@ -48,9 +78,6 @@
 			<trans-unit id="module.newsletter.new.field.origin.description">
 				<source>UID of the newsletter page that sould be send with this campaign.</source>
 			</trans-unit>
-			<trans-unit id="module.newsletter.prepare.field.language">
-                <source>Language</source>
-            </trans-unit>
 			<trans-unit id="module.newsletter.new.field.description">
 				<source>Description (internal)</source>
 			</trans-unit>
@@ -143,18 +170,9 @@
 			<trans-unit id="save">
 				<source>Save</source>
 			</trans-unit>
-			<trans-unit id="startWizard">
-                <source>Start Wizard</source>
-            </trans-unit>
 			<trans-unit id="sendoutOf">
 				<source>of</source>
 			</trans-unit>
-			<trans-unit id="message.choosePage">
-				<source>Please choose a newsletter page first!</source>
-			</trans-unit>
-			<trans-unit id="message.chooseLanguage">
-                <source>Please choose a language</source>
-            </trans-unit>
 			<trans-unit id="module.newsletter.create.message">
 				<source>Newsletter successfully created</source>
 			</trans-unit>
@@ -202,6 +220,22 @@
 			</trans-unit>
 			<trans-unit id="module.newsletter.preparePage.wrongType.title">
 				<source>Wrong page type!</source>
+			</trans-unit>
+
+			<trans-unit id="module.newsletter.prepare.title">
+				<source>Prepare Newsletter</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.prepare.description">
+				<source>Change the page uid and set the language for the newsletter. Be sure the selected page is already translated before you select a language.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.prepare.wizard">
+				<source>Page and language</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.prepare.field.language">
+				<source>Choose language for the newsletter</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.prepare.button.go">
+				<source>Next</source>
 			</trans-unit>
 		</body>
 	</file>

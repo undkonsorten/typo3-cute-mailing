@@ -4,20 +4,23 @@
 <f:layout name="Backend"/>
 
 <f:section name="content">
+	<div class="col-md-12">
+		<h1>
+			<f:translate key="module.newsletter.prepare.title">Prepare newsletter</f:translate>
+		</h1>
+		<p><f:translate key="module.newsletter.prepare.description">Choose page and language</f:translate></p>
+		<div class="wizard prepare">
+			<span class="wizard__step current dummy">
+				<f:translate key="module.newsletter.prepare.wizard">Page and language</f:translate>
+			</span>
+		</div>
+	</div>
+
+
 	<f:render arguments="{_all}" partial="Miscellaneous/FlashMessages"/>
 	<f:form action="new">
 
 		<div class="row">
-			<div class="col-md-12">
-				<h1>
-					<f:translate key="module.newsletter.new.title">Add newsletter</f:translate>
-				</h1>
-				<div class="wizard prepare">
-					<span class="wizard__step current dummy">
-						<f:translate key="module.newsletter.wizard.prepare">Page and language</f:translate>
-					</span>
-				</div>
-			</div>
 			<div class="col-md-6">
 				<div class="form-group">
 					<label class="lb-lg" for="newsletterPage">
@@ -39,8 +42,7 @@
 				<div class="col-md-6">
 				<div class="form-group">
 					<label class="lb-lg" for="language">
-						<f:translate key="module.newsletter.prepare.field.language">Language
-						</f:translate>
+						<f:translate key="module.newsletter.prepare.field.language">Language</f:translate>
 						*
 					</label>
 					<f:form.select
@@ -53,13 +55,13 @@
 							optionLabelField="title"
 					/>
 					<span class="help-block">
-					<f:translate key="message.chooseLanguage">Chose a language.</f:translate>
+					<f:translate key="module.newsletter.prepare.field.language">Choose a language.</f:translate>
 				</span>
 				</div>
 			</div>
 			</f:if>
 		</div>
-		<f:form.submit class="btn btn-lg btn-primary mb-3 pull-right" value="{f:translate(key:'startWizard',extensionName:'CuteMailing')}" />
+		<f:form.submit class="btn btn-lg btn-primary mb-3 pull-right" value="{f:translate(key: 'module.newsletter.prepare.button.go', default: 'Next')}" />
 	</f:form>
 </f:section>
 </html>
