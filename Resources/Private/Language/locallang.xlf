@@ -48,6 +48,9 @@
 			<trans-unit id="module.newsletter.new.field.origin.description">
 				<source>UID of the newsletter page that sould be send with this campaign.</source>
 			</trans-unit>
+			<trans-unit id="module.newsletter.prepare.field.language">
+                <source>Language</source>
+            </trans-unit>
 			<trans-unit id="module.newsletter.new.field.description">
 				<source>Description (internal)</source>
 			</trans-unit>
@@ -140,6 +143,9 @@
 			<trans-unit id="save">
 				<source>Save</source>
 			</trans-unit>
+			<trans-unit id="startWizard">
+                <source>Start Wizard</source>
+            </trans-unit>
 			<trans-unit id="sendoutOf">
 				<source>of</source>
 			</trans-unit>
