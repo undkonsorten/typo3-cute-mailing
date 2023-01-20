@@ -152,6 +152,9 @@
 			<trans-unit id="message.choosePage">
 				<source>Please choose a newsletter page first!</source>
 			</trans-unit>
+			<trans-unit id="message.chooseLanguage">
+                <source>Please choose a language</source>
+            </trans-unit>
 			<trans-unit id="module.newsletter.create.message">
 				<source>Newsletter successfully created</source>
 			</trans-unit>
