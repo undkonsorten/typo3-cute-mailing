@@ -175,8 +175,8 @@ class NewsletterController extends ActionController
             $page = $this->pageRepository->getPageOverlay($page, $language);
             if($page['sys_language_uid'] !== $language){
                 $this->addFlashMessage(
-                    "This page does not exist for chosen language.",
-                    "Translation does not exist.",
+                    LocalizationUtility::translate('module.newsletter.noTranslation.message', 'cute_mailing'),
+                    LocalizationUtility::translate('module.newsletter.noTranslation.title', 'cute_mailing'),
                     AbstractMessage::WARNING
                 );
             }
@@ -287,7 +287,7 @@ class NewsletterController extends ActionController
     public function enableAction(Newsletter $newsletter): void
     {
         if ($newsletter->getStatus() >= $newsletter::SCHEDULED) {
-            $this->addFlashMessage('Newsletter was already send.', 'Was sended.', AbstractMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.newsletterSend.message', 'cute_mailing'), LocalizationUtility::translate('module.newsletter.newsletterSend.title', 'cute_mailing'), AbstractMessage::ERROR);
         } else {
             $newsletter->enable();
             /**@var $newsletterTask NewsletterTask* */
@@ -296,7 +296,7 @@ class NewsletterController extends ActionController
             $newsletterTask->setStartDate($newsletter->getSendingTime()->getTimestamp());
             $this->taskRepository->add($newsletterTask);
             $this->newsletterRepository->update($newsletter);
-            $this->addFlashMessage('Newsletter was queued for sending.', 'Sending....', AbstractMessage::OK);
+            $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.newsletterQueued.message', 'cute_mailing'), LocalizationUtility::translate('module.newsletter.newsletterQueued.title', 'cute_mailing'), AbstractMessage::OK);
         }
 
         $this->redirect('list');
@@ -305,7 +305,7 @@ class NewsletterController extends ActionController
     public function updateAction(Newsletter $newsletter): void
     {
         $this->newsletterRepository->update($newsletter);
-        $this->addFlashMessage('Newsletter was updated.', 'Updated', AbstractMessage::OK);
+        $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.newsletterUpdated.message', 'cute_mailing'), LocalizationUtility::translate('module.newsletter.newsletterUpdated.title', 'cute_mailing'), AbstractMessage::OK);
         $this->redirect('list');
     }
 
@@ -335,9 +335,9 @@ class NewsletterController extends ActionController
 
             $this->taskRepository->add($newsletterTask);
             $this->newsletterRepository->update($newsletter);
-            $this->addFlashMessage('Your test mailing is being send out for the recipient group: ' . $newsletter->getTestRecipientList()->getName(), 'Testmailing invoked', AbstractMessage::OK);
+            $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.testMailToGroup.message', 'cute_mailing') . $newsletter->getTestRecipientList()->getName(), LocalizationUtility::translate('module.newsletter.testMailToGroup.title', 'cute_mailing'), AbstractMessage::OK);
         } else {
-            $this->addFlashMessage('This newsletter has no test recipient.', 'Error', AbstractMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.testMailNoRecipient.message', 'cute_mailing'), LocalizationUtility::translate('module.newsletter.testMailNoRecipient.title', 'cute_mailing'), AbstractMessage::ERROR);
         }
         $this->redirect('list');
 
@@ -369,8 +369,8 @@ class NewsletterController extends ActionController
         if ($page['doktype'] === PageRepository::DOKTYPE_SYSFOLDER) {
             /** @TODO Translate error messages * */
             $this->addFlashMessage(
-                "Sysfolder can not be selected, please use another page.",
-                "Wrong page type",
+                LocalizationUtility::translate('module.newsletter.preparePage.wrongType.message', 'cute_mailing'),
+                LocalizationUtility::translate('module.newsletter.preparePage.wrongType.title', 'cute_mailing'),
                 AbstractMessage::WARNING
             );
             return true;

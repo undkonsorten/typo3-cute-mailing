@@ -152,6 +152,48 @@
 			<trans-unit id="module.newsletter.delete.message">
 				<source>Newsletter successfully deleted</source>
 			</trans-unit>
+			<trans-unit id="module.newsletter.noTranslation.message">
+				<source>This page does not exist for chosen language. Start again and choose another page or language.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.noTranslation.title">
+				<source>Translation does not exist.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.newsletterSended.message">
+				<source>Newsletter was already send.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.newsletterSended.title">
+				<source>Was sended</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.newsletterQueued.message">
+				<source>Newsletter was queued for sending.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.newsletterQueued.title">
+				<source>Sending....</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.newsletterUpdated.message">
+				<source>Newsletter was updated.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.newsletterUpdated.title">
+				<source>Updated</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.testMailToGroup.message">
+				<source>Your test mailing is being send out for the recipient group: </source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.testMailToGroup.title">
+				<source>Testmailing invoked</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.testMailNoRecipient.message">
+				<source>This test for the newsletter has no recipient(s). Please check test recipients list.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.testMailNoRecipient.title">
+				<source>Error: No test recipient(s)!</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.preparePage.wrongType.message">
+				<source>Sysfolder can not be selected, please use another page.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.preparePage.wrongType.title">
+				<source>Wrong page type!</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
