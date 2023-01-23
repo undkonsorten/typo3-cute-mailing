@@ -107,6 +107,11 @@ the language.
 
    Module Cute Mailing: Additionally step on creating multilanguage Newsletter
 
+.. important::
+
+   Be sure the selected page is translated! Otherwise they are errors in wizard preview
+   on accessing the page.
+
 If you won't creating multilanguage Newsletter (just default language) you can
 disable those additionally step by setting `mod.web_modules.cute_mailing.language` to `1`.
 
