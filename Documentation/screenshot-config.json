@@ -1,19 +1,22 @@
 {
   "configuration": {
-    "screenPath": "./screens/",
+    "screenPath": "./project/screens/",
     "screenWidth": 1280,
     "screenHeight": 800,
-    "defaultTimeout": 6000
+    "defaultTimeout": 6000,
+    "fullPage": true,
+    "protocol": "https://",
+    "host": "cute-mailing.dev.undko.de.lan"
   },
   "items": [
     {
-      "url": "https://cute-mailing.dev.undko.de.lan/typo3/module/tools/TaskqueueTaskqueue",
+      "url": "/typo3/module/tools/TaskqueueTaskqueue",
       "selector": ".module-docheader-bar-column-left .btn-toolbar",
       "filename": "TaskQueueDashboardButtons",
       "iFrameSelector":"#typo3-contentIframe"
     },
     {
-      "url": "https://cute-mailing.dev.undko.de.lan/typo3/module/web/CuteMailingCutemailing?id=94",
+      "url": "/typo3/module/web/CuteMailingCutemailing?id=94",
       "selector": "",
       "filename": "NewsletterModule",
       "clickOnIt": [
@@ -22,12 +25,12 @@
       ]
     },
     {
-      "url": "https://cute-mailing.dev.undko.de.lan/typo3/module/web/list?id=94&table=tx_cutemailing_domain_model_recipientlist",
+      "url": "/typo3/module/web/list?id=94&table=tx_cutemailing_domain_model_recipientlist&sortField=name&sortRev=0",
       "selector": "",
       "filename": "Recipientslist"
     },
     {
-      "url": "https://cute-mailing.dev.undko.de.lan/typo3/record/edit?edit%5Bpages%5D%5B94%5D=edit&returnUrl=%2Ftypo3%2Fmodule%2Fweb%2Flist%3Ftoken%3Db36d93a4347edbf0a58d51ed672da0f4d7c94aeb%26id%3D94%26table%3D%26pointer%3D1",
+      "url": "/typo3/record/edit?edit%5Bpages%5D%5B94%5D=edit",
       "selector": "",
       "filename": "CuteMailingSysfolder",
       "clickOnIt": [
@@ -36,20 +39,44 @@
         {
           "iframe": [
             "#typo3-contentIframe",
-            ".btn.btn-default.btn-sm[title='Edit page properties']"
+            [
+              ".btn.btn-default.btn-sm[title='Edit page properties']",
+              ".module-body.t3js-module-body .typo3-TCEforms .t3js-tabmenu-item.nav-item:nth-child(3)"
+            ]
           ]
         }
       ]
     },
     {
-      "url": "https://cute-mailing.dev.undko.de.lan/typo3/module/tools/TaskqueueTaskqueue",
+      "url": "/typo3/module/tools/TaskqueueTaskqueue",
       "selector": "",
       "filename": "ModuleTaskQueue"
     },
     {
-      "url": "https://cute-mailing.dev.undko.de.lan/typo3/module/tools/TaskqueueTaskqueue",
+      "url": "/typo3/module/tools/TaskqueueTaskqueue",
       "selector": "#tools_TaskqueueTaskqueue",
       "filename": "TaskQueueModuleButton"
+    },
+    {
+      "url": "/typo3/module/web/CuteMailingCutemailing?id=70",
+      "selector": "",
+      "filename": "CreateMultilanguageNewsletter",
+      "clickOnIt": [
+        {
+          "iframe": [
+            "#typo3-contentIframe",
+            [
+              ".cute__list-add-new"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "url": "/typo3/module/web/CuteMailingCutemailing?id=70",
+      "selector": ".cute__list-edit-button",
+      "filename": "NewsletterModuleButtons",
+      "iFrameSelector":"#typo3-contentIframe"
     }
   ]
 }
