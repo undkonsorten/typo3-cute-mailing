@@ -112,10 +112,10 @@ the language.
    Be sure the selected page is translated! Otherwise they are errors in wizard preview
    on accessing the page.
 
-If you won't creating multilanguage Newsletter (just default language) you can
-disable those additionally step by setting `mod.web_modules.cute_mailing.language` to `1`.
+If you dont want to use multilanguage support (just default language) you can
+disable this feature and the additionally step in the wizard by setting `mod.web_modules.cute_mailing.hideLanguage` to `1`.
 
-Set `mod.web_modules.cute_mailing.language` with the language uid to use this
-for the default selected language on the first step.
+Set `mod.web_modules.cute_mailing.language` to the default language you want to use, this can be overwritten
+by language selection on the first step.
 
 See :ref:`Configuration <configuration_example>` section.
