@@ -96,3 +96,10 @@ connector extensions.
             .. code-block:: bash
 
                composer require undkonsorten/typo3-cute-mailing-ttaddress
+
+.. tip::
+
+   Cute Mailing comes with a simple recipient list which is ready to use after
+   installing the extension.
+   It's just a line separated list in a textfield. Can be used for a
+   Test-Recipients list or if you won't install any connector extension.
