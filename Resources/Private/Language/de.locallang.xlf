@@ -3,8 +3,316 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2022-10-09T12:38:21Z" product-name="cute_mailing" target-language="de">
     <header/>
     <body>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter" approved="yes">
+        <source>Task</source>
+        <target state="final">Aufgabe</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list" approved="yes">
+        <source>Recipient list</source>
+        <target state="final">Empfängerliste</target>
+      </trans-unit>
+      <trans-unit id="cute_mailing_sys_folder" approved="yes">
+        <source>Cute Mailing</source>
+        <target state="final">Cute Mailing</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.title" approved="yes">
+        <source>Create newsletter from current page</source>
+        <target state="final">Newsletter von der aktuellen Seite erstellen</target>
+      </trans-unit>
       <!-- Wizard -->
+      <trans-unit id="module.newsletter.new.field.title" approved="yes">
+        <source>Newsletter title (internal)</source>
+        <target state="final">Newsletter-Titel (intern)</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.title.description" approved="yes">
+        <source>This title is used only for internal description. It's not the email title.</source>
+        <target state="final">Dieser Titel wird nur für interne Beschreibung verwendet. Das ist nicht der E-Mail-Titel.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.title.placeholder" approved="yes">
+        <source>Newsletter Product A 2020/01</source>
+        <target state="final">Newsletter 2020/01</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.sendingTime" approved="yes">
+        <source>Scheduled sending time</source>
+        <target state="final">Versandzeitpunkt wählen</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.message.notready" approved="yes">
+        <source>Newsletter is not yet ready to be sent!</source>
+        <target state="final">Newsletter ist noch nicht versandfertig!</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.message.notready.origin" approved="yes">
+        <source>Please select an origin for your newsletter</source>
+        <target state="final">Bitte wählen Sie eine Quelle für Ihren Newsletter</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.message.notready.receiver" approved="yes">
+        <source>Please choose a receiver group.</source>
+        <target state="final">Bitte wählen Sie eine Empfängergruppe aus.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.message.notready.mandatory" approved="yes">
+        <source>Please fill all	mandatory fields.</source>
+        <target state="final">Bitte füllen Sie alle Pflichtfelder aus.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.previewnewsletter" approved="yes">
+        <source>Newsletter Preview</source>
+        <target state="final">Newsletter Vorschau</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.previewreceivers" approved="yes">
+        <source>Preview of the receivers</source>
+        <target state="final">Vorschau der Empfänger</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.amountReceivers" approved="yes">
+        <source>receivers</source>
+        <target state="final">Empfänger</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.further" approved="yes">
+        <source>further</source>
+        <target state="final">weitere</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.nousersfound.title" approved="yes">
+        <source>No users</source>
+        <target state="final">Keine Empfänger</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.nousersfound.addition" approved="yes">
+        <source>Choose a different group</source>
+        <target state="final">Bitte eine andere Empfängergruppe wählen.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.subject.prefix" approved="yes">
+        <source>Subject:</source>
+        <target state="final">Betreff:</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.tableheader.datetime" approved="yes">
+        <source>Scheduled sending time</source>
+        <target state="final">Versandzeitpunkt</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.sendingTime.description" approved="yes">
+        <source>The date and time when your newsletter sending should be scheduled.</source>
+        <target state="final">Datum und die Uhrzeit, zu der Ihr Newsletter verschickt werden soll.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.tableheader.status" approved="yes">
+        <source>Status</source>
+        <target state="final">Status</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.tableheader.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beschreibung</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.origin" approved="yes">
+        <source>Newsletter page</source>
+        <target state="final">Newsletter Seite</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.origin.description" approved="yes">
+        <source>UID of the newsletter page that sould be send with this campaign.</source>
+        <target state="final">UID der Newsletter Seite, die mit dieser Kampagne verschickt werden soll.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.description" approved="yes">
+        <source>Description (internal)</source>
+        <target state="final">Beschreibung (intern)</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.description.description" approved="yes">
+        <source>A newsletter description for internal usage only.</source>
+        <target state="final">Eine Newsletter-Beschreibung zur internen Nutzung.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.sender" approved="yes">
+        <source>Sender email</source>
+        <target state="final">Absender E-Mail</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.sender.description" approved="yes">
+        <source>Email address of the sender of the email. Attention your mailserver might need configuration to use this email address.</source>
+        <target state="final">E-Mail-Adresse des Absenders der E-Mail. Bitte beachten Sie, dass Ihr Mailserver eine entsprechende Konfiguration benötigt, um diese E-Mail-Adresse verwenden zu können.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.senderName" approved="yes">
+        <source>Sender name</source>
+        <target state="final">Absender Name</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.senderName.description" approved="yes">
+        <source>Name of the newsletter sender (will be displayed in the receivers email software).</source>
+        <target state="final">Name des Newsletter-Absenders (wird in der E-Mail-Software des Empfängers angezeigt).</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.replyTo" approved="yes">
+        <source>ReplyTo email</source>
+        <target state="final">Antwort E-Mail (Reply-To)</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.replyTo.description" approved="yes">
+        <source>If an newsletter receiver wants to answer on you newsletter this email address will be used as a receiver.</source>
+        <target state="final">Wenn ein Newsletter Empfänger antworten möchte, wird diese E-Mail-Adresse als Empfänger verwendet.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.replyToName" approved="yes">
+        <source>ReplyTo name</source>
+        <target state="final">Antwort an Name</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.replyToName.description" approved="yes">
+        <source>If an newsletter receiver wants to answer on you newsletter this name address will be used as a receiver.</source>
+        <target state="final">Wenn ein Newsletter Empfänger antworten möchte, wird dieser Name als Empfängername verwendet.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.receiver" approved="yes">
+        <source>Newsletter receivers</source>
+        <target state="final">Newsletter Empfänger</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.receiver.description" approved="yes">
+        <source>Choose the list of newsletter receivers.</source>
+        <target state="final">Wählen Sie eine Liste der Newsletter Empfänger.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.testReceiver" approved="yes">
+        <source>Test newsletter receivers</source>
+        <target state="final">Newslettertest Empfänger</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.testReceiver.description" approved="yes">
+        <source>Choose the list of newsletter receivers which sould recieve the test newsletter.</source>
+        <target state="final">Wählen Sie die Liste der Newsletter Empfänger, die den Test-Newsletter erhalten.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.subject" approved="yes">
+        <source>Newsletter/Email subject line</source>
+        <target state="final">Newsletter/E-Mail Betreffzeile</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.subject.placeholder" approved="yes">
+        <source>Your very good newsletter</source>
+        <target state="final">Ihr prima Newsletter</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.subject.description" approved="yes">
+        <source>The subject line of your newsletter will be shown in the email software of the receiver. Optimal length: 20-60 characters.</source>
+        <target state="final">Die Betreffzeile Ihres Newsletters wird in der E-Mail-Software des Empfängers angezeigt. Optimale Länge: 20-60 Zeichen.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.wizard.back" approved="yes">
+        <source>Back</source>
+        <target state="final">Zurück</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.wizard.next" approved="yes">
+        <source>Next</source>
+        <target state="final">Weiter</target>
+      </trans-unit>
       <!-- LIST -->
+      <trans-unit id="module.newsletter.list.edit" approved="yes">
+        <source>Edit</source>
+        <target state="final">Bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.delete" approved="yes">
+        <source>Delete</source>
+        <target state="final">Löschen</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.enable" approved="yes">
+        <source>Send</source>
+        <target state="final">Senden</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.test" approved="yes">
+        <source>Send test</source>
+        <target state="final">Testversand</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.test.attachImages" approved="yes">
+        <source>Test (attach Images)</source>
+        <target state="final">Testversand (Bilder einbetten)</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.enabled" approved="yes">
+        <source>Scheduled</source>
+        <target state="final">Geplant</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.enableConfirm" approved="yes">
+        <source>Please confirm you want to send out this newsletter campaign.</source>
+        <target state="final">Bitte bestätigen Sie, dass Sie diese Newsletter Kampagne verschicken möchten.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.deleteConfirm" approved="yes">
+        <source>Please confirm the deletion of this newsletter.</source>
+        <target state="final">Bitte bestätigen Sie die Löschung dieses Newsletters.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.tableheader.deleteConfirm" approved="yes">
+        <source>Please confirm the deletion of this newsletter.</source>
+        <target state="final">Bitte bestätigen Sie die Löschung dieses Newsletters.</target>
+      </trans-unit>
+      <trans-unit id="pleasechoose" approved="yes">
+        <source>Please choose a recipient list</source>
+        <target state="final">Bitte wählen Sie eine Empfängerliste</target>
+      </trans-unit>
+      <trans-unit id="save" approved="yes">
+        <source>Save</source>
+        <target state="final">Speichern</target>
+      </trans-unit>
+      <trans-unit id="sendoutOf" approved="yes">
+        <source>of</source>
+        <target state="final">von</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.create.message" approved="yes">
+        <source>Newsletter successfully created</source>
+        <target state="final">Newsletter erfolgreich erstellt</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.delete.message" approved="yes">
+        <source>Newsletter successfully deleted</source>
+        <target state="final">Newsletter erfolgreich gelöscht</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.noTranslation.message" approved="yes">
+        <source>This page does not exist for chosen language. Start again and choose another page or language.</source>
+        <target state="final">Diese Seite existiert nicht für die gewählte Sprache. Starten Sie erneut und wählen Sie eine andere Seite oder Sprache.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.noTranslation.title" approved="yes">
+        <source>Translation does not exist.</source>
+        <target state="final">Übersetzung existiert nicht.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.newsletterSended.message" approved="yes">
+        <source>Newsletter was already send.</source>
+        <target state="final">Newsletter wurde bereits versendet.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.newsletterSended.title" approved="yes">
+        <source>Was sended</source>
+        <target state="final">Gesendet</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.newsletterQueued.message" approved="yes">
+        <source>Newsletter was queued for sending.</source>
+        <target state="final">Der Newsletter wurde für den Versand in der Warteschlange gespeichert.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.newsletterQueued.title" approved="yes">
+        <source>Sending....</source>
+        <target state="final">Wird gesendet...</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.newsletterUpdated.message" approved="yes">
+        <source>Newsletter was updated.</source>
+        <target state="final">Newsletter wurde aktualisiert.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.newsletterUpdated.title" approved="yes">
+        <source>Updated</source>
+        <target state="final">Aktualisiert</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.testMailToGroup.message" approved="yes">
+        <source>Your test mailing is being send out for the recipient group: </source>
+        <target state="final">Ihr Testversand wird für die Empfängergruppe versendet: </target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.testMailToGroup.title" approved="yes">
+        <source>Testmailing invoked</source>
+        <target state="final">Testversand angestoßen</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.testMailNoRecipient.message" approved="yes">
+        <source>This test for the newsletter has no recipient(s). Please check test recipients list.</source>
+        <target state="final">Dieser Testversand für den Newsletter hat keine Empfänger. Bitte überprüfen Sie die Liste der Testempfänger.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.testMailNoRecipient.title" approved="yes">
+        <source>Error: No test recipient(s)!</source>
+        <target state="final">Fehler: Kein Test-Empfänger!</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.preparePage.wrongType.message" approved="yes">
+        <source>Sysfolder can not be selected, please use another page.</source>
+        <target state="final">Ein Sysordner kann nicht ausgewählt werden, bitte verwenden Sie eine andere Seite.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.preparePage.wrongType.title" approved="yes">
+        <source>Wrong page type!</source>
+        <target state="final">Falscher Seitentyp!</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.prepare.title" approved="yes">
+        <source>Prepare Newsletter</source>
+        <target state="final">Newsletter vorbereiten</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.prepare.description" approved="yes">
+        <source>Change the page uid and set the language for the newsletter. Be sure the selected page is already translated before you select a language.</source>
+        <target state="final">Ändern Sie die Seiten Uid und legen Sie die Sprache für den Newsletter fest. Stellen Sie sicher, dass die ausgewählte Seite bereits übersetzt ist, bevor Sie eine Sprache auswählen.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.prepare.wizard" approved="yes">
+        <source>Page and language</source>
+        <target state="final">Seite und Sprache</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.prepare.field.language" approved="yes">
+        <source>Choose language for the newsletter</source>
+        <target state="final">Sprache für den Newsletter auswählen</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.prepare.button.go" approved="yes">
+        <source>Next</source>
+        <target state="final">Weiter</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
