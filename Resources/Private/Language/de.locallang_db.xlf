@@ -3,51 +3,182 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2022-02-16T12:00:00Z" product-name="cute_mailing" target-language="de">
     <header/>
     <body>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		</body>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter" approved="yes">
+        <source>Newsletter</source>
+        <target state="final">Newsletter</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.title" approved="yes">
+        <source>Newsletter title (internal)</source>
+        <target state="final">Newslettertitel (intern)</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.title" approved="yes">
+        <source>Newsletter title (internal)</source>
+        <target state="final">Newslettertitel (intern)</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.subject" approved="yes">
+        <source>Email subject line (title)</source>
+        <target state="final">E-Mail Betreffzeile (Titel)</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beschreibung</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.sending_time" approved="yes">
+        <source>Scheduled sending time</source>
+        <target state="final">Versandzeitpunkt wählen</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.sender" approved="yes">
+        <source>Sender: Email</source>
+        <target state="final">Absender E-Mail</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.sender_name" approved="yes">
+        <source>Sender: Name</source>
+        <target state="final">Absender Name</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.reply_to" approved="yes">
+        <source>Reply to: Email address</source>
+        <target state="final">Antwort an: E-Mail-Adresse</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.reply_to_name" approved="yes">
+        <source>Reply to: Name</source>
+        <target state="final">Antwort an: Name</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.test_recipients" approved="yes">
+        <source>Testing recipients list</source>
+        <target state="final">Testempfängerliste</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.recipients" approved="yes">
+        <source>Newsletter recipients list</source>
+        <target state="final">Empfängerliste</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.status" approved="yes">
+        <source>Status</source>
+        <target state="final">Status</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.status.0" approved="yes">
+        <source>Created</source>
+        <target state="final">Erstellt</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.status.1" approved="yes">
+        <source>Tested</source>
+        <target state="final">Getestet</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.status.2" approved="yes">
+        <source>Scheduled</source>
+        <target state="final">Geplant</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.status.3" approved="yes">
+        <source>Sent</source>
+        <target state="final">Gesendet</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.page" approved="yes">
+        <source>Newsletter page (to be send)</source>
+        <target state="final">Newsletter Seite (zum senden)</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list" approved="yes">
+        <source>Recipient list</source>
+        <target state="final">Empfängerliste</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list.name" approved="yes">
+        <source>Name of recipient list</source>
+        <target state="final">Name der Empfängerliste</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list.page" approved="yes">
+        <source>Page with receivers</source>
+        <target state="final">Seite mit Empfängern</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list.type" approved="yes">
+        <source>Receiver table</source>
+        <target state="final">Tabelle der Empfänger</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list.type.ttaddress" approved="yes">
+        <source>Address (EXT:tt_address)</source>
+        <target state="final">Adresse (EXT:tt_adress)</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list.type.line_separated_list" approved="yes">
+        <source>Line separated recipient list</source>
+        <target state="final">Einfache Liste, Empfänger zeilenweise</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list.line_separated_list" approved="yes">
+        <source>Email addresses</source>
+        <target state="final">E-Mail Adressen</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list.line_separated_list.description" approved="yes">
+        <source>Please enter recipients‘ email addresses, one per line. Intended for test usage.</source>
+        <target state="final">Bitte geben Sie die E-Mail Adressen der Empfängers ein, eine pro Zeile. Kann als einfache Liste für Testempfänger verwendet werden.</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.page_type_html" approved="yes">
+        <source>Page type for html newsletter</source>
+        <target state="final">Seitentyp (typeNum) für HTML Format beim Versand der Newsletter</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.page_type_text" approved="yes">
+        <source>Page type for text newsletter</source>
+        <target state="final">Seitentyp (typeNum) für TEXT Format beim Versand der Newsletter</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.allowed_marker" approved="yes">
+        <source>Allowed marker</source>
+        <target state="final">Erlaubte Marker</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.return_path" approved="yes">
+        <source>Return path / envelope from</source>
+        <target state="final">Return Pfad (E-Mail Empfänger), für zurückgewiesene E-Mails</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.language" approved="yes">
+        <source>Language</source>
+        <target state="final">Sprache</target>
+      </trans-unit>
+      <trans-unit id="palettes.sender" approved="yes">
+        <source>Sender</source>
+        <target state="final">Absender</target>
+      </trans-unit>
+      <trans-unit id="palettes.reply_to" approved="yes">
+        <source>Reply to</source>
+        <target state="final">Antwort an</target>
+      </trans-unit>
+      <trans-unit id="palettes.page_types" approved="yes">
+        <source>Page types</source>
+        <target state="final">Seitentypen</target>
+      </trans-unit>
+      <trans-unit id="tabs.sender" approved="yes">
+        <source>Sender</source>
+        <target state="final">Absender</target>
+      </trans-unit>
+      <trans-unit id="tabs.recipients" approved="yes">
+        <source>Recipients</source>
+        <target state="final">Empfänger</target>
+      </trans-unit>
+      <trans-unit id="tabs.technical_details" approved="yes">
+        <source>Technical Details</source>
+        <target state="final">Technische Details</target>
+      </trans-unit>
+      <trans-unit id="tx_taskqueue_domain_model_task.newsletter" approved="yes">
+        <source>Newsletter</source>
+        <target state="final">Newsletter</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_sendout" approved="yes">
+        <source>Send-out</source>
+        <target state="final">Versendung</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_sendout.newsletter" approved="yes">
+        <source>Newsletter</source>
+        <target state="final">Newsletter</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_sendout.mail_tasks" approved="yes">
+        <source>Mail tasks</source>
+        <target state="final">Mail-Aufgaben</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_sendout.total" approved="yes">
+        <source>Total number of mails</source>
+        <target state="final">Gesamtzahl der E-Mails</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_sendout.completed" approved="yes">
+        <source>Completed mails count</source>
+        <target state="final">Anzahl abgeschlossener Mails</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_sendout.test" approved="yes">
+        <source>Is test sendout</source>
+        <target state="final">Ist Testversand</target>
+      </trans-unit>
+    </body>
   </file>
 </xliff>
