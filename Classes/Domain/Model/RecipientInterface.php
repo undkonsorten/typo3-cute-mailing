@@ -26,7 +26,7 @@ interface RecipientInterface
     /**
      * @return string
      */
-    public function getFirstName(): string;
+    public function getFirstName(): ?string;
 
 
     /**
@@ -37,7 +37,7 @@ interface RecipientInterface
     /**
      * @return string
      */
-    public function getLastName(): string;
+    public function getLastName(): ?string;
 
 
     /**
