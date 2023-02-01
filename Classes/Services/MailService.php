@@ -80,11 +80,12 @@ class MailService implements SingletonInterface
         $textUrl = (string)$site->getRouter()->generateUri($newsletter->getNewsletterPage(), ['type' => $newsletter->getPageTypeText(), '_language' => $newsletter->getLanguage()]);
         $htmlUrl = GeneralUtility::makeInstance(Uri::class, $htmlUrl);
         $textUrl = GeneralUtility::makeInstance(Uri::class, $textUrl);
+        $recipientName = trim(sprintf('%s %s',$recipient->getFirstName(), $recipient->getLastName()));
 
         $this->email
-            ->to($recipient->getEmail())
-            ->from($newsletter->getSender())
-            ->replyTo($newsletter->getReplyTo())
+            ->to(sprintf('%s <%s>',$recipientName, $recipient->getEmail()))
+            ->from(sprintf('%s <%s>',$newsletter->getSenderName(),$newsletter->getSender()))
+            ->replyTo(sprintf('%s <%s>',$newsletter->getReplyToName(),$newsletter->getReplyTo()))
             ->subject($newsletter->getSubject());
 
         if (trim($newsletter->getReturnPath())) {
