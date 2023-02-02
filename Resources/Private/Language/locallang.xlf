@@ -240,6 +240,13 @@
 			<trans-unit id="module.newsletter.prepare.button.go">
 				<source>Next</source>
 			</trans-unit>
+
+			<trans-unit id="module.newsletter.list.createnew.1">
+				<source>No newsletters yet, </source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.list.createnew.2">
+				<source>add a new one.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
