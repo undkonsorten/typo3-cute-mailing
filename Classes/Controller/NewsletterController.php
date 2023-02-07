@@ -401,7 +401,22 @@ class NewsletterController extends ActionController
 
     protected function getPageTsConfigForModule(?int $pid = null): array
     {
-        return BackendUtility::getPagesTSconfig($pid ?? $this->getCurrentPageUid())['mod.']['web_modules.']['cute_mailing.'] ?? [];
+        $pageTsDefault = [
+            'language' => null,
+            'sender' => '',
+            'sender_name' => '',
+            'reply_to' => '',
+            'reply_to_name' => '',
+            'page_type_html' => '',
+            'page_type_text' => '',
+            'allowed_marker' => '',
+            'return_path' => '',
+        ];
+        $pageTs = array_merge(
+            $pageTsDefault,
+            BackendUtility::getPagesTSconfig($pid ?? $this->getCurrentPageUid())['mod.']['web_modules.']['cute_mailing.'] ?? []
+        );
+        return $pageTs;
     }
 
 }
