@@ -74,12 +74,7 @@ class MailService implements SingletonInterface
 
         /** @var MailMessage $email */
         $this->email = GeneralUtility::makeInstance(MailMessage::class);
-        /** @var Site $site */
-        $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
-        $htmlUrl = (string)$site->getRouter()->generateUri($newsletter->getNewsletterPage(), ['type' => $newsletter->getPageTypeHtml(), '_language' => $newsletter->getLanguage()]);
-        $textUrl = (string)$site->getRouter()->generateUri($newsletter->getNewsletterPage(), ['type' => $newsletter->getPageTypeText(), '_language' => $newsletter->getLanguage()]);
-        $htmlUrl = GeneralUtility::makeInstance(Uri::class, $htmlUrl);
-        $textUrl = GeneralUtility::makeInstance(Uri::class, $textUrl);
+
 
         $this->email
             ->to($recipient->getEmail())
@@ -92,29 +87,27 @@ class MailService implements SingletonInterface
         }
 
         if ($mailTask->getFormat() == $mailTask::HTML) {
-            $response = $this->requestFactory->request($htmlUrl);
-            $content = $response->getBody()->getContents();
             if ($mailTask->isAttachImages()) {
-                $content = $this->attachImages($content);
+                $content = $this->attachImages($mailTask->getHtmlContent());
+            }else{
+                $content = $mailTask->getHtmlContent();
             }
             $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $content, $recipient);
             $this->email->html($content);
         }
         if ($mailTask->getFormat() == $mailTask::PLAINTEXT) {
-            $response = $this->requestFactory->request($textUrl);
-            $content = $response->getBody()->getContents();
+            $content = $mailTask->getTextContent();
             $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $content, $recipient);
             $this->email->text($content);
 
         }
         if ($mailTask->getFormat() == $mailTask::BOTH) {
-            $htmlResponse = $this->requestFactory->request($htmlUrl);
-            $textResponse = $this->requestFactory->request($textUrl);
-            $htmlContent = $htmlResponse->getBody()->getContents();
+            $textContent = $mailTask->getTextContent();
             if ($mailTask->isAttachImages()) {
-                $htmlContent = $this->attachImages($htmlContent);
+                $htmlContent = $this->attachImages($mailTask->getHtmlContent());
+            }else{
+                $htmlContent = $mailTask->getHtmlContent();
             }
-            $textContent = $textResponse->getBody()->getContents();
             $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $htmlContent, $recipient);
             $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $textContent, $recipient);
             $this->email

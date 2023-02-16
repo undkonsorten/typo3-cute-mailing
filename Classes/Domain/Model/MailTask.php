@@ -103,4 +103,26 @@ class MailTask extends Task
         return $this;
     }
 
+    public function setHtmlContent(string $htmlContent): self
+    {
+        $this->setProperty('htmlContent', $htmlContent);
+        return $this;
+    }
+
+    public function getHtmlContent(): string
+    {
+        return $this->getProperty('htmlContent');
+    }
+
+    public function setTextContent(string $textContent): self
+    {
+        $this->setProperty('textContent', $textContent);
+        return $this;
+    }
+
+    public function getTextContent(): string
+    {
+        return $this->getProperty('textContent');
+    }
+
 }
