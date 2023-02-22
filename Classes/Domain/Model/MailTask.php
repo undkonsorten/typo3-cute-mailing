@@ -29,6 +29,7 @@ class MailTask extends Task
      */
     protected $mailService;
 
+
     public function injectMailService(MailService $mailService)
     {
         $this->mailService = $mailService;
@@ -37,7 +38,6 @@ class MailTask extends Task
     public function run(): void
     {
         $this->mailService->sendMail($this);
-        $this->sendOut->incrementCompleted();
         $this->getNewsletter() && $this->getNewsletter()->updateStatus();
     }
 
@@ -124,5 +124,35 @@ class MailTask extends Task
     {
         return $this->getProperty('textContent');
     }
+
+    /**
+     * @return array
+     */
+    public function getRecipientChunk(): array
+    {
+        return $this->getProperty('recipientChunk')?:[];
+    }
+
+    /**
+     * @param array $recipientChunk
+     * @return MailTask
+     */
+    public function setRecipientChunk(array $recipientChunk): MailTask
+    {
+        $this->setProperty('recipientChunk', $recipientChunk);
+        return $this;
+    }
+
+    public function addRecipientToChunk(int $recipient)
+    {
+        $recipientChunk = $this->getRecipientChunk();
+        $recipientChunk[] = [
+            'id' => $recipient,
+            'status' => 0
+        ];
+        $this->setRecipientChunk($recipientChunk);
+    }
+
+
 
 }

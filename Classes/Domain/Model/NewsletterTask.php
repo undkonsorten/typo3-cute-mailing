@@ -91,11 +91,7 @@ class NewsletterTask extends Task
         } else {
             $recipientList = $this->newsletter->getRecipientList();
         }
-        $recipients = $recipientList->getRecipients();
 
-        if (empty($recipients)) {
-            throw new Exception("Recipient list is empty", 1644851884);
-        }
 
         /** @var Site $site */
         $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($this->newsletter->getNewsletterPage());
@@ -108,28 +104,65 @@ class NewsletterTask extends Task
         $htmlContent = $htmlResponse->getBody()->getContents();
         $textContent = $textResponse->getBody()->getContents();
 
-        $this->setProperty('textContent', $textContent);
+       #$this->setProperty('textContent', $textContent);
 
         $sendOut = GeneralUtility::makeInstance(SendOut::class);
         $sendOut->setNewsletter($this->newsletter);
         $sendOut->setTest($this->getTest());
-        foreach ($recipients as $recipient) {
-            /**@var $recipient RecipientInterface* */
-            /**@var $mailTask MailTask* */
-            $mailTask = GeneralUtility::makeInstance(MailTask::class);
-            /** @TODO format needs to be configured somewhere */
-            $mailTask->setFormat($mailTask::BOTH);
-            $mailTask->setNewsletter($this->newsletter);
-            $mailTask->setSendOut($sendOut);
-            $mailTask->setRecipient($recipient->getUid());
-            $mailTask->setPid($this->newsletter->getPid());
-            $mailTask->setTextContent($textContent);
-            $mailTask->setHtmlContent($htmlContent);
-            $mailTask->setAttachImages($this->isAttachImages() ?? false);
-            $this->taskRepository->add($mailTask);
-            $sendOut->addMailTask($mailTask);
+
+
+        $useChunks = true;
+
+
+        if($this->getRecipientListChunkSize() !== 0){
+            $totalRecipients = $recipientList->getRecipientsCount();
+            $offset = 0;
+
+            if ($totalRecipients === 0) {
+                throw new Exception("Recipient list is empty", 1644851884);
+            }
+            while($offset <= $totalRecipients + $this->getRecipientListChunkSize()){
+                $recipientChunk = $recipientList->getRecipients($this->getRecipientListChunkSize(),$offset);
+                /**@var $recipient RecipientInterface* */
+                /**@var $mailTask MailTask* */
+                $mailTask = GeneralUtility::makeInstance(MailTask::class);
+                foreach ($recipientChunk as $recipient) {
+                    $mailTask->addRecipientToChunk($recipient->getUid());
+                    $mailTask->setFormat($mailTask::BOTH);
+                    $mailTask->setNewsletter($this->newsletter);
+                    $mailTask->setSendOut($sendOut);
+                    $mailTask->setPid($this->newsletter->getPid());
+                    $mailTask->setTextContent($textContent);
+                    $mailTask->setHtmlContent($htmlContent);
+                    $mailTask->setAttachImages($this->isAttachImages() ?? false);
+                    $this->taskRepository->add($mailTask);
+                    $sendOut->addMailTask($mailTask);
+                }
+                $offset = $offset + $this->getRecipientListChunkSize();
+            }
+            $sendOut->setTotal($totalRecipients);
+        }else{
+            $recipients = $recipientList->getRecipients();
+            foreach ($recipients as $recipient) {
+                /**@var $recipient RecipientInterface* */
+                /**@var $mailTask MailTask* */
+                $mailTask = GeneralUtility::makeInstance(MailTask::class);
+                $mailTask->setRecipient($recipient->getUid());
+                /** @TODO format needs to be configured somewhere */
+                $mailTask->setFormat($mailTask::BOTH);
+                $mailTask->setNewsletter($this->newsletter);
+                $mailTask->setSendOut($sendOut);
+                $mailTask->setPid($this->newsletter->getPid());
+                $mailTask->setTextContent($textContent);
+                $mailTask->setHtmlContent($htmlContent);
+                $mailTask->setAttachImages($this->isAttachImages() ?? false);
+                $this->taskRepository->add($mailTask);
+                $sendOut->addMailTask($mailTask);
+                $iterator++;
+            }
+            $sendOut->setTotal(count($recipients));
         }
-        $sendOut->setTotal(count($recipients));
+
         $sendOut->setPid($this->newsletter->getPid());
         $this->newsletter->addSendOut($sendOut);
         $this->newsletterRepository->update($this->newsletter);
@@ -173,6 +206,16 @@ class NewsletterTask extends Task
     public function isAttachImages(): ?bool
     {
         return $this->getProperty('attachImages');
+    }
+
+    public function getRecipientListChunkSize()
+    {
+        return $this->getProperty('recipientListChunkSize');
+    }
+
+    public function setRecipientListChunkSize(int $recipientListChunkSize)
+    {
+        $this->setProperty('recipientListChunkSize', $recipientListChunkSize);
     }
 
 }

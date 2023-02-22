@@ -5,7 +5,9 @@ namespace Undkonsorten\CuteMailing\Domain\Model;
 use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 use DateTime;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 class Newsletter extends AbstractEntity
 {
@@ -35,11 +37,13 @@ class Newsletter extends AbstractEntity
 
     /**
      * @var RecipientList
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $recipientList = null;
 
     /**
      * @var RecipientList
+     * @@TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $testRecipientList = null;
 
@@ -101,6 +105,7 @@ class Newsletter extends AbstractEntity
     /**
      * @var ObjectStorage<SendOut>
      * @Cascade("remove")
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $sendOuts;
 
@@ -130,6 +135,9 @@ class Newsletter extends AbstractEntity
      */
     public function getRecipientList(): RecipientList
     {
+        if ($this->recipientList instanceof LazyLoadingProxy) {
+            $this->recipientList->_loadRealInstance();
+        }
         return $this->recipientList;
     }
 

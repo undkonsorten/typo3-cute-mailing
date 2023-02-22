@@ -16,7 +16,7 @@ class LineSeparatedRecipientList extends RecipientList
     /**
      * @inheritDoc
      */
-    public function getRecipients(): array
+    public function getRecipients(int $limit = null, int $offset = null): array
     {
         // @todo validate email addresses?
         // @todo allow format "FirstName LastName <firstname.lastname@example.org>"?
@@ -26,6 +26,12 @@ class LineSeparatedRecipientList extends RecipientList
             $recipient->setUid($position)->setEmail($address);
             return $recipient;
         }, $addresses, array_keys($addresses));
+    }
+
+    public function getRecipientsCount(): int
+    {
+        $addresses = GeneralUtility::trimExplode("\n", $this->lineSeparatedList, true);
+        return count($addresses);
     }
 
     /**

@@ -13,6 +13,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use Undkonsorten\CuteMailing\Domain\Model\MailTask;
+use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
 use Undkonsorten\CuteMailing\Domain\Model\RecipientInterface;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
 
@@ -62,60 +63,39 @@ class MailService implements SingletonInterface
             throw new \Exception('No newsletter given for sending', 1651441455);
         }
 
-        // They are issue with recipient list type if different types for recipient list and test-recipient list are used!
-        // Therefore check here is necessary. Maybe change in future if another solution is needed.
-        if ($mailTask->getSendOut()->isTest()) {
-            /** @var RecipientInterface $recipient */
-            $recipient = $newsletter->getTestRecipientList()->getRecipient($mailTask->getRecipient());
-        } else {
-            /** @var RecipientInterface $recipient */
-            $recipient = $newsletter->getRecipientList()->getRecipient($mailTask->getRecipient());
-        }
-
         /** @var MailMessage $email */
         $this->email = GeneralUtility::makeInstance(MailMessage::class);
 
-
-        $this->email
-            ->to($recipient->getEmail())
-            ->from($newsletter->getSender())
-            ->replyTo($newsletter->getReplyTo())
-            ->subject($newsletter->getSubject());
-
-        if (trim($newsletter->getReturnPath())) {
-            $this->email->returnPath($newsletter->getReturnPath());
-        }
-
-        if ($mailTask->getFormat() == $mailTask::HTML) {
-            if ($mailTask->isAttachImages()) {
-                $content = $this->attachImages($mailTask->getHtmlContent());
-            }else{
-                $content = $mailTask->getHtmlContent();
+        if(count($mailTask->getRecipientChunk()) >0) {
+            $recipientChunk = $mailTask->getRecipientChunk();
+            foreach ($recipientChunk as $recipient){
+                // They are issue with recipient list type if different types for recipient list and test-recipient list are used!
+                // Therefore check here is necessary. Maybe change in future if another solution is needed.
+                if ($mailTask->getSendOut()->isTest()) {
+                    /** @var RecipientInterface $recipient */
+                    $recipient = $newsletter->getTestRecipientList()->getRecipient($recipient['id']);
+                } else {
+                    /** @var RecipientInterface $recipient */
+                    $recipient = $newsletter->getRecipientList()->getRecipient($recipient['id']);
+                }
+                $this->configureMail($recipient, $newsletter, $mailTask);
+                $this->email->send();
+                $mailTask->getSendOut()->incrementCompleted();
             }
-            $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $content, $recipient);
-            $this->email->html($content);
-        }
-        if ($mailTask->getFormat() == $mailTask::PLAINTEXT) {
-            $content = $mailTask->getTextContent();
-            $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $content, $recipient);
-            $this->email->text($content);
-
-        }
-        if ($mailTask->getFormat() == $mailTask::BOTH) {
-            $textContent = $mailTask->getTextContent();
-            if ($mailTask->isAttachImages()) {
-                $htmlContent = $this->attachImages($mailTask->getHtmlContent());
-            }else{
-                $htmlContent = $mailTask->getHtmlContent();
+        }else{
+            // They are issue with recipient list type if different types for recipient list and test-recipient list are used!
+            // Therefore check here is necessary. Maybe change in future if another solution is needed.
+            if ($mailTask->getSendOut()->isTest()) {
+                /** @var RecipientInterface $recipient */
+                $recipient = $newsletter->getTestRecipientList()->getRecipient($mailTask->getRecipient());
+            } else {
+                /** @var RecipientInterface $recipient */
+                $recipient = $newsletter->getRecipientList()->getRecipient($mailTask->getRecipient());
             }
-            $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $htmlContent, $recipient);
-            $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $textContent, $recipient);
-            $this->email
-                ->html($htmlContent)
-                ->text($textContent);
+            $this->configureMail($recipient, $newsletter, $mailTask);
+            $this->email->send();
+            $mailTask->getSendOut()->incrementCompleted();
         }
-        $this->email->send();
-
     }
 
     protected function replaceMarker(array $allowedMarker, &$content, RecipientInterface $recipient)
@@ -174,6 +154,54 @@ class MailService implements SingletonInterface
         $image = $this->requestFactory->request($uri);
         $imageContent = $image->getBody()->getContents();
         return new DataPart($imageContent, basename($uri), $image->getHeaderLine('Content-Type'));
+    }
+
+    /**
+     * @param RecipientInterface $recipient
+     * @param Newsletter $newsletter
+     * @param MailTask $mailTask
+     * @return array
+     */
+    protected function configureMail(RecipientInterface $recipient, Newsletter $newsletter, MailTask $mailTask): void
+    {
+        $this->email
+            ->to($recipient->getEmail())
+            ->from($newsletter->getSender())
+            ->replyTo($newsletter->getReplyTo())
+            ->subject($newsletter->getSubject());
+
+        if (trim($newsletter->getReturnPath())) {
+            $this->email->returnPath($newsletter->getReturnPath());
+        }
+
+        if ($mailTask->getFormat() == $mailTask::HTML) {
+            if ($mailTask->isAttachImages()) {
+                $content = $this->attachImages($mailTask->getHtmlContent());
+            } else {
+                $content = $mailTask->getHtmlContent();
+            }
+            $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $content, $recipient);
+            $this->email->html($content);
+        }
+        if ($mailTask->getFormat() == $mailTask::PLAINTEXT) {
+            $content = $mailTask->getTextContent();
+            $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $content, $recipient);
+            $this->email->text($content);
+
+        }
+        if ($mailTask->getFormat() == $mailTask::BOTH) {
+            $textContent = $mailTask->getTextContent();
+            if ($mailTask->isAttachImages()) {
+                $htmlContent = $this->attachImages($mailTask->getHtmlContent());
+            } else {
+                $htmlContent = $mailTask->getHtmlContent();
+            }
+            $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $htmlContent, $recipient);
+            $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $textContent, $recipient);
+            $this->email
+                ->html($htmlContent)
+                ->text($textContent);
+        }
     }
 
 }

@@ -264,6 +264,7 @@ class NewsletterController extends ActionController
     public function createAction(Newsletter $newsletter): void
     {
         $currentPid = (int)GeneralUtility::_GP('id');
+
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
         foreach ($rootline as $page) {
             if ($page['module'] === 'cute_mailing') {
@@ -289,11 +290,14 @@ class NewsletterController extends ActionController
         if ($newsletter->getStatus() >= $newsletter::SCHEDULED) {
             $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.newsletterSend.message', 'cute_mailing'), LocalizationUtility::translate('module.newsletter.newsletterSend.title', 'cute_mailing'), AbstractMessage::ERROR);
         } else {
+            $currentPid = $this->getCurrentPageUid();
+            $pageTs = $this->getPageTsConfigForModule($currentPid);
             $newsletter->enable();
             /**@var $newsletterTask NewsletterTask* */
             $newsletterTask = GeneralUtility::makeInstance(NewsletterTask::class);
             $newsletterTask->setNewsletter($newsletter);
             $newsletterTask->setStartDate($newsletter->getSendingTime()->getTimestamp());
+            $newsletterTask->setRecipientListChunkSize((int)$pageTs['recipient_chunk_size']);
             $this->taskRepository->add($newsletterTask);
             $this->newsletterRepository->update($newsletter);
             $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.newsletterQueued.message', 'cute_mailing'), LocalizationUtility::translate('module.newsletter.newsletterQueued.title', 'cute_mailing'), AbstractMessage::OK);
@@ -326,12 +330,15 @@ class NewsletterController extends ActionController
     public function sendTestMailAction(Newsletter $newsletter, bool $attachImages = false): void
     {
         if ($newsletter->getTestRecipientList()) {
+            $currentPid = $this->getCurrentPageUid();
+            $pageTs = $this->getPageTsConfigForModule($currentPid);
             $newsletter->setStatus($newsletter::TESTED);
             /**@var $newsletterTask NewsletterTask* */
             $newsletterTask = GeneralUtility::makeInstance(NewsletterTask::class);
             $newsletterTask->setNewsletter($newsletter);
             $newsletterTask->setTest(true);
             $newsletterTask->setAttachImages($attachImages);
+            $newsletterTask->setRecipientListChunkSize((int)$pageTs['recipient_chunk_size']);
 
             $this->taskRepository->add($newsletterTask);
             $this->newsletterRepository->update($newsletter);
@@ -348,12 +355,11 @@ class NewsletterController extends ActionController
         $recipientListId = $request->getQueryParams()['recipientList'];
         /** @var RecipientListInterface $recipientList */
         $recipientList = $this->recipientListRepository->findByUid($recipientListId);
-        $recipients = $recipientList->getRecipients();
         $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
         $standaloneView->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($this->wizardUserPreviewFile));
         $standaloneView->assignMultiple([
-            'userPreview' => array_slice($recipients, 0, 3),
-            'userAmount' => count($recipients),
+            'userPreview' => $recipientList->getRecipients(3),
+            'userAmount' => $recipientList->getRecipientsCount(),
         ]);
         /** @noinspection PhpComposerExtensionStubsInspection */
         return $this->jsonResponse(json_encode(['html' => $standaloneView->render()]));
@@ -411,6 +417,7 @@ class NewsletterController extends ActionController
             'page_type_text' => '',
             'allowed_marker' => '',
             'return_path' => '',
+            'recipient_chunk_size' => 0
         ];
         $pageTs = array_merge(
             $pageTsDefault,
