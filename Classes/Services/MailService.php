@@ -63,8 +63,7 @@ class MailService implements SingletonInterface
             throw new \Exception('No newsletter given for sending', 1651441455);
         }
 
-        /** @var MailMessage $email */
-        $this->email = GeneralUtility::makeInstance(MailMessage::class);
+
 
         if(count($mailTask->getRecipientChunk()) >0) {
             $recipientChunk = $mailTask->getRecipientChunk();
@@ -78,6 +77,8 @@ class MailService implements SingletonInterface
                     /** @var RecipientInterface $recipient */
                     $recipient = $newsletter->getRecipientList()->getRecipient($recipient['id']);
                 }
+                /** @var MailMessage $email */
+                $this->email = GeneralUtility::makeInstance(MailMessage::class);
                 $this->configureMail($recipient, $newsletter, $mailTask);
                 $this->email->send();
                 $mailTask->getSendOut()->incrementCompleted();
