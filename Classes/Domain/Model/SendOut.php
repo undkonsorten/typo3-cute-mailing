@@ -14,6 +14,7 @@ class SendOut extends AbstractEntity
 
     /**
      * @var Newsletter
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $newsletter;
 
@@ -25,6 +26,7 @@ class SendOut extends AbstractEntity
     /**
      * @var ObjectStorage<MailTask>
      * @Cascade("remove")
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $mailTasks;
 

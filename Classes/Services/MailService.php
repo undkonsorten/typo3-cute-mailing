@@ -11,10 +11,13 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use Undkonsorten\CuteMailing\Domain\Model\MailTask;
 use Undkonsorten\CuteMailing\Domain\Model\RecipientInterface;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
+use Undkonsorten\CuteMailing\Domain\Repository\SendOutRepository;
 
 class MailService implements SingletonInterface
 {
@@ -39,6 +42,25 @@ class MailService implements SingletonInterface
      */
     protected $newsletterRepository;
 
+    /**
+     * @var SendOutRepository
+     */
+    protected $sendOutRepository;
+
+    /**
+     * @var PersistenceManagerInterface
+     */
+    protected $persistenceManager;
+
+    public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager)
+    {
+        $this->persistenceManager = $persistenceManager;
+    }
+
+    public function injectSendOutRepository(SendOutRepository $sendOutRepository)
+    {
+        $this->sendOutRepository = $sendOutRepository;
+    }
 
     public function injectNewsletterRepository(NewsletterRepository $newsletterRepository)
     {
@@ -57,14 +79,15 @@ class MailService implements SingletonInterface
 
     public function sendMail(MailTask $mailTask)
     {
-        $newsletter = $mailTask->getNewsletter();
+        $newsletter = $this->newsletterRepository->findByUid($mailTask->getNewsletter());
+        $sendOut = $this->sendOutRepository->findByUid($mailTask->getSendOut());
         if (is_null($newsletter)) {
             throw new \Exception('No newsletter given for sending', 1651441455);
         }
 
         // They are issue with recipient list type if different types for recipient list and test-recipient list are used!
         // Therefore check here is necessary. Maybe change in future if another solution is needed.
-        if ($mailTask->getSendOut()->isTest()) {
+        if ($sendOut->isTest()) {
             /** @var RecipientInterface $recipient */
             $recipient = $newsletter->getTestRecipientList()->getRecipient($mailTask->getRecipient());
         } else {
@@ -115,7 +138,10 @@ class MailService implements SingletonInterface
                 ->text($textContent);
         }
         $this->email->send();
-
+        $sendOut->incrementCompleted();
+        $newsletter->updateStatus();
+        $this->newsletterRepository->update($newsletter);
+        $this->sendOutRepository->update($sendOut);
     }
 
     protected function replaceMarker(array $allowedMarker, &$content, RecipientInterface $recipient)

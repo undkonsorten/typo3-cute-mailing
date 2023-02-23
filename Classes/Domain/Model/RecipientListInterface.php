@@ -7,7 +7,12 @@ interface RecipientListInterface
     /**
      * @return array
      */
-    public function getRecipients(): array;
+    public function getRecipients(int $limit = null, int $offset = null): array;
+
+    /**
+     * @return int
+     */
+    public function getRecipientsCount(): int;
 
     /**
      * @return string

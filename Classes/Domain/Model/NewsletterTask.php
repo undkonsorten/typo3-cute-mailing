@@ -110,17 +110,22 @@ class NewsletterTask extends Task
 
         $this->setProperty('textContent', $textContent);
 
+        /** @var SendOut $sendOut */
         $sendOut = GeneralUtility::makeInstance(SendOut::class);
         $sendOut->setNewsletter($this->newsletter);
         $sendOut->setTest($this->getTest());
+        // We need an uid for later
+        $this->sendOutRepository->add($sendOut);
+        $this->persistenceManager->persistAll();
+
         foreach ($recipients as $recipient) {
             /**@var $recipient RecipientInterface* */
             /**@var $mailTask MailTask* */
             $mailTask = GeneralUtility::makeInstance(MailTask::class);
             /** @TODO format needs to be configured somewhere */
             $mailTask->setFormat($mailTask::BOTH);
-            $mailTask->setNewsletter($this->newsletter);
-            $mailTask->setSendOut($sendOut);
+            $mailTask->setNewsletter($this->newsletter->getUid());
+            $mailTask->setSendOut($sendOut->getUid());
             $mailTask->setRecipient($recipient->getUid());
             $mailTask->setPid($this->newsletter->getPid());
             $mailTask->setTextContent($textContent);
@@ -133,7 +138,6 @@ class NewsletterTask extends Task
         $sendOut->setPid($this->newsletter->getPid());
         $this->newsletter->addSendOut($sendOut);
         $this->newsletterRepository->update($this->newsletter);
-        $this->sendOutRepository->add($sendOut);
         $this->persistenceManager->persistAll();
     }
 

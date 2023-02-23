@@ -348,12 +348,11 @@ class NewsletterController extends ActionController
         $recipientListId = $request->getQueryParams()['recipientList'];
         /** @var RecipientListInterface $recipientList */
         $recipientList = $this->recipientListRepository->findByUid($recipientListId);
-        $recipients = $recipientList->getRecipients();
         $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
         $standaloneView->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($this->wizardUserPreviewFile));
         $standaloneView->assignMultiple([
-            'userPreview' => array_slice($recipients, 0, 3),
-            'userAmount' => count($recipients),
+            'userPreview' => $recipientList->getRecipients(3),
+            'userAmount' => $recipientList->getRecipientsCount(),
         ]);
         /** @noinspection PhpComposerExtensionStubsInspection */
         return $this->jsonResponse(json_encode(['html' => $standaloneView->render()]));

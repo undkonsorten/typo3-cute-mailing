@@ -14,15 +14,6 @@ class MailTask extends Task
     const HTML = 'html';
     const BOTH = 'both';
 
-    /**
-     * @var Newsletter
-     */
-    protected $newsletter = null;
-
-    /**
-     * @var SendOut
-     */
-    protected $sendOut;
 
     /**
      * @var MailService
@@ -37,8 +28,6 @@ class MailTask extends Task
     public function run(): void
     {
         $this->mailService->sendMail($this);
-        $this->sendOut->incrementCompleted();
-        $this->getNewsletter() && $this->getNewsletter()->updateStatus();
     }
 
 
@@ -52,14 +41,14 @@ class MailTask extends Task
         return $this->getProperty("format");
     }
 
-    public function getNewsletter(): ?Newsletter
+    public function getNewsletter(): ?int
     {
-        return $this->newsletter;
+        return $this->getProperty('newsletter');
     }
 
-    public function setNewsletter(?Newsletter $newsletter): self
+    public function setNewsletter(?int $newsletter): self
     {
-        $this->newsletter = $newsletter;
+        $this->setProperty('newsletter', $newsletter);
         return $this;
     }
 
@@ -81,15 +70,15 @@ class MailTask extends Task
         ];
     }
 
-    public function setSendOut(SendOut $sendOut): self
+    public function setSendOut(int $sendOut): self
     {
-        $this->sendOut = $sendOut;
+        $this->setProperty('sendOut', $sendOut);
         return $this;
     }
 
-    public function getSendOut(): SendOut
+    public function getSendOut(): ?int
     {
-        return $this->sendOut;
+        return $this->getProperty('sendOut');
     }
 
     public function isAttachImages(): ?bool
