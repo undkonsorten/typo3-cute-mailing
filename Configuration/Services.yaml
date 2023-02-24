@@ -12,3 +12,12 @@ services:
       - name: 'console.command'
         command: 'cute-mailing:send-mail'
         description: 'Sends testing mail'
+
+  cache.cute_mailing:
+    class: TYPO3\CMS\Core\Cache\Frontend\FrontendInterface
+    factory: [ '@TYPO3\CMS\Core\Cache\CacheManager', 'getCache' ]
+    arguments: [ 'cute_mailing' ]
+
+  Undkonsorten\CuteMailing\Services\MailService:
+    arguments:
+      $cache: '@cache.cute_mailing'

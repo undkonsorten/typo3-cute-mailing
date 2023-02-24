@@ -5,7 +5,6 @@ namespace Undkonsorten\CuteMailing\Domain\Model;
 
 use Undkonsorten\CuteMailing\Services\MailService;
 use Undkonsorten\Taskqueue\Domain\Model\Task;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 class MailTask extends Task
 {
@@ -90,28 +89,6 @@ class MailTask extends Task
     {
         $this->setProperty('attachImages', $attachImages);
         return $this;
-    }
-
-    public function setHtmlContent(string $htmlContent): self
-    {
-        $this->setProperty('htmlContent', $htmlContent);
-        return $this;
-    }
-
-    public function getHtmlContent(): string
-    {
-        return $this->getProperty('htmlContent');
-    }
-
-    public function setTextContent(string $textContent): self
-    {
-        $this->setProperty('textContent', $textContent);
-        return $this;
-    }
-
-    public function getTextContent(): string
-    {
-        return $this->getProperty('textContent');
     }
 
 }

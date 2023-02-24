@@ -34,6 +34,11 @@ call_user_func(
             = \Undkonsorten\CuteMailing\Updates\FolderUpdateWizard::class;
 
         $GLOBALS['TYPO3_CONF_VARS']['FE']['addRootLineFields'] = $GLOBALS['TYPO3_CONF_VARS']['FE']['addRootLineFields'].', module';
+
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['cute_mailing']
+            ??= [];
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['cute_mailing']['backend']
+            ??= \TYPO3\CMS\Core\Cache\Backend\Typo3DatabaseBackend::class;
     }
 
 );

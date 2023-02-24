@@ -3,6 +3,8 @@
 namespace Undkonsorten\CuteMailing\Services;
 
 use Symfony\Component\Mime\Part\DataPart;
+use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
+use TYPO3\CMS\Core\Cache\Frontend\VariableFrontend;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -16,6 +18,7 @@ use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use Undkonsorten\CuteMailing\Domain\Model\MailTask;
 use Undkonsorten\CuteMailing\Domain\Model\RecipientInterface;
+use Undkonsorten\CuteMailing\Domain\Model\SendOut;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
 use Undkonsorten\CuteMailing\Domain\Repository\SendOutRepository;
 
@@ -52,6 +55,11 @@ class MailService implements SingletonInterface
      */
     protected $persistenceManager;
 
+    /**
+     * @var FrontendInterface
+     */
+    protected $cache;
+
     public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager)
     {
         $this->persistenceManager = $persistenceManager;
@@ -77,9 +85,17 @@ class MailService implements SingletonInterface
         $this->uriBuilder = $uriBuilder;
     }
 
+    public function __construct(FrontendInterface $cache)
+    {
+        $this->cache = $cache;
+    }
+
+
+
     public function sendMail(MailTask $mailTask)
     {
         $newsletter = $this->newsletterRepository->findByUid($mailTask->getNewsletter());
+        /** @var SendOut $sendOut */
         $sendOut = $this->sendOutRepository->findByUid($mailTask->getSendOut());
         if (is_null($newsletter)) {
             throw new \Exception('No newsletter given for sending', 1651441455);
@@ -93,6 +109,35 @@ class MailService implements SingletonInterface
         } else {
             /** @var RecipientInterface $recipient */
             $recipient = $newsletter->getRecipientList()->getRecipient($mailTask->getRecipient());
+        }
+        $htmlCacheIdentifier = 'htmlContent_'.$sendOut->getUid();
+        $textCacheIdentifier = 'textContent_'.$sendOut->getUid();
+
+
+        if (($htmlContent = $this->cache->get($htmlCacheIdentifier)) === false) {
+            /** @var Site $site */
+            $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
+            $htmlUrl = (string)$site->getRouter()->generateUri(
+                $newsletter->getNewsletterPage(),
+                ['type' => $newsletter->getPageTypeHtml(), '_language' => $newsletter->getLanguage()]
+            );
+            $htmlUrl = GeneralUtility::makeInstance(Uri::class, $htmlUrl);
+            $htmlResponse = $this->requestFactory->request($htmlUrl);
+            $htmlContent = $htmlResponse->getBody()->getContents();
+            $this->cache->set($htmlCacheIdentifier, $htmlContent);
+        }
+
+        if (($textContent = $this->cache->get($textCacheIdentifier)) === false) {
+            /** @var Site $site */
+            $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
+            $textUrl = (string)$site->getRouter()->generateUri(
+                $newsletter->getNewsletterPage(),
+                ['type' => $newsletter->getPageTypeText(), '_language' => $newsletter->getLanguage()]
+            );
+            $textUrl = GeneralUtility::makeInstance(Uri::class, $textUrl);
+            $textResponse = $this->requestFactory->request($textUrl);
+            $textContent = $textResponse->getBody()->getContents();
+            $this->cache->set($textCacheIdentifier, $textContent);
         }
 
         /** @var MailMessage $email */
@@ -111,25 +156,19 @@ class MailService implements SingletonInterface
 
         if ($mailTask->getFormat() == $mailTask::HTML) {
             if ($mailTask->isAttachImages()) {
-                $content = $this->attachImages($mailTask->getHtmlContent());
-            }else{
-                $content = $mailTask->getHtmlContent();
+                $htmlContent = $this->attachImages($htmlContent);
             }
-            $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $content, $recipient);
-            $this->email->html($content);
+            $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $htmlContent, $recipient);
+            $this->email->html($htmlContent);
         }
         if ($mailTask->getFormat() == $mailTask::PLAINTEXT) {
-            $content = $mailTask->getTextContent();
-            $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $content, $recipient);
-            $this->email->text($content);
+            $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $textContent, $recipient);
+            $this->email->text($textContent);
 
         }
         if ($mailTask->getFormat() == $mailTask::BOTH) {
-            $textContent = $mailTask->getTextContent();
             if ($mailTask->isAttachImages()) {
-                $htmlContent = $this->attachImages($mailTask->getHtmlContent());
-            }else{
-                $htmlContent = $mailTask->getHtmlContent();
+                $htmlContent = $this->attachImages($htmlContent);
             }
             $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $htmlContent, $recipient);
             $this->replaceMarker(GeneralUtility::trimExplode(',', $newsletter->getAllowedMarker()), $textContent, $recipient);

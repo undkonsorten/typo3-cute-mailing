@@ -2,19 +2,13 @@
 
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
-
 use TYPO3\CMS\Core\Exception;
-use TYPO3\CMS\Core\Http\RequestFactory;
-use TYPO3\CMS\Core\Http\Uri;
-use TYPO3\CMS\Core\Site\Entity\Site;
-use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
 use Undkonsorten\CuteMailing\Domain\Repository\SendOutRepository;
 use Undkonsorten\Taskqueue\Domain\Model\Task;
 use Undkonsorten\Taskqueue\Domain\Repository\TaskRepository;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 class NewsletterTask extends Task
 {
@@ -38,21 +32,6 @@ class NewsletterTask extends Task
      * @var Newsletter
      */
     protected $newsletter;
-
-    /**
-     * @var RequestFactory
-     */
-    protected $requestFactory;
-
-    /**
-     * @var SendOutRepository
-     */
-    protected SendOutRepository $sendOutRepository;
-
-    public function injectRequestFactory(RequestFactory $requestFactory)
-    {
-        $this->requestFactory = $requestFactory;
-    }
 
     public function injectSendOutRepository(SendOutRepository $sendOutRepository): void
     {
@@ -97,18 +76,6 @@ class NewsletterTask extends Task
             throw new Exception("Recipient list is empty", 1644851884);
         }
 
-        /** @var Site $site */
-        $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($this->newsletter->getNewsletterPage());
-        $htmlUrl = (string)$site->getRouter()->generateUri($this->newsletter->getNewsletterPage(), ['type' => $this->newsletter->getPageTypeHtml(), '_language' => $this->newsletter->getLanguage()]);
-        $textUrl = (string)$site->getRouter()->generateUri($this->newsletter->getNewsletterPage(), ['type' => $this->newsletter->getPageTypeText(), '_language' => $this->newsletter->getLanguage()]);
-        $htmlUrl = GeneralUtility::makeInstance(Uri::class, $htmlUrl);
-        $textUrl = GeneralUtility::makeInstance(Uri::class, $textUrl);
-        $htmlResponse = $this->requestFactory->request($htmlUrl);
-        $textResponse = $this->requestFactory->request($textUrl);
-        $htmlContent = $htmlResponse->getBody()->getContents();
-        $textContent = $textResponse->getBody()->getContents();
-
-        $this->setProperty('textContent', $textContent);
 
         /** @var SendOut $sendOut */
         $sendOut = GeneralUtility::makeInstance(SendOut::class);
@@ -128,8 +95,6 @@ class NewsletterTask extends Task
             $mailTask->setSendOut($sendOut->getUid());
             $mailTask->setRecipient($recipient->getUid());
             $mailTask->setPid($this->newsletter->getPid());
-            $mailTask->setTextContent($textContent);
-            $mailTask->setHtmlContent($htmlContent);
             $mailTask->setAttachImages($this->isAttachImages() ?? false);
             $this->taskRepository->add($mailTask);
             $sendOut->addMailTask($mailTask);
