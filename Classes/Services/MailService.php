@@ -2,6 +2,7 @@
 
 namespace Undkonsorten\CuteMailing\Services;
 
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Mime\Part\DataPart;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Cache\Frontend\VariableFrontend;
@@ -21,6 +22,7 @@ use Undkonsorten\CuteMailing\Domain\Model\RecipientInterface;
 use Undkonsorten\CuteMailing\Domain\Model\SendOut;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
 use Undkonsorten\CuteMailing\Domain\Repository\SendOutRepository;
+use Undkonsorten\CuteMailing\Events\BeforeEmailSendingEvent;
 
 class MailService implements SingletonInterface
 {
@@ -56,6 +58,11 @@ class MailService implements SingletonInterface
     protected $persistenceManager;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    private EventDispatcherInterface $eventDispatcher;
+
+    /**
      * @var FrontendInterface
      */
     protected $cache;
@@ -83,6 +90,10 @@ class MailService implements SingletonInterface
     public function injectUriBuilder(UriBuilder $uriBuilder)
     {
         $this->uriBuilder = $uriBuilder;
+    }
+    public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher): void
+    {
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function __construct(FrontendInterface $cache)
@@ -182,6 +193,13 @@ class MailService implements SingletonInterface
                 ->html($htmlContent)
                 ->text($textContent);
         }
+
+        /** @var BeforeEmailSendingEvent $event */
+        $event = $this->eventDispatcher->dispatch(
+            new BeforeEmailSendingEvent($this->email)
+        );
+        $this->email = $event->getEmail();
+
         $this->email->send();
         $sendOut->incrementCompleted();
         $newsletter->updateStatus();
