@@ -150,6 +150,12 @@ class MailService implements SingletonInterface
             ->replyTo($newsletter->getReplyTo())
             ->subject($newsletter->getSubject());
 
+        $header = $this->email->getHeaders();
+        // save the rcpt in the header
+        $header->addTextHeader('X-TYPO3RCPT', base64_encode($recipient->getEmail()));
+        // save the newsletter uid in the header
+        $header->addTextHeader('X-TYPO3NLUID', $sendOut->getUid());
+
         if (trim($newsletter->getReturnPath())) {
             $this->email->returnPath($newsletter->getReturnPath());
         }
