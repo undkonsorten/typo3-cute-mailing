@@ -114,31 +114,36 @@ class MailService implements SingletonInterface
         $textCacheIdentifier = 'textContent_'.$sendOut->getUid();
 
 
-        if (($htmlContent = $this->cache->get($htmlCacheIdentifier)) === false) {
-            /** @var Site $site */
-            $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
-            $htmlUrl = (string)$site->getRouter()->generateUri(
-                $newsletter->getNewsletterPage(),
-                ['type' => $newsletter->getPageTypeHtml(), '_language' => $newsletter->getLanguage()]
-            );
-            $htmlUrl = GeneralUtility::makeInstance(Uri::class, $htmlUrl);
-            $htmlResponse = $this->requestFactory->request($htmlUrl);
-            $htmlContent = $htmlResponse->getBody()->getContents();
-            $this->cache->set($htmlCacheIdentifier, $htmlContent);
+        if($mailTask->getFormat() == $mailTask::BOTH || $mailTask->getFormat() == $mailTask::HTML) {
+            if (($htmlContent = $this->cache->get($htmlCacheIdentifier)) === false) {
+                /** @var Site $site */
+                $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
+                $htmlUrl = (string)$site->getRouter()->generateUri(
+                    $newsletter->getNewsletterPage(),
+                    ['type' => $newsletter->getPageTypeHtml(), '_language' => $newsletter->getLanguage()]
+                );
+                $htmlUrl = GeneralUtility::makeInstance(Uri::class, $htmlUrl);
+                $htmlResponse = $this->requestFactory->request($htmlUrl);
+                $htmlContent = $htmlResponse->getBody()->getContents();
+                $this->cache->set($htmlCacheIdentifier, $htmlContent);
+            }
         }
 
-        if (($textContent = $this->cache->get($textCacheIdentifier)) === false) {
-            /** @var Site $site */
-            $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
-            $textUrl = (string)$site->getRouter()->generateUri(
-                $newsletter->getNewsletterPage(),
-                ['type' => $newsletter->getPageTypeText(), '_language' => $newsletter->getLanguage()]
-            );
-            $textUrl = GeneralUtility::makeInstance(Uri::class, $textUrl);
-            $textResponse = $this->requestFactory->request($textUrl);
-            $textContent = $textResponse->getBody()->getContents();
-            $this->cache->set($textCacheIdentifier, $textContent);
+        if($mailTask->getFormat() == $mailTask::BOTH || $mailTask->getFormat() == $mailTask::PLAINTEXT){
+            if (($textContent = $this->cache->get($textCacheIdentifier)) === false) {
+                /** @var Site $site */
+                $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
+                $textUrl = (string)$site->getRouter()->generateUri(
+                    $newsletter->getNewsletterPage(),
+                    ['type' => $newsletter->getPageTypeText(), '_language' => $newsletter->getLanguage()]
+                );
+                $textUrl = GeneralUtility::makeInstance(Uri::class, $textUrl);
+                $textResponse = $this->requestFactory->request($textUrl);
+                $textContent = $textResponse->getBody()->getContents();
+                $this->cache->set($textCacheIdentifier, $textContent);
+            }
         }
+
 
         /** @var MailMessage $email */
         $this->email = GeneralUtility::makeInstance(MailMessage::class);
