@@ -78,14 +78,10 @@ class FolderUpdateWizard implements ChattyInterface, UpgradeWizardInterface
         $updateNeeded = false;
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($this->tablename);
         $result = $queryBuilder->select('*')
-            ->from($this->tablename)
-            ->where(
-                $queryBuilder->expr()->eq(
-                    'doktype',
-                    116
-                )
-            )
-            ->execute()->rowCount();
+            ->from($this->tablename)->where($queryBuilder->expr()->eq(
+            'doktype',
+            116
+        ))->executeQuery()->rowCount();
         if ($result > 0) {
             $updateNeeded = true;
             $this->output->writeln('CuteMailing sysfolder has old doktype "116" and should be changed.');
