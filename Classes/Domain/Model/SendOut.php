@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -14,7 +15,7 @@ class SendOut extends AbstractEntity
 
     /**
      * @var Newsletter
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Lazy
      */
     protected $newsletter;
 
@@ -26,7 +27,7 @@ class SendOut extends AbstractEntity
     /**
      * @var ObjectStorage<MailTask>
      * @Cascade("remove")
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Lazy
      */
     protected $mailTasks;
 

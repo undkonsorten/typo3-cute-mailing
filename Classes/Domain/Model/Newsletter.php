@@ -2,6 +2,7 @@
 
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 use DateTime;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -36,7 +37,7 @@ class Newsletter extends AbstractEntity
 
     /**
      * @var RecipientList
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Lazy
      */
     protected $recipientList = null;
 
@@ -104,7 +105,7 @@ class Newsletter extends AbstractEntity
     /**
      * @var ObjectStorage<SendOut>
      * @Cascade("remove")
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Lazy
      */
     protected $sendOuts;
 
