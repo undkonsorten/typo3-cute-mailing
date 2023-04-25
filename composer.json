@@ -31,9 +31,9 @@
 	"require": {
 		"ext-json": "*",
 		"php": "^7.4|^8.1",
-		"typo3/cms-backend": "^11.5",
-		"typo3/cms-core": "^11.5",
-		"typo3/cms-extbase": "^11.5",
+		"typo3/cms-backend": "^11.5 || ^12.4",
+		"typo3/cms-core": "^11.5|| ^12.4",
+		"typo3/cms-extbase": "^11.5|| ^12.4",
 		"undkonsorten/taskqueue": "^8.0"
 	},
 	"suggest": {
@@ -53,6 +53,9 @@
 	"extra": {
 		"typo3/cms": {
 			"extension-key": "cute_mailing"
+		},
+		"branch-alias":{
+			"dev-main": "3.0.x-dev"
 		}
 	}
 }
