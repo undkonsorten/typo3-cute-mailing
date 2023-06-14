@@ -7,6 +7,7 @@ namespace Undkonsorten\CuteMailing\Domain\Model;
 use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use Undkonsorten\Taskqueue\Domain\Model\TaskInterface;
 
@@ -48,6 +49,9 @@ class SendOut extends AbstractEntity
 
     public function getNewsletter(): Newsletter
     {
+        if ($this->newsletter instanceof LazyLoadingProxy) {
+            $this->newsletter->_loadRealInstance();
+        }
         return $this->newsletter;
     }
 
@@ -59,6 +63,9 @@ class SendOut extends AbstractEntity
 
     public function getMailTasks(): ObjectStorage
     {
+        if ($this->mailTasks instanceof LazyLoadingProxy) {
+            $this->mailTasks->_loadRealInstance();
+        }
         return $this->mailTasks;
     }
 

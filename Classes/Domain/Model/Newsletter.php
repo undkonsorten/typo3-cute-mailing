@@ -298,6 +298,9 @@ class Newsletter extends AbstractEntity
      */
     public function getTestRecipientList(): ?RecipientList
     {
+        if ($this->testRecipientList instanceof LazyLoadingProxy) {
+            $this->testRecipientList->_loadRealInstance();
+        }
         return $this->testRecipientList;
     }
 
@@ -402,6 +405,9 @@ class Newsletter extends AbstractEntity
 
     public function getSendOuts(): ObjectStorage
     {
+        if ($this->sendOuts instanceof LazyLoadingProxy) {
+            $this->sendOuts->_loadRealInstance();
+        }
         return $this->sendOuts;
     }
 
