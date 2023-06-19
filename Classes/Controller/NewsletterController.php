@@ -10,6 +10,8 @@ use Exception;
 use PharIo\Manifest\InvalidUrlException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Backend\Template\ModuleTemplate;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
@@ -80,6 +82,11 @@ class NewsletterController extends ActionController
     protected $pageRepository;
 
     /**
+     * @var ModuleTemplate
+     */
+    protected $moduleTemplateFactory;
+
+    /**
      * @param NewsletterRepository $newsletterRepository
      * @param RecipientListRepositoryInterface $recipientListRepository
      */
@@ -88,7 +95,8 @@ class NewsletterController extends ActionController
         RecipientListRepositoryInterface $recipientListRepository,
         TaskRepository                   $taskRepository,
         PersistenceManager               $persistenceManager,
-        PageRepository                   $pageRepository
+        PageRepository                   $pageRepository,
+        ModuleTemplateFactory $moduleTemplateFactory,
     )
     {
         $this->newsletterRepository = $newsletterRepository;
@@ -96,6 +104,7 @@ class NewsletterController extends ActionController
         $this->taskRepository = $taskRepository;
         $this->persistenceManager = $persistenceManager;
         $this->pageRepository = $pageRepository;
+        $this->moduleTemplateFactory = $moduleTemplateFactory;
     }
 
     /**
@@ -112,7 +121,9 @@ class NewsletterController extends ActionController
         $this->view->assignMultiple([
             'newsletters' => $newsletters,
         ]);
-        return $this->htmlResponse();
+        $moduleTemplate =$this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     public function choosePageAction(): ResponseInterface
