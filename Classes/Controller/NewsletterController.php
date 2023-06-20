@@ -82,9 +82,14 @@ class NewsletterController extends ActionController
     protected $pageRepository;
 
     /**
-     * @var ModuleTemplate
+     * @var ModuleTemplateFactory
      */
     protected $moduleTemplateFactory;
+
+    /**
+     * @var ModuleTemplate
+     */
+    protected $moduleTemplate;
 
     /**
      * @param NewsletterRepository $newsletterRepository
@@ -121,14 +126,14 @@ class NewsletterController extends ActionController
         $this->view->assignMultiple([
             'newsletters' => $newsletters,
         ]);
-        $moduleTemplate =$this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        $this->moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($this->moduleTemplate->renderContent());
     }
 
     public function choosePageAction(): ResponseInterface
     {
-        return $this->htmlResponse();
+        $this->moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($this->moduleTemplate->renderContent());
     }
 
     public function prepareAction(): ResponseInterface
@@ -151,7 +156,8 @@ class NewsletterController extends ActionController
         $assign['languages'] = $siteLanguages;
         $assign['selectedLanguage'] = $pageTs['language'] ?? 0;
         $this->view->assignMultiple($assign);
-        return $this->htmlResponse();
+        $this->moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($this->moduleTemplate->renderContent());
     }
 
     public function editAction(Newsletter $newsletter): ResponseInterface
@@ -163,7 +169,8 @@ class NewsletterController extends ActionController
         $assign['newsletter'] = $newsletter;
 
         $this->view->assignMultiple($assign);
-        return $this->htmlResponse();
+        $this->moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($this->moduleTemplate->renderContent());
     }
 
     /**
@@ -212,40 +219,8 @@ class NewsletterController extends ActionController
         $assign['returnPath'] = $pageTs['return_path'];
 
         $this->view->assignMultiple($assign);
-        return $this->htmlResponse();
-    }
-
-    /**
-     * @return void
-     * @throws ExceptionExtbaseObject
-     * @throws InvalidConfigurationTypeException
-     * @throws InvalidSlotException
-     * @throws InvalidSlotReturnException
-     * @throws InvalidUrlException
-     * @throws NoSuchArgumentException
-     * @throws InvalidArgumentNameException
-     * @noinspection PhpUnused
-     */
-    public function initializeCreateAction(): void
-    {
-        $this->setDatetimeObjectInNewsletterRequest();
-    }
-
-    /**
-     * @return void
-     * @throws NoSuchArgumentException
-     * @throws Exception
-     */
-    protected function setDatetimeObjectInNewsletterRequest(): void
-    {
-        $newsletter = (array)$this->request->getArgument('newsletter');
-        if (!empty($newsletter['sendingTime'])) {
-            $datetime = new DateTime($newsletter['sendingTime']);
-        } else {
-            $datetime = new DateTime();
-        }
-        $newsletter['sendingTime'] = $datetime;
-        $this->request->setArgument('newsletter', $newsletter);
+        $this->moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($this->moduleTemplate->renderContent());
     }
 
     public function initializeAction()
@@ -260,11 +235,12 @@ class NewsletterController extends ActionController
                     DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                     $dateFormat);
         }
+        $this->moduleTemplate = $this->moduleTemplateFactory->create($this->request);
     }
 
     /**
      * @param Newsletter $newsletter
-     * @return void
+     * @return ResponseInterface
      * @throws ExceptionExtbaseObject
      * @throws IllegalObjectTypeException
      * @throws InvalidSlotException
@@ -272,7 +248,7 @@ class NewsletterController extends ActionController
      * @throws StopActionException
      * @throws ExceptionDbalDriver
      */
-    public function createAction(Newsletter $newsletter): void
+    public function createAction(Newsletter $newsletter): ResponseInterface
     {
         $currentPid = (int)GeneralUtility::_GP('id');
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
@@ -284,18 +260,18 @@ class NewsletterController extends ActionController
         $this->newsletterRepository->add($newsletter);
         $this->persistenceManager->persistAll();
         $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.create.message', 'cute_mailing'));
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
     /**
      * @param Newsletter $newsletter
-     * @return void
+     * @return ResponseInterface
      * @throws IllegalObjectTypeException
      * @throws StopActionException
      * @throws UnknownObjectException
      * @noinspection PhpUnused
      */
-    public function enableAction(Newsletter $newsletter): void
+    public function enableAction(Newsletter $newsletter): ResponseInterface
     {
         if ($newsletter->getStatus() >= $newsletter::SCHEDULED) {
             $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.newsletterSend.message', 'cute_mailing'), LocalizationUtility::translate('module.newsletter.newsletterSend.title', 'cute_mailing'), AbstractMessage::ERROR);
@@ -310,31 +286,31 @@ class NewsletterController extends ActionController
             $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.newsletterQueued.message', 'cute_mailing'), LocalizationUtility::translate('module.newsletter.newsletterQueued.title', 'cute_mailing'), AbstractMessage::OK);
         }
 
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
-    public function updateAction(Newsletter $newsletter): void
+    public function updateAction(Newsletter $newsletter): ResponseInterface
     {
         $this->newsletterRepository->update($newsletter);
         $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.newsletterUpdated.message', 'cute_mailing'), LocalizationUtility::translate('module.newsletter.newsletterUpdated.title', 'cute_mailing'), AbstractMessage::OK);
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
     /**
      * @param Newsletter $newsletter
-     * @return void
+     * @return ResponseInterface
      * @throws IllegalObjectTypeException
      * @throws StopActionException
      * @throws DBALException
      */
-    public function deleteAction(Newsletter $newsletter): void
+    public function deleteAction(Newsletter $newsletter): ResponseInterface
     {
         $this->newsletterRepository->remove($newsletter);
         $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.delete.message', 'cute_mailing'), 'Deleted');
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
-    public function sendTestMailAction(Newsletter $newsletter, bool $attachImages = false): void
+    public function sendTestMailAction(Newsletter $newsletter, bool $attachImages = false): ResponseInterface
     {
         if ($newsletter->getTestRecipientList()) {
             $newsletter->setStatus($newsletter::TESTED);
@@ -350,7 +326,7 @@ class NewsletterController extends ActionController
         } else {
             $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.testMailNoRecipient.message', 'cute_mailing'), LocalizationUtility::translate('module.newsletter.testMailNoRecipient.title', 'cute_mailing'), AbstractMessage::ERROR);
         }
-        $this->redirect('list');
+        return $this->redirect('list');
 
     }
 
