@@ -3,6 +3,7 @@
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Undkonsorten\CuteMailing\Services\MailService;
 use Undkonsorten\Taskqueue\Domain\Model\Task;
 
@@ -14,19 +15,10 @@ class MailTask extends Task
     const BOTH = 'both';
 
 
-    /**
-     * @var MailService
-     */
-    protected $mailService;
-
-    public function injectMailService(MailService $mailService)
-    {
-        $this->mailService = $mailService;
-    }
-
     public function run(): void
     {
-        $this->mailService->sendMail($this);
+        $mailService = GeneralUtility::makeInstance(MailService::class);
+        $mailService->sendMail($this);
     }
 
 
