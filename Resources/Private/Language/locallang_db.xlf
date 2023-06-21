@@ -136,6 +136,12 @@
 			<trans-unit id="tx_cutemailing_domain_model_sendout.test">
 				<source>Is test sendout</source>
 			</trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.basic_auth_user">
+                <source>Basic auth user</source>
+            </trans-unit>
+            <trans-unit id="tx_cutemailing_domain_model_newsletter.basic_auth_password">
+                <source>Basic auth password</source>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>

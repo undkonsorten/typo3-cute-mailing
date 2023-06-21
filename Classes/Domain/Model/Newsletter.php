@@ -103,6 +103,16 @@ class Newsletter extends AbstractEntity
     protected $language = 0;
 
     /**
+     * @var string|null
+     */
+    protected $basicAuthUser = null;
+
+    /**
+     * @var string|null
+     */
+    protected $basicAuthPassword = null;
+
+    /**
      * @var ObjectStorage<SendOut>
      * @Cascade("remove")
      * @Lazy
@@ -112,6 +122,38 @@ class Newsletter extends AbstractEntity
     public function __construct()
     {
         $this->sendOuts = new ObjectStorage();
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBasicAuthUser(): ?string
+    {
+        return $this->basicAuthUser;
+    }
+
+    /**
+     * @param string|null $basicAuthUser
+     */
+    public function setBasicAuthUser(?string $basicAuthUser): void
+    {
+        $this->basicAuthUser = $basicAuthUser;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBasicAuthPassword(): ?string
+    {
+        return $this->basicAuthPassword;
+    }
+
+    /**
+     * @param string|null $basicAuthPassword
+     */
+    public function setBasicAuthPassword(?string $basicAuthPassword): void
+    {
+        $this->basicAuthPassword = $basicAuthPassword;
     }
 
     /**

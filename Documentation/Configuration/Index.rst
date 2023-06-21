@@ -56,6 +56,11 @@ Typical example
       hideLanguageSelection = 1
       # uid of the default language of created newsletter
       language = 1
+      # Basic auth if your newsletter page needs auth
+      # Basic auth user
+      basicAuthUser =
+      #Basic auth password
+      basicAuthPassword =
    }
 
 Taskqueue
