@@ -190,7 +190,7 @@ class NewsletterController extends ActionController
         $assign['testRecipientList'] = $this->recipientListRepository->findByRootline($rootline);
         $assign['defaultSendingTime'] = new DateTime('now');
 
-
+        /*@todo we need to check if this is set here*/
         $assign['sender'] = $pageTs['sender'];
         $assign['senderName'] = $pageTs['sender_name'];
         $assign['replyTo'] = $pageTs['reply_to'];
@@ -199,6 +199,8 @@ class NewsletterController extends ActionController
         $assign['pageTypeText'] = $pageTs['page_type_text'];
         $assign['allowedMarker'] = $pageTs['allowed_marker'];
         $assign['returnPath'] = $pageTs['return_path'];
+        $assign['basicAuthUser'] = $pageTs['basic_auth_user'];
+        $assign['basicAuthPassword'] = $pageTs['basic_auth_password'];
 
         $this->view->assignMultiple($assign);
         return $this->htmlResponse();

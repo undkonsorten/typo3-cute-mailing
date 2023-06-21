@@ -17,6 +17,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use Undkonsorten\CuteMailing\Domain\Model\MailTask;
+use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
 use Undkonsorten\CuteMailing\Domain\Model\RecipientInterface;
 use Undkonsorten\CuteMailing\Domain\Model\SendOut;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
@@ -60,6 +61,11 @@ class MailService implements SingletonInterface
      */
     protected $cache;
 
+    /**
+     * @var array
+     */
+    protected $requestOptions;
+
     public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager)
     {
         $this->persistenceManager = $persistenceManager;
@@ -94,6 +100,7 @@ class MailService implements SingletonInterface
 
     public function sendMail(MailTask $mailTask)
     {
+        /** @var Newsletter $newsletter */
         $newsletter = $this->newsletterRepository->findByUid($mailTask->getNewsletter());
         /** @var SendOut $sendOut */
         $sendOut = $this->sendOutRepository->findByUid($mailTask->getSendOut());
@@ -113,32 +120,52 @@ class MailService implements SingletonInterface
         $htmlCacheIdentifier = 'htmlContent_'.$sendOut->getUid();
         $textCacheIdentifier = 'textContent_'.$sendOut->getUid();
 
+        $this->requestOptions = [
+          'auth' => [
+              $newsletter->getBasicAuthUser(),
+              $newsletter->getBasicAuthPassword()
+          ]
+        ];
 
-        if (($htmlContent = $this->cache->get($htmlCacheIdentifier)) === false) {
-            /** @var Site $site */
-            $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
-            $htmlUrl = (string)$site->getRouter()->generateUri(
-                $newsletter->getNewsletterPage(),
-                ['type' => $newsletter->getPageTypeHtml(), '_language' => $newsletter->getLanguage()]
-            );
-            $htmlUrl = GeneralUtility::makeInstance(Uri::class, $htmlUrl);
-            $htmlResponse = $this->requestFactory->request($htmlUrl);
-            $htmlContent = $htmlResponse->getBody()->getContents();
-            $this->cache->set($htmlCacheIdentifier, $htmlContent);
+
+        if($mailTask->getFormat() == $mailTask::BOTH || $mailTask->getFormat() == $mailTask::HTML) {
+            if (($htmlContent = $this->cache->get($htmlCacheIdentifier)) === false) {
+                /** @var Site $site */
+                $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
+                $htmlUrl = (string)$site->getRouter()->generateUri(
+                    $newsletter->getNewsletterPage(),
+                    ['type' => $newsletter->getPageTypeHtml(), '_language' => $newsletter->getLanguage()]
+                );
+                $htmlUrl = GeneralUtility::makeInstance(Uri::class, $htmlUrl);
+                $htmlResponse = $this->requestFactory->request(
+                    $htmlUrl,
+                    'GET',
+                    $this->requestOptions
+                );
+                $htmlContent = $htmlResponse->getBody()->getContents();
+                $this->cache->set($htmlCacheIdentifier, $htmlContent);
+            }
         }
 
-        if (($textContent = $this->cache->get($textCacheIdentifier)) === false) {
-            /** @var Site $site */
-            $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
-            $textUrl = (string)$site->getRouter()->generateUri(
-                $newsletter->getNewsletterPage(),
-                ['type' => $newsletter->getPageTypeText(), '_language' => $newsletter->getLanguage()]
-            );
-            $textUrl = GeneralUtility::makeInstance(Uri::class, $textUrl);
-            $textResponse = $this->requestFactory->request($textUrl);
-            $textContent = $textResponse->getBody()->getContents();
-            $this->cache->set($textCacheIdentifier, $textContent);
+        if($mailTask->getFormat() == $mailTask::BOTH || $mailTask->getFormat() == $mailTask::PLAINTEXT){
+            if (($textContent = $this->cache->get($textCacheIdentifier)) === false) {
+                /** @var Site $site */
+                $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
+                $textUrl = (string)$site->getRouter()->generateUri(
+                    $newsletter->getNewsletterPage(),
+                    ['type' => $newsletter->getPageTypeText(), '_language' => $newsletter->getLanguage()]
+                );
+                $textUrl = GeneralUtility::makeInstance(Uri::class, $textUrl);
+                $textResponse = $this->requestFactory->request(
+                    $textUrl,
+                    'GET',
+                    $this->requestOptions
+                );
+                $textContent = $textResponse->getBody()->getContents();
+                $this->cache->set($textCacheIdentifier, $textContent);
+            }
         }
+
 
         /** @var MailMessage $email */
         $this->email = GeneralUtility::makeInstance(MailMessage::class);
@@ -242,7 +269,11 @@ class MailService implements SingletonInterface
 
     protected function createImageMailPartFromUri(string $uri): DataPart
     {
-        $image = $this->requestFactory->request($uri);
+        $image = $this->requestFactory->request(
+            $uri,
+            'GET',
+            $this->requestOptions
+        );
         $imageContent = $image->getBody()->getContents();
         return new DataPart($imageContent, basename($uri), $image->getHeaderLine('Content-Type'));
     }
