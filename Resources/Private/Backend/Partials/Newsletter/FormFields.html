@@ -4,10 +4,13 @@
 	<div class="row">
 		<div class="col-md-6">
 			<div class="form-group">
-				<label class="lb-lg" for="title">
+				<label class="lb-lg form-label t3js-formengine-label" for="title">
 					<f:translate key="module.newsletter.new.field.title">Title</f:translate>
 					*
 				</label>
+				<div class="form-description">
+					<f:translate key="module.newsletter.new.field.title.description">Useful title</f:translate>
+				</div>
 				<f:form.textfield
 					class="form-control input-lg"
 					data="{cutemailing-mandatory:'1'}"
@@ -16,18 +19,18 @@
 					property="title"
 					required="required"
 					value="{title}" />
-				<span class="help-block">
-                    <f:translate key="module.newsletter.new.field.title.description">Useful title</f:translate>
-                </span>
 			</div>
 		</div>
 
 		<div class="col-md-6">
 			<div class="form-group">
-				<label class="lb-lg" for="sendingTime">
+				<label class="lb-lg form-label t3js-formengine-label" for="sendingTime">
 					<f:translate key="module.newsletter.new.field.sendingTime">Sending date
 					</f:translate>
 				</label>
+				<div class="form-description">
+					<f:translate key="module.newsletter.new.field.sendingTime.description">Sending date description</f:translate>
+				</div>
 				<f:if condition="{newsletter.sendingTime}">
 					<f:then>
 						<f:form.textfield
@@ -46,27 +49,23 @@
 							value="{defaultSendingTime -> f:format.date(format: 'Y-m-d H:i')}"/>
 					</f:else>
 				</f:if>
-
-				<span class="help-block">
-                    <f:translate key="module.newsletter.new.field.sendingTime.description">Sending date description</f:translate>
-                </span>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label class="lb-lg" for="description">
+				<label class="lb-lg form-label t3js-formengine-label" for="description">
 					<f:translate key="module.newsletter.new.field.description">description
 					</f:translate>
 				</label>
+				<div class="form-description">
+					<f:translate key="module.newsletter.new.field.description.description">Example description</f:translate>
+				</div>
 				<f:form.textarea class="form-control input-lg"
 												 id="description"
 												 property="description"
 												 style="height: 200px;"/>
-				<span class="help-block">
-                    <f:translate key="module.newsletter.new.field.description.description">Example description</f:translate>
-                </span>
 			</div>
 		</div>
 	</div>
@@ -82,10 +81,13 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label class="lb-lg" for="subject">
+				<label class="lb-lg form-label t3js-formengine-label" for="subject">
 					<f:translate key="module.newsletter.new.field.subject">Subject</f:translate>
 					*
 				</label>
+				<div class="form-description">
+					<f:translate key="module.newsletter.new.field.subject.description">Email subject</f:translate>
+				</div>
 				<f:form.textfield
 						class="form-control input-lg"
 						data="{
@@ -100,19 +102,19 @@
 						property="subject"
 						required="required"
 						value="{subject}"/>
-				<span class="help-block">
-                    <f:translate key="module.newsletter.new.field.subject.description">Email subject</f:translate>
-                </span>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-6">
 			<div class="form-group">
-				<label class="lb-lg" for="sender">
+				<label class="lb-lg form-label t3js-formengine-label" for="sender">
 					<f:translate key="module.newsletter.new.field.sender">Sender</f:translate>
 					*
 				</label>
+				<div class="form-description">
+					<f:translate key="module.newsletter.new.field.sender.description">Sender description</f:translate>
+				</div>
 				<f:form.textfield
 					class="form-control form-input input-lg"
 					data="{cutemailing-mandatory:'1',cutemailing-testmail:'sender'}"
@@ -120,27 +122,31 @@
 					property="sender"
 					required="required"
 					value="{sender}"/>
-				<span class="help-block">
-                    <f:translate key="module.newsletter.new.field.sender.description">Sender description</f:translate>
-                </span>
-				<label class="lb-lg" for="senderName">
+			</div>
+			<div class="form-group">
+				<label class="lb-lg form-label t3js-formengine-label" for="senderName">
 					<f:translate key="module.newsletter.new.field.senderName">Sender name
 					</f:translate>
 					*
 				</label>
+				<div class="form-description">
+					<f:translate key="module.newsletter.new.field.configuration.senderName">Sender name</f:translate>
+				</div>
 				<f:form.textfield
 					class="form-control form-input input-lg"
 					id="senderName"
 					property="senderName"
 					required="required"
 					value="{senderName}"/>
-				<span class="help-block">
-                    <f:translate key="module.newsletter.new.field.configuration.senderName">Sender name</f:translate>
-                </span>
-				<label class="lb-lg" for="replyTo">
+			</div>
+			<div class="form-group">
+				<label class="lb-lg form-label t3js-formengine-label" for="replyTo">
 					<f:translate key="module.newsletter.new.field.replyTo">Reply to</f:translate>
 					*
 				</label>
+				<div class="form-description">
+					<f:translate key="module.newsletter.new.field.replyTo.description">Reply to address</f:translate>
+				</div>
 				<f:form.textfield
 					class="form-control form-input input-lg"
 					data="{cutemailing-mandatory:'1',cutemailing-testmail:'replyTo'}"
@@ -148,13 +154,15 @@
 					property="replyTo"
 					required="required"
 					value="{replyTo}"/>
-				<span class="help-block">
-                    <f:translate key="module.newsletter.new.field.replyTo.description">Reply to address</f:translate>
-                </span>
-				<label class="lb-lg" for="replyToName">
+			</div>
+			<div class="form-group">
+				<label class="lb-lg form-label t3js-formengine-label" for="replyToName">
 					<f:translate key="module.newsletter.new.field.replyToName">Reply to name</f:translate>
 					*
 				</label>
+				<div class="form-description">
+					<f:translate key="module.newsletter.new.field.replyToName.description">Reply to name</f:translate>
+				</div>
 				<f:form.textfield
 					class="form-control form-input input-lg"
 					data="{cutemailing-mandatory:'1',cutemailing-testmail:'replyToName'}"
@@ -162,17 +170,17 @@
 					property="replyToName"
 					required="required"
 					value="{replyToName}"/>
-				<span class="help-block">
-                    <f:translate key="module.newsletter.new.field.replyToName.description">Reply to name</f:translate>
-                </span>
 			</div>
 		</div>
 		<div class="col-md-6">
 			<div class="form-group">
-				<label class="lb-lg" for="receiver">
+				<label class="lb-lg form-label t3js-formengine-label" for="receiver">
 					<f:translate key="module.newsletter.new.field.receiver">Receiver</f:translate>
 					*
 				</label>
+				<div class="form-description">
+					<f:translate key="module.newsletter.new.field.receiver.description">Receiver group description</f:translate>
+				</div>
 				<f:form.select
 					class="form-control form-select input-lg"
 					data="{cutemailing-mandatory:'1',cutemailing-wizardpreviewevent:'users'}"
@@ -184,14 +192,16 @@
 					prependOptionValue=""
 					property="recipientList"
 					required="required"/>
-				<span class="help-block">
-                    <f:translate key="module.newsletter.new.field.receiver.description">Receiver group description</f:translate>
-                </span>
-				<label class="lb-lg" for="testReceiver">
+			</div>
+			<div class="form-group">
+				<label class="lb-lg form-label t3js-formengine-label" for="testReceiver">
 					<f:translate key="module.newsletter.new.field.testReceiver">Test Receiver
 					</f:translate>
 					*
 				</label>
+				<div class="form-description">
+					<f:translate key="module.newsletter.new.field.testReceiver.description">Test receiver group description</f:translate>
+				</div>
 				<f:form.select
 					class="form-control form-select input-lg"
 					data="{cutemailing-mandatory:'1',cutemailing-wizardpreviewevent:'testRecipientList'}"
@@ -203,9 +213,6 @@
 					prependOptionValue=""
 					property="testRecipientList"
 					required="required" />
-				<span class="help-block">
-					<f:translate key="module.newsletter.new.field.testReceiver.description">Test receiver group description</f:translate>
-				</span>
 			</div>
 		</div>
 	</div>
