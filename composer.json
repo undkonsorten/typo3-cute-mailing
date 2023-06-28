@@ -34,7 +34,7 @@
 		"typo3/cms-backend": "^11.5 || ^12.4",
 		"typo3/cms-core": "^11.5|| ^12.4",
 		"typo3/cms-extbase": "^11.5|| ^12.4",
-		"undkonsorten/taskqueue": "^8.0"
+		"undkonsorten/taskqueue": "^8.0 || ^9.0"
 	},
 	"suggest": {
 		"undkonsorten/typo3-cute-mailing-registeraddress": "Connector for recipient list if register/unregister subscriber with registeraddress extension.",
