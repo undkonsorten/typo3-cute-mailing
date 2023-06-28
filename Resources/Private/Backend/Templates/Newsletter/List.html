@@ -90,15 +90,13 @@
 						<td>
 							<div class="btn-group">
 								<f:if condition="{newsletter.status} != 2 && {newsletter.status} != 3">
+
 									<f:link.action action="edit" arguments="{newsletter:newsletter}" class="btn btn-default"
 																 title="{f:translate(key: 'module.newsletter.list.edit', extensionName: 'CuteMailing')}">
 												<span class="t3js-icon icon icon-size-small icon-state-default icon-actions-page-open"
 															data-identifier="actions-page-open">
 													<span class="icon-markup">
-														<svg class="icon-color">
-															<use
-																xlink:href="/typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/actions.svg#actions-file-edit"></use>
-														</svg>
+														<core:icon identifier="actions-open" size="small"></core:icon>
 													</span>
 													<span class="sr-only">
 														<f:translate key="module.newsletter.list.edit">
@@ -118,10 +116,7 @@
 										class="t3js-icon icon icon-size-small icon-state-default icon-actions-edit-delete"
 										data-identifier="actions-edit-delete">
 										<span class="icon-markup">
-											<svg class="icon-color">
-												<use
-													xlink:href="/typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/actions.svg#actions-delete"></use>
-											</svg>
+											<core:icon identifier="actions-delete" size="small"></core:icon>
 										</span>
 									</span>
 									<span class="sr-only">
