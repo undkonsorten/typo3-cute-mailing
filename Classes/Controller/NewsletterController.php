@@ -154,7 +154,7 @@ class NewsletterController extends ActionController
             $assign['displayLanguageSelect'] = false;
         }
         $assign['languages'] = $siteLanguages;
-        $assign['selectedLanguage'] = $pageTs['language'] ?? 0;
+        $assign['selectedLanguage'] = (int)($pageTs['language'] ?? 0);
         $this->view->assignMultiple($assign);
         $this->moduleTemplate->setContent($this->view->render());
         return $this->htmlResponse($this->moduleTemplate->renderContent());
@@ -184,8 +184,7 @@ class NewsletterController extends ActionController
         $pageTs = $this->getPageTsConfigForModule($currentPid);
 
         $page = BackendUtility::getRecord('pages', $newsletterPage ?? $currentPid );
-
-        $language = $language ?? (int)$pageTs['language'];
+        $language = (int)($language ?? $pageTs['language'] ?? 0);
         if ($this->shouldForwardToPrepareAction($currentPid, $page, $pageTs, $newsletterPage, $language)) {
             return new ForwardResponse('prepare');
         }
@@ -200,7 +199,7 @@ class NewsletterController extends ActionController
             }
         }
         $assign['newsletterPage'] = $newsletterPage ?? $currentPid;
-        $assign['language'] = $language ?? $pageTs['language'] ?? 0;
+        $assign['language'] = $language;
         $assign['title'] = $page['title'];
         $assign['subject'] = $page['title'];
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
@@ -208,17 +207,16 @@ class NewsletterController extends ActionController
         $assign['testRecipientList'] = $this->recipientListRepository->findByRootline($rootline);
         $assign['defaultSendingTime'] = new DateTime('now');
 
-        /*@todo we need to check if this is set here*/
-        $assign['sender'] = $pageTs['sender'];
-        $assign['senderName'] = $pageTs['sender_name'];
-        $assign['replyTo'] = $pageTs['reply_to'];
-        $assign['replyToName'] = $pageTs['reply_to_name'];
-        $assign['pageTypeHtml'] = $pageTs['page_type_html'];
-        $assign['pageTypeText'] = $pageTs['page_type_text'];
-        $assign['allowedMarker'] = $pageTs['allowed_marker'];
-        $assign['returnPath'] = $pageTs['return_path'];
-        $assign['basicAuthUser'] = $pageTs['basic_auth_user'];
-        $assign['basicAuthPassword'] = $pageTs['basic_auth_password'];
+        $assign['sender'] = $pageTs['sender'] ?? '';
+        $assign['senderName'] = $pageTs['sender_name'] ?? '';
+        $assign['replyTo'] = $pageTs['reply_to'] ?? '';
+        $assign['replyToName'] = $pageTs['reply_to_name'] ?? '';
+        $assign['pageTypeHtml'] = $pageTs['page_type_html'] ?? '';
+        $assign['pageTypeText'] = $pageTs['page_type_text'] ?? '';
+        $assign['allowedMarker'] = $pageTs['allowed_marker'] ?? '';
+        $assign['returnPath'] = $pageTs['return_path'] ?? '';
+        $assign['basicAuthUser'] = $pageTs['basic_auth_user'] ?? '';
+        $assign['basicAuthPassword'] = $pageTs['basic_auth_password'] ?? '';
 
         $this->view->assignMultiple($assign);
         $this->moduleTemplate->setContent($this->view->render());
@@ -343,7 +341,6 @@ class NewsletterController extends ActionController
             'userPreview' => $recipientList->getRecipients(3),
             'userAmount' => $recipientList->getRecipientsCount(),
         ]);
-        /** @noinspection PhpComposerExtensionStubsInspection */
         return $this->jsonResponse(json_encode(['html' => $standaloneView->render()]));
     }
 
@@ -389,22 +386,7 @@ class NewsletterController extends ActionController
 
     protected function getPageTsConfigForModule(?int $pid = null): array
     {
-        $pageTsDefault = [
-            'language' => null,
-            'sender' => '',
-            'sender_name' => '',
-            'reply_to' => '',
-            'reply_to_name' => '',
-            'page_type_html' => '',
-            'page_type_text' => '',
-            'allowed_marker' => '',
-            'return_path' => '',
-        ];
-        $pageTs = array_merge(
-            $pageTsDefault,
-            BackendUtility::getPagesTSconfig($pid ?? $this->getCurrentPageUid())['mod.']['web_modules.']['cute_mailing.'] ?? []
-        );
-        return $pageTs;
+        return BackendUtility::getPagesTSconfig($pid ?? $this->getCurrentPageUid())['mod.']['web_modules.']['cute_mailing.'] ?? [];
     }
 
 }

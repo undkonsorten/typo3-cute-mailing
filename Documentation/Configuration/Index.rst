@@ -58,9 +58,9 @@ Typical example
       language = 1
       # Basic auth if your newsletter page needs auth
       # Basic auth user
-      basicAuthUser =
+      basic_auth_user =
       #Basic auth password
-      basicAuthPassword =
+      basic_auth_password =
    }
 
 Taskqueue
