@@ -36,6 +36,11 @@ class Newsletter extends AbstractEntity
     protected $newsletterPage = 0;
 
     /**
+     * @var string
+     */
+    protected $newsletterPageUrl = '';
+
+    /**
      * @var RecipientList
      * @Lazy
      */
@@ -513,5 +518,22 @@ class Newsletter extends AbstractEntity
     {
         return $this->language;
     }
+
+    /**
+     * @return string
+     */
+    public function getNewsletterPageUrl(): string
+    {
+        return $this->newsletterPageUrl;
+    }
+
+    /**
+     * @param string $newsletterPageUrl
+     */
+    public function setNewsletterPageUrl(string $newsletterPageUrl): void
+    {
+        $this->newsletterPageUrl = $newsletterPageUrl;
+    }
+
 
 }

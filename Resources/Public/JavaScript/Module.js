@@ -151,19 +151,7 @@ define(['jquery'], function ($) {
 		 * @returns {string}
 		 */
 		var getIframeSource = function () {
-			var pageId = parseInt(document.querySelector('[data-cutemailing-newsletterpage]').value);
-			var pageTypeHTML = 0;
-			var pageTypeHTMLElement = document.querySelector("[data-cutemailing-pagetype-html]");
-			if (pageTypeHTMLElement) {
-				pageTypeHTML = pageTypeHTMLElement.value;
-			}
-			var languageElement = document.querySelector("[data-cutemailing-language]");
-			var language = 0;
-			if (languageElement) {
-				language = parseInt(languageElement.value);
-			}
-			console.log(language, languageElement, pageId);
-			return '//' + window.location.host + '/index.php?id=' + pageId + "&type=" + pageTypeHTML + "&L=" + language;
+            return document.querySelector('[data-cutemailing-pageurl]').value;
 		};
 
 		/**

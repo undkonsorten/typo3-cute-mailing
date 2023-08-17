@@ -14,8 +14,10 @@ use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
+use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Site\Entity\Site;
+use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
@@ -217,6 +219,13 @@ class NewsletterController extends ActionController
         $assign['returnPath'] = $pageTs['return_path'] ?? '';
         $assign['basicAuthUser'] = $pageTs['basic_auth_user'] ?? '';
         $assign['basicAuthPassword'] = $pageTs['basic_auth_password'] ?? '';
+
+        $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($assign['newsletterPage']);
+        $htmlUrl = (string)$site->getRouter()->generateUri(
+            $assign['newsletterPage'],
+            ['type' => $assign['pageTypeHtml'], '_language' => $assign['language']]
+        );
+        $assign['newsletterPageUrl'] = GeneralUtility::makeInstance(Uri::class, $htmlUrl);
 
         $this->view->assignMultiple($assign);
         $this->moduleTemplate->setContent($this->view->render());
