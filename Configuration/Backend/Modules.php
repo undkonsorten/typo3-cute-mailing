@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'newsletter' => [
+    'cutemailing' => [
         'parent' => 'web',
         'position' => ['after' => 'recycler'],
-        'access' => 'user,group',
+        'access' => 'user',
         'icon' => 'EXT:cute_mailing/Resources/Public/Icons/CuteMailing.svg',
         'workspaces' => 'live',
         'path' => '/module/page/cute-mailing',
