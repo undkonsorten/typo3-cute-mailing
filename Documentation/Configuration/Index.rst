@@ -61,6 +61,9 @@ Typical example
       basic_auth_user =
       #Basic auth password
       basic_auth_password =
+      listunsubscribe = 1
+      listunsubscribeEmail = unsubscribe@example.com
+}
    }
 
 Taskqueue
