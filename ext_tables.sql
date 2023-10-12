@@ -83,7 +83,7 @@ CREATE TABLE tx_cutemailing_domain_model_recipientlist
 	name                varchar(255) DEFAULT '' NOT NULL,
 	recipient_list_page int(11) DEFAULT '0' NOT NULL,
 	record_type         varchar(255) DEFAULT '' NOT NULL,
-	line_separated_list text,
+	line_separated_list mediumtext,
 
 	tstamp              int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate              int(11) unsigned DEFAULT '0' NOT NULL,
