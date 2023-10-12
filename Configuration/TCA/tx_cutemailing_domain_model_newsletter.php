@@ -21,12 +21,14 @@ return [
         'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_newsletter.svg'
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid,l10n_parent,l10n_diffsource,--palette--;;title, subject, description,sending_time, ' .
-            ' newsletter_page, ' .
-            '--div--;LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tabs.sender, --palette--;;sender, --palette--;;reply_to,' .
-            '--div--;LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tabs.recipients, test_recipient_list,recipient_list,' .
-            '--div--;LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tabs.technical_details,--palette--;;page_types,allowed_marker,return_path,language,basic_auth_user,basic_auth_password,' .
-            '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,hidden,starttime,endtime'],
+        '1' => [
+            'showitem' => 'sys_language_uid,l10n_parent,l10n_diffsource,--palette--;;title, subject, description,sending_time, ' .
+                ' newsletter_page, ' .
+                '--div--;LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tabs.sender, --palette--;;sender, --palette--;;reply_to,' .
+                '--div--;LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tabs.recipients, test_recipient_list,recipient_list,' .
+                '--div--;LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tabs.technical_details,--palette--;;page_types,allowed_marker,return_path,language,basic_auth_user,basic_auth_password,listunsubscribe_enable,listunsubscribe_email,' .
+                '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,hidden,starttime,endtime'
+        ],
     ],
     'palettes' => [
         'sender' => [
@@ -196,10 +198,22 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status.0', 0],
-                    ['LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status.1', 1],
-                    ['LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status.2', 2],
-                    ['LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status.3', 3],
+                    [
+                        'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status.0',
+                        0
+                    ],
+                    [
+                        'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status.1',
+                        1
+                    ],
+                    [
+                        'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status.2',
+                        2
+                    ],
+                    [
+                        'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status.3',
+                        3
+                    ],
                 ],
             ]
         ],
@@ -268,6 +282,21 @@ return [
             'config' => [
                 'type' => 'input',
             ]
+        ],
+
+        'listunsubscribe_enable' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.listunsubscribe_enable',
+            'config' => [
+                'type' => 'input',
+            ]
+        ],
+        'listunsubscribe_email' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.listunsubscribe_email',
+            'config' => [
+                'type' => 'check',
+            ],
         ],
     ],
 

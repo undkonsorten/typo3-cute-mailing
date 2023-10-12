@@ -142,6 +142,13 @@
             <trans-unit id="tx_cutemailing_domain_model_newsletter.basic_auth_password">
                 <source>Basic auth password</source>
             </trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.listunsubscribe_enable">
+                <source>Enable list unsubscribe header</source>
+            </trans-unit>
+			<trans-unit id="tx_cutemailing_domain_model_newsletter.listunsubscribe_email">
+                <source>list unsubscribe header email</source>
+            </trans-unit>
+
 		</body>
 	</file>
 </xliff>

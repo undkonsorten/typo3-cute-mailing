@@ -117,6 +117,18 @@ class Newsletter extends AbstractEntity
      */
     protected $basicAuthPassword = null;
 
+
+    /**
+     * @var bool
+     */
+    protected $listunsubscribeEnable = null;
+
+    /**
+     * @var string|null
+     */
+    protected $listunsubscribeEmail = null;
+
+
     /**
      * @var ObjectStorage<SendOut>
      * @Cascade("remove")
@@ -533,6 +545,38 @@ class Newsletter extends AbstractEntity
     public function setNewsletterPageUrl(string $newsletterPageUrl): void
     {
         $this->newsletterPageUrl = $newsletterPageUrl;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getListunsubscribeEmail(): ?string
+    {
+        return $this->listunsubscribeEmail;
+    }
+
+    /**
+     * @param string|null $listunsubscribeEmail
+     */
+    public function setListunsubscribeEmail(?string $listunsubscribeEmail): void
+    {
+        $this->listunsubscribeEmail = $listunsubscribeEmail;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getListunsubscribeEnable(): ?bool
+    {
+        return $this->listunsubscribeEnable;
+    }
+
+    /**
+     * @param bool|null $listunsubscribeEnable
+     */
+    public function setListunsubscribeEnable(?bool $listunsubscribeEnable): void
+    {
+        $this->listunsubscribeEnable = $listunsubscribeEnable;
     }
 
 
