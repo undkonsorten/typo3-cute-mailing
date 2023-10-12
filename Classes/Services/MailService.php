@@ -178,10 +178,15 @@ class MailService implements SingletonInterface
             ->subject($newsletter->getSubject());
 
         $header = $this->email->getHeaders();
+
         // save the rcpt in the header
         $header->addTextHeader('X-TYPO3RCPT', base64_encode($recipient->getEmail()));
         // save the newsletter uid in the header
         $header->addTextHeader('X-TYPO3NLUID', $sendOut->getUid());
+        // add a list unsubscribe header
+        if ($newsletter->getListunsubscribeEnable() && $newsletter->getListunsubscribeEmail()){
+            $header->addTextHeader('List-Unsubscribe', '<mailto:' . $newsletter->getListunsubscribeEmail() . '?subject=' . urlencode( 'action=listunsubscribe&rcptuid=' . $recipient->getUid() . '&rcptemail=' . $recipient->getEmail() .'&sendout=' . $sendOut->getUid()) . '>');
+        }
 
         if (trim($newsletter->getReturnPath())) {
             $this->email->returnPath($newsletter->getReturnPath());

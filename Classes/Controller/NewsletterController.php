@@ -219,6 +219,8 @@ class NewsletterController extends ActionController
         $assign['returnPath'] = $pageTs['return_path'] ?? '';
         $assign['basicAuthUser'] = $pageTs['basic_auth_user'] ?? '';
         $assign['basicAuthPassword'] = $pageTs['basic_auth_password'] ?? '';
+        $assign['listunsubscribeEnable'] = $pageTs['listunsubscribe_enable'] ?? '';
+        $assign['listunsubscribeEmail'] = $pageTs['listunsubscribe_email'] ?? '';
 
         $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($assign['newsletterPage']);
         $htmlUrl = (string)$site->getRouter()->generateUri(
