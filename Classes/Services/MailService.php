@@ -102,10 +102,13 @@ class MailService implements SingletonInterface
     {
         /** @var Newsletter $newsletter */
         $newsletter = $this->newsletterRepository->findByUid($mailTask->getNewsletter());
+        if (is_null($newsletter)) {
+            throw new \Exception('Newsletter with id '.$mailTask->getNewsletter().' does no longer exist.', 1651441455);
+        }
         /** @var SendOut $sendOut */
         $sendOut = $this->sendOutRepository->findByUid($mailTask->getSendOut());
-        if (is_null($newsletter)) {
-            throw new \Exception('No newsletter given for sending', 1651441455);
+        if (is_null($sendOut)) {
+            throw new \Exception('Sendout with id'.$mailTask->getSendOut().' does no longer exist.', 1697631977);
         }
 
         // They are issue with recipient list type if different types for recipient list and test-recipient list are used!
@@ -117,6 +120,12 @@ class MailService implements SingletonInterface
             /** @var RecipientInterface $recipient */
             $recipient = $newsletter->getRecipientList()->getRecipient($mailTask->getRecipient());
         }
+
+        // Recipient might have been unsubscribed already
+        if(is_null($recipient)){
+            throw new \Exception('The recipient does no longer exist', 1697631568);
+        }
+
         $htmlCacheIdentifier = 'htmlContent_'.$sendOut->getUid();
         $textCacheIdentifier = 'textContent_'.$sendOut->getUid();
 
@@ -169,7 +178,7 @@ class MailService implements SingletonInterface
 
         /** @var MailMessage $email */
         $this->email = GeneralUtility::makeInstance(MailMessage::class);
-	$recipientName = trim(sprintf('%s %s',$recipient->getFirstName(), $recipient->getLastName()));
+	    $recipientName = trim(sprintf('%s %s',$recipient->getFirstName(), $recipient->getLastName()));
 
         $this->email
             ->to(sprintf('%s <%s>',$recipientName, $recipient->getEmail()))
