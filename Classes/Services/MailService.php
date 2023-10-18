@@ -123,7 +123,7 @@ class MailService implements SingletonInterface
 
         // Recipient might have been unsubscribed already
         if(is_null($recipient)){
-            throw new \Exception('The recipient does no longer exist', 1697631568);
+            throw new \Exception('The recipient with id '.$mailTask->getRecipient().' does no longer exist', 1697631568);
         }
 
         $htmlCacheIdentifier = 'htmlContent_'.$sendOut->getUid();
