@@ -37,11 +37,51 @@ class LineSeparatedRecipientList extends RecipientList
     /**
      * @inheritDoc
      */
-    public function getRecipient(int $recipient): ?object
+    public function getRecipient(int $recipient): ?SimpleRecipient
     {
         $filteredRecipients = array_filter($this->getRecipients(), function (SimpleRecipient $recipientObject) use ($recipient) {
             return $recipientObject->getUid() === $recipient;
         });
         return array_values($filteredRecipients)[0] ?? null;
+    }
+
+    /**
+     * @param int $recipient
+     * @return void
+     * @throws \Exception
+     */
+    public function removeRecipientById(int $recipient): void
+    {
+        throw new \Exception("Not implemented.", 1700484658);
+    }
+
+    /**
+     * @param string $email
+     * @return void
+     * @throws \Exception
+     */
+    public function removeRecipientByEmail(string $email): void
+    {
+        throw new \Exception("Not implemented.", 1700484658);
+    }
+
+    /**
+     * @param string $email
+     * @return void
+     * @throws \Exception
+     */
+    public function disableRecipientByEmail(string $email): void
+    {
+        throw new \Exception("Not implemented.", 1700484664);
+    }
+
+    /**
+     * @param int $recipient
+     * @return void
+     * @throws \Exception
+     */
+    public function disableRecipientById(int $recipient): void
+    {
+        throw new \Exception("Not implemented.", 1700484664);
     }
 }

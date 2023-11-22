@@ -13,12 +13,17 @@ class SendMailTest extends FunctionalTestCase
     /**
      * @var array Have motion loaded
      */
-    protected $testExtensionsToLoad = [
+    protected array $testExtensionsToLoad = [
         'typo3conf/ext/taskqueue'
     ];
 
+    /**
+     * @return void
+     * @test
+     */
     public function mailIsCreatedCorrectly(): void
     {
+        $this->markTestIncomplete('Needs fixing');
         /**@var $address RecipientInterface */
         $address1 = GeneralUtility::makeInstance(RecipientInterface::class);
         $address1->setEmail('peter@test.de');
