@@ -28,13 +28,12 @@ interface RecipientListInterface
 
     /**
      * @param int $recipient
-     * @return object
+     * @return RecipientInterface|null
      */
     public function getRecipient(int $recipient): ?RecipientInterface;
 
     /**
      * @param string $email
-     * @param int|null $recipient
      * @return void
      */
     public function removeRecipientByEmail(string $email): void;
@@ -47,7 +46,6 @@ interface RecipientListInterface
 
     /**
      * @param string $email
-     * @param int|null $recipient
      * @return void
      */
     public function disableRecipientByEmail(string $email): void;
