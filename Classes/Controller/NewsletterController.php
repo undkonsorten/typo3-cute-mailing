@@ -168,6 +168,13 @@ class NewsletterController extends ActionController
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
         $assign['recipientList'] = $this->recipientListRepository->findByRootline($rootline);
         $assign['testRecipientList'] = $this->recipientListRepository->findByRootline($rootline);
+
+        $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
+        $htmlUrl = (string)$site->getRouter()->generateUri(
+            $newsletter->getNewsletterPage(),
+            ['type' => $newsletter->getPageTypeHtml(), '_language' => $newsletter->getLanguage()]
+        );
+        $newsletter->setNewsletterPageUrl($htmlUrl);
         $assign['newsletter'] = $newsletter;
 
         $this->view->assignMultiple($assign);
