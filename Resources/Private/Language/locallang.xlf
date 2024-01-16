@@ -159,7 +159,7 @@
 				<source>Scheduled</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.list.enableConfirm">
-				<source>Please confirm you want to send out this newsletter campaign.</source>
+				<source>Please confirm you want to send out this newsletter campaign to %s recipients.</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.list.deleteConfirm">
 				<source>Please confirm the deletion of this newsletter.</source>

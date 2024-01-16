@@ -71,7 +71,7 @@
 						<td class="cute__list-edit-button">
 							<f:comment><!-- status const SEND = 2; const CREATED = 0; const TESTED = 1; --></f:comment>
 							<f:if condition="{newsletter.status} != 2 && {newsletter.status} != 3">
-								<f:link.action action="enable" additionalAttributes="{data-cutemailing-confirm:'{f:translate(key:\'module.newsletter.list.enableConfirm\',extensionName:\'CuteMailing\')}'}" arguments="{newsletter:newsletter}"
+								<f:link.action action="enable" additionalAttributes="{data-cutemailing-confirm:'{f:translate(key:\'module.newsletter.list.enableConfirm\',extensionName:\'CuteMailing\', arguments: \'{0: newsletter.recipientList.recipientsCount}\')}'}" arguments="{newsletter:newsletter}"
 															 class="btn btn-primary">
 									<i class="fa fa-send"></i>
 									<f:translate key="module.newsletter.list.enable">enable</f:translate>
