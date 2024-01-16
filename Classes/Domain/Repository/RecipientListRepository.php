@@ -24,6 +24,13 @@ class RecipientListRepository extends Repository implements RecipientListReposit
         return $query->execute();
     }
 
+    /**
+     * @param int|null $limit
+     * @param int|null $offset
+     * @return array|object[]|QueryResultInterface
+     * @deprecated This method makes no sense
+     * @todo remove in next version
+     */
     public function findAll(int $limit = null, int $offset = null)
     {
         $query = $this->createQuery();
