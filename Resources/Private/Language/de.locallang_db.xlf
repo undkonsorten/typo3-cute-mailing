@@ -179,6 +179,22 @@
         <source>Is test sendout</source>
         <target state="final">Ist Testversand</target>
       </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.basic_auth_user" approved="yes">
+        <source>Basic auth user</source>
+        <target state="final">Basic Auth - Benutzername</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.basic_auth_password" approved="yes">
+        <source>Basic auth password</source>
+        <target state="final">Basic Auth - Passwort</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.listunsubscribe_enable" approved="yes">
+        <source>Enable list unsubscribe header</source>
+        <target state="final">Aktiviere Abmeldemöglichkeit im Mailheader</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.listunsubscribe_email" approved="yes">
+        <source>list unsubscribe header email</source>
+        <target state="final">Abmelde E-Mail im Mailheader</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
