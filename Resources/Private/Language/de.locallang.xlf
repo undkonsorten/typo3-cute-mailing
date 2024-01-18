@@ -313,6 +313,14 @@
         <source>Next</source>
         <target state="final">Weiter</target>
       </trans-unit>
+      <trans-unit id="module.newsletter.list.createnew.1" approved="yes">
+        <source>No newsletters yet, </source>
+        <target state="final">Noch kein Newsletter erstellt,</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.createnew.2" approved="yes">
+        <source>add a new one.</source>
+        <target state="final">jetzt einen hinzufügen.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
