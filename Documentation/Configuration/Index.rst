@@ -63,8 +63,16 @@ Typical example
       basic_auth_password =
       listunsubscribe_enable = 1
       listunsubscribe_email = unsubscribe@example.com
-}
    }
+
+.. tip::
+
+   Configuration is written to the newsletter when it's created. Therefore it's
+   necessary to set all needed values before creating a newsletter.
+   If a newsletter is created already and page ts config changed afterwards,
+   the values of configuration are still the old one in the existing newsletter.
+   You must delete the newsletter and creating a new one to get the new values
+   of the configuration.
 
 Taskqueue
 ---------
