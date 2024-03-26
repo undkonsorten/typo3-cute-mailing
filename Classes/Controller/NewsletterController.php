@@ -103,7 +103,7 @@ class NewsletterController extends ActionController
         TaskRepository                   $taskRepository,
         PersistenceManager               $persistenceManager,
         PageRepository                   $pageRepository,
-        ModuleTemplateFactory $moduleTemplateFactory,
+        ModuleTemplateFactory $moduleTemplateFactory
     )
     {
         $this->newsletterRepository = $newsletterRepository;
