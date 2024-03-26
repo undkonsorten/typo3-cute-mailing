@@ -185,12 +185,19 @@ class NewsletterController extends ActionController
     /**
      * @return void
      * @throws InvalidConfigurationTypeException
+     * @throws Exception
      * @noinspection PhpUnused
      */
     public function newAction(?int $newsletterPage = null, ?int $language = null): ResponseInterface
     {
         $currentPid = $this->getCurrentPageUid();
         $pageTs = $this->getPageTsConfigForModule($currentPid);
+        if(!is_numeric($pageTs['page_type_html'])) {
+            throw new \Exception('Page type for "html" rendering is not numeric or not set. Please check configuration for page type html.',1711444628);
+        }
+        if(!is_numeric($pageTs['page_type_text'])) {
+            throw new \Exception('Page type for "text" rendering is not numeric or not set. Please check configuration for page type text.',1711444629);
+        }
 
         $page = BackendUtility::getRecord('pages', $newsletterPage ?? $currentPid );
         $language = (int)($language ?? $pageTs['language'] ?? 0);
@@ -220,8 +227,8 @@ class NewsletterController extends ActionController
         $assign['senderName'] = $pageTs['sender_name'] ?? '';
         $assign['replyTo'] = $pageTs['reply_to'] ?? '';
         $assign['replyToName'] = $pageTs['reply_to_name'] ?? '';
-        $assign['pageTypeHtml'] = $pageTs['page_type_html'] ?? '';
-        $assign['pageTypeText'] = $pageTs['page_type_text'] ?? '';
+        $assign['pageTypeHtml'] = (int)$pageTs['page_type_html'];
+        $assign['pageTypeText'] = (int)$pageTs['page_type_text'];
         $assign['allowedMarker'] = $pageTs['allowed_marker'] ?? '';
         $assign['returnPath'] = $pageTs['return_path'] ?? '';
         $assign['basicAuthUser'] = $pageTs['basic_auth_user'] ?? '';
