@@ -50,7 +50,7 @@ class SendMailCommand extends Command
     }
 
 
-    public function execute(InputInterface $input, OutputInterface $output)
+    public function execute(InputInterface $input, OutputInterface $output): int
     {
 
         $newsletter = $this->newsletterRepository->findByUid(13);
