@@ -274,7 +274,7 @@ class MailService implements SingletonInterface
             function ($match) {
                 $part = $this->createImageMailPartFromUri($match[1]);
                 $cid = $part->getContentId();
-                $this->email->attachPart($part);
+                $this->email->addPart($part);
                 return sprintf('src="cid:%s"', $cid);
             },
             $imageTag
