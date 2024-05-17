@@ -17,17 +17,12 @@
 	"keywords": [
 		"email",
 		"newsletter",
-		"TYPO3"
+		"TYPO3",
+		"direct_mail"
 	],
 	"support": {
-		"issues": ""
+		"issues": "https://github.com/undkonsorten/typo3-cute-mailing/issues"
 	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": ""
-		}
-	],
 	"require": {
 		"ext-json": "*",
 		"php": "^7.4|^8.1",
