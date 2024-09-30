@@ -1,7 +1,7 @@
 {
 	"name": "undkonsorten/typo3-cute-mailing",
 	"type": "typo3-cms-extension",
-	"description": "A TYPO3 extension that makes mailing and newsletter sending cute. Send TYPO3 pages as emails to many recipients.",
+	"description": "A TYPO3 extension that makes mailing and newsletter sending cute. Send TYPO3 pages as emails (newsletter) to many recipients. Can be used as replacement for direct_mail.",
 	"homepage": "https://www.undkonsorten.com",
 	"authors": [
 		{
@@ -25,10 +25,10 @@
 	},
 	"require": {
 		"ext-json": "*",
-		"php": "^7.4|^8.1",
-		"typo3/cms-backend": "^11.5 || ^12.4",
-		"typo3/cms-core": "^11.5|| ^12.4",
-		"typo3/cms-extbase": "^11.5|| ^12.4",
+		"php": "^8.1",
+		"typo3/cms-backend": "^12.4 || ^13.3",
+		"typo3/cms-core": "^12.4 || ^13.3",
+		"typo3/cms-extbase": "^12.4 || ^13.3",
 		"undkonsorten/taskqueue": "^8.0 || ^9.0",
 		"symfony/console": "^5.4 || ^6.0 || ^7",
 		"symfony/mime": "^6.2 || ^7"
