@@ -42,14 +42,14 @@ class Newsletter extends AbstractEntity
 
     /**
      * @var RecipientList
-     * @Lazy
      */
+    #[Lazy]
     protected $recipientList = null;
 
     /**
      * @var RecipientList
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[\TYPO3\CMS\Extbase\Annotation\ORM\Lazy]
     protected $testRecipientList = null;
 
     /**
@@ -131,9 +131,9 @@ class Newsletter extends AbstractEntity
 
     /**
      * @var ObjectStorage<SendOut>
-     * @Cascade("remove")
-     * @Lazy
      */
+    #[Cascade(['value' => 'remove'])]
+    #[Lazy]
     protected $sendOuts;
 
     public function __construct()

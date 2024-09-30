@@ -36,28 +36,14 @@ class NewsletterService implements SingletonInterface
      * @var Newsletter
      */
     protected $newsletter;
-
-    public function injectSendOutRepository(SendOutRepository $sendOutRepository): void
-    {
-        $this->sendOutRepository = $sendOutRepository;
-    }
-
-    public function injectNewsletterRepository(NewsletterRepository $newsletterRepository)
+    public function __construct(protected \Undkonsorten\CuteMailing\Domain\Repository\SendOutRepository $sendOutRepository, \Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository $newsletterRepository, \Undkonsorten\Taskqueue\Domain\Repository\TaskRepository $taskRepository, \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager)
     {
         $this->newsletterRepository = $newsletterRepository;
-    }
-
-    public function injectTaskRepository(TaskRepository $taskRepository)
-    {
         $this->taskRepository = $taskRepository;
-    }
-
-    public function injectPersistenceManager(PersistenceManager $persistenceManager)
-    {
         $this->persistenceManager = $persistenceManager;
     }
 
-    public function runNewsletter(NewsletterTask $newsletterTask){
+    public function runNewsletter(NewsletterTask $newsletterTask): void{
         $this->newsletter = $newsletterTask->getNewsletter();
         if (is_null($this->newsletter)) {
             throw new \Exception("Newsletter with uid: " . $this->newsletter . " was not found", 1643821994);

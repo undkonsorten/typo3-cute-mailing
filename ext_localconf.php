@@ -11,7 +11,6 @@ call_user_func(
     function ($extKey = 'cute_mailing') {
         ExtensionManagementUtility::addTypoScriptConstants('@import "EXT:cute_mailing/Configuration/TypoScript/constants.typoscript"');
         ExtensionManagementUtility::addTypoScriptSetup('@import "EXT:cute_mailing/Configuration/TypoScript/setup.typoscript"');
-        $cuteMailingSysFolder = 116;
 
         // Provide icon for page tree, list view, ... :
         $iconRegistry = GeneralUtility::makeInstance(IconRegistry::class);
@@ -23,12 +22,6 @@ call_user_func(
                     'source' => 'EXT:' . $extKey . '/Resources/Public/Icons/cute_folder_icon.svg',
                 ]
             );
-        // ... register other icons in the same way, see below.
-
-        // Allow backend users to drag and drop the new page type:
-        ExtensionManagementUtility::addUserTSConfig(
-            'options.pageTree.doktypesToShowInNewPageDragArea := addToList(' . $cuteMailingSysFolder . ')'
-        );
 
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['cuteMailing_folderUpdateWizard']
             = \Undkonsorten\CuteMailing\Updates\FolderUpdateWizard::class;

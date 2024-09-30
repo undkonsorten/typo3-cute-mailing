@@ -16,8 +16,8 @@ class SendOut extends AbstractEntity
 
     /**
      * @var Newsletter
-     * @Lazy
      */
+    #[Lazy]
     protected $newsletter;
 
     /**
@@ -27,9 +27,9 @@ class SendOut extends AbstractEntity
 
     /**
      * @var ObjectStorage<MailTask>
-     * @Cascade("remove")
-     * @Lazy
      */
+    #[Cascade(['value' => 'remove'])]
+    #[Lazy]
     protected $mailTasks;
 
     protected int $total = 0;

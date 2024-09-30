@@ -9,9 +9,6 @@ if (!defined('TYPO3')) {
 }
 (function () {
 
-    ExtensionManagementUtility::allowTableOnStandardPages('tx_cutemailing_domain_model_newsletter');
-    ExtensionManagementUtility::allowTableOnStandardPages('tx_cutemailing_domain_model_recipient_list');
-
     /**
      * Registers a Backend Module
      */
@@ -35,10 +32,10 @@ if (!defined('TYPO3')) {
         $cuteMailingDoktype = 116;
 
         // Add new page type:
-        $GLOBALS['PAGES_TYPES'][$cuteMailingDoktype] = [
+        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\DataHandling\PageDoktypeRegistry::class)->add($cuteMailingDoktype, [
             'type' => 'web',
             'allowedTables' => '*',
-        ];
+        ]);
 
     })();
 })();

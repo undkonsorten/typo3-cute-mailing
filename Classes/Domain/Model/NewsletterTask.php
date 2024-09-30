@@ -58,7 +58,7 @@ class NewsletterTask extends Task
         ];
     }
 
-    public function setAttachImages(bool $attachImages)
+    public function setAttachImages(bool $attachImages): void
     {
         $this->setProperty('attachImages', $attachImages);
     }

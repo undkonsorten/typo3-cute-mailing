@@ -66,39 +66,19 @@ class MailService implements SingletonInterface
      */
     protected $requestOptions;
 
-    public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager)
+    public function __construct(FrontendInterface $cache, \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface $persistenceManager, \Undkonsorten\CuteMailing\Domain\Repository\SendOutRepository $sendOutRepository, \Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository $newsletterRepository, \TYPO3\CMS\Core\Http\RequestFactory $requestFactory, \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder $uriBuilder)
     {
+        $this->cache = $cache;
         $this->persistenceManager = $persistenceManager;
-    }
-
-    public function injectSendOutRepository(SendOutRepository $sendOutRepository)
-    {
         $this->sendOutRepository = $sendOutRepository;
-    }
-
-    public function injectNewsletterRepository(NewsletterRepository $newsletterRepository)
-    {
         $this->newsletterRepository = $newsletterRepository;
-    }
-
-    public function injectRequestFactory(RequestFactory $requestFactory)
-    {
         $this->requestFactory = $requestFactory;
-    }
-
-    public function injectUriBuilder(UriBuilder $uriBuilder)
-    {
         $this->uriBuilder = $uriBuilder;
     }
 
-    public function __construct(FrontendInterface $cache)
-    {
-        $this->cache = $cache;
-    }
 
 
-
-    public function sendMail(MailTask $mailTask)
+    public function sendMail(MailTask $mailTask): void
     {
         /** @var Newsletter $newsletter */
         $newsletter = $this->newsletterRepository->findByUid($mailTask->getNewsletter());
@@ -274,7 +254,7 @@ class MailService implements SingletonInterface
             function ($match) {
                 $part = $this->createImageMailPartFromUri($match[1]);
                 $cid = $part->getContentId();
-                $this->email->addPart($part);
+                $this->email->text($part);
                 return sprintf('src="cid:%s"', $cid);
             },
             $imageTag
