@@ -56,7 +56,7 @@ class NewsletterController extends ActionController
     /**
      * @var string
      */
-    protected $wizardUserPreviewFile = 'EXT:cute_mailing/Resources/Private/Backend/Templates/Newsletter/WizardUserPreview.html';
+    protected $wizardUserPreviewFile = 'EXT:cute_mailing/Resources/Private/Templates/Newsletter/WizardUserPreview.html';
 
     /**
      * @var NewsletterRepository|null
@@ -119,23 +119,24 @@ class NewsletterController extends ActionController
      */
     public function listAction(): ResponseInterface
     {
-        $currentPid = (int)($GLOBALS['TYPO3_REQUEST']->getParsedBody()['id'] ?? $GLOBALS['TYPO3_REQUEST']->getQueryParams()['id'] ?? null);
+        $currentPid = $this->getCurrentPageUid();
         if ($currentPid === 0) {
             return new ForwardResponse('choosePage');
         }
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
         $newsletters = $this->newsletterRepository->findByRootline($rootline);
-        $this->view->assignMultiple([
+
+        $this->moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $this->moduleTemplate->assignMultiple([
             'newsletters' => $newsletters,
         ]);
-        $this->moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($this->moduleTemplate->renderContent());
+        return $this->moduleTemplate->renderResponse('Newsletter/List');
     }
 
     public function choosePageAction(): ResponseInterface
     {
-        $this->moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($this->moduleTemplate->renderContent());
+        $this->moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        return $this->moduleTemplate->renderResponse('Newsletter/ChoosePage');
     }
 
     public function prepareAction(): ResponseInterface
@@ -157,9 +158,10 @@ class NewsletterController extends ActionController
         }
         $assign['languages'] = $siteLanguages;
         $assign['selectedLanguage'] = (int)($pageTs['language'] ?? 0);
-        $this->view->assignMultiple($assign);
-        $this->moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($this->moduleTemplate->renderContent());
+
+        $this->moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $this->moduleTemplate->assignMultiple($assign);
+        return $this->moduleTemplate->renderResponse('Newsletter/Prepare');
     }
 
     public function editAction(Newsletter $newsletter): ResponseInterface
@@ -177,9 +179,9 @@ class NewsletterController extends ActionController
         $newsletter->setNewsletterPageUrl($htmlUrl);
         $assign['newsletter'] = $newsletter;
 
-        $this->view->assignMultiple($assign);
-        $this->moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($this->moduleTemplate->renderContent());
+        $this->moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $this->moduleTemplate->assignMultiple($assign);
+        return $this->moduleTemplate->renderResponse('Newsletter/Edit');
     }
 
     /**
@@ -243,9 +245,9 @@ class NewsletterController extends ActionController
         );
         $assign['newsletterPageUrl'] = GeneralUtility::makeInstance(Uri::class, $htmlUrl);
 
-        $this->view->assignMultiple($assign);
-        $this->moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($this->moduleTemplate->renderContent());
+        $this->moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $this->moduleTemplate->assignMultiple($assign);
+        return $this->moduleTemplate->renderResponse('Newsletter/New');
     }
 
     public function initializeAction(): void
@@ -275,7 +277,7 @@ class NewsletterController extends ActionController
      */
     public function createAction(Newsletter $newsletter): ResponseInterface
     {
-        $currentPid = (int)($GLOBALS['TYPO3_REQUEST']->getParsedBody()['id'] ?? $GLOBALS['TYPO3_REQUEST']->getQueryParams()['id'] ?? null);
+        $currentPid = $this->getCurrentPageUid();
         $rootline = GeneralUtility::makeInstance(RootlineUtility::class, $currentPid)->get();
         foreach ($rootline as $page) {
             if ($page['module'] === 'cute_mailing') {

@@ -1,8 +1,0 @@
- # Module configuration
-module.tx_cutemailing {
-	view {
-		templateRootPaths.0 = {$module.tx_cutemailing.view.templateRootPath}
-		partialRootPaths.0 = {$module.tx_cutemailing.view.partialRootPath}
-		layoutRootPaths.0 = {$module.tx_cutemailing.view.layoutRootPath}
-	}
-}
