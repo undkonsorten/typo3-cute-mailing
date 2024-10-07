@@ -60,10 +60,12 @@
 						<td>
 							<f:if condition="{newsletter.scheduled}">
 								<f:then>
-									<f:render partial="Sendout/Progress" section="main" arguments="{sendout:newsletter.latestNonTestSendout}" />
+									<f:render partial="Sendout/Progress" section="main"
+														arguments="{sendout:newsletter.latestNonTestSendout}"/>
 								</f:then>
 								<f:else if="{newsletter.sent}">
-									<f:render partial="Sendout/Progress" section="main" arguments="{sendout:newsletter.latestNonTestSendout}" />
+									<f:render partial="Sendout/Progress" section="main"
+														arguments="{sendout:newsletter.latestNonTestSendout}"/>
 								</f:else>
 							</f:if>
 						</td>
@@ -71,7 +73,9 @@
 						<td class="cute__list-edit-button">
 							<f:comment><!-- status const SEND = 2; const CREATED = 0; const TESTED = 1; --></f:comment>
 							<f:if condition="{newsletter.status} != 2 && {newsletter.status} != 3">
-								<f:link.action action="enable" additionalAttributes="{data-cutemailing-confirm:'{f:translate(key:\'module.newsletter.list.enableConfirm\',extensionName:\'CuteMailing\', arguments: \'{0: newsletter.recipientList.recipientsCount}\')}'}" arguments="{newsletter:newsletter}"
+								<f:link.action action="enable"
+															 additionalAttributes="{data-cutemailing-confirm:'{f:translate(key:\'module.newsletter.list.enableConfirm\',extensionName:\'CuteMailing\', arguments: \'{0: newsletter.recipientList.recipientsCount}\')}'}"
+															 arguments="{newsletter:newsletter}"
 															 class="btn btn-primary">
 									<i class="fa fa-send"></i>
 									<f:translate key="module.newsletter.list.enable">enable</f:translate>
@@ -80,7 +84,8 @@
 									<i class="fa fa-flask"></i>
 									<f:translate key="module.newsletter.list.test">Send test mail</f:translate>
 								</f:link.action>
-								<f:link.action action="sendTestMail" arguments="{newsletter:newsletter,attachImages:1}" class="btn btn-primary">
+								<f:link.action action="sendTestMail" arguments="{newsletter:newsletter,attachImages:1}"
+															 class="btn btn-primary">
 									<i class="fa fa-flask"></i>
 									<f:translate key="module.newsletter.list.test.attachImages">Test mail (attach Images)</f:translate>
 								</f:link.action>
@@ -93,17 +98,16 @@
 
 									<f:link.action action="edit" arguments="{newsletter:newsletter}" class="btn btn-default"
 																 title="{f:translate(key: 'module.newsletter.list.edit', extensionName: 'CuteMailing')}">
-												<span class="t3js-icon icon icon-size-small icon-state-default icon-actions-page-open"
-															data-identifier="actions-page-open">
-													<span class="icon-markup">
-														<core:icon identifier="actions-open" size="small"></core:icon>
-													</span>
-													<span class="sr-only">
-														<f:translate key="module.newsletter.list.edit">
-															edit
-														</f:translate>
-													</span>
-												</span>
+										<span class="t3js-icon icon icon-size-small icon-state-default icon-actions-page-open"
+													data-identifier="actions-page-open">
+											<span class="icon-markup">
+												<core:icon identifier="actions-open" size="small"></core:icon>
+											</span>
+										</span> <span class="sr-only">
+												<f:translate key="module.newsletter.list.edit">
+													edit
+												</f:translate>
+											</span>
 									</f:link.action>
 								</f:if>
 								<f:link.action
