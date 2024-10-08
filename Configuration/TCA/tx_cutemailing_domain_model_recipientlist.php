@@ -21,6 +21,9 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
+        'security' => [
+            'ignorePageTypeRestriction' => true
+        ],
         'searchFields' => 'name,data,status,start_date,message,priority,',
         'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_recipient_list.svg'
     ],
