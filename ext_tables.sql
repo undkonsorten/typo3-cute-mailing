@@ -72,7 +72,7 @@ CREATE TABLE tx_cutemailing_domain_model_sendout
 
 
 #
-# Table structure for table 'tx_cutemailing_domain_model_recipient_list'
+# Table structure for table 'tx_cutemailing_domain_model_recipientlist'
 #
 CREATE TABLE tx_cutemailing_domain_model_recipientlist
 (
