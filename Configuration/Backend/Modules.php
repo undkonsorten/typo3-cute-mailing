@@ -5,7 +5,7 @@ return [
         'parent' => 'web',
         'position' => ['after' => 'recycler'],
         'access' => 'user',
-        'icon' => 'EXT:cute_mailing/Resources/Public/Icons/CuteMailing.svg',
+        'iconIdentifier' => 'apps-cute-mailing',
         'workspaces' => 'live',
         'path' => '/module/page/cute-mailing',
         'labels' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_mod_newsletter.xlf',
