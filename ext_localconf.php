@@ -1,15 +1,15 @@
 <?php
 
 use TYPO3\CMS\Core\Imaging\IconRegistry;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 if (!defined('TYPO3')) {
     die('Access denied.');
 }
 call_user_func(
     function ($extKey = 'cute_mailing') {
+        $typo3VersionInformation = GeneralUtility::makeInstance(Typo3Version::class);
 
         // Provide icon for page tree, list view, ... :
         $iconRegistry = GeneralUtility::makeInstance(IconRegistry::class);
@@ -27,6 +27,10 @@ call_user_func(
 
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['cute_mailing'] ??= [];
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['cute_mailing']['backend'] ??= \TYPO3\CMS\Core\Cache\Backend\Typo3DatabaseBackend::class;
+        
+        if ( $typo3VersionInformation->getMajorVersion() < 13) {
+            $GLOBALS['TYPO3_CONF_VARS']['FE']['addRootLineFields'] = $GLOBALS['TYPO3_CONF_VARS']['FE']['addRootLineFields'].', module';
+        }
     }
 
 );
