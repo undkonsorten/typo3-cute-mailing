@@ -3,13 +3,12 @@
 <f:layout name="Backend"/>
 
 <f:section name="content">
+	<f:flashMessages />
 	<div class="row">
 		<div class="col-md-12">
 			<h1>
 				<f:translate key="module.newsletter.new.title">Add newsletter</f:translate>
 			</h1>
-
-			<f:render arguments="{_all}" partial="Miscellaneous/FlashMessages"/>
 
 			<f:render arguments="{_all}" partial="Newsletter/Wizard"/>
 

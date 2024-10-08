@@ -18,6 +18,7 @@ use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\SiteFinder;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
@@ -210,9 +211,9 @@ class NewsletterController extends ActionController
             $page = $this->pageRepository->getPageOverlay($page, $language);
             if($page['sys_language_uid'] !== $language){
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('module.newsletter.noTranslation.message', 'CuteMailing'),
-                    LocalizationUtility::translate('module.newsletter.noTranslation.title', 'CuteMailing'),
-                    \TYPO3\CMS\Core\Type\ContextualFeedbackSeverity::WARNING
+                    $this->localizeKey('module.newsletter.noTranslation.message'),
+                    $this->localizeKey('module.newsletter.noTranslation.title'),
+                    ContextualFeedbackSeverity::WARNING
                 );
             }
         }
@@ -286,7 +287,10 @@ class NewsletterController extends ActionController
         }
         $this->newsletterRepository->add($newsletter);
         $this->persistenceManager->persistAll();
-        $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.create.message', 'CuteMailing'));
+        $this->addFlashMessage(
+            $this->localizeKey('module.newsletter.create.message'),
+            $this->localizeKey('module.newsletter.create.title')
+        );
         return $this->redirect('list');
     }
 
@@ -301,7 +305,11 @@ class NewsletterController extends ActionController
     public function enableAction(Newsletter $newsletter): ResponseInterface
     {
         if ($newsletter->getStatus() >= $newsletter::SCHEDULED) {
-            $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.newsletterSend.message', 'CuteMailing'), LocalizationUtility::translate('module.newsletter.newsletterSend.title', 'CuteMailing'), \TYPO3\CMS\Core\Type\ContextualFeedbackSeverity::ERROR);
+            $this->addFlashMessage(
+                $this->localizeKey('module.newsletter.newsletterSend.message'),
+                $this->localizeKey('module.newsletter.newsletterSend.title'),
+                ContextualFeedbackSeverity::ERROR
+            );
         } else {
             $newsletter->enable();
             /**@var $newsletterTask NewsletterTask* */
@@ -310,7 +318,10 @@ class NewsletterController extends ActionController
             $newsletterTask->setStartDate($newsletter->getSendingTime()->getTimestamp());
             $this->taskRepository->add($newsletterTask);
             $this->newsletterRepository->update($newsletter);
-            $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.newsletterQueued.message', 'CuteMailing'), LocalizationUtility::translate('module.newsletter.newsletterQueued.title', 'CuteMailing'), \TYPO3\CMS\Core\Type\ContextualFeedbackSeverity::OK);
+            $this->addFlashMessage(
+                $this->localizeKey('module.newsletter.newsletterQueued.message'),
+                $this->localizeKey('module.newsletter.newsletterQueued.title')
+            );
         }
 
         return $this->redirect('list');
@@ -319,7 +330,10 @@ class NewsletterController extends ActionController
     public function updateAction(Newsletter $newsletter): ResponseInterface
     {
         $this->newsletterRepository->update($newsletter);
-        $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.newsletterUpdated.message', 'CuteMailing'), LocalizationUtility::translate('module.newsletter.newsletterUpdated.title', 'CuteMailing'), \TYPO3\CMS\Core\Type\ContextualFeedbackSeverity::OK);
+        $this->addFlashMessage(
+            $this->localizeKey('module.newsletter.newsletterUpdated.message'),
+            $this->localizeKey('module.newsletter.newsletterUpdated.title')
+        );
         return $this->redirect('list');
     }
 
@@ -333,7 +347,10 @@ class NewsletterController extends ActionController
     public function deleteAction(Newsletter $newsletter): ResponseInterface
     {
         $this->newsletterRepository->remove($newsletter);
-        $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.delete.message', 'CuteMailing'), 'Deleted');
+        $this->addFlashMessage(
+            $this->localizeKey('module.newsletter.delete.message'),
+            $this->localizeKey('module.newsletter.delete.title')
+        );
         return $this->redirect('list');
     }
 
@@ -349,9 +366,16 @@ class NewsletterController extends ActionController
 
             $this->taskRepository->add($newsletterTask);
             $this->newsletterRepository->update($newsletter);
-            $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.testMailToGroup.message', 'CuteMailing') . $newsletter->getTestRecipientList()->getName(), LocalizationUtility::translate('module.newsletter.testMailToGroup.title', 'CuteMailing'), \TYPO3\CMS\Core\Type\ContextualFeedbackSeverity::OK);
+            $this->addFlashMessage(
+                sprintf($this->localizeKey('module.newsletter.testMailToGroup.message'), $newsletter->getTestRecipientList()->getName()),
+                $this->localizeKey('module.newsletter.testMailToGroup.title')
+            );
         } else {
-            $this->addFlashMessage(LocalizationUtility::translate('module.newsletter.testMailNoRecipient.message', 'CuteMailing'), LocalizationUtility::translate('module.newsletter.testMailNoRecipient.title', 'CuteMailing'), \TYPO3\CMS\Core\Type\ContextualFeedbackSeverity::ERROR);
+            $this->addFlashMessage(
+                $this->localizeKey('module.newsletter.testMailNoRecipient.message'),
+                $this->localizeKey('module.newsletter.testMailNoRecipient.title'),
+                ContextualFeedbackSeverity::ERROR
+            );
         }
         return $this->redirect('list');
 
@@ -379,11 +403,10 @@ class NewsletterController extends ActionController
     protected function shouldForwardToPrepareAction(int $currentPid, ?array $page, array $pageTs, ?int $newsletterPage, ?int $language): bool
     {
         if ($page['doktype'] === PageRepository::DOKTYPE_SYSFOLDER) {
-            /** @TODO Translate error messages * */
             $this->addFlashMessage(
-                LocalizationUtility::translate('module.newsletter.preparePage.wrongType.message', 'CuteMailing'),
-                LocalizationUtility::translate('module.newsletter.preparePage.wrongType.title', 'CuteMailing'),
-                \TYPO3\CMS\Core\Type\ContextualFeedbackSeverity::WARNING
+                $this->localizeKey('module.newsletter.preparePage.wrongType.message'),
+                $this->localizeKey('module.newsletter.preparePage.wrongType.title'),
+                ContextualFeedbackSeverity::WARNING
             );
             return true;
         }
@@ -416,4 +439,8 @@ class NewsletterController extends ActionController
         return BackendUtility::getPagesTSconfig($pid ?? $this->getCurrentPageUid())['mod.']['web_modules.']['cute_mailing.'] ?? [];
     }
 
+    protected function localizeKey(string $key): string
+    {
+        return LocalizationUtility::translate($key, 'CuteMailing');
+    }
 }

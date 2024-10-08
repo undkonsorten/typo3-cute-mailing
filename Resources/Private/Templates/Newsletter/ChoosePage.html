@@ -3,6 +3,7 @@
 <f:layout name="Backend"/>
 
 <f:section name="content">
+	<f:flashMessages />
 	<f:render arguments="{_all}" section="Newsletters"/>
 </f:section>
 
@@ -11,6 +12,6 @@
 	<h1>
 		<f:translate key="module.newsletter.list.title">CuteMailing: Newsletters</f:translate>
 	</h1>
-	<f:render arguments="{_all}" partial="Miscellaneous/FlashMessages"/>
+
 	<f:be.infobox state="1"><f:translate key="message.choosePage">Please choose a newsletter page first!</f:translate></f:be.infobox>
 </f:section>

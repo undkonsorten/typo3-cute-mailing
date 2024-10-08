@@ -159,7 +159,7 @@
 				<source>Scheduled</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.list.enableConfirm">
-				<source>Please confirm you want to send out this newsletter campaign to %s recipients.</source>
+				<source>Please confirm you want to send out this newsletter campaign to %s recipients!</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.list.deleteConfirm">
 				<source>Please confirm the deletion of this newsletter.</source>
@@ -168,7 +168,7 @@
 				<source>Please confirm the deletion of this newsletter.</source>
 			</trans-unit>
 			<trans-unit id="pleasechoose">
-				<source>Please choose a recipient list</source>
+				<source>Please choose a recipient list.</source>
 			</trans-unit>
 			<trans-unit id="save">
 				<source>Save</source>
@@ -176,23 +176,29 @@
 			<trans-unit id="sendoutOf">
 				<source>of</source>
 			</trans-unit>
+			<trans-unit id="module.newsletter.create.title">
+				<source>Success!</source>
+			</trans-unit>
 			<trans-unit id="module.newsletter.create.message">
-				<source>Newsletter successfully created</source>
+				<source>Newsletter successfully created.</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.delete.title">
+				<source>Deleted!</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.delete.message">
-				<source>Newsletter successfully deleted</source>
+				<source>Newsletter successfully deleted.</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.noTranslation.message">
 				<source>This page does not exist for chosen language. Start again and choose another page or language.</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.noTranslation.title">
-				<source>Translation does not exist.</source>
+				<source>Translation does not exist!</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.newsletterSended.message">
 				<source>Newsletter was already send.</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.newsletterSended.title">
-				<source>Was sended</source>
+				<source>Was sended!</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.newsletterQueued.message">
 				<source>Newsletter was queued for sending.</source>
@@ -204,13 +210,13 @@
 				<source>Newsletter was updated.</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.newsletterUpdated.title">
-				<source>Updated</source>
+				<source>Updated!</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.testMailToGroup.message">
-				<source>Your test mailing is being send out for the recipient group: </source>
+				<source>Your test mailing is being send out for the recipient group: "%s".</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.testMailToGroup.title">
-				<source>Testmailing invoked</source>
+				<source>Testmailing invoked!</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.testMailNoRecipient.message">
 				<source>This test for the newsletter has no recipient(s). Please check test recipients list.</source>

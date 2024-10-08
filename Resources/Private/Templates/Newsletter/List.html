@@ -3,6 +3,7 @@
 <f:layout name="Backend"/>
 
 <f:section name="content">
+	<f:flashMessages />
 	<f:render arguments="{_all}" section="Newsletters"/>
 </f:section>
 
@@ -11,7 +12,6 @@
 	<h1>
 		<f:translate key="module.newsletter.list.title">CuteMailing: Newsletters</f:translate>
 	</h1>
-	<f:render arguments="{_all}" partial="Miscellaneous/FlashMessages"/>
 	<f:if condition="{newsletters}">
 		<f:then>
 			<f:link.action action="new" class="btn btn-primary cute__list-add-new mb-3">

@@ -4,6 +4,7 @@
 <f:layout name="Backend"/>
 
 <f:section name="content">
+	<f:flashMessages />
 	<div class="col-md-12">
 		<h1>
 			<f:translate key="module.newsletter.prepare.title">Prepare newsletter</f:translate>
@@ -16,8 +17,6 @@
 		</div>
 	</div>
 
-
-	<f:render arguments="{_all}" partial="Miscellaneous/FlashMessages"/>
 	<f:form action="new">
 
 		<div class="row">
