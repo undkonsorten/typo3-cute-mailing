@@ -70,10 +70,12 @@
 		</div>
 	</div>
 
+	<div class="button-line button-line__main">
+		<button class="btn btn-primary btn-lg pull-right" data-wizardform-gotostep="2" type="button">
+			<f:translate key="module.newsletter.wizard.next">Next</f:translate>
+		</button>
+	</div>
 
-	<button class="btn btn-primary btn-lg pull-right" data-wizardform-gotostep="2" type="button">
-		<f:translate key="module.newsletter.wizard.next">Next</f:translate>
-	</button>
 </fieldset>
 
 
@@ -217,7 +219,7 @@
 		</div>
 	</div>
 
-	<div style="margin: 20px 0;">
+	<div class="button-line button-line__details" style="margin: 20px 0;">
 		<button class="btn btn-primary btn-lg" data-wizardform-gotostep="1">
 			<f:translate key="module.newsletter.wizard.back">Back</f:translate>
 		</button>
@@ -250,7 +252,7 @@
 
 
 
-    <div class="row">
+	<div class="row">
         <div class="col-md-12">
             <div data-cutemailing-wizardpreview="users">
                 <div class="panel panel-default">
@@ -298,25 +300,27 @@
 		</div>
 	</div>
 
+	<div class="button-line button-line__preview">
+		<button class="btn btn-primary btn-lg" data-wizardform-gotostep="2">
+			<f:translate key="module.newsletter.wizard.back">Back</f:translate>
+		</button>
+		<f:form.hidden property="newsletterPage" value="{newsletterPage}" data="{cutemailing-newsletterpage:1}" />
+		<f:form.hidden property="language" value="{language}" data="{cutemailing-language:1}" />
+		<f:form.hidden property="pageTypeHtml" data="{cutemailing-pagetype-html:true}" value="{pageTypeHtml}"/>
+		<f:form.hidden property="pageTypeText" data="{cutemailing-pagetype-text:true}" value="{pageTypeText}"/>
+		<f:form.hidden property="newsletterPageUrl" data="{cutemailing-pageurl:true}" value="{newsletterPageUrl}" />
+		<f:form.hidden property="allowedMarker" value="{allowedMarker}"/>
+		<f:form.hidden property="basicAuthUser" value="{basicAuthUser}"/>
+		<f:form.hidden property="basicAuthPassword" value="{basicAuthPassword}"/>
+		<f:form.hidden property="listunsubscribeEnable" value="{listunsubscribeEnable}"/>
+		<f:form.hidden property="listunsubscribeEmail" value="{listunsubscribeEmail}"/>
+		<f:form.hidden property="returnPath" value="{returnPath}"/>
+		<f:form.hidden property="language" data="{cutemailing-language:1}" value="{language}"/>
+		<f:form.submit class="btn btn-primary btn-lg pull-right" data="{cutemailing-wizardstatus:'pending'}"
+									 disabled="disabled" value="{f:translate(key:'save',extensionName:'CuteMailing')}"/>
+		<f:form.submit class="btn btn-primary btn-lg pull-right" data="{cutemailing-wizardstatus:'ready'}"
+									 style="display:none" value="{f:translate(key:'save',extensionName:'CuteMailing')}"/>
+	</div>
 
-	<button class="btn btn-primary btn-lg" data-wizardform-gotostep="2">
-		<f:translate key="module.newsletter.wizard.back">Back</f:translate>
-	</button>
-	<f:form.hidden property="newsletterPage" value="{newsletterPage}" data="{cutemailing-newsletterpage:1}" />
-	<f:form.hidden property="language" value="{language}" data="{cutemailing-language:1}" />
-	<f:form.hidden property="pageTypeHtml" data="{cutemailing-pagetype-html:true}" value="{pageTypeHtml}"/>
-	<f:form.hidden property="pageTypeText" data="{cutemailing-pagetype-text:true}" value="{pageTypeText}"/>
-	<f:form.hidden property="newsletterPageUrl" data="{cutemailing-pageurl:true}" value="{newsletterPageUrl}" />
-	<f:form.hidden property="allowedMarker" value="{allowedMarker}"/>
-	<f:form.hidden property="basicAuthUser" value="{basicAuthUser}"/>
-	<f:form.hidden property="basicAuthPassword" value="{basicAuthPassword}"/>
-	<f:form.hidden property="listunsubscribeEnable" value="{listunsubscribeEnable}"/>
-	<f:form.hidden property="listunsubscribeEmail" value="{listunsubscribeEmail}"/>
-	<f:form.hidden property="returnPath" value="{returnPath}"/>
-	<f:form.hidden property="language" data="{cutemailing-language:1}" value="{language}"/>
-	<f:form.submit class="btn btn-primary btn-lg pull-right" data="{cutemailing-wizardstatus:'pending'}"
-								 disabled="disabled" value="{f:translate(key:'save',extensionName:'CuteMailing')}"/>
-	<f:form.submit class="btn btn-primary btn-lg pull-right" data="{cutemailing-wizardstatus:'ready'}"
-								 style="display:none" value="{f:translate(key:'save',extensionName:'CuteMailing')}"/>
 </fieldset>
 </html>

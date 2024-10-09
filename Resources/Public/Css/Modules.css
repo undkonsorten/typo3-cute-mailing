@@ -350,6 +350,13 @@ label {
 	background-color: var(--cute-color--darken);
 	border-color: var(--cute-color--darken);
 }
+.button-line {
+	display: flex;
+	justify-content: space-between;
+}
+.button-line.button-line__main {
+	justify-content: flex-end;
+}
 
 .cute__flash-message-list {
 	list-style: none;
