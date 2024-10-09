@@ -1,4 +1,6 @@
-define(['jquery'], function ($) {
+import $ from 'jquery';
+
+(() => {
 	'use strict';
 
 	/**
@@ -295,4 +297,4 @@ define(['jquery'], function ($) {
 		var CuteMailingBackendObject = new CuteMailingBackend($);
 		CuteMailingBackendObject.initialize();
 	})
-});
+})();
