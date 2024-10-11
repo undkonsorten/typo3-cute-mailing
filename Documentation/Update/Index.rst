@@ -6,6 +6,19 @@
 Update
 ======
 
+.. _update_to_4.1:
+
+Update to 4.1
+================
+
+TYPO3 11 compatibility has been removed and TYPO3 13 compatibilty has been added
+in 4.1.0.
+There are currently no known breaking changes.
+The wizard to migrate old Sysfolders with the old CuteMailing doktype
+(from version 1.x) has been removed. If you update CuteMailing from a version
+lower than 2, you need an interim update step with version 2.x or 3.x to use
+that update wizard. Or change existing folders manually.
+
 .. _update_to_2.0:
 
 Update to 2.x?
