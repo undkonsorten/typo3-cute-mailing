@@ -10,9 +10,6 @@ call_user_func(
     function ($extKey = 'cute_mailing') {
         $typo3VersionInformation = GeneralUtility::makeInstance(Typo3Version::class);
 
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['cuteMailing_folderUpdateWizard']
-            = \Undkonsorten\CuteMailing\Updates\FolderUpdateWizard::class;
-
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['cute_mailing'] ??= [];
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['cute_mailing']['backend'] ??= \TYPO3\CMS\Core\Cache\Backend\Typo3DatabaseBackend::class;
 
