@@ -49,7 +49,7 @@ class Newsletter extends AbstractEntity
     /**
      * @var RecipientList
      */
-    #[\TYPO3\CMS\Extbase\Annotation\ORM\Lazy]
+    #[Lazy]
     protected $testRecipientList = null;
 
     /**
