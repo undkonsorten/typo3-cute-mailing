@@ -6,9 +6,6 @@
 Configuration
 =============
 
-There is no TypoScript configuration needed. You can use the usual settings
-to override template paths.
-
 .. _configuration_setup_sysfolder:
 
 Set up CuteMailing Sysfolder

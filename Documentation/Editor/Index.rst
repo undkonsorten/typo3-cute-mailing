@@ -119,3 +119,14 @@ Set `mod.web_modules.cute_mailing.language` to the default language you want to 
 by language selection on the first step.
 
 See :ref:`Configuration <configuration_example>` section.
+
+.. important::
+
+    If you start sending newsletter, it can be take a while until the first mail
+    was really sent! Let's assume Scheduler Task will be executed every 5 minutes.
+
+    - you click on send Button, 5 minutes pass
+    - newsletter task will be executed, mail tasks are created, 5 minutes pass
+    - mail tasks will be executed, first mails are sent
+
+    So it can take up to 10 minutes until the first mail was send!
