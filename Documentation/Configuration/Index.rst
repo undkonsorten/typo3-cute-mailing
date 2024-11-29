@@ -60,6 +60,10 @@ Typical example
       basic_auth_password =
       listunsubscribe_enable = 1
       listunsubscribe_email = unsubscribe@example.com
+      # uid for a default recipient list if needed
+      default_recipient_list = 1
+      # uid for a default test recipient list if needed
+      default_test_recipient_list = 3
    }
 
 .. tip::
