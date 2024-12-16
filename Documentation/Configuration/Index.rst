@@ -89,3 +89,14 @@ and save the task.
 
 Now you are prepared for sending Newsletters. Scheduler will start executing the
 spooled Tasks in the "Task Queue".
+
+.. note::
+
+    In TYPO3 13 you need additional package to fix issue with missing request.
+    You need to install extbase-cli-aware-configuration-manager!
+
+    Get it from github:
+    https://github.com/undkonsorten/extbase-cli-aware-configuration-manager
+
+    or install directly with composer:
+    `composer require undkonsorten/extbase-cli-aware-configuration-manager`
