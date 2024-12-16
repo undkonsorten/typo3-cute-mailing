@@ -3,8 +3,10 @@
 
 Pronounced [kø] "queued" mailing :grin:
 
-A typo3 extension that makes mail and newsletter sending cute.
+A TYPO3 extension that makes mail and newsletter sending cute.
 
 ![cute_mail](./Documentation/Images/Build/NewsletterModule.png)
 
 [Documentation](./Documentation/Index.rst)
+
+[Link to TYPO3 docs](https://docs.typo3.org/p/undkonsorten/typo3-cute-mailing/main/en-us/)
