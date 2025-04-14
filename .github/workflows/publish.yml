@@ -1,6 +1,7 @@
 name: TERUpload
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - "**"
