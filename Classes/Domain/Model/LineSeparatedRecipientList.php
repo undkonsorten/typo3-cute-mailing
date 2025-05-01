@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace Undkonsorten\CuteMailing\Domain\Model;
+
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class LineSeparatedRecipientList extends RecipientList
@@ -19,11 +20,13 @@ class LineSeparatedRecipientList extends RecipientList
     public function getRecipients(int $limit = null, int $offset = null): array
     {
         // @todo validate email addresses?
-        // @todo allow format "FirstName LastName <firstname.lastname@example.org>"?
         $addresses = GeneralUtility::trimExplode("\n", $this->lineSeparatedList, true);
         return array_map(function (string $address, int $position): SimpleRecipient {
             $recipient = new SimpleRecipient();
-            $recipient->setUid($position)->setEmail($address);
+            $splitAddress = explode(' ', str_replace(['"','<','>'],'',$address));
+            $recipient->setUid($position)->setEmail(array_pop($splitAddress));
+            $recipient->setLastName(array_pop($splitAddress) ?? "");
+            $recipient->setFirstName(implode(' ', $splitAddress) ?? "");
             return $recipient;
         }, $addresses, array_keys($addresses));
     }
