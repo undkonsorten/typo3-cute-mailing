@@ -20,9 +20,8 @@
 						</f:for>
 						<f:if condition="{userAmount} > 3">
 							<li class="list-group-item">
-								<f:image class="cutemailing-mailpreview--image" height="32"
-										 src="{f:uri.resource(path: 'Images/DummyUser.svg', extensionName: 'cute_mailing')}"
-										 width="32" />
+								<img class="cutemailing-mailpreview--image" height="32" width="32"
+										 src="{f:uri.resource(path: 'Images/DummyUser.svg', extensionName: 'CuteMailing')}" />
 								{userAmount - 3}
 								<f:translate key="module.newsletter.new.wizarduserpreview.further" extensionName="CuteMailing">Further</f:translate>
 								...
