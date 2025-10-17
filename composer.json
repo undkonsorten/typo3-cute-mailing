@@ -33,6 +33,10 @@
 		"symfony/console": "^5.4 || ^6.0 || ^7",
 		"symfony/mime": "^6.2 || ^7"
 	},
+	"require-dev": {
+		"codappix/typo3-php-datasets": "^1.6",
+		"typo3/testing-framework": "^9.0"
+	},
 	"suggest": {
 		"undkonsorten/typo3-cute-mailing-registeraddress": "Connector for recipient list if register/unregister subscriber with registeraddress extension.",
 		"undkonsorten/typo3-cute-mailing-ttaddress": "tt_address recipient connector. If just tt_address data should be used in recipient list."
