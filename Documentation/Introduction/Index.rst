@@ -21,6 +21,15 @@ two extension that introduce different recipient list for
 * `undkonsorten/typo3-cute-mailing-ttaddress <https://github.com/undkonsorten/typo3-cute-mailing-ttaddress>`__ (if you just using tt_address data for recipients)
 * `undkonsorten/typo3-cute-mailing-registeraddress <https://github.com/undkonsorten/typo3-cute-mailing-registeraddress>`__ (if you use tt_adress data and register recipients with the ext: registeraddress)
 
+For testing purpose or some quick and easy newsletter sending, Cute Mailing
+provides a very simple text based recipient list type. You can use that type
+to create a small list in a textarea by using a new line for every recipient.
+You can use known email syntax as following or only the email address:
+
+.. code-block:: typoscript
+
+   FirstName LastName <firstname.lastname@example.org>
+
 Cute Mailing is heavily inspired by luxletter but omits the rendering part to
 focus on it‘s main purpose:
 
