@@ -388,6 +388,9 @@ class NewsletterController extends ActionController
         $recipientListId = $request->getQueryParams()['recipientList'];
         /** @var RecipientListInterface $recipientList */
         $recipientList = $this->recipientListRepository->findByUid($recipientListId);
+        if (!$recipientList instanceof RecipientListInterface) {
+            return $this->jsonResponse(json_encode([]));
+        }
         $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
         $standaloneView->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($this->wizardUserPreviewFile));
         $standaloneView->assignMultiple([
