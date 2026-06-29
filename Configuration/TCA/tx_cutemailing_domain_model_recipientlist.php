@@ -24,6 +24,8 @@ return [
         'security' => [
             'ignorePageTypeRestriction' => true
         ],
+        #@todo deprecated for TYPO3 14, can be removed after 13 support is dropped
+        'searchFields' => 'name,data,status,start_date,message,priority,',
         'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_recipient_list.svg'
     ],
     'types' => [

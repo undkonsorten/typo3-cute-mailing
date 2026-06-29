@@ -18,6 +18,8 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
+        #@todo deprecated for TYPO3 14, can be removed after 13 support is dropped
+        'searchFields' => 'newsletter',
         'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_sendout.svg'
     ],
     'types' => [
