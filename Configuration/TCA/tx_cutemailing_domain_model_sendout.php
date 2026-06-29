@@ -18,7 +18,6 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'newsletter',
         'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_sendout.svg'
     ],
     'types' => [
@@ -30,6 +29,7 @@ return [
             'config' => [
                 'type' => 'datetime',
                 'default' => 0,
+                'searchable' => false,
             ],
         ],
         'hidden' => [
@@ -50,6 +50,7 @@ return [
                 'range' => [
                     'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y'))
                 ],
+                'searchable' => false,
             ],
         ],
         'endtime' => [
@@ -63,6 +64,7 @@ return [
                 'range' => [
                     'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y'))
                 ],
+                'searchable' => false,
             ],
         ],
         'newsletter' => [
