@@ -52,7 +52,7 @@
 			"extension-key": "cute_mailing"
 		},
 		"branch-alias":{
-			"dev-main": "4.2.x-dev"
+			"dev-develop": "4.2.x-dev"
 		}
 	}
 }
