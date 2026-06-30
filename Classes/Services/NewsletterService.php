@@ -9,7 +9,6 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use Undkonsorten\CuteMailing\Domain\Model\MailTask;
 use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
 use Undkonsorten\CuteMailing\Domain\Model\NewsletterTask;
-use Undkonsorten\CuteMailing\Domain\Model\RecipientInterface;
 use Undkonsorten\CuteMailing\Domain\Model\SendOut;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
 use Undkonsorten\CuteMailing\Domain\Repository\SendOutRepository;
@@ -36,7 +35,7 @@ class NewsletterService implements SingletonInterface
      * @var Newsletter
      */
     protected $newsletter;
-    public function __construct(protected \Undkonsorten\CuteMailing\Domain\Repository\SendOutRepository $sendOutRepository, \Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository $newsletterRepository, \Undkonsorten\Taskqueue\Domain\Repository\TaskRepository $taskRepository, \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager)
+    public function __construct(protected SendOutRepository $sendOutRepository, NewsletterRepository $newsletterRepository, TaskRepository $taskRepository, PersistenceManager $persistenceManager)
     {
         $this->newsletterRepository = $newsletterRepository;
         $this->taskRepository = $taskRepository;
@@ -59,7 +58,7 @@ class NewsletterService implements SingletonInterface
         }
         $recipients = $recipientList->getRecipients();
 
-        if (empty($recipients)) {
+        if ($recipients === []) {
             throw new Exception("Recipient list is empty", 1644851884);
         }
 

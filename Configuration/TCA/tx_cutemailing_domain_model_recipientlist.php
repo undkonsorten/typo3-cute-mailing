@@ -24,6 +24,7 @@ return [
         'security' => [
             'ignorePageTypeRestriction' => true
         ],
+        #@todo deprecated for TYPO3 14, can be removed after 13 support is dropped
         'searchFields' => 'name,data,status,start_date,message,priority,',
         'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_recipient_list.svg'
     ],
@@ -40,6 +41,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
+                'searchable' => false,
             ]
         ],
 
@@ -61,6 +63,7 @@ return [
                 'range' => [
                     'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y'))
                 ],
+                'searchable' => false,
             ],
         ],
         'endtime' => [
@@ -74,6 +77,7 @@ return [
                 'range' => [
                     'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y'))
                 ],
+                'searchable' => false,
             ],
         ],
         'name' => [
@@ -116,6 +120,7 @@ return [
                 'type' => 'text',
                 'cols' => 30,
                 'rows' => 10,
+                'searchable' => false,
             ]
         ],
     ],

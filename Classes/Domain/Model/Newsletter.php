@@ -11,6 +11,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Newsletter extends AbstractEntity
 {
+    public $configuration;
     const CREATED = 0;
     const TESTED = 1;
     const SCHEDULED = 2;
@@ -479,9 +480,7 @@ class Newsletter extends AbstractEntity
     public function getLatestNonTestSendout(): ?SendOut
     {
         $sendOuts = $this->sendOuts->toArray() ?? [];
-        $sendOuts = array_filter($sendOuts, static function(SendOut $sendout): bool {
-            return !$sendout->isTest();
-        });
+        $sendOuts = array_filter($sendOuts, static fn(SendOut $sendout): bool => !$sendout->isTest());
         return array_pop($sendOuts);
     }
 
@@ -493,7 +492,7 @@ class Newsletter extends AbstractEntity
 
     public function getProgress(): float
     {
-        return (float)($this->getLatestNonTestSendout() ? $this->getLatestNonTestSendout()->getProgress() : 0);
+        return (float)($this->getLatestNonTestSendout() instanceof SendOut ? $this->getLatestNonTestSendout()->getProgress() : 0);
     }
 
     public function isComplete(): bool

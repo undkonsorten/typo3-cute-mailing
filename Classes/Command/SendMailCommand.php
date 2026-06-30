@@ -34,7 +34,7 @@ class SendMailCommand extends Command
         TaskRepository       $taskRepository,
         PersistenceManager   $persistenceManager,
         NewsletterRepository $newsletterRepository,
-        string               $name = null
+        ?string               $name = null
     )
     {
         $this->taskRepository = $taskRepository;

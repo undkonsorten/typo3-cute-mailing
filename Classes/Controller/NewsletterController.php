@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace Undkonsorten\CuteMailing\Controller;
 
+use Undkonsorten\CuteMailing\Domain\Model\RecipientList;
 use DateTime;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Exception as ExceptionDbalDriver;
 use Exception;
-use PharIo\Manifest\InvalidUrlException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
@@ -15,7 +15,6 @@ use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Http\Uri;
-use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
@@ -24,8 +23,6 @@ use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentNameException;
-use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Object\Exception as ExceptionExtbaseObject;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
@@ -104,7 +101,8 @@ class NewsletterController extends ActionController
         TaskRepository                   $taskRepository,
         PersistenceManager               $persistenceManager,
         PageRepository                   $pageRepository,
-        ModuleTemplateFactory $moduleTemplateFactory
+        ModuleTemplateFactory $moduleTemplateFactory,
+        private readonly SiteFinder $siteFinder
     )
     {
         $this->newsletterRepository = $newsletterRepository;
@@ -172,7 +170,7 @@ class NewsletterController extends ActionController
         $assign['recipientList'] = $this->recipientListRepository->findByRootline($rootline);
         $assign['testRecipientList'] = $this->recipientListRepository->findByRootline($rootline);
 
-        $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
+        $site = $this->siteFinder->getSiteByPageId($newsletter->getNewsletterPage());
         $htmlUrl = (string)$site->getRouter()->generateUri(
             $newsletter->getNewsletterPage(),
             ['type' => $newsletter->getPageTypeHtml(), '_language' => $newsletter->getLanguage()]
@@ -241,7 +239,7 @@ class NewsletterController extends ActionController
         $assign['listunsubscribeEnable'] = $pageTs['listunsubscribe_enable'] ?? '';
         $assign['listunsubscribeEmail'] = $pageTs['listunsubscribe_email'] ?? '';
 
-        $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($assign['newsletterPage']);
+        $site = $this->siteFinder->getSiteByPageId($assign['newsletterPage']);
         $htmlUrl = (string)$site->getRouter()->generateUri(
             $assign['newsletterPage'],
             ['type' => $assign['pageTypeHtml'], '_language' => $assign['language']]
@@ -358,7 +356,7 @@ class NewsletterController extends ActionController
 
     public function sendTestMailAction(Newsletter $newsletter, bool $attachImages = false): ResponseInterface
     {
-        if ($newsletter->getTestRecipientList()) {
+        if ($newsletter->getTestRecipientList() instanceof RecipientList) {
             $newsletter->setStatus($newsletter::TESTED);
             /**@var $newsletterTask NewsletterTask* */
             $newsletterTask = GeneralUtility::makeInstance(NewsletterTask::class);
@@ -423,10 +421,7 @@ class NewsletterController extends ActionController
 
         $languages = $this->getSiteLanguagesForPid($newsletterPage ?? $currentPid);
         /** @noinspection IfReturnReturnSimplificationInspection */
-        if (count($languages) < 2) {
-            return false;
-        }
-        return true;
+        return count($languages) >= 2;
     }
 
     protected function getSiteLanguagesForPid(int $currentPid): array

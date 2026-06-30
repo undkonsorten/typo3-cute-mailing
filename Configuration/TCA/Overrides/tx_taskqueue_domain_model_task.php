@@ -1,6 +1,8 @@
 <?php
 
-defined('TYPO3') or die();
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
+defined('TYPO3') || die();
 
 (function() {
     $additionalColumns = [
@@ -19,6 +21,6 @@ defined('TYPO3') or die();
             ],
         ],
     ];
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tx_taskqueue_domain_model_task', $additionalColumns);
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tx_taskqueue_domain_model_task', 'tx_cutemailing_newsletter, tx_cutemailing_sendout', '', 'after:retries');
+    ExtensionManagementUtility::addTCAcolumns('tx_taskqueue_domain_model_task', $additionalColumns);
+    ExtensionManagementUtility::addToAllTCAtypes('tx_taskqueue_domain_model_task', 'tx_cutemailing_newsletter, tx_cutemailing_sendout', '', 'after:retries');
 })();

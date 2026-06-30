@@ -16,7 +16,7 @@ class LineSeparatedRecipientList extends RecipientList
     /**
      * @inheritDoc
      */
-    public function getRecipients(int $limit = null, int $offset = null): array
+    public function getRecipients(?int $limit = null, ?int $offset = null): array
     {
         // @todo validate email addresses?
         // @todo allow format "FirstName LastName <firstname.lastname@example.org>"?
@@ -39,9 +39,7 @@ class LineSeparatedRecipientList extends RecipientList
      */
     public function getRecipient(int $recipient): ?SimpleRecipient
     {
-        $filteredRecipients = array_filter($this->getRecipients(), function (SimpleRecipient $recipientObject) use ($recipient) {
-            return $recipientObject->getUid() === $recipient;
-        });
+        $filteredRecipients = array_filter($this->getRecipients(), fn(SimpleRecipient $recipientObject) => $recipientObject->getUid() === $recipient);
         return array_values($filteredRecipients)[0] ?? null;
     }
 

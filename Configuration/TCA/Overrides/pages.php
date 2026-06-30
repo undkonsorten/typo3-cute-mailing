@@ -10,9 +10,9 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
         $table,
         'module',
         [
-            'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang.xlf:cute_mailing_sys_folder',
-            $extKey,
-            'EXT:' . $extKey . '/Resources/Public/Icons/cute_folder_icon.svg'
+            'label' => 'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang.xlf:cute_mailing_sys_folder',
+            'value' => $extKey,
+            'icon' => 'EXT:' . $extKey . '/Resources/Public/Icons/cute_folder_icon.svg'
         ],
     );
 

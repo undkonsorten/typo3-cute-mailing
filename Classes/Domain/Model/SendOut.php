@@ -83,9 +83,7 @@ class SendOut extends AbstractEntity
 
     public function getCompletedMailTasks(): array
     {
-        return array_filter($this->getMailTasks()->toArray(), static function (MailTask $task): bool {
-            return $task->getStatus() === TaskInterface::FAILED || $task->getStatus() === TaskInterface::FINISHED;
-        });
+        return array_filter($this->getMailTasks()->toArray(), static fn(MailTask $task): bool => $task->getStatus() === TaskInterface::FAILED || $task->getStatus() === TaskInterface::FINISHED);
     }
 
     public function getProgress(): float

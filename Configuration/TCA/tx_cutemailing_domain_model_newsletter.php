@@ -20,6 +20,7 @@ return [
         'security' => [
             'ignorePageTypeRestriction' => true
         ],
+        #@todo deprecated for TYPO3 14, can be removed after 13 support is dropped
         'searchFields' => 'name,data,status,start_date,message,priority,',
         'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_newsletter.svg'
     ],
@@ -55,6 +56,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
+                'searchable' => false,
             ]
         ],
 
@@ -76,6 +78,7 @@ return [
                 'range' => [
                     'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y'))
                 ],
+                'searchable' => false,
             ],
         ],
         'endtime' => [
@@ -89,6 +92,7 @@ return [
                 'range' => [
                     'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y'))
                 ],
+                'searchable' => false,
             ],
         ],
         'newsletter_page' => [
@@ -140,6 +144,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 15,
+                'searchable' => false,
             ]
         ],
         'sender_name' => [
@@ -148,6 +153,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
+                'searchable' => false,
             ]
         ],
         'reply_to' => [
@@ -156,6 +162,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 15,
+                'searchable' => false,
             ]
         ],
         'reply_to_name' => [
@@ -164,6 +171,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
+                'searchable' => false,
             ]
         ],
         'title' => [
@@ -172,6 +180,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 25,
+                'searchable' => false,
             ]
         ],
         'subject' => [
@@ -180,6 +189,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 40,
+                'searchable' => false,
             ]
         ],
         'description' => [
@@ -188,6 +198,7 @@ return [
             'config' => [
                 'type' => 'text',
                 'size' => 4,
+                'searchable' => false,
             ]
         ],
         'status' => [
@@ -223,7 +234,8 @@ return [
                 'type' => 'datetime',
                 'size' => 13,
                 'checkbox' => 0,
-                'default' => 0
+                'default' => 0,
+                'searchable' => false
             ]
         ],
         'page_type_html' => [
@@ -246,14 +258,14 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.allowed_marker',
             'config' => [
-                'type' => 'text',
+                'type' => 'text', 'searchable' => false,
             ]
         ],
         'return_path' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.return_path',
             'config' => [
-                'type' => 'input',
+                'type' => 'input', 'searchable' => false,
             ]
         ],
         'language' => [
@@ -267,14 +279,14 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.basic_auth_user',
             'config' => [
-                'type' => 'input',
+                'type' => 'input', 'searchable' => false,
             ]
         ],
         'basic_auth_password' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.basic_auth_password',
             'config' => [
-                'type' => 'input',
+                'type' => 'input', 'searchable' => false,
             ]
         ],
 
@@ -282,7 +294,7 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.listunsubscribe_enable',
             'config' => [
-                'type' => 'input',
+                'type' => 'input', 'searchable' => false,
             ]
         ],
         'listunsubscribe_email' => [

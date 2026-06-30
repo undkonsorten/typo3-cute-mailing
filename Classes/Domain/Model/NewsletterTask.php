@@ -2,14 +2,9 @@
 
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
-use TYPO3\CMS\Core\Exception;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
-use Undkonsorten\CuteMailing\Domain\Repository\SendOutRepository;
 use Undkonsorten\CuteMailing\Services\NewsletterService;
 use Undkonsorten\Taskqueue\Domain\Model\Task;
-use Undkonsorten\Taskqueue\Domain\Repository\TaskRepository;
 
 class NewsletterTask extends Task
 {

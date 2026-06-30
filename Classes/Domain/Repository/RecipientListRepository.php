@@ -28,10 +28,11 @@ class RecipientListRepository extends Repository implements RecipientListReposit
      * @param int|null $limit
      * @param int|null $offset
      * @return array|object[]|QueryResultInterface
-     * @deprecated This method makes no sense
      * @todo remove in next version
      */
-    public function findAll(int $limit = null, int $offset = null)
+    #[\Override]
+    #[\Deprecated(message: 'This method makes no sense')]
+    public function findAll(?int $limit = null, ?int $offset = null)
     {
         $query = $this->createQuery();
         if(!is_null($limit) && $limit > 0){

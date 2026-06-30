@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -12,7 +14,6 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 return [
     'dependencies' => ['core', 'backend'],
     'imports' => [

@@ -17,6 +17,7 @@ declare(strict_types=1);
 
 namespace Undkonsorten\CuteMailing\ViewHelpers\Be\Security;
 
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 
@@ -25,9 +26,10 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
  */
 final class IfIsAdminViewHelper extends AbstractConditionViewHelper
 {
+    #[\Override]
     public static function verdict(array $arguments, RenderingContextInterface $renderingContext): bool
     {
-        /** @var \TYPO3\CMS\Core\Authentication\BackendUserAuthentication $backenduser */
+        /** @var BackendUserAuthentication $backenduser */
         $backenduser = $GLOBALS['BE_USER'];
         $isAdmin = $backenduser?->isAdmin();
         return (bool)$isAdmin;
