@@ -1,0 +1,5 @@
+"tx_cutemailing_domain_model_newsletter"
+,"uid","pid","title","crdate"
+,1,10,"On page 10 (older)",1000000
+,2,20,"On page 20 (newer)",1000001
+,3,30,"On page 30 (not in rootline)",1000002

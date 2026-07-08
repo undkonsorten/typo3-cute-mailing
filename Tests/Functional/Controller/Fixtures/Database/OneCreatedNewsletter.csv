@@ -1,0 +1,3 @@
+"tx_cutemailing_domain_model_newsletter"
+,"uid","pid","title","subject","sender","sender_name","reply_to","reply_to_name","newsletter_page","page_type_html","page_type_text","status"
+,5,1,"My Newsletter","Hello","sender@example.org","Sender","reply@example.org","Reply",1,10,11,0

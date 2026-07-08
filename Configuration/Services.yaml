@@ -11,7 +11,7 @@ services:
     tags:
       - name: 'console.command'
         command: 'cute-mailing:send-mail'
-        description: 'Sends testing mail'
+        description: 'Queues a newsletter for sending by its uid.'
 
   cache.cute_mailing:
     class: TYPO3\CMS\Core\Cache\Frontend\FrontendInterface

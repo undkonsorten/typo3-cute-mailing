@@ -1,0 +1,8 @@
+"tx_cutemailing_domain_model_recipientlist"
+,"uid","pid","name","record_type","line_separated_list"
+,1,10,"Real recipients","Undkonsorten\CuteMailing\Domain\Model\LineSeparatedRecipientList",""
+,2,10,"Test recipients","Undkonsorten\CuteMailing\Domain\Model\LineSeparatedRecipientList",""
+
+"tx_cutemailing_domain_model_newsletter"
+,"uid","pid","title","recipient_list","test_recipient_list","status"
+,1,10,"My Newsletter",1,2,0
