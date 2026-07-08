@@ -1,8 +1,16 @@
 {
 	"name": "undkonsorten/typo3-cute-mailing",
-	"type": "typo3-cms-extension",
 	"description": "A TYPO3 extension that makes mailing and newsletter sending cute. Send TYPO3 pages as emails (newsletter) to many recipients. Can be used as replacement for direct_mail.",
-	"homepage": "https://www.undkonsorten.com",
+	"license": [
+		"GPL-2.0+"
+	],
+	"type": "typo3-cms-extension",
+	"keywords": [
+		"email",
+		"newsletter",
+		"TYPO3",
+		"direct_mail"
+	],
 	"authors": [
 		{
 			"name": "Eike Starkmann",
@@ -11,27 +19,30 @@
 			"role": "Developer"
 		}
 	],
-	"license": [
-		"GPL-2.0+"
-	],
-	"keywords": [
-		"email",
-		"newsletter",
-		"TYPO3",
-		"direct_mail"
-	],
+	"homepage": "https://www.undkonsorten.com",
 	"support": {
 		"issues": "https://github.com/undkonsorten/typo3-cute-mailing/issues"
 	},
 	"require": {
-		"ext-json": "*",
 		"php": "^8.3",
-		"typo3/cms-backend": "^13.4 || ^v14.3",
-		"typo3/cms-core": "^13.4 || ^v14.3",
-		"typo3/cms-extbase": "^13.4 || ^v14.3",
-		"undkonsorten/taskqueue": "^8.0 || ^9.0",
+		"ext-json": "*",
 		"symfony/console": "^5.4 || ^6.0 || ^7",
-		"symfony/mime": "^6.2 || ^7"
+		"symfony/mime": "^6.2 || ^7",
+		"typo3/cms-backend": "^13.4 || ^14.3",
+		"typo3/cms-core": "^13.4 || ^14.3",
+		"typo3/cms-extbase": "^13.4 || ^14.3",
+		"undkonsorten/taskqueue": "^8.0 || ^9.0"
+	},
+	"require-dev": {
+		"ergebnis/composer-normalize": "^2.0",
+		"friendsofphp/php-cs-fixer": "^3.0",
+		"j13k/yaml-lint": "^1.1",
+		"php-parallel-lint/php-console-highlighter": "^1.0",
+		"php-parallel-lint/php-parallel-lint": "^1.4",
+		"phpmd/phpmd": "^2.15",
+		"phpunit/phpunit": "^11.5",
+		"typo3/coding-standards": "^0.8",
+		"typo3/testing-framework": "^9.5"
 	},
 	"suggest": {
 		"undkonsorten/typo3-cute-mailing-registeraddress": "Connector for recipient list if register/unregister subscriber with registeraddress extension.",
@@ -47,17 +58,9 @@
 			"Undkonsorten\\CuteMailing\\Tests\\": "Tests/"
 		}
 	},
-	"require-dev": {
-		"friendsofphp/php-cs-fixer": "^3.0",
-		"php-parallel-lint/php-console-highlighter": "^1.0",
-		"php-parallel-lint/php-parallel-lint": "^1.4",
-		"phpmd/phpmd": "^2.15",
-		"phpunit/phpunit": "^11.5",
-		"typo3/coding-standards": "^0.8",
-		"typo3/testing-framework": "^9.5"
-	},
 	"config": {
 		"allow-plugins": {
+			"ergebnis/composer-normalize": true,
 			"phpstan/extension-installer": true,
 			"typo3/class-alias-loader": true,
 			"typo3/cms-composer-installers": true
@@ -71,12 +74,12 @@
 		"vendor-dir": ".Build/vendor"
 	},
 	"extra": {
+		"branch-alias": {
+			"dev-develop": "4.2.x-dev"
+		},
 		"typo3/cms": {
 			"extension-key": "cute_mailing",
 			"web-dir": ".Build/public"
-		},
-		"branch-alias":{
-			"dev-develop": "4.2.x-dev"
 		}
 	}
 }
