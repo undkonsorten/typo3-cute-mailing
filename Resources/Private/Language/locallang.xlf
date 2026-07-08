@@ -194,10 +194,10 @@
 			<trans-unit id="module.newsletter.noTranslation.title">
 				<source>Translation does not exist!</source>
 			</trans-unit>
-			<trans-unit id="module.newsletter.newsletterSended.message">
+			<trans-unit id="module.newsletter.newsletterSend.message">
 				<source>Newsletter was already send.</source>
 			</trans-unit>
-			<trans-unit id="module.newsletter.newsletterSended.title">
+			<trans-unit id="module.newsletter.newsletterSend.title">
 				<source>Was sended!</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.newsletterQueued.message">

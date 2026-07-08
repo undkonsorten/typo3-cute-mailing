@@ -10,7 +10,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Newsletter extends AbstractEntity
 {
-    public $configuration;
     public const CREATED = 0;
     public const TESTED = 1;
     public const SCHEDULED = 2;
@@ -204,22 +203,6 @@ class Newsletter extends AbstractEntity
     public function setRecipientList(RecipientList $recipientList): void
     {
         $this->recipientList = $recipientList;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getConfiguration()
-    {
-        return $this->configuration;
-    }
-
-    /**
-     * @param mixed $configuration
-     */
-    public function setConfiguration($configuration): void
-    {
-        $this->configuration = $configuration;
     }
 
     /**

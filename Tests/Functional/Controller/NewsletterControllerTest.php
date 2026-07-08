@@ -14,8 +14,11 @@ use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Site\SiteFinder;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
+use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfigurationService;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 use Undkonsorten\CuteMailing\Controller\NewsletterController;
 use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
@@ -32,13 +35,14 @@ final class NewsletterControllerTest extends FunctionalTestCase
     ];
 
     protected array $pathsToLinkInTestInstance = [
-        'typo3conf/ext/cute_mailing/Tests/Functional/Controller/Fixtures/Sites/' => 'config/sites',
+        'typo3conf/ext/cute_mailing/Tests/Functional/Controller/Fixtures/Sites/' => 'typo3conf/sites',
     ];
 
     private const MODULE_PATH = '/module/page/cute-mailing';
 
     private NewsletterRepository $newsletterRepository;
     private TaskRepository $taskRepository;
+    private PersistenceManagerInterface $persistenceManager;
 
     protected function setUp(): void
     {
@@ -51,6 +55,7 @@ final class NewsletterControllerTest extends FunctionalTestCase
 
         $this->newsletterRepository = $this->get(NewsletterRepository::class);
         $this->taskRepository = $this->get(TaskRepository::class);
+        $this->persistenceManager = $this->get(PersistenceManagerInterface::class);
     }
 
     #[Test]
@@ -67,9 +72,13 @@ final class NewsletterControllerTest extends FunctionalTestCase
     #[Test]
     public function listActionForwardsToChoosePageWhenNoPageIdIsGiven(): void
     {
+        // processRequest() is called directly here (see executeRequest()), bypassing the
+        // outer Extbase Dispatcher that normally resolves a ForwardResponse into an actual
+        // re-dispatched response. So the raw, unresolved ForwardResponse is what we get back.
         $response = $this->executeRequest('list', []);
 
-        self::assertSame(200, $response->getStatusCode());
+        self::assertInstanceOf(ForwardResponse::class, $response);
+        self::assertSame('choosePage', $response->getActionName());
     }
 
     #[Test]
@@ -109,16 +118,18 @@ final class NewsletterControllerTest extends FunctionalTestCase
     #[Test]
     public function createActionPersistsNewNewsletterUnderTheCuteMailingFolderAndRedirects(): void
     {
+        $properties = [
+            'title' => 'Brand New Newsletter',
+            'subject' => 'Hello',
+            'sender' => 'sender@example.org',
+            'senderName' => 'Sender',
+            'replyTo' => 'reply@example.org',
+            'replyToName' => 'Reply',
+            'newsletterPage' => '1',
+        ];
         $response = $this->executeRequest('create', ['id' => 1], [
-            'newsletter' => [
-                'title' => 'Brand New Newsletter',
-                'subject' => 'Hello',
-                'sender' => 'sender@example.org',
-                'senderName' => 'Sender',
-                'replyTo' => 'reply@example.org',
-                'replyToName' => 'Reply',
-                'newsletterPage' => '1',
-            ],
+            'newsletter' => $properties,
+            '__trustedProperties' => $this->buildTrustedPropertiesToken(array_keys($properties)),
         ]);
 
         self::assertSame(303, $response->getStatusCode());
@@ -134,17 +145,18 @@ final class NewsletterControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/Database/OneCreatedNewsletter.csv');
 
+        $properties = [
+            'title' => 'Updated title',
+            'subject' => 'Hello',
+            'sender' => 'sender@example.org',
+            'senderName' => 'Sender',
+            'replyTo' => 'reply@example.org',
+            'replyToName' => 'Reply',
+            'newsletterPage' => '1',
+        ];
         $response = $this->executeRequest('update', ['id' => 1], [
-            'newsletter' => [
-                '__identity' => '5',
-                'title' => 'Updated title',
-                'subject' => 'Hello',
-                'sender' => 'sender@example.org',
-                'senderName' => 'Sender',
-                'replyTo' => 'reply@example.org',
-                'replyToName' => 'Reply',
-                'newsletterPage' => '1',
-            ],
+            'newsletter' => ['__identity' => '5'] + $properties,
+            '__trustedProperties' => $this->buildTrustedPropertiesToken(['__identity', ...array_keys($properties)]),
         ]);
 
         self::assertSame(303, $response->getStatusCode());
@@ -215,7 +227,9 @@ final class NewsletterControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/Database/OneCreatedNewsletterWithTestRecipientList.csv');
 
         $request = (new ServerRequest(self::MODULE_PATH . '/wizardUserPreview'))
+            ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE)
             ->withQueryParams(['recipientList' => 1]);
+        $GLOBALS['TYPO3_REQUEST'] = $request;
 
         $response = $this->get(NewsletterController::class)->wizardUserPreviewAjax($request);
         $payload = json_decode((string)$response->getBody(), true);
@@ -234,6 +248,15 @@ final class NewsletterControllerTest extends FunctionalTestCase
             iterator_to_array($this->taskRepository->findAll()),
             static fn($task): bool => $task instanceof NewsletterTask,
         ));
+    }
+
+    /**
+     * @param string[] $propertyNames
+     */
+    private function buildTrustedPropertiesToken(array $propertyNames): string
+    {
+        $formFieldNames = array_map(static fn(string $name): string => 'newsletter[' . $name . ']', $propertyNames);
+        return $this->get(MvcPropertyMappingConfigurationService::class)->generateTrustedPropertiesToken($formFieldNames);
     }
 
     private function executeRequest(string $action, array $queryParams, array $extbaseArguments = []): ResponseInterface
@@ -255,6 +278,9 @@ final class NewsletterControllerTest extends FunctionalTestCase
         );
 
         $response = $this->get(NewsletterController::class)->processRequest(new Request($request));
+        // processRequest() is called directly here, bypassing the PSR-15 middleware stack that
+        // normally triggers persistAll() automatically at the end of a real HTTP request.
+        $this->persistenceManager->persistAll();
 
         Environment::initialize(
             Environment::getContext(),
