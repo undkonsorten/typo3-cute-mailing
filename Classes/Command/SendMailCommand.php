@@ -3,6 +3,7 @@
 namespace Undkonsorten\CuteMailing\Command;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -45,19 +46,25 @@ class SendMailCommand extends Command
 
     public function configure(): void
     {
-        $this->setDescription('Sends out test emails');
-
+        $this
+            ->setDescription('Queues a newsletter for sending by its uid.')
+            ->addArgument('newsletter', InputArgument::REQUIRED, 'The uid of the newsletter to queue for sending.');
     }
 
 
     public function execute(InputInterface $input, OutputInterface $output): int
     {
+        $newsletterUid = (int)$input->getArgument('newsletter');
+        $newsletter = $this->newsletterRepository->findByUid($newsletterUid);
 
-        $newsletter = $this->newsletterRepository->findByUid(13);
+        if ($newsletter === null) {
+            $output->writeln(sprintf('<error>Newsletter with uid %d was not found.</error>', $newsletterUid));
+            return self::FAILURE;
+        }
 
         /**@var $newsletterTask NewsletterTask* */
         $newsletterTask = GeneralUtility::makeInstance(NewsletterTask::class);
-        $newsletterTask->setNewsletter($newsletter->getUid());
+        $newsletterTask->setNewsletter($newsletter);
 
         $this->taskRepository->add($newsletterTask);
         $this->persitenceManager->persistAll();
