@@ -6,6 +6,9 @@ namespace Undkonsorten\CuteMailing\Tests\Functional\Domain\Repository;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
@@ -24,6 +27,11 @@ final class NewsletterRepositoryTest extends FunctionalTestCase
     protected function setUp(): void
     {
         parent::setUp();
+        // Extbase's ConfigurationManager needs a request to resolve query settings (e.g. storage
+        // page respecting). Outside of a real HTTP dispatch, this must be set explicitly.
+        $request = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
+        $this->get(ConfigurationManagerInterface::class)->setRequest($request);
+
         $this->subject = $this->get(NewsletterRepository::class);
     }
 

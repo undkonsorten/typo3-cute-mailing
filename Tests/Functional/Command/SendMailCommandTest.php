@@ -8,6 +8,9 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 use Undkonsorten\CuteMailing\Command\SendMailCommand;
 use Undkonsorten\CuteMailing\Domain\Model\NewsletterTask;
@@ -26,6 +29,12 @@ final class SendMailCommandTest extends FunctionalTestCase
     protected function setUp(): void
     {
         parent::setUp();
+        // Extbase's ConfigurationManager needs a request to resolve query settings (e.g. storage
+        // page respecting). Real CLI execution gets this from TYPO3's console bootstrap; CommandTester
+        // bypasses that, so it must be set explicitly here.
+        $request = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
+        $this->get(ConfigurationManagerInterface::class)->setRequest($request);
+
         $this->taskRepository = $this->get(TaskRepository::class);
     }
 
