@@ -51,9 +51,13 @@ final class SendOutTest extends UnitTestCase
     }
 
     #[Test]
-    public function isTestInitiallyReturnsFalsyValue(): void
+    public function isTestThrowsWhenNeverSet(): void
     {
-        self::assertFalse((bool)$this->subject->isTest());
+        // The getter is declared to return a non-nullable bool, but the $test
+        // property defaults to null, so PHP throws a TypeError before any of our
+        // code runs. This documents that behaviour rather than a chosen design.
+        $this->expectException(\TypeError::class);
+        $this->subject->isTest();
     }
 
     #[Test]

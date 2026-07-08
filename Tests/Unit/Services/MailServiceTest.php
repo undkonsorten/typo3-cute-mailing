@@ -286,7 +286,10 @@ final class MailServiceTest extends UnitTestCase
     public function sendMailUsesTestRecipientListWhenSendOutIsTest(): void
     {
         $recipient = new SimpleRecipient();
-        $recipient->setUid(1)->setEmail('test@example.org')->setFirstName('Test')->setLastName('Recipient');
+        $recipient->setUid(1);
+        $recipient->setEmail('test@example.org');
+        $recipient->setFirstName('Test');
+        $recipient->setLastName('Recipient');
 
         $testRecipientList = $this->createMock(RecipientList::class);
         $testRecipientList->method('getRecipient')->willReturn($recipient);
@@ -299,6 +302,7 @@ final class MailServiceTest extends UnitTestCase
         $newsletter->setPageTypeHtml(10);
         $newsletter->setPageTypeText(11);
         $newsletter->setSender('sender@example.org');
+        $newsletter->setReplyTo('reply@example.org');
         $newsletter->setSubject('Test send');
         $newsletter->setAllowedMarker('');
         $newsletter->setRecipientList($realRecipientList);
@@ -383,7 +387,10 @@ final class MailServiceTest extends UnitTestCase
     private function buildScenario(string $format, bool $test): array
     {
         $recipient = new SimpleRecipient();
-        $recipient->setUid(0)->setEmail('peter@example.org')->setFirstName('Peter')->setLastName('Müller');
+        $recipient->setUid(0);
+        $recipient->setEmail('peter@example.org');
+        $recipient->setFirstName('Peter');
+        $recipient->setLastName('Müller');
 
         $recipientList = $this->createMock(RecipientList::class);
         $recipientList->method('getRecipient')->willReturn($recipient);
