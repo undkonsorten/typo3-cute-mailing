@@ -58,6 +58,8 @@
 			"Undkonsorten\\CuteMailing\\Tests\\": "Tests/"
 		}
 	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"config": {
 		"allow-plugins": {
 			"ergebnis/composer-normalize": true,

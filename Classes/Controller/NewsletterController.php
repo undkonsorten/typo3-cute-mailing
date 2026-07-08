@@ -18,6 +18,8 @@ use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -30,7 +32,6 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
 use Undkonsorten\CuteMailing\Domain\Model\NewsletterTask;
 use Undkonsorten\CuteMailing\Domain\Model\RecipientList;
@@ -48,11 +49,6 @@ class NewsletterController extends ActionController
      * @var string
      */
     protected $receiverDetailFile = 'EXT:cute_mailing/Resources/Private/Templates/Newsletter/ReceiverDetail.html';
-
-    /**
-     * @var string
-     */
-    protected $wizardUserPreviewFile = 'EXT:cute_mailing/Resources/Private/Templates/Newsletter/WizardUserPreview.html';
 
     /**
      * @var NewsletterRepository|null
@@ -100,7 +96,8 @@ class NewsletterController extends ActionController
         PersistenceManager $persistenceManager,
         PageRepository $pageRepository,
         ModuleTemplateFactory $moduleTemplateFactory,
-        private readonly SiteFinder $siteFinder
+        private readonly SiteFinder $siteFinder,
+        private readonly ViewFactoryInterface $viewFactory,
     ) {
         $this->newsletterRepository = $newsletterRepository;
         $this->recipientListRepository = $recipientListRepository;
@@ -380,13 +377,15 @@ class NewsletterController extends ActionController
         $recipientListId = $request->getQueryParams()['recipientList'];
         /** @var RecipientListInterface $recipientList */
         $recipientList = $this->recipientListRepository->findByUid($recipientListId);
-        $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
-        $standaloneView->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($this->wizardUserPreviewFile));
-        $standaloneView->assignMultiple([
+        $view = $this->viewFactory->create(new ViewFactoryData(
+            templateRootPaths: ['EXT:cute_mailing/Resources/Private/Templates/'],
+            request: $request,
+        ));
+        $view->assignMultiple([
             'userPreview' => $recipientList->getRecipients(3),
             'userAmount' => $recipientList->getRecipientsCount(),
         ]);
-        return $this->jsonResponse(json_encode(['html' => $standaloneView->render()]));
+        return $this->jsonResponse(json_encode(['html' => $view->render('Newsletter/WizardUserPreview')]));
     }
 
     protected function getCurrentPageUid(): int
