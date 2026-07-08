@@ -2,18 +2,15 @@
 
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
-
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Undkonsorten\CuteMailing\Services\MailService;
 use Undkonsorten\Taskqueue\Domain\Model\Task;
 
 class MailTask extends Task
 {
-
-    const PLAINTEXT = 'plain';
-    const HTML = 'html';
-    const BOTH = 'both';
-
+    public const PLAINTEXT = 'plain';
+    public const HTML = 'html';
+    public const BOTH = 'both';
 
     public function run(): void
     {
@@ -21,15 +18,14 @@ class MailTask extends Task
         $mailService->sendMail($this);
     }
 
-
     public function setFormat(string $format): void
     {
-        $this->setProperty("format", $format);
+        $this->setProperty('format', $format);
     }
 
     public function getFormat(): string
     {
-        return $this->getProperty("format");
+        return $this->getProperty('format');
     }
 
     public function getNewsletter(): ?int

@@ -6,7 +6,6 @@ namespace Undkonsorten\CuteMailing\Tests\Unit\Domain\Model;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
-use ReflectionProperty;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use Undkonsorten\CuteMailing\Domain\Model\LineSeparatedRecipientList;
 use Undkonsorten\CuteMailing\Domain\Model\RecipientList;
@@ -139,7 +138,7 @@ final class LineSeparatedRecipientListTest extends UnitTestCase
 
     private function setLineSeparatedList(string $value): void
     {
-        $property = new ReflectionProperty($this->subject, 'lineSeparatedList');
+        $property = new \ReflectionProperty($this->subject, 'lineSeparatedList');
         $property->setAccessible(true);
         $property->setValue($this->subject, $value);
     }

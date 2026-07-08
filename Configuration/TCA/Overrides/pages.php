@@ -12,7 +12,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
         [
             'label' => 'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang.xlf:cute_mailing_sys_folder',
             'value' => $extKey,
-            'icon' => 'EXT:' . $extKey . '/Resources/Public/Icons/cute_folder_icon.svg'
+            'icon' => 'EXT:' . $extKey . '/Resources/Public/Icons/cute_folder_icon.svg',
         ],
     );
 
@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
             // add icon for new page type:
             'ctrl' => [
                 'typeicon_classes' => [
-                    'contains-'.$extKey => 'apps-pagetree-cute-mailing',
+                    'contains-' . $extKey => 'apps-pagetree-cute-mailing',
                 ],
             ],
         ]

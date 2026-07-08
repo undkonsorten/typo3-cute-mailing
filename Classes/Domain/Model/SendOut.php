@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
-use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -13,7 +13,6 @@ use Undkonsorten\Taskqueue\Domain\Model\TaskInterface;
 
 class SendOut extends AbstractEntity
 {
-
     /**
      * @var Newsletter
      */

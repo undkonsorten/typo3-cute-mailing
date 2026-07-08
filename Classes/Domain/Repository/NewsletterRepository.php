@@ -8,7 +8,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class NewsletterRepository extends Repository
 {
-
     /**
      * @return array|object[]|QueryResultInterface
      */

@@ -42,13 +42,14 @@ class NewsletterService implements SingletonInterface
         $this->persistenceManager = $persistenceManager;
     }
 
-    public function runNewsletter(NewsletterTask $newsletterTask): void{
+    public function runNewsletter(NewsletterTask $newsletterTask): void
+    {
         $this->newsletter = $newsletterTask->getNewsletter();
         if (is_null($this->newsletter)) {
-            throw new \Exception("Newsletter with uid: " . $this->newsletter . " was not found", 1643821994);
+            throw new \Exception('Newsletter with uid: ' . $this->newsletter . ' was not found', 1643821994);
         }
         if (empty($this->newsletter->getRecipientList())) {
-            throw new \Exception("Newsletter does not have any recipients.", 1643822115);
+            throw new \Exception('Newsletter does not have any recipients.', 1643822115);
         }
 
         if ($newsletterTask->getTest()) {
@@ -59,9 +60,8 @@ class NewsletterService implements SingletonInterface
         $recipients = $recipientList->getRecipients();
 
         if ($recipients === []) {
-            throw new Exception("Recipient list is empty", 1644851884);
+            throw new Exception('Recipient list is empty', 1644851884);
         }
-
 
         /** @var SendOut $sendOut */
         $sendOut = GeneralUtility::makeInstance(SendOut::class);

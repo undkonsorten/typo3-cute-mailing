@@ -16,8 +16,8 @@ return [
         'extensionName' => 'CuteMailing',
         'controllerActions' => [
             NewsletterController::class => [
-                'list','new','edit','create','enable','delete','receiver','sendTestMail','update',
+                'list', 'new', 'edit', 'create', 'enable', 'delete', 'receiver', 'sendTestMail', 'update',
             ],
         ],
-    ]
+    ],
 ];

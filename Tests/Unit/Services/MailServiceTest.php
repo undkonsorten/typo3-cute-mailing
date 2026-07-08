@@ -8,8 +8,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
-use ReflectionMethod;
-use ReflectionProperty;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Http\Uri;
@@ -371,7 +369,7 @@ final class MailServiceTest extends UnitTestCase
         $this->setProtectedProperty('requestOptions', []);
         $this->setProtectedProperty('email', new MailMessage());
 
-        $method = new ReflectionMethod($this->subject, 'attachImages');
+        $method = new \ReflectionMethod($this->subject, 'attachImages');
         $method->setAccessible(true);
         $html = $method->invoke($this->subject, '<img src="https://example.org/logo.png" alt="Logo">');
 
@@ -451,14 +449,14 @@ final class MailServiceTest extends UnitTestCase
 
     private function invokeReplaceMarker(array $allowedMarker, string &$content, SimpleRecipient $recipient): void
     {
-        $method = new ReflectionMethod($this->subject, 'replaceMarker');
+        $method = new \ReflectionMethod($this->subject, 'replaceMarker');
         $method->setAccessible(true);
         $method->invokeArgs($this->subject, [$allowedMarker, &$content, $recipient]);
     }
 
     private function setProtectedProperty(string $name, mixed $value): void
     {
-        $property = new ReflectionProperty($this->subject, $name);
+        $property = new \ReflectionProperty($this->subject, $name);
         $property->setAccessible(true);
         $property->setValue($this->subject, $value);
     }

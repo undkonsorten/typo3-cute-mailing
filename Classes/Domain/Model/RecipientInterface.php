@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
-
 interface RecipientInterface
 {
-
     /**
      * @return int
      */
@@ -18,18 +16,15 @@ interface RecipientInterface
      */
     public function getEmail(): string;
 
-
     /**
      * @param string $email
      */
     public function setEmail(string $email): void;
 
-
     /**
      * @return string
      */
     public function getFirstName(): ?string;
-
 
     /**
      * @param string $firstName
@@ -41,11 +36,9 @@ interface RecipientInterface
      */
     public function getLastName(): ?string;
 
-
     /**
      * @param string $lastName
      */
     public function setLastName(string $lastName): void;
-
 
 }

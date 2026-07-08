@@ -2,9 +2,8 @@
 
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
-use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
-use DateTime;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -12,10 +11,10 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class Newsletter extends AbstractEntity
 {
     public $configuration;
-    const CREATED = 0;
-    const TESTED = 1;
-    const SCHEDULED = 2;
-    const SENT = 3;
+    public const CREATED = 0;
+    public const TESTED = 1;
+    public const SCHEDULED = 2;
+    public const SENT = 3;
 
     /**
      * @var string
@@ -23,9 +22,9 @@ class Newsletter extends AbstractEntity
     protected $title = '';
 
     /**
-     * @var DateTime
+     * @var \DateTime
      */
-    protected $sendingTime = null;
+    protected $sendingTime;
 
     /**
      * @var string
@@ -45,13 +44,13 @@ class Newsletter extends AbstractEntity
      * @var RecipientList
      */
     #[Lazy]
-    protected $recipientList = null;
+    protected $recipientList;
 
     /**
      * @var RecipientList
      */
     #[Lazy]
-    protected $testRecipientList = null;
+    protected $testRecipientList;
 
     /**
      * @var string
@@ -86,22 +85,22 @@ class Newsletter extends AbstractEntity
     /**
      * @var int|null
      */
-    protected $pageTypeHtml = null;
+    protected $pageTypeHtml;
 
     /**
      * @var int|null
      */
-    protected $pageTypeText = null;
+    protected $pageTypeText;
 
     /**
      * @var string|null
      */
-    protected $allowedMarker = null;
+    protected $allowedMarker;
 
     /**
      * @var string|null
      */
-    protected $returnPath = null;
+    protected $returnPath;
 
     /**
      * @var int
@@ -111,24 +110,22 @@ class Newsletter extends AbstractEntity
     /**
      * @var string|null
      */
-    protected $basicAuthUser = null;
+    protected $basicAuthUser;
 
     /**
      * @var string|null
      */
-    protected $basicAuthPassword = null;
-
+    protected $basicAuthPassword;
 
     /**
      * @var bool
      */
-    protected $listunsubscribeEnable = null;
+    protected $listunsubscribeEnable;
 
     /**
      * @var string|null
      */
-    protected $listunsubscribeEmail = null;
-
+    protected $listunsubscribeEmail;
 
     /**
      * @var ObjectStorage<SendOut>
@@ -242,17 +239,17 @@ class Newsletter extends AbstractEntity
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
-    public function getSendingTime(): DateTime
+    public function getSendingTime(): \DateTime
     {
-        return $this->sendingTime ?: new DateTime();
+        return $this->sendingTime ?: new \DateTime();
     }
 
     /**
-     * @param DateTime $sendingTime
+     * @param \DateTime $sendingTime
      */
-    public function setSendingTime(?DateTime $sendingTime): void
+    public function setSendingTime(?\DateTime $sendingTime): void
     {
         $this->sendingTime = $sendingTime;
     }
@@ -577,6 +574,5 @@ class Newsletter extends AbstractEntity
     {
         $this->listunsubscribeEnable = $listunsubscribeEnable;
     }
-
 
 }

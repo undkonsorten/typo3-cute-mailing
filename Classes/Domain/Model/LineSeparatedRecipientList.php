@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 namespace Undkonsorten\CuteMailing\Domain\Model;
+
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class LineSeparatedRecipientList extends RecipientList
 {
-
     /**
      * @var string
      */
@@ -45,41 +45,37 @@ class LineSeparatedRecipientList extends RecipientList
 
     /**
      * @param int $recipient
-     * @return void
      * @throws \Exception
      */
     public function removeRecipientById(int $recipient): void
     {
-        throw new \Exception("Not implemented.", 1700484658);
+        throw new \Exception('Not implemented.', 1700484658);
     }
 
     /**
      * @param string $email
-     * @return void
      * @throws \Exception
      */
     public function removeRecipientByEmail(string $email): void
     {
-        throw new \Exception("Not implemented.", 1700484658);
+        throw new \Exception('Not implemented.', 1700484658);
     }
 
     /**
      * @param string $email
-     * @return void
      * @throws \Exception
      */
     public function disableRecipientByEmail(string $email): void
     {
-        throw new \Exception("Not implemented.", 1700484664);
+        throw new \Exception('Not implemented.', 1700484664);
     }
 
     /**
      * @param int $recipient
-     * @return void
      * @throws \Exception
      */
     public function disableRecipientById(int $recipient): void
     {
-        throw new \Exception("Not implemented.", 1700484664);
+        throw new \Exception('Not implemented.', 1700484664);
     }
 }

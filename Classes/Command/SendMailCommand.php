@@ -14,7 +14,6 @@ use Undkonsorten\Taskqueue\Domain\Repository\TaskRepository;
 
 class SendMailCommand extends Command
 {
-
     /**
      * @var TaskRepository
      */
@@ -30,14 +29,12 @@ class SendMailCommand extends Command
      */
     protected $newsletterRepository;
 
-
     public function __construct(
-        TaskRepository       $taskRepository,
-        PersistenceManager   $persistenceManager,
+        TaskRepository $taskRepository,
+        PersistenceManager $persistenceManager,
         NewsletterRepository $newsletterRepository,
-        ?string               $name = null
-    )
-    {
+        ?string $name = null
+    ) {
         $this->taskRepository = $taskRepository;
         $this->persitenceManager = $persistenceManager;
         $this->newsletterRepository = $newsletterRepository;
@@ -50,7 +47,6 @@ class SendMailCommand extends Command
             ->setDescription('Queues a newsletter for sending by its uid.')
             ->addArgument('newsletter', InputArgument::REQUIRED, 'The uid of the newsletter to queue for sending.');
     }
-
 
     public function execute(InputInterface $input, OutputInterface $output): int
     {

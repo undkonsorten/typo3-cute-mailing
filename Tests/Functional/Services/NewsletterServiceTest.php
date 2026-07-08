@@ -6,7 +6,6 @@ namespace Undkonsorten\CuteMailing\Tests\Functional\Services;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
-use ReflectionProperty;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 use Undkonsorten\CuteMailing\Domain\Model\LineSeparatedRecipientList;
@@ -171,7 +170,7 @@ final class NewsletterServiceTest extends FunctionalTestCase
 
     private function setLineSeparatedList(LineSeparatedRecipientList $list, string $value): void
     {
-        $property = new ReflectionProperty($list, 'lineSeparatedList');
+        $property = new \ReflectionProperty($list, 'lineSeparatedList');
         $property->setAccessible(true);
         $property->setValue($list, $value);
     }

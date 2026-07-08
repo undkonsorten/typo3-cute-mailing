@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Undkonsorten\CuteMailing\Tests\Unit\Domain\Model;
 
-use DateTime;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -171,9 +170,9 @@ final class NewsletterTest extends UnitTestCase
     #[Test]
     public function getSendingTimeReturnsCurrentTimeWhenNeverSet(): void
     {
-        $before = new DateTime();
+        $before = new \DateTime();
         $sendingTime = $this->subject->getSendingTime();
-        $after = new DateTime();
+        $after = new \DateTime();
 
         self::assertGreaterThanOrEqual($before->getTimestamp(), $sendingTime->getTimestamp());
         self::assertLessThanOrEqual($after->getTimestamp(), $sendingTime->getTimestamp());
@@ -182,7 +181,7 @@ final class NewsletterTest extends UnitTestCase
     #[Test]
     public function setAndGetSendingTimeRoundTrips(): void
     {
-        $dateTime = new DateTime('2030-01-01 10:00:00');
+        $dateTime = new \DateTime('2030-01-01 10:00:00');
         $this->subject->setSendingTime($dateTime);
         self::assertSame($dateTime, $this->subject->getSendingTime());
     }

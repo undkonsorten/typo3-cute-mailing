@@ -2,11 +2,11 @@
 
 namespace Undkonsorten\CuteMailing\Services;
 
-use TYPO3\CMS\Core\Mail\MailerInterface;
 use Symfony\Component\Mime\Part\DataPart;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Http\Uri;
+use TYPO3\CMS\Core\Mail\MailerInterface;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -24,7 +24,6 @@ use Undkonsorten\CuteMailing\Domain\Repository\SendOutRepository;
 
 class MailService implements SingletonInterface
 {
-
     /**
      * @var MailMessage|null
      */
@@ -75,19 +74,17 @@ class MailService implements SingletonInterface
         $this->uriBuilder = $uriBuilder;
     }
 
-
-
     public function sendMail(MailTask $mailTask): void
     {
         /** @var Newsletter $newsletter */
         $newsletter = $this->newsletterRepository->findByUid($mailTask->getNewsletter());
         if (is_null($newsletter)) {
-            throw new \Exception('Newsletter with id '.$mailTask->getNewsletter().' does no longer exist.', 1651441455);
+            throw new \Exception('Newsletter with id ' . $mailTask->getNewsletter() . ' does no longer exist.', 1651441455);
         }
         /** @var SendOut $sendOut */
         $sendOut = $this->sendOutRepository->findByUid($mailTask->getSendOut());
         if (is_null($sendOut)) {
-            throw new \Exception('Sendout with id'.$mailTask->getSendOut().' does no longer exist.', 1697631977);
+            throw new \Exception('Sendout with id' . $mailTask->getSendOut() . ' does no longer exist.', 1697631977);
         }
 
         // They are issue with recipient list type if different types for recipient list and test-recipient list are used!
@@ -101,20 +98,19 @@ class MailService implements SingletonInterface
         }
 
         // Recipient might have been unsubscribed already
-        if(is_null($recipient)){
-            throw new \Exception('The recipient with id '.$mailTask->getRecipient().' does no longer exist', 1697631568);
+        if (is_null($recipient)) {
+            throw new \Exception('The recipient with id ' . $mailTask->getRecipient() . ' does no longer exist', 1697631568);
         }
 
-        $htmlCacheIdentifier = 'htmlContent_'.$sendOut->getUid();
-        $textCacheIdentifier = 'textContent_'.$sendOut->getUid();
+        $htmlCacheIdentifier = 'htmlContent_' . $sendOut->getUid();
+        $textCacheIdentifier = 'textContent_' . $sendOut->getUid();
 
         $this->requestOptions = [
-          'auth' => [
-              $newsletter->getBasicAuthUser(),
-              $newsletter->getBasicAuthPassword()
-          ]
+            'auth' => [
+                $newsletter->getBasicAuthUser(),
+                $newsletter->getBasicAuthPassword(),
+            ],
         ];
-
 
         if (($mailTask->getFormat() == $mailTask::BOTH || $mailTask->getFormat() == $mailTask::HTML) && ($htmlContent = $this->cache->get($htmlCacheIdentifier)) === false) {
             /** @var Site $site */
@@ -150,15 +146,14 @@ class MailService implements SingletonInterface
             $this->cache->set($textCacheIdentifier, $textContent);
         }
 
-
         /** @var MailMessage $email */
         $this->email = GeneralUtility::makeInstance(MailMessage::class);
-	    $recipientName = trim(sprintf('%s %s',$recipient->getFirstName(), $recipient->getLastName()));
+        $recipientName = trim(sprintf('%s %s', $recipient->getFirstName(), $recipient->getLastName()));
 
         $this->email
-            ->to(sprintf('%s <%s>',$recipientName, $recipient->getEmail()))
-            ->from(sprintf('%s <%s>',$newsletter->getSenderName(),$newsletter->getSender()))
-            ->replyTo(sprintf('%s <%s>',$newsletter->getReplyToName(),$newsletter->getReplyTo()))
+            ->to(sprintf('%s <%s>', $recipientName, $recipient->getEmail()))
+            ->from(sprintf('%s <%s>', $newsletter->getSenderName(), $newsletter->getSender()))
+            ->replyTo(sprintf('%s <%s>', $newsletter->getReplyToName(), $newsletter->getReplyTo()))
             ->subject($newsletter->getSubject());
 
         $header = $this->email->getHeaders();
@@ -168,11 +163,11 @@ class MailService implements SingletonInterface
         // save the newsletter uid in the header
         $header->addTextHeader('X-TYPO3NLUID', $sendOut->getUid());
         // add a list unsubscribe header
-        if ($newsletter->getListunsubscribeEnable() && $newsletter->getListunsubscribeEmail()){
-            $header->addTextHeader('List-Unsubscribe', '<mailto:' . $newsletter->getListunsubscribeEmail() . '?subject=' . urlencode( 'action=listunsubscribe&rcptuid=' . $recipient->getUid() . '&rcptemail=' . $recipient->getEmail() .'&sendout=' . $sendOut->getUid()) . '>');
+        if ($newsletter->getListunsubscribeEnable() && $newsletter->getListunsubscribeEmail()) {
+            $header->addTextHeader('List-Unsubscribe', '<mailto:' . $newsletter->getListunsubscribeEmail() . '?subject=' . urlencode('action=listunsubscribe&rcptuid=' . $recipient->getUid() . '&rcptemail=' . $recipient->getEmail() . '&sendout=' . $sendOut->getUid()) . '>');
         }
 
-        if (trim((string) $newsletter->getReturnPath()) !== '' && trim((string) $newsletter->getReturnPath()) !== '0') {
+        if (trim((string)$newsletter->getReturnPath()) !== '' && trim((string)$newsletter->getReturnPath()) !== '0') {
             $this->email->returnPath($newsletter->getReturnPath());
         }
 

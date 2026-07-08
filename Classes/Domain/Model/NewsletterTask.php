@@ -8,7 +8,6 @@ use Undkonsorten\Taskqueue\Domain\Model\Task;
 
 class NewsletterTask extends Task
 {
-
     /**
      * @var Newsletter
      */
@@ -27,7 +26,7 @@ class NewsletterTask extends Task
 
     public function getTest(): bool
     {
-        return (bool)$this->getProperty("test");
+        return (bool)$this->getProperty('test');
     }
 
     public function getNewsletter(): ?Newsletter
@@ -43,7 +42,7 @@ class NewsletterTask extends Task
 
     public function setTest(bool $test): void
     {
-        $this->setProperty("test", $test);
+        $this->setProperty('test', $test);
     }
 
     public function getAdditionalData(): array

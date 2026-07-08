@@ -4,7 +4,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 defined('TYPO3') || die();
 
-(function() {
+(function () {
     $additionalColumns = [
         'tx_cutemailing_newsletter' => [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_taskqueue_domain_model_task.newsletter',

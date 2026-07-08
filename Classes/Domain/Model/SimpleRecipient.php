@@ -6,7 +6,6 @@ namespace Undkonsorten\CuteMailing\Domain\Model;
 
 class SimpleRecipient implements RecipientInterface
 {
-
     protected $uid = 0;
 
     /**
