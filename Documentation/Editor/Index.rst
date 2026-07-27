@@ -41,9 +41,9 @@ Create Newsletter
 -----------------
 
 Select the "Newsletter" Module on the left and choose a page for the newsletter
-in the page tree. Then click the [+] button.
+in the page tree. Then click the button to create your first newsletter.
 
-.. figure:: /Images/Build/NewsletterModule.png
+.. figure:: /Images/Build/CreateFirstNewsletter.png
    :class: with-shadow
    :alt: Create new Newsletter from the current page
 
