@@ -68,7 +68,7 @@ a.wizard__step:hover {
 	position: absolute;
 	content: "";
 	top: 0;
-	right: -34px;
+	right: -33px;
 	z-index: 2
 }
 
