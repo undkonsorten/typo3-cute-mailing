@@ -6,6 +6,8 @@
 	--cute-wizardline-background-color: light-dark(#ddd, var(--typo3-surface-bright));
 	--cute-default-gap: var(--typo3-card-grid-gap);
 	--cute-color-white: light-dark(#fff, #fff);
+	--cute-receiver-background-color: light-dark(rgb(255 219 206 / 0.5), #5c1616);
+	--cute-test-receiver-background-color: light-dark(rgb(231 255 206 / 0.5), #202e08);
 
 }
 
@@ -289,4 +291,12 @@ label {
 
 .cute__list-change-button {
 	background-color: dimgrey;
+}
+
+.form-group__receiver select,
+.form-group__receiver select option {
+	background-color: var(--cute-receiver-background-color)
+}
+.form-group__test-receiver select {
+	background-color: var(--cute-test-receiver-background-color)
 }
