@@ -79,4 +79,16 @@ class MailTask extends Task
         return $this;
     }
 
+    public function getAdditionalInformation(): string
+    {
+        $newsletterId = $this->getNewsletter();
+        if (! $newsletterId) {
+            return 'No Newsletter found!';
+        }
+        return sprintf(
+            '%s:%s',
+            'Newsletter',
+            $newsletterId
+        );
+    }
 }

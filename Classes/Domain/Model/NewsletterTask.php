@@ -62,4 +62,18 @@ class NewsletterTask extends Task
         return $this->getProperty('attachImages');
     }
 
+    public function getAdditionalInformation(): string
+    {
+        $newsletter = $this->getNewsletter();
+        if (! $newsletter) {
+            return 'No Newsletter found!';
+        }
+        return $this->getLastPartOfNamespacedClassName($newsletter);
+    }
+
+    protected function getLastPartOfNamespacedClassName(string $className): string
+    {
+        $nameParts = explode('\\', $className);
+        return array_pop($nameParts);
+    }
 }
