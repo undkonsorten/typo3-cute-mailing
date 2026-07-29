@@ -6,6 +6,16 @@
 Update
 ======
 
+.. _update_to_4.2:
+
+Update to 4.2
+================
+
+TYPO3 12 compatibility has been removed and TYPO3 14 compatibilty has been added
+in 4.2.0.
+There are currently no known breaking changes.
+Please test your newsletter sending.
+
 .. _update_to_4.1:
 
 Update to 4.1

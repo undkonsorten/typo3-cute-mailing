@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 if (!defined('TYPO3')) {
     die('Access denied.');
@@ -18,8 +19,9 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
+        //@todo deprecated for TYPO3 14, can be removed after 13 support is dropped
         'searchFields' => 'newsletter',
-        'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_sendout.svg'
+        'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_sendout.svg',
     ],
     'types' => [
         '1' => ['showitem' => 'hidden, newsletter, mail_tasks, total, test'],
@@ -30,6 +32,7 @@ return [
             'config' => [
                 'type' => 'datetime',
                 'default' => 0,
+                'searchable' => false,
             ],
         ],
         'hidden' => [
@@ -48,8 +51,9 @@ return [
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y'))
+                    'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y')),
                 ],
+                'searchable' => false,
             ],
         ],
         'endtime' => [
@@ -61,8 +65,9 @@ return [
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y'))
+                    'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y')),
                 ],
+                'searchable' => false,
             ],
         ],
         'newsletter' => [

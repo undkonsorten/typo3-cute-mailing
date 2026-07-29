@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+use Undkonsorten\CuteMailing\Controller\NewsletterController;
+
 return [
     'cutemailing' => [
         'parent' => 'web',
@@ -11,9 +15,9 @@ return [
         'labels' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_mod_newsletter.xlf',
         'extensionName' => 'CuteMailing',
         'controllerActions' => [
-            \Undkonsorten\CuteMailing\Controller\NewsletterController::class => [
-                'list','new','edit','create','enable','delete','receiver','sendTestMail','update',
+            NewsletterController::class => [
+                'list', 'new', 'edit', 'create', 'enable', 'delete', 'receiver', 'sendTestMail', 'update',
             ],
         ],
-    ]
+    ],
 ];

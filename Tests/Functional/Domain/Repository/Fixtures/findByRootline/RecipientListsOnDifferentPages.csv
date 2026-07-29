@@ -1,0 +1,5 @@
+"tx_cutemailing_domain_model_recipientlist"
+,"uid","pid","name","record_type"
+,1,10,"List A","Undkonsorten\CuteMailing\Domain\Model\LineSeparatedRecipientList"
+,2,20,"List B","Undkonsorten\CuteMailing\Domain\Model\LineSeparatedRecipientList"
+,3,30,"List C","Undkonsorten\CuteMailing\Domain\Model\LineSeparatedRecipientList"

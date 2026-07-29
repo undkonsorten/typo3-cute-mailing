@@ -1,26 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-        backupGlobals="true"
-        bootstrap="./Bootstrap/FunctionalTestsBootstrap.php"
-        colors="true"
-        convertErrorsToExceptions="true"
-        convertWarningsToExceptions="true"
-        forceCoversAnnotation="false"
-        stopOnError="false"
-        stopOnFailure="false"
-        stopOnIncomplete="false"
-        stopOnSkipped="false"
-        verbose="false"
-        processIsolation="true"
-        beStrictAboutTestsThatDoNotTestAnything="false"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd"
+    backupGlobals="true"
+    beStrictAboutOutputDuringTests="true"
+    bootstrap="./Bootstrap/FunctionalTestsBootstrap.php"
+    cacheResult="false"
+    colors="true"
+    displayDetailsOnTestsThatTriggerDeprecations="true"
+    displayDetailsOnTestsThatTriggerErrors="true"
+    displayDetailsOnTestsThatTriggerNotices="true"
+    displayDetailsOnTestsThatTriggerWarnings="true"
+    failOnDeprecation="true"
+    failOnEmptyTestSuite="true"
+    failOnNotice="true"
+    failOnPhpunitDeprecation="true"
+    failOnRisky="true"
+    failOnWarning="true"
+    requireCoverageMetadata="true"
 >
+    <php>
+        <const name="TYPO3_TESTING_FUNCTIONAL_REMOVE_ERROR_HANDLER" value="true"/>
+        <ini name="display_errors" value="1"/>
+        <env name="TYPO3_CONTEXT" value="Testing"/>
+    </php>
+    <source restrictNotices="true" restrictWarnings="true" ignoreIndirectDeprecations="true" ignoreDirectDeprecations="true">
+        <include>
+            <directory>../Classes</directory>
+        </include>
+    </source>
     <testsuites>
-        <testsuite name="Functional tests">
+        <testsuite name="Functional">
             <directory>./Functional/</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist>
-            <directory suffix=".php">../Classes/</directory>
-        </whitelist>
-    </filter>
 </phpunit>

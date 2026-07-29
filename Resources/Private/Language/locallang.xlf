@@ -194,10 +194,10 @@
 			<trans-unit id="module.newsletter.noTranslation.title">
 				<source>Translation does not exist!</source>
 			</trans-unit>
-			<trans-unit id="module.newsletter.newsletterSended.message">
+			<trans-unit id="module.newsletter.newsletterSend.message">
 				<source>Newsletter was already send.</source>
 			</trans-unit>
-			<trans-unit id="module.newsletter.newsletterSended.title">
+			<trans-unit id="module.newsletter.newsletterSend.title">
 				<source>Was sended!</source>
 			</trans-unit>
 			<trans-unit id="module.newsletter.newsletterQueued.message">
@@ -252,6 +252,16 @@
 			</trans-unit>
 			<trans-unit id="module.newsletter.list.createnew.2">
 				<source>add a new one.</source>
+			</trans-unit>
+
+			<trans-unit id="module.newsletter.wizard.1">
+				<source>Main</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.wizard.2">
+				<source>Details</source>
+			</trans-unit>
+			<trans-unit id="module.newsletter.wizard.3">
+				<source>Preview</source>
 			</trans-unit>
 		</body>
 	</file>

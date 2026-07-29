@@ -1,0 +1,195 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+  schedule:
+    - cron: '15 3 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  php-lint:
+    name: "PHP linter (PHP ${{ matrix.php-version }})"
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cache dependencies installed with composer
+        uses: actions/cache@v4
+        with:
+          key: "php-${{ matrix.php-version }}-typo3-${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-${{ hashFiles('**/composer.json') }}"
+          path: .cache/composer
+          restore-keys: "php-${{ matrix.php-version }}-typo3-${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-\n"
+      - name: Install composer dependencies
+        run: |
+          ./Build/Scripts/runTests.sh -b docker -p ${{ matrix.php-version }} -t ${{ matrix.typo3-version }} -s composerUpdate${{ matrix.composer-dependencies }}
+      - name: Lint PHP
+        run: |
+          Build/Scripts/runTests.sh -b docker -p ${{ matrix.php-version }} -s lintPhp
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - typo3-version: "14.3"
+            php-version: "8.3"
+            composer-dependencies: Max
+          - typo3-version: "14.3"
+            php-version: "8.4"
+            composer-dependencies: Max
+
+  yaml-lint:
+    name: "YAML linter"
+    runs-on: ubuntu-24.04
+    needs: php-lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v4
+        with:
+          key: "php-8.4-typo3-14.3-Max-composer-${{ hashFiles('**/composer.json') }}"
+          path: .cache/composer
+          restore-keys: "php-8.4-typo3-14.3-Max-composer-"
+
+      - name: Install composer dependencies
+        run: ./Build/Scripts/runTests.sh -b docker -p 8.4 -t 14.3 -s composerUpdateMax
+
+      - name: Lint YAML files
+        run: ./Build/Scripts/runTests.sh -b docker -p 8.4 -s lintYaml
+
+  composer-normalize:
+    name: "Composer normalize"
+    runs-on: ubuntu-24.04
+    needs: php-lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v4
+        with:
+          key: "php-8.4-typo3-14.3-Max-composer-${{ hashFiles('**/composer.json') }}"
+          path: .cache/composer
+          restore-keys: "php-8.4-typo3-14.3-Max-composer-"
+
+      - name: Install composer dependencies
+        run: ./Build/Scripts/runTests.sh -b docker -p 8.4 -t 14.3 -s composerUpdateMax
+
+      - name: Normalize composer.json
+        run: ./Build/Scripts/runTests.sh -b docker -p 8.4 -s composerNormalize
+
+  psr-verify:
+    name: "PSR-4 verification"
+    runs-on: ubuntu-24.04
+    needs: php-lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v4
+        with:
+          key: "php-8.4-typo3-14.3-Max-composer-${{ hashFiles('**/composer.json') }}"
+          path: .cache/composer
+          restore-keys: "php-8.4-typo3-14.3-Max-composer-"
+
+      - name: Install composer dependencies
+        run: ./Build/Scripts/runTests.sh -b docker -p 8.4 -t 14.3 -s composerUpdateMax
+
+      - name: Verify PSR-4 autoloading
+        run: ./Build/Scripts/runTests.sh -b docker -p 8.4 -s psr-verify
+
+  unit-tests:
+    name: "Unit tests (PHP ${{ matrix.php-version }}, TYPO3 ${{ matrix.typo3-version }}, ${{ matrix.composer-dependencies }})"
+    runs-on: ubuntu-24.04
+    needs: php-lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v4
+        with:
+          key: "php-${{ matrix.php-version }}-typo3-${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-${{ hashFiles('**/composer.json') }}"
+          path: .cache/composer
+          restore-keys: "php-${{ matrix.php-version }}-typo3-${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-\n"
+
+      - name: Install composer dependencies
+        run: ./Build/Scripts/runTests.sh -b docker -p ${{ matrix.php-version }} -t ${{ matrix.typo3-version }} -s composerUpdate${{ matrix.composer-dependencies }}
+
+      - name: Run unit tests
+        run: ./Build/Scripts/runTests.sh -b docker -p ${{ matrix.php-version }} -s unit
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - typo3-version: "13.4"
+            php-version: "8.3"
+            composer-dependencies: Min
+          - typo3-version: "13.4"
+            php-version: "8.4"
+            composer-dependencies: Max
+          - typo3-version: "14.3"
+            php-version: "8.3"
+            composer-dependencies: Min
+          - typo3-version: "14.3"
+            php-version: "8.4"
+            composer-dependencies: Max
+
+  functional-tests:
+    name: "Functional tests (PHP ${{ matrix.php-version }}, TYPO3 ${{ matrix.typo3-version }}, ${{ matrix.dbms }}, ${{ matrix.composer-dependencies }})"
+    runs-on: ubuntu-24.04
+    needs: php-lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v4
+        with:
+          key: "php-${{ matrix.php-version }}-typo3-${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-${{ hashFiles('**/composer.json') }}"
+          path: .cache/composer
+          restore-keys: "php-${{ matrix.php-version }}-typo3-${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-\n"
+
+      - name: Install composer dependencies
+        run: ./Build/Scripts/runTests.sh -b docker -p ${{ matrix.php-version }} -t ${{ matrix.typo3-version }} -s composerUpdate${{ matrix.composer-dependencies }}
+
+      - name: Run functional tests
+        run: ./Build/Scripts/runTests.sh -b docker -p ${{ matrix.php-version }} -d ${{ matrix.dbms }} -s functional
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - typo3-version: "13.4"
+            php-version: "8.3"
+            dbms: sqlite
+            composer-dependencies: Min
+          - typo3-version: "13.4"
+            php-version: "8.4"
+            dbms: sqlite
+            composer-dependencies: Max
+          - typo3-version: "13.4"
+            php-version: "8.4"
+            dbms: mysql
+            composer-dependencies: Max
+          - typo3-version: "14.3"
+            php-version: "8.3"
+            dbms: sqlite
+            composer-dependencies: Min
+          - typo3-version: "14.3"
+            php-version: "8.4"
+            dbms: sqlite
+            composer-dependencies: Max
+          - typo3-version: "14.3"
+            php-version: "8.4"
+            dbms: mysql
+            composer-dependencies: Max

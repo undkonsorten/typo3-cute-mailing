@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
 interface RecipientListInterface
@@ -7,7 +9,7 @@ interface RecipientListInterface
     /**
      * @return array<RecipientInterface>
      */
-    public function getRecipients(int $limit = null, int $offset = null): array;
+    public function getRecipients(?int $limit = null, ?int $offset = null): array;
 
     /**
      * @return int
@@ -25,7 +27,6 @@ interface RecipientListInterface
      */
     public function setName(string $name);
 
-
     /**
      * @param int $recipient
      * @return RecipientInterface|null
@@ -34,27 +35,22 @@ interface RecipientListInterface
 
     /**
      * @param string $email
-     * @return void
      */
     public function removeRecipientByEmail(string $email): void;
 
     /**
      * @param int $recipient
-     * @return void
      */
     public function removeRecipientById(int $recipient): void;
 
     /**
      * @param string $email
-     * @return void
      */
     public function disableRecipientByEmail(string $email): void;
 
     /**
      * @param int $recipient
-     * @return void
      */
     public function disableRecipientById(int $recipient): void;
-
 
 }

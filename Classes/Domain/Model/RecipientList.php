@@ -48,5 +48,4 @@ abstract class RecipientList extends AbstractEntity implements RecipientListInte
         $this->recipientListPage = $recipientListPage;
     }
 
-
 }

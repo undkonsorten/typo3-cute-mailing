@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
-use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -13,7 +13,6 @@ use Undkonsorten\Taskqueue\Domain\Model\TaskInterface;
 
 class SendOut extends AbstractEntity
 {
-
     /**
      * @var Newsletter
      */
@@ -83,9 +82,7 @@ class SendOut extends AbstractEntity
 
     public function getCompletedMailTasks(): array
     {
-        return array_filter($this->getMailTasks()->toArray(), static function (MailTask $task): bool {
-            return $task->getStatus() === TaskInterface::FAILED || $task->getStatus() === TaskInterface::FINISHED;
-        });
+        return array_filter($this->getMailTasks()->toArray(), static fn(MailTask $task): bool => $task->getStatus() === TaskInterface::FAILED || $task->getStatus() === TaskInterface::FINISHED);
     }
 
     public function getProgress(): float

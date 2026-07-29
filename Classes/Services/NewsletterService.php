@@ -9,7 +9,6 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use Undkonsorten\CuteMailing\Domain\Model\MailTask;
 use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
 use Undkonsorten\CuteMailing\Domain\Model\NewsletterTask;
-use Undkonsorten\CuteMailing\Domain\Model\RecipientInterface;
 use Undkonsorten\CuteMailing\Domain\Model\SendOut;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
 use Undkonsorten\CuteMailing\Domain\Repository\SendOutRepository;
@@ -36,20 +35,21 @@ class NewsletterService implements SingletonInterface
      * @var Newsletter
      */
     protected $newsletter;
-    public function __construct(protected \Undkonsorten\CuteMailing\Domain\Repository\SendOutRepository $sendOutRepository, \Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository $newsletterRepository, \Undkonsorten\Taskqueue\Domain\Repository\TaskRepository $taskRepository, \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager)
+    public function __construct(protected SendOutRepository $sendOutRepository, NewsletterRepository $newsletterRepository, TaskRepository $taskRepository, PersistenceManager $persistenceManager)
     {
         $this->newsletterRepository = $newsletterRepository;
         $this->taskRepository = $taskRepository;
         $this->persistenceManager = $persistenceManager;
     }
 
-    public function runNewsletter(NewsletterTask $newsletterTask): void{
+    public function runNewsletter(NewsletterTask $newsletterTask): void
+    {
         $this->newsletter = $newsletterTask->getNewsletter();
         if (is_null($this->newsletter)) {
-            throw new \Exception("Newsletter with uid: " . $this->newsletter . " was not found", 1643821994);
+            throw new \Exception('Newsletter with uid: ' . $this->newsletter . ' was not found', 1643821994);
         }
         if (empty($this->newsletter->getRecipientList())) {
-            throw new \Exception("Newsletter does not have any recipients.", 1643822115);
+            throw new \Exception('Newsletter does not have any recipients.', 1643822115);
         }
 
         if ($newsletterTask->getTest()) {
@@ -59,10 +59,9 @@ class NewsletterService implements SingletonInterface
         }
         $recipients = $recipientList->getRecipients();
 
-        if (empty($recipients)) {
-            throw new Exception("Recipient list is empty", 1644851884);
+        if ($recipients === []) {
+            throw new Exception('Recipient list is empty', 1644851884);
         }
-
 
         /** @var SendOut $sendOut */
         $sendOut = GeneralUtility::makeInstance(SendOut::class);

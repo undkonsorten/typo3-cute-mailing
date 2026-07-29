@@ -1,0 +1,4 @@
+"pages"
+,"uid","pid","title","doktype","is_siteroot","module","TSconfig"
+,1,0,"Newsletters",1,1,"cute_mailing","mod.web_modules.cute_mailing.page_type_html = 10
+mod.web_modules.cute_mailing.page_type_text = 11"

@@ -6,6 +6,8 @@
 	--cute-wizardline-background-color: light-dark(#ddd, var(--typo3-surface-bright));
 	--cute-default-gap: var(--typo3-card-grid-gap);
 	--cute-color-white: light-dark(#fff, #fff);
+	--cute-receiver-background-color: light-dark(rgb(255 219 206 / 0.5), #5c1616);
+	--cute-test-receiver-background-color: light-dark(rgb(231 255 206 / 0.5), #202e08);
 
 }
 
@@ -66,7 +68,7 @@ a.wizard__step:hover {
 	position: absolute;
 	content: "";
 	top: 0;
-	right: -34px;
+	right: -33px;
 	z-index: 2
 }
 
@@ -212,6 +214,10 @@ label {
 	background-color: var(--cute-color--darken);
 	border-color: var(--cute-color--darken);
 }
+/* selector strengthness needed! Otherwise `margin-bottom:0` will win from another css rule */
+.cute__list-edit-button a.btn {
+	margin: 0 .5em .5em 0;
+}
 .button-line {
 	display: flex;
 	justify-content: space-between;
@@ -289,4 +295,12 @@ label {
 
 .cute__list-change-button {
 	background-color: dimgrey;
+}
+
+.form-group__receiver select,
+.form-group__receiver select option {
+	background-color: var(--cute-receiver-background-color)
+}
+.form-group__test-receiver select {
+	background-color: var(--cute-test-receiver-background-color)
 }

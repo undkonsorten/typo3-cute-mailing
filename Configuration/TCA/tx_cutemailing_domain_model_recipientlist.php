@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use Undkonsorten\CuteMailing\Domain\Model\LineSeparatedRecipientList;
@@ -22,10 +23,11 @@ return [
             'endtime' => 'endtime',
         ],
         'security' => [
-            'ignorePageTypeRestriction' => true
+            'ignorePageTypeRestriction' => true,
         ],
+        //@todo deprecated for TYPO3 14, can be removed after 13 support is dropped
         'searchFields' => 'name,data,status,start_date,message,priority,',
-        'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_recipient_list.svg'
+        'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_recipient_list.svg',
     ],
     'types' => [
         '0' => ['showitem' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,--palette--;;1,name,record_type,line_separated_list,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,starttime,endtime'],
@@ -40,7 +42,8 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            ]
+                'searchable' => false,
+            ],
         ],
 
         'hidden' => [
@@ -59,8 +62,9 @@ return [
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y'))
+                    'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y')),
                 ],
+                'searchable' => false,
             ],
         ],
         'endtime' => [
@@ -72,8 +76,9 @@ return [
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y'))
+                    'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y')),
                 ],
+                'searchable' => false,
             ],
         ],
         'name' => [
@@ -82,7 +87,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 10,
-            ]
+            ],
         ],
         'recipient_list_page' => [
             'exclude' => 1,
@@ -93,7 +98,7 @@ return [
                 'size' => '1',
                 'maxitems' => '1',
                 'minitems' => '0',
-            ]
+            ],
         ],
         'record_type' => [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_recipient_list.type',
@@ -103,8 +108,8 @@ return [
                 'items' => [
                     [
                         'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_recipient_list.type.line_separated_list',
-                        'value' => LineSeparatedRecipientList::class
-                    ]
+                        'value' => LineSeparatedRecipientList::class,
+                    ],
                 ],
             ],
         ],
@@ -116,7 +121,8 @@ return [
                 'type' => 'text',
                 'cols' => 30,
                 'rows' => 10,
-            ]
+                'searchable' => false,
+            ],
         ],
     ],
 ];

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 if (!defined('TYPO3')) {
     die('Access denied.');
@@ -18,10 +19,11 @@ return [
             'endtime' => 'endtime',
         ],
         'security' => [
-            'ignorePageTypeRestriction' => true
+            'ignorePageTypeRestriction' => true,
         ],
+        //@todo deprecated for TYPO3 14, can be removed after 13 support is dropped
         'searchFields' => 'name,data,status,start_date,message,priority,',
-        'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_newsletter.svg'
+        'iconfile' => 'EXT:cute_mailing/Resources/Public/Icons/tx_cutemailing_domain_model_newsletter.svg',
     ],
     'types' => [
         '1' => [
@@ -30,21 +32,21 @@ return [
                 '--div--;LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tabs.sender, --palette--;;sender, --palette--;;reply_to,' .
                 '--div--;LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tabs.recipients, test_recipient_list,recipient_list,' .
                 '--div--;LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tabs.technical_details,--palette--;;page_types,allowed_marker,return_path,language,basic_auth_user,basic_auth_password,listunsubscribe_enable,listunsubscribe_email,' .
-                '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,hidden,starttime,endtime'
+                '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,hidden,starttime,endtime',
         ],
     ],
     'palettes' => [
         'sender' => [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:palettes.sender',
-            'showitem' => 'sender,sender_name'
+            'showitem' => 'sender,sender_name',
         ],
         'reply_to' => [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:palettes.reply_to',
-            'showitem' => 'reply_to,reply_to_name'
+            'showitem' => 'reply_to,reply_to_name',
         ],
         'page_types' => [
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:palettes.page_types',
-            'showitem' => 'page_type_html,page_type_text'
+            'showitem' => 'page_type_html,page_type_text',
         ],
         'title' => ['showitem' => 'title,status'],
     ],
@@ -55,7 +57,8 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            ]
+                'searchable' => false,
+            ],
         ],
 
         'hidden' => [
@@ -74,8 +77,9 @@ return [
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y'))
+                    'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y')),
                 ],
+                'searchable' => false,
             ],
         ],
         'endtime' => [
@@ -87,8 +91,9 @@ return [
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y'))
+                    'lower' => mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y')),
                 ],
+                'searchable' => false,
             ],
         ],
         'newsletter_page' => [
@@ -100,7 +105,7 @@ return [
                 'size' => '1',
                 'maxitems' => '1',
                 'minitems' => '1',
-            ]
+            ],
         ],
         'send_outs' => [
             'exclude' => 1,
@@ -121,7 +126,7 @@ return [
                 'size' => '1',
                 'maxitems' => '1',
                 'minitems' => '1',
-            ]
+            ],
         ],
         'test_recipient_list' => [
             'exclude' => 1,
@@ -132,7 +137,7 @@ return [
                 'size' => '1',
                 'maxitems' => '1',
                 'minitems' => '1',
-            ]
+            ],
         ],
         'sender' => [
             'exclude' => 1,
@@ -140,7 +145,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 15,
-            ]
+                'searchable' => false,
+            ],
         ],
         'sender_name' => [
             'exclude' => 1,
@@ -148,7 +154,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-            ]
+                'searchable' => false,
+            ],
         ],
         'reply_to' => [
             'exclude' => 1,
@@ -156,7 +163,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 15,
-            ]
+                'searchable' => false,
+            ],
         ],
         'reply_to_name' => [
             'exclude' => 1,
@@ -164,7 +172,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-            ]
+                'searchable' => false,
+            ],
         ],
         'title' => [
             'exclude' => 1,
@@ -172,7 +181,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 25,
-            ]
+                'searchable' => false,
+            ],
         ],
         'subject' => [
             'exclude' => 1,
@@ -180,7 +190,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 40,
-            ]
+                'searchable' => false,
+            ],
         ],
         'description' => [
             'exclude' => 1,
@@ -188,7 +199,8 @@ return [
             'config' => [
                 'type' => 'text',
                 'size' => 4,
-            ]
+                'searchable' => false,
+            ],
         ],
         'status' => [
             'exclude' => 1,
@@ -199,22 +211,22 @@ return [
                 'items' => [
                     [
                         'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status.0',
-                        'value' => 0
+                        'value' => 0,
                     ],
                     [
                         'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status.1',
-                        'value' => 1
+                        'value' => 1,
                     ],
                     [
                         'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status.2',
-                        'value' => 2
+                        'value' => 2,
                     ],
                     [
                         'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.status.3',
-                        'value' => 3
+                        'value' => 3,
                     ],
                 ],
-            ]
+            ],
         ],
         'sending_time' => [
             'exclude' => 1,
@@ -223,8 +235,9 @@ return [
                 'type' => 'datetime',
                 'size' => 13,
                 'checkbox' => 0,
-                'default' => 0
-            ]
+                'default' => 0,
+                'searchable' => false,
+            ],
         ],
         'page_type_html' => [
             'exclude' => 1,
@@ -232,7 +245,7 @@ return [
             'config' => [
                 'type' => 'number',
                 'size' => 4,
-            ]
+            ],
         ],
         'page_type_text' => [
             'exclude' => 1,
@@ -240,50 +253,50 @@ return [
             'config' => [
                 'type' => 'number',
                 'size' => 4,
-            ]
+            ],
         ],
         'allowed_marker' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.allowed_marker',
             'config' => [
-                'type' => 'text',
-            ]
+                'type' => 'text', 'searchable' => false,
+            ],
         ],
         'return_path' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.return_path',
             'config' => [
-                'type' => 'input',
-            ]
+                'type' => 'input', 'searchable' => false,
+            ],
         ],
         'language' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.language',
             'config' => [
-                'type' => 'number'
-            ]
+                'type' => 'number',
+            ],
         ],
         'basic_auth_user' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.basic_auth_user',
             'config' => [
-                'type' => 'input',
-            ]
+                'type' => 'input', 'searchable' => false,
+            ],
         ],
         'basic_auth_password' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.basic_auth_password',
             'config' => [
-                'type' => 'input',
-            ]
+                'type' => 'input', 'searchable' => false,
+            ],
         ],
 
         'listunsubscribe_enable' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:cute_mailing/Resources/Private/Language/locallang_db.xlf:tx_cutemailing_domain_model_newsletter.listunsubscribe_enable',
             'config' => [
-                'type' => 'input',
-            ]
+                'type' => 'input', 'searchable' => false,
+            ],
         ],
         'listunsubscribe_email' => [
             'exclude' => 1,

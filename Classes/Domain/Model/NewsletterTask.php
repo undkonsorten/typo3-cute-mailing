@@ -2,18 +2,12 @@
 
 namespace Undkonsorten\CuteMailing\Domain\Model;
 
-use TYPO3\CMS\Core\Exception;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
-use Undkonsorten\CuteMailing\Domain\Repository\SendOutRepository;
 use Undkonsorten\CuteMailing\Services\NewsletterService;
 use Undkonsorten\Taskqueue\Domain\Model\Task;
-use Undkonsorten\Taskqueue\Domain\Repository\TaskRepository;
 
 class NewsletterTask extends Task
 {
-
     /**
      * @var Newsletter
      */
@@ -32,7 +26,7 @@ class NewsletterTask extends Task
 
     public function getTest(): bool
     {
-        return (bool)$this->getProperty("test");
+        return (bool)$this->getProperty('test');
     }
 
     public function getNewsletter(): ?Newsletter
@@ -48,7 +42,7 @@ class NewsletterTask extends Task
 
     public function setTest(bool $test): void
     {
-        $this->setProperty("test", $test);
+        $this->setProperty('test', $test);
     }
 
     public function getAdditionalData(): array
@@ -68,4 +62,18 @@ class NewsletterTask extends Task
         return $this->getProperty('attachImages');
     }
 
+    public function getAdditionalInformation(): string
+    {
+        $newsletter = $this->getNewsletter();
+        if (! $newsletter) {
+            return 'No Newsletter found!';
+        }
+        return $this->getLastPartOfNamespacedClassName($newsletter);
+    }
+
+    protected function getLastPartOfNamespacedClassName(string $className): string
+    {
+        $nameParts = explode('\\', $className);
+        return array_pop($nameParts);
+    }
 }

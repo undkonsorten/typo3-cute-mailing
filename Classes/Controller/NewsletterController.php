@@ -1,13 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Undkonsorten\CuteMailing\Controller;
 
-use DateTime;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Exception as ExceptionDbalDriver;
-use Exception;
-use PharIo\Manifest\InvalidUrlException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
@@ -15,17 +13,16 @@ use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Http\Uri;
-use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentNameException;
-use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Object\Exception as ExceptionExtbaseObject;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
@@ -35,9 +32,9 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 use Undkonsorten\CuteMailing\Domain\Model\Newsletter;
 use Undkonsorten\CuteMailing\Domain\Model\NewsletterTask;
+use Undkonsorten\CuteMailing\Domain\Model\RecipientList;
 use Undkonsorten\CuteMailing\Domain\Model\RecipientListInterface;
 use Undkonsorten\CuteMailing\Domain\Repository\NewsletterRepository;
 use Undkonsorten\CuteMailing\Domain\Repository\RecipientListRepositoryInterface;
@@ -48,26 +45,20 @@ use Undkonsorten\Taskqueue\Domain\Repository\TaskRepository;
  */
 class NewsletterController extends ActionController
 {
-
     /**
      * @var string
      */
     protected $receiverDetailFile = 'EXT:cute_mailing/Resources/Private/Templates/Newsletter/ReceiverDetail.html';
 
     /**
-     * @var string
-     */
-    protected $wizardUserPreviewFile = 'EXT:cute_mailing/Resources/Private/Templates/Newsletter/WizardUserPreview.html';
-
-    /**
      * @var NewsletterRepository|null
      */
-    protected $newsletterRepository = null;
+    protected $newsletterRepository;
 
     /**
      * @var RecipientListRepositoryInterface|null
      */
-    protected $recipientListRepository = null;
+    protected $recipientListRepository;
 
     /**
      * @var TaskRepository
@@ -99,14 +90,15 @@ class NewsletterController extends ActionController
      * @param RecipientListRepositoryInterface $recipientListRepository
      */
     public function __construct(
-        NewsletterRepository             $newsletterRepository,
+        NewsletterRepository $newsletterRepository,
         RecipientListRepositoryInterface $recipientListRepository,
-        TaskRepository                   $taskRepository,
-        PersistenceManager               $persistenceManager,
-        PageRepository                   $pageRepository,
-        ModuleTemplateFactory $moduleTemplateFactory
-    )
-    {
+        TaskRepository $taskRepository,
+        PersistenceManager $persistenceManager,
+        PageRepository $pageRepository,
+        ModuleTemplateFactory $moduleTemplateFactory,
+        private readonly SiteFinder $siteFinder,
+        private readonly ViewFactoryInterface $viewFactory,
+    ) {
         $this->newsletterRepository = $newsletterRepository;
         $this->recipientListRepository = $recipientListRepository;
         $this->taskRepository = $taskRepository;
@@ -115,9 +107,6 @@ class NewsletterController extends ActionController
         $this->moduleTemplateFactory = $moduleTemplateFactory;
     }
 
-    /**
-     *
-     */
     public function listAction(): ResponseInterface
     {
         $currentPid = $this->getCurrentPageUid();
@@ -172,7 +161,7 @@ class NewsletterController extends ActionController
         $assign['recipientList'] = $this->recipientListRepository->findByRootline($rootline);
         $assign['testRecipientList'] = $this->recipientListRepository->findByRootline($rootline);
 
-        $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($newsletter->getNewsletterPage());
+        $site = $this->siteFinder->getSiteByPageId($newsletter->getNewsletterPage());
         $htmlUrl = (string)$site->getRouter()->generateUri(
             $newsletter->getNewsletterPage(),
             ['type' => $newsletter->getPageTypeHtml(), '_language' => $newsletter->getLanguage()]
@@ -186,30 +175,29 @@ class NewsletterController extends ActionController
     }
 
     /**
-     * @return void
      * @throws InvalidConfigurationTypeException
-     * @throws Exception
+     * @throws \Exception
      * @noinspection PhpUnused
      */
     public function newAction(?int $newsletterPage = null, ?int $language = null): ResponseInterface
     {
         $currentPid = $this->getCurrentPageUid();
         $pageTs = $this->getPageTsConfigForModule($currentPid);
-        if(!is_numeric($pageTs['page_type_html'])) {
-            throw new \Exception('Page type for "html" rendering is not numeric or not set. Please check configuration for page type html.',1711444628);
+        if (!is_numeric($pageTs['page_type_html'])) {
+            throw new \Exception('Page type for "html" rendering is not numeric or not set. Please check configuration for page type html.', 1711444628);
         }
-        if(!is_numeric($pageTs['page_type_text'])) {
-            throw new \Exception('Page type for "text" rendering is not numeric or not set. Please check configuration for page type text.',1711444629);
+        if (!is_numeric($pageTs['page_type_text'])) {
+            throw new \Exception('Page type for "text" rendering is not numeric or not set. Please check configuration for page type text.', 1711444629);
         }
 
-        $page = BackendUtility::getRecord('pages', $newsletterPage ?? $currentPid );
+        $page = BackendUtility::getRecord('pages', $newsletterPage ?? $currentPid);
         $language = (int)($language ?? $pageTs['language'] ?? 0);
         if ($this->shouldForwardToPrepareAction($currentPid, $page, $pageTs, $newsletterPage, $language)) {
             return new ForwardResponse('prepare');
         }
-        if($language > 0){
+        if ($language > 0) {
             $page = $this->pageRepository->getPageOverlay($page, $language);
-            if($page['sys_language_uid'] !== $language){
+            if ($page['sys_language_uid'] !== $language) {
                 $this->addFlashMessage(
                     $this->localizeKey('module.newsletter.noTranslation.message'),
                     $this->localizeKey('module.newsletter.noTranslation.title'),
@@ -226,7 +214,7 @@ class NewsletterController extends ActionController
         $assign['testRecipientList'] = $this->recipientListRepository->findByRootline($rootline);
         $assign['defaultRecipientList'] = $pageTs['default_recipient_list'] ?? 0;
         $assign['defaultTestRecipientList'] = $pageTs['default_test_recipient_list'] ?? 0;
-        $assign['defaultSendingTime'] = new DateTime('now');
+        $assign['defaultSendingTime'] = new \DateTime('now');
 
         $assign['sender'] = $pageTs['sender'] ?? '';
         $assign['senderName'] = $pageTs['sender_name'] ?? '';
@@ -241,7 +229,7 @@ class NewsletterController extends ActionController
         $assign['listunsubscribeEnable'] = $pageTs['listunsubscribe_enable'] ?? '';
         $assign['listunsubscribeEmail'] = $pageTs['listunsubscribe_email'] ?? '';
 
-        $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($assign['newsletterPage']);
+        $site = $this->siteFinder->getSiteByPageId($assign['newsletterPage']);
         $htmlUrl = (string)$site->getRouter()->generateUri(
             $assign['newsletterPage'],
             ['type' => $assign['pageTypeHtml'], '_language' => $assign['language']]
@@ -263,7 +251,8 @@ class NewsletterController extends ActionController
                 ->setTypeConverterOption(
                     DateTimeConverter::class,
                     DateTimeConverter::CONFIGURATION_DATE_FORMAT,
-                    $dateFormat);
+                    $dateFormat
+                );
         }
         $this->moduleTemplate = $this->moduleTemplateFactory->create($this->request);
     }
@@ -358,7 +347,7 @@ class NewsletterController extends ActionController
 
     public function sendTestMailAction(Newsletter $newsletter, bool $attachImages = false): ResponseInterface
     {
-        if ($newsletter->getTestRecipientList()) {
+        if ($newsletter->getTestRecipientList() instanceof RecipientList) {
             $newsletter->setStatus($newsletter::TESTED);
             /**@var $newsletterTask NewsletterTask* */
             $newsletterTask = GeneralUtility::makeInstance(NewsletterTask::class);
@@ -391,13 +380,15 @@ class NewsletterController extends ActionController
         if (!$recipientList instanceof RecipientListInterface) {
             return $this->jsonResponse(json_encode([]));
         }
-        $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
-        $standaloneView->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($this->wizardUserPreviewFile));
-        $standaloneView->assignMultiple([
+        $view = $this->viewFactory->create(new ViewFactoryData(
+            templateRootPaths: ['EXT:cute_mailing/Resources/Private/Templates/'],
+            request: $request,
+        ));
+        $view->assignMultiple([
             'userPreview' => $recipientList->getRecipients(3),
             'userAmount' => $recipientList->getRecipientsCount(),
         ]);
-        return $this->jsonResponse(json_encode(['html' => $standaloneView->render()]));
+        return $this->jsonResponse(json_encode(['html' => $view->render('Newsletter/WizardUserPreview')]));
     }
 
     protected function getCurrentPageUid(): int
@@ -426,10 +417,7 @@ class NewsletterController extends ActionController
 
         $languages = $this->getSiteLanguagesForPid($newsletterPage ?? $currentPid);
         /** @noinspection IfReturnReturnSimplificationInspection */
-        if (count($languages) < 2) {
-            return false;
-        }
-        return true;
+        return count($languages) >= 2;
     }
 
     protected function getSiteLanguagesForPid(int $currentPid): array
