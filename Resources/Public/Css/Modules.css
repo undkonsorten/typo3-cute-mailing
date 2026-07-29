@@ -214,6 +214,10 @@ label {
 	background-color: var(--cute-color--darken);
 	border-color: var(--cute-color--darken);
 }
+/* selector strengthness needed! Otherwise `margin-bottom:0` will win from another css rule */
+.cute__list-edit-button a.btn {
+	margin: 0 .5em .5em 0;
+}
 .button-line {
 	display: flex;
 	justify-content: space-between;
