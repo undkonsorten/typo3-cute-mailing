@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2022-10-09T12:38:21Z" product-name="cute_mailing" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter">
+        <source>Task</source>
+        <target>crwdns275329:0crwdne275329:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list">
+        <source>Recipient list</source>
+        <target>crwdns275331:0crwdne275331:0</target>
+      </trans-unit>
+      <trans-unit id="cute_mailing_sys_folder">
+        <source>Cute Mailing</source>
+        <target>crwdns275333:0crwdne275333:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.title">
+        <source>Create newsletter from current page</source>
+        <target>crwdns275335:0crwdne275335:0</target>
+      </trans-unit>
+      <!-- Wizard -->
+      <trans-unit id="module.newsletter.new.field.title">
+        <source>Newsletter title (internal)</source>
+        <target>crwdns275337:0crwdne275337:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.title.description">
+        <source>This title is used only for internal description. It's not the email title.</source>
+        <target>crwdns275339:0crwdne275339:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.title.placeholder">
+        <source>Newsletter Product A 2020/01</source>
+        <target>crwdns275341:0crwdne275341:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.sendingTime">
+        <source>Scheduled sending time</source>
+        <target>crwdns275343:0crwdne275343:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.message.notready">
+        <source>Newsletter is not yet ready to be sent!</source>
+        <target>crwdns275345:0crwdne275345:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.message.notready.origin">
+        <source>Please select an origin for your newsletter</source>
+        <target>crwdns275347:0crwdne275347:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.message.notready.receiver">
+        <source>Please choose a receiver group.</source>
+        <target>crwdns275349:0crwdne275349:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.message.notready.mandatory">
+        <source>Please fill all	mandatory fields.</source>
+        <target>crwdns275351:0crwdne275351:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.previewnewsletter">
+        <source>Newsletter Preview</source>
+        <target>crwdns275353:0crwdne275353:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.previewreceivers">
+        <source>Preview of the receivers</source>
+        <target>crwdns275355:0crwdne275355:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.amountReceivers">
+        <source>receivers</source>
+        <target>crwdns275357:0crwdne275357:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.further">
+        <source>further</source>
+        <target>crwdns275359:0crwdne275359:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.nousersfound.title">
+        <source>No users</source>
+        <target>crwdns275361:0crwdne275361:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.nousersfound.addition">
+        <source>Choose a different group</source>
+        <target>crwdns275363:0crwdne275363:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.subject.prefix">
+        <source>Subject:</source>
+        <target>crwdns275365:0crwdne275365:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.tableheader.datetime">
+        <source>Scheduled sending time</source>
+        <target>crwdns275367:0crwdne275367:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.sendingTime.description">
+        <source>The date and time when your newsletter sending should be scheduled.</source>
+        <target>crwdns275369:0crwdne275369:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.tableheader.status">
+        <source>Status</source>
+        <target>crwdns275371:0crwdne275371:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.tableheader.description">
+        <source>Description</source>
+        <target>crwdns275373:0crwdne275373:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.origin">
+        <source>Newsletter page</source>
+        <target>crwdns275375:0crwdne275375:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.origin.description">
+        <source>UID of the newsletter page that sould be send with this campaign.</source>
+        <target>crwdns275377:0crwdne275377:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.description">
+        <source>Description (internal)</source>
+        <target>crwdns275379:0crwdne275379:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.description.description">
+        <source>A newsletter description for internal usage only.</source>
+        <target>crwdns275381:0crwdne275381:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.sender">
+        <source>Sender email</source>
+        <target>crwdns275383:0crwdne275383:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.sender.description">
+        <source>Email address of the sender of the email. Attention your mailserver might need configuration to use this email address.</source>
+        <target>crwdns275385:0crwdne275385:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.senderName">
+        <source>Sender name</source>
+        <target>crwdns275387:0crwdne275387:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.senderName.description">
+        <source>Name of the newsletter sender (will be displayed in the receivers email software).</source>
+        <target>crwdns275389:0crwdne275389:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.replyTo">
+        <source>ReplyTo email</source>
+        <target>crwdns275391:0crwdne275391:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.replyTo.description">
+        <source>If an newsletter receiver wants to answer on you newsletter this email address will be used as a receiver.</source>
+        <target>crwdns275393:0crwdne275393:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.replyToName">
+        <source>ReplyTo name</source>
+        <target>crwdns275395:0crwdne275395:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.replyToName.description">
+        <source>If an newsletter receiver wants to answer on you newsletter this name address will be used as a receiver.</source>
+        <target>crwdns275397:0crwdne275397:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.receiver">
+        <source>Newsletter receivers</source>
+        <target>crwdns275399:0crwdne275399:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.receiver.description">
+        <source>Choose the list of newsletter receivers.</source>
+        <target>crwdns275401:0crwdne275401:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.testReceiver">
+        <source>Test newsletter receivers</source>
+        <target>crwdns275403:0crwdne275403:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.testReceiver.description">
+        <source>Choose the list of newsletter receivers which sould recieve the test newsletter.</source>
+        <target>crwdns275405:0crwdne275405:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.subject">
+        <source>Newsletter/Email subject line</source>
+        <target>crwdns275407:0crwdne275407:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.subject.placeholder">
+        <source>Your very good newsletter</source>
+        <target>crwdns275409:0crwdne275409:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.subject.description">
+        <source>The subject line of your newsletter will be shown in the email software of the receiver. Optimal length: 20-60 characters.</source>
+        <target>crwdns275411:0crwdne275411:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.wizard.back">
+        <source>Back</source>
+        <target>crwdns275413:0crwdne275413:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.wizard.next">
+        <source>Next</source>
+        <target>crwdns275415:0crwdne275415:0</target>
+      </trans-unit>
+      <!-- LIST -->
+      <trans-unit id="module.newsletter.list.edit">
+        <source>Edit</source>
+        <target>crwdns275417:0crwdne275417:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.delete">
+        <source>Delete</source>
+        <target>crwdns275419:0crwdne275419:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.enable">
+        <source>Send</source>
+        <target>crwdns275421:0crwdne275421:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.test">
+        <source>Send test</source>
+        <target>crwdns275423:0crwdne275423:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.test.attachImages">
+        <source>Test (attach Images)</source>
+        <target>crwdns275425:0crwdne275425:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.enabled">
+        <source>Scheduled</source>
+        <target>crwdns275427:0crwdne275427:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.enableConfirm">
+        <source>Please confirm you want to send out this newsletter campaign to %s recipients!</source>
+        <target>crwdns342012:0%scrwdne342012:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.deleteConfirm">
+        <source>Please confirm the deletion of this newsletter.</source>
+        <target>crwdns275431:0crwdne275431:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.tableheader.deleteConfirm">
+        <source>Please confirm the deletion of this newsletter.</source>
+        <target>crwdns275433:0crwdne275433:0</target>
+      </trans-unit>
+      <trans-unit id="pleasechoose">
+        <source>Please choose a recipient list.</source>
+        <target>crwdns342014:0crwdne342014:0</target>
+      </trans-unit>
+      <trans-unit id="save">
+        <source>Save</source>
+        <target>crwdns275437:0crwdne275437:0</target>
+      </trans-unit>
+      <trans-unit id="sendoutOf">
+        <source>of</source>
+        <target>crwdns275439:0crwdne275439:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.create.title">
+        <source>Success!</source>
+        <target>crwdns342016:0crwdne342016:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.create.message">
+        <source>Newsletter successfully created.</source>
+        <target>crwdns342018:0crwdne342018:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.delete.title">
+        <source>Deleted!</source>
+        <target>crwdns342020:0crwdne342020:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.delete.message">
+        <source>Newsletter successfully deleted.</source>
+        <target>crwdns342022:0crwdne342022:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.noTranslation.message">
+        <source>This page does not exist for chosen language. Start again and choose another page or language.</source>
+        <target>crwdns275445:0crwdne275445:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.noTranslation.title">
+        <source>Translation does not exist!</source>
+        <target>crwdns342024:0crwdne342024:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.newsletterSend.message">
+        <source>Newsletter was already send.</source>
+        <target>crwdns412931:0crwdne412931:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.newsletterSend.title">
+        <source>Was sended!</source>
+        <target>crwdns412933:0crwdne412933:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.newsletterQueued.message">
+        <source>Newsletter was queued for sending.</source>
+        <target>crwdns275453:0crwdne275453:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.newsletterQueued.title">
+        <source>Sending....</source>
+        <target>crwdns275455:0crwdne275455:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.newsletterUpdated.message">
+        <source>Newsletter was updated.</source>
+        <target>crwdns275457:0crwdne275457:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.newsletterUpdated.title">
+        <source>Updated!</source>
+        <target>crwdns342028:0crwdne342028:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.testMailToGroup.message">
+        <source>Your test mailing is being send out for the recipient group: "%s".</source>
+        <target>crwdns342030:0%scrwdne342030:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.testMailToGroup.title">
+        <source>Testmailing invoked!</source>
+        <target>crwdns342032:0crwdne342032:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.testMailNoRecipient.message">
+        <source>This test for the newsletter has no recipient(s). Please check test recipients list.</source>
+        <target>crwdns275465:0crwdne275465:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.testMailNoRecipient.title">
+        <source>Error: No test recipient(s)!</source>
+        <target>crwdns275467:0crwdne275467:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.preparePage.wrongType.message">
+        <source>Sysfolder can not be selected, please use another page.</source>
+        <target>crwdns275469:0crwdne275469:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.preparePage.wrongType.title">
+        <source>Wrong page type!</source>
+        <target>crwdns275471:0crwdne275471:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.prepare.title">
+        <source>Prepare Newsletter</source>
+        <target>crwdns275473:0crwdne275473:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.prepare.description">
+        <source>Change the page uid and set the language for the newsletter. Be sure the selected page is already translated before you select a language.</source>
+        <target>crwdns275475:0crwdne275475:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.prepare.wizard">
+        <source>Page and language</source>
+        <target>crwdns275477:0crwdne275477:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.prepare.field.language">
+        <source>Choose language for the newsletter</source>
+        <target>crwdns275479:0crwdne275479:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.prepare.button.go">
+        <source>Next</source>
+        <target>crwdns275481:0crwdne275481:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.createnew.1">
+        <source>No newsletters yet, </source>
+        <target>crwdns292427:0crwdne292427:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.list.createnew.2">
+        <source>add a new one.</source>
+        <target>crwdns292429:0crwdne292429:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.wizard.1">
+        <source>Main</source>
+        <target>crwdns412935:0crwdne412935:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.wizard.2">
+        <source>Details</source>
+        <target>crwdns412937:0crwdne412937:0</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.wizard.3">
+        <source>Preview</source>
+        <target>crwdns412939:0crwdne412939:0</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

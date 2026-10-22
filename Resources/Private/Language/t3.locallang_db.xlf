@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2022-02-16T12:00:00Z" product-name="cute_mailing" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter">
+        <source>Newsletter</source>
+        <target>crwdns275483:0crwdne275483:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.title">
+        <source>Newsletter title (internal)</source>
+        <target>crwdns275485:0crwdne275485:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.title">
+        <source>Newsletter title (internal)</source>
+        <target>crwdns275485:0crwdne275485:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.subject">
+        <source>Email subject line (title)</source>
+        <target>crwdns275489:0crwdne275489:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.description">
+        <source>Description</source>
+        <target>crwdns275491:0crwdne275491:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.sending_time">
+        <source>Scheduled sending time</source>
+        <target>crwdns275493:0crwdne275493:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.sender">
+        <source>Sender: Email</source>
+        <target>crwdns275495:0crwdne275495:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.sender_name">
+        <source>Sender: Name</source>
+        <target>crwdns275497:0crwdne275497:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.reply_to">
+        <source>Reply to: Email address</source>
+        <target>crwdns275499:0crwdne275499:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.reply_to_name">
+        <source>Reply to: Name</source>
+        <target>crwdns275501:0crwdne275501:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.test_recipients">
+        <source>Testing recipients list</source>
+        <target>crwdns275503:0crwdne275503:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.recipients">
+        <source>Newsletter recipients list</source>
+        <target>crwdns275505:0crwdne275505:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.status">
+        <source>Status</source>
+        <target>crwdns275507:0crwdne275507:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.status.0">
+        <source>Created</source>
+        <target>crwdns275509:0crwdne275509:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.status.1">
+        <source>Tested</source>
+        <target>crwdns275511:0crwdne275511:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.status.2">
+        <source>Scheduled</source>
+        <target>crwdns275513:0crwdne275513:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.status.3">
+        <source>Sent</source>
+        <target>crwdns275515:0crwdne275515:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.page">
+        <source>Newsletter page (to be send)</source>
+        <target>crwdns275517:0crwdne275517:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list">
+        <source>Recipient list</source>
+        <target>crwdns275519:0crwdne275519:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list.name">
+        <source>Name of recipient list</source>
+        <target>crwdns275521:0crwdne275521:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list.page">
+        <source>Page with receivers</source>
+        <target>crwdns275523:0crwdne275523:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list.type">
+        <source>Receiver table</source>
+        <target>crwdns275525:0crwdne275525:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list.type.ttaddress">
+        <source>Address (EXT:tt_address)</source>
+        <target>crwdns275527:0crwdne275527:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list.type.line_separated_list">
+        <source>Line separated recipient list</source>
+        <target>crwdns275529:0crwdne275529:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list.line_separated_list">
+        <source>Email addresses</source>
+        <target>crwdns275531:0crwdne275531:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list.line_separated_list.description">
+        <source>Please enter recipients‘ email addresses, one per line. Intended for test usage.</source>
+        <target>crwdns275533:0crwdne275533:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.page_type_html">
+        <source>Page type for html newsletter</source>
+        <target>crwdns275535:0crwdne275535:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.page_type_text">
+        <source>Page type for text newsletter</source>
+        <target>crwdns275537:0crwdne275537:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.allowed_marker">
+        <source>Allowed marker</source>
+        <target>crwdns275539:0crwdne275539:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.return_path">
+        <source>Return path / envelope from</source>
+        <target>crwdns275541:0crwdne275541:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.language">
+        <source>Language</source>
+        <target>crwdns275543:0crwdne275543:0</target>
+      </trans-unit>
+      <trans-unit id="palettes.sender">
+        <source>Sender</source>
+        <target>crwdns275545:0crwdne275545:0</target>
+      </trans-unit>
+      <trans-unit id="palettes.reply_to">
+        <source>Reply to</source>
+        <target>crwdns275547:0crwdne275547:0</target>
+      </trans-unit>
+      <trans-unit id="palettes.page_types">
+        <source>Page types</source>
+        <target>crwdns275549:0crwdne275549:0</target>
+      </trans-unit>
+      <trans-unit id="tabs.sender">
+        <source>Sender</source>
+        <target>crwdns275551:0crwdne275551:0</target>
+      </trans-unit>
+      <trans-unit id="tabs.recipients">
+        <source>Recipients</source>
+        <target>crwdns275553:0crwdne275553:0</target>
+      </trans-unit>
+      <trans-unit id="tabs.technical_details">
+        <source>Technical Details</source>
+        <target>crwdns275555:0crwdne275555:0</target>
+      </trans-unit>
+      <trans-unit id="tx_taskqueue_domain_model_task.newsletter">
+        <source>Newsletter</source>
+        <target>crwdns275557:0crwdne275557:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_sendout">
+        <source>Send-out</source>
+        <target>crwdns275559:0crwdne275559:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_sendout.newsletter">
+        <source>Newsletter</source>
+        <target>crwdns275561:0crwdne275561:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_sendout.mail_tasks">
+        <source>Mail tasks</source>
+        <target>crwdns275563:0crwdne275563:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_sendout.total">
+        <source>Total number of mails</source>
+        <target>crwdns275565:0crwdne275565:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_sendout.completed">
+        <source>Completed mails count</source>
+        <target>crwdns275567:0crwdne275567:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_sendout.test">
+        <source>Is test sendout</source>
+        <target>crwdns275569:0crwdne275569:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.basic_auth_user">
+        <source>Basic auth user</source>
+        <target>crwdns292431:0crwdne292431:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.basic_auth_password">
+        <source>Basic auth password</source>
+        <target>crwdns292433:0crwdne292433:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.listunsubscribe_enable">
+        <source>Enable list unsubscribe header</source>
+        <target>crwdns296638:0crwdne296638:0</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter.listunsubscribe_email">
+        <source>list unsubscribe header email</source>
+        <target>crwdns296640:0crwdne296640:0</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
