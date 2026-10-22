@@ -3,7 +3,83 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2022-10-09T12:38:21Z" product-name="cute_mailing" target-language="da">
     <header/>
     <body>
+      <trans-unit id="tx_cutemailing_domain_model_newsletter" approved="yes">
+        <source>Task</source>
+        <target state="final">Opgave</target>
+      </trans-unit>
+      <trans-unit id="tx_cutemailing_domain_model_recipient_list" approved="yes">
+        <source>Recipient list</source>
+        <target state="final">Modtagerliste</target>
+      </trans-unit>
+      <trans-unit id="cute_mailing_sys_folder" approved="yes">
+        <source>Cute Mailing</source>
+        <target state="final">Cute Mailing</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.title" approved="yes">
+        <source>Create newsletter from current page</source>
+        <target state="final">Opret nyhedsbrev fra aktuel side</target>
+      </trans-unit>
       <!-- Wizard -->
+      <trans-unit id="module.newsletter.new.field.title" approved="yes">
+        <source>Newsletter title (internal)</source>
+        <target state="final">Nyhedsbrevstitel (intern)</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.title.description" approved="yes">
+        <source>This title is used only for internal description. It's not the email title.</source>
+        <target state="final">Denne titel bruges kun til intern beskrivelse. Det er ikke e-mail-titlen.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.title.placeholder" approved="yes">
+        <source>Newsletter Product A 2020/01</source>
+        <target state="final">Nyhedsbrev produkt A 2020/01</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.field.sendingTime" approved="yes">
+        <source>Scheduled sending time</source>
+        <target state="final">Planlagt udsendelsestid</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.message.notready" approved="yes">
+        <source>Newsletter is not yet ready to be sent!</source>
+        <target state="final">Nyhedsbrev er endnu ikke klar til at blive sendt!</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.message.notready.origin" approved="yes">
+        <source>Please select an origin for your newsletter</source>
+        <target state="final">Vælg venligst en oprindelse til dit nyhedsbrev</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.message.notready.receiver" approved="yes">
+        <source>Please choose a receiver group.</source>
+        <target state="final">Vælg venligst en modtagergruppe.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.message.notready.mandatory" approved="yes">
+        <source>Please fill all	mandatory fields.</source>
+        <target state="final">Udfyld venligst alle obligatoriske felter.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.previewnewsletter" approved="yes">
+        <source>Newsletter Preview</source>
+        <target state="final">Forhåndsvisning af nyhedsbrev</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.previewreceivers" approved="yes">
+        <source>Preview of the receivers</source>
+        <target state="final">Forhåndsvisning af modtagerne</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.amountReceivers" approved="yes">
+        <source>receivers</source>
+        <target state="final">modtagere</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.further" approved="yes">
+        <source>further</source>
+        <target state="final">yderligere</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.nousersfound.title" approved="yes">
+        <source>No users</source>
+        <target state="final">Ingen brugere</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.nousersfound.addition" approved="yes">
+        <source>Choose a different group</source>
+        <target state="final">Vælg en anden gruppe</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.new.wizarduserpreview.subject.prefix" approved="yes">
+        <source>Subject:</source>
+        <target state="final">Emne:</target>
+      </trans-unit>
       <!-- LIST -->
     </body>
   </file>
