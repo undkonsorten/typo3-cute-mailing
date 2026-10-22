@@ -206,8 +206,8 @@
         <target state="final">Geplant</target>
       </trans-unit>
       <trans-unit id="module.newsletter.list.enableConfirm" approved="yes">
-        <source>Please confirm you want to send out this newsletter campaign.</source>
-        <target state="final">Bitte bestätigen Sie, dass Sie diese Newsletter Kampagne verschicken möchten.</target>
+        <source>Please confirm you want to send out this newsletter campaign to %s recipients!</source>
+        <target state="final">Bitte bestätigen Sie, dass Sie diese Newsletter-Kampagne an %s Empfänger senden möchten!</target>
       </trans-unit>
       <trans-unit id="module.newsletter.list.deleteConfirm" approved="yes">
         <source>Please confirm the deletion of this newsletter.</source>
@@ -218,8 +218,8 @@
         <target state="final">Bitte bestätigen Sie die Löschung dieses Newsletters.</target>
       </trans-unit>
       <trans-unit id="pleasechoose" approved="yes">
-        <source>Please choose a recipient list</source>
-        <target state="final">Bitte wählen Sie eine Empfängerliste</target>
+        <source>Please choose a recipient list.</source>
+        <target state="final">Bitte wählen Sie eine Empfängerliste.</target>
       </trans-unit>
       <trans-unit id="save" approved="yes">
         <source>Save</source>
@@ -229,29 +229,29 @@
         <source>of</source>
         <target state="final">von</target>
       </trans-unit>
+      <trans-unit id="module.newsletter.create.title" approved="yes">
+        <source>Success!</source>
+        <target state="final">Geschafft!</target>
+      </trans-unit>
       <trans-unit id="module.newsletter.create.message" approved="yes">
-        <source>Newsletter successfully created</source>
-        <target state="final">Newsletter erfolgreich erstellt</target>
+        <source>Newsletter successfully created.</source>
+        <target state="final">Newsletter erfolgreich erstellt.</target>
+      </trans-unit>
+      <trans-unit id="module.newsletter.delete.title" approved="yes">
+        <source>Deleted!</source>
+        <target state="final">Gelöscht!</target>
       </trans-unit>
       <trans-unit id="module.newsletter.delete.message" approved="yes">
-        <source>Newsletter successfully deleted</source>
-        <target state="final">Newsletter erfolgreich gelöscht</target>
+        <source>Newsletter successfully deleted.</source>
+        <target state="final">Newsletter erfolgreich gelöscht.</target>
       </trans-unit>
       <trans-unit id="module.newsletter.noTranslation.message" approved="yes">
         <source>This page does not exist for chosen language. Start again and choose another page or language.</source>
         <target state="final">Diese Seite existiert nicht für die gewählte Sprache. Starten Sie erneut und wählen Sie eine andere Seite oder Sprache.</target>
       </trans-unit>
       <trans-unit id="module.newsletter.noTranslation.title" approved="yes">
-        <source>Translation does not exist.</source>
-        <target state="final">Übersetzung existiert nicht.</target>
-      </trans-unit>
-      <trans-unit id="module.newsletter.newsletterSended.message" approved="yes">
-        <source>Newsletter was already send.</source>
-        <target state="final">Newsletter wurde bereits versendet.</target>
-      </trans-unit>
-      <trans-unit id="module.newsletter.newsletterSended.title" approved="yes">
-        <source>Was sended</source>
-        <target state="final">Gesendet</target>
+        <source>Translation does not exist!</source>
+        <target state="final">Übersetzung fehlt!</target>
       </trans-unit>
       <trans-unit id="module.newsletter.newsletterQueued.message" approved="yes">
         <source>Newsletter was queued for sending.</source>
@@ -266,16 +266,16 @@
         <target state="final">Newsletter wurde aktualisiert.</target>
       </trans-unit>
       <trans-unit id="module.newsletter.newsletterUpdated.title" approved="yes">
-        <source>Updated</source>
-        <target state="final">Aktualisiert</target>
+        <source>Updated!</source>
+        <target state="final">Aktualisiert!</target>
       </trans-unit>
       <trans-unit id="module.newsletter.testMailToGroup.message" approved="yes">
-        <source>Your test mailing is being send out for the recipient group: </source>
+        <source>Your test mailing is being send out for the recipient group: "%s".</source>
         <target state="final">Ihr Testversand wird für die Empfängergruppe versendet: </target>
       </trans-unit>
       <trans-unit id="module.newsletter.testMailToGroup.title" approved="yes">
-        <source>Testmailing invoked</source>
-        <target state="final">Testversand angestoßen</target>
+        <source>Testmailing invoked!</source>
+        <target state="final">Testversand angestoßen!</target>
       </trans-unit>
       <trans-unit id="module.newsletter.testMailNoRecipient.message" approved="yes">
         <source>This test for the newsletter has no recipient(s). Please check test recipients list.</source>
